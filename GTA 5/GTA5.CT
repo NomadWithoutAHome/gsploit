@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="24">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Health"</Description>
+      <LastState Value="199.6043701" RealAddress="2022B27F920"/>
+      <VariableType>Float</VariableType>
+      <Address>GTA5.exe+1B8B660</Address>
+      <Offsets>
+        <Offset>280</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"Armor"</Description>
+      <LastState Value="0" RealAddress="2022B280B50"/>
+      <VariableType>Float</VariableType>
+      <Address>GTA5.exe+1B8B660</Address>
+      <Offsets>
+        <Offset>14b0</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>money1</Name>
+      <Address>7FF62697E3E7</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>money2</Name>
+      <Address>7FF627D6E596</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>timeAddr</Name>
+      <Address>7FF622539C92</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>moneyLoc</Name>
+      <Address>7FF6221D054F</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>clipLoc</Name>
+      <Address>7FF622D9D3B8</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>ammoLoc</Name>
+      <Address>7FF622D9D3FD</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

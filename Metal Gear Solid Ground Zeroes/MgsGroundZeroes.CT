@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="18">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"Scripts"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Infinite Health"</Description>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(healthWrite,MgsGroundZeroes.exe,01 41 28 8B 41 2C 39 41 28)
+registersymbol(healthWrite)
+//MgsGroundZeroes.exe+30C705:
+healthWrite:
+db 90 90 90
+
+[DISABLE]
+unregistersymbol(healthWrite)
+
+//MgsGroundZeroes.exe+30C705:
+healthWrite:
+db 01 41 28
+//Alt: add [rcx+28],eax
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"Infinite Clip"</Description>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(primaryClipDec,MgsGroundZeroes.exe,FF C8 89 81 4C 04 00 00 C3 33 C0)
+aobscanmodule(secondaryClipDec,MgsGroundZeroes.exe,FF C8 89 41 04 C3 33 C0)
+registersymbol(primaryClipDec)
+registersymbol(secondaryClipDec)
+
+//MgsGroundZeroes.exe+69CB0E:
+primaryClipDec:
+db 90 90
+
+//MgsGroundZeroes.exe+C9CB58:
+secondaryClipDec:
+db 90 90
+
+[DISABLE]
+unregistersymbol(primaryClipDec)
+unregistersymbol(secondaryClipDec)
+
+//MgsGroundZeroes.exe+69CB0E:
+primaryClipDec:
+db FF C8
+//Alt: dec eax
+
+//MgsGroundZeroes.exe+C9CB58:
+secondaryClipDec:
+db FF C8
+//Alt: dec eax
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"Infinite Ammo"</Description>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(ammoWrite,MgsGroundZeroes.exe,41 89 33 41 2B F1 8B C6)
+registersymbol(ammoWrite)
+//MgsGroundZeroes.exe+9518DF:
+ammoWrite:
+db 90 90 90
+
+[DISABLE]
+unregistersymbol(ammoWrite)
+//MgsGroundZeroes.exe+9518DF:
+ammoWrite:
+db 41 89 33
+//Alt: mov [r11],esi
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"Infinite Silencer Durability"</Description>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(durabilityDec,MgsGroundZeroes.exe,66 FF CA 66 89 91 58 04 00 00 75 12)
+registersymbol(durabilityDec)
+//MgsGroundZeroes.exe+69CB97:
+durabilityDec:
+db 90 90 90
+
+[DISABLE]
+unregistersymbol(durabilityDec)
+//MgsGroundZeroes.exe+69CB97:
+durabilityDec:
+db 66 FF CA
+//Alt: mov [rcx+00000458],dx
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>115</ID>
+          <Description>"Marking"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(markingWrite,MgsGroundZeroes.exe,80 60 34 FB F3 C3 CC CC)
+registersymbol(markingWrite)
+
+alloc(newmem,512,MgsGroundZeroes.exe)
+label(return)
+label(markingCode)
+label(originalCode)
+label(exit)
+
+alloc(bMark,1,MgsGroundZeroes.exe)
+registersymbol(bMark)
+
+bMark:
+dd 0
+
+newmem:
+cmp [bMark],1
+je markingCode
+mov [rax+34],3
+jmp originalCode
+
+markingCode:
+mov [rax+34],303
+jmp originalCode
+
+originalCode:
+and byte ptr [rax+34],-05
+repe ret
+
+exit:
+jmp return
+
+//MgsGroundZeroes.exe+AB6D18:
+markingWrite:
+jmp newmem
+nop
+return:
+
+[DISABLE]
+unregistersymbol(markingWrite)
+unregistersymbol(bMark)
+dealloc(bMark)
+dealloc(newmem)
+//MgsGroundZeroes.exe+AB6D18:
+markingWrite:
+db 80 60 34 FB F3 C3
+//Alt: and byte ptr [rax+34],-05
+//Alt: repe ret
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>118</ID>
+              <Description>"Mark All Targets"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>bMark</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>119</ID>
+          <Description>"Enemy State Mod"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(aliveWrite,MgsGroundZeroes.exe,C7 83 08 01 00 00 00 00 00 00 48 8B 5C 24 30 48 83 C4 20)
+registersymbol(aliveWrite)
+aobscanmodule(deadWrite,MgsGroundZeroes.exe,C7 83 08 01 00 00 01 00 00 00 48 8B 5C 24 30 48 83 C4 20)
+registersymbol(deadWrite)
+aobscanmodule(dyingWrite,MgsGroundZeroes.exe,C7 83 08 01 00 00 02 00 00 00 48 8B 5C 24 30 48 83 C4 20)
+registersymbol(dyingWrite)
+aobscanmodule(sleepWrite,MgsGroundZeroes.exe,C7 83 08 01 00 00 03 00 00 00 48 8B 5C 24 30 48 83 C4 20)
+registersymbol(sleepWrite)
+aobscanmodule(faintWrite,MgsGroundZeroes.exe,C7 83 08 01 00 00 04 00 00 00 48 8B 5C 24 30 48 83 C4 20)
+registersymbol(faintWrite)
+
+alloc(newmem0,64,MgsGroundZeroes.exe)
+label(return0)
+label(exit0)
+alloc(newmem1,64,MgsGroundZeroes.exe)
+label(return1)
+label(exit1)
+alloc(newmem2,64,MgsGroundZeroes.exe)
+label(return2)
+label(exit2)
+alloc(newmem3,64,MgsGroundZeroes.exe)
+label(return3)
+label(exit3)
+alloc(newmem4,64,MgsGroundZeroes.exe)
+label(return4)
+label(exit4)
+
+alloc(uState,1,MgsGroundZeroes.exe)
+registersymbol(uState)
+
+uState:
+dd 0
+
+newmem0:
+mov eax,[uState]
+mov [rbx+00000108],eax
+
+exit0:
+jmp return0
+
+newmem1:
+mov eax,[uState]
+mov [rbx+00000108],eax
+
+exit1:
+jmp return1
+
+newmem2:
+mov eax,[uState]
+mov [rbx+00000108],eax
+
+exit2:
+jmp return2
+
+newmem3:
+mov eax,[uState]
+mov [rbx+00000108],eax
+
+exit3:
+jmp return3
+
+newmem4:
+mov eax,[uState]
+mov [rbx+00000108],eax
+
+exit4:
+jmp return4
+
+//MgsGroundZeroes.exe+784AA1:
+aliveWrite:
+jmp newmem0
+nop
+nop
+nop
+nop
+nop
+return0:
+
+//MgsGroundZeroes.exe+7849A7:
+deadWrite:
+jmp newmem1
+nop
+nop
+nop
+nop
+nop
+return1:
+
+//MgsGroundZeroes.exe+784A8C:
+dyingWrite:
+jmp newmem2
+nop
+nop
+nop
+nop
+nop
+return2:
+
+//MgsGroundZeroes.exe+784A4C:
+sleepWrite:
+jmp newmem3
+nop
+nop
+nop
+nop
+nop
+return3:
+
+//MgsGroundZeroes.exe+784A07:
+faintWrite:
+jmp newmem4
+nop
+nop
+nop
+nop
+nop
+return4:
+
+[DISABLE]
+unregistersymbol(aliveWrite)
+unregistersymbol(deadWrite)
+unregistersymbol(dyingWrite)
+unregistersymbol(sleepWrite)
+unregistersymbol(faintWrite)
+unregistersymbol(uState)
+dealloc(uState)
+dealloc(newmem0)
+dealloc(newmem1)
+dealloc(newmem2)
+dealloc(newmem3)
+dealloc(newmem4)
+
+//MgsGroundZeroes.exe+784AA1:
+aliveWrite:
+db C7 83 08 01 00 00 00 00 00 00
+//Alt: mov [rbx+00000108],00000000
+
+//MgsGroundZeroes.exe+7849A7:
+deadWrite:
+db C7 83 08 01 00 00 01 00 00 00
+//Alt: mov [rbx+00000108],00000001
+
+//MgsGroundZeroes.exe+784A8C:
+dyingWrite:
+db C7 83 08 01 00 00 02 00 00 00
+//Alt: mov [rbx+00000108],00000002
+
+//MgsGroundZeroes.exe+784A4C:
+sleepWrite:
+db C7 83 08 01 00 00 03 00 00 00
+//Alt: mov [rbx+00000108],00000003
+
+//MgsGroundZeroes.exe+784A07:
+faintWrite:
+db C7 83 08 01 00 00 04 00 00 00
+//Alt: mov [rbx+00000108],00000004
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>120</ID>
+              <Description>"State"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>uState</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>121</ID>
+      <Description>"Scoreboard"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="0"/>
+      <Color>80000008</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+[DISABLE]
+// Scoreboard Base Pointer
+/*
+MgsGroundZeroes.exe+A669B0 - 48 63 C1              - movsxd  rax,ecx
+MgsGroundZeroes.exe+A669B3 - 48 8B 0D B6C93F01     - mov rcx,[MgsGroundZeroes.exe+1E63370]
+MgsGroundZeroes.exe+A669BA - 48 85 C9              - test rcx,rcx
+MgsGroundZeroes.exe+A669BD - 74 11                 - je MgsGroundZeroes.exe+A669D0
+MgsGroundZeroes.exe+A669BF - 48 8B 49 08           - mov rcx,[rcx+08]
+MgsGroundZeroes.exe+A669C3 - 4C 8B 4C C1 08        - mov r9,[rcx+rax*8+08]
+MgsGroundZeroes.exe+A669C8 - 4D 85 C9              - test r9,r9
+MgsGroundZeroes.exe+A669CB - 74 03                 - je MgsGroundZeroes.exe+A669D0
+MgsGroundZeroes.exe+A669CD - 49 FF E1              - jmp r9
+MgsGroundZeroes.exe+A669D0 - F3 C3                 - repe ret
+*/
+
+// Scoreboard Code
+/*
+MgsGroundZeroes.exe+A64060 - 4C 8B DC              - mov r11,rsp
+MgsGroundZeroes.exe+A64063 - 55                    - push rbp
+MgsGroundZeroes.exe+A64064 - 48 81 EC A0000000     - sub rsp,000000A0
+MgsGroundZeroes.exe+A6406B - 4C 8B 91 E02A0000     - mov r10,[rcx+00002AE0]
+MgsGroundZeroes.exe+A64072 - 48 8B E9              - mov rbp,rcx
+MgsGroundZeroes.exe+A64075 - 4D 85 D2              - test r10,r10
+*/
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"Time"</Description>
+          <LastState Value="241773" Activated="0" RealAddress="76A3B30CD0"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MgsGroundZeroes.exe+1E63370</Address>
+          <Offsets>
+            <Offset>70</Offset>
+            <Offset>2AE0</Offset>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"Enemy Combat Alerts"</Description>
+          <LastState Value="0" Activated="0" RealAddress="76A3B30D10"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MgsGroundZeroes.exe+1E63370</Address>
+          <Offsets>
+            <Offset>B0</Offset>
+            <Offset>2AE0</Offset>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>80</ID>
+          <Description>"Kills"</Description>
+          <LastState Value="0" Activated="0" RealAddress="76A3B30CF4"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MgsGroundZeroes.exe+1E63370</Address>
+          <Offsets>
+            <Offset>94</Offset>
+            <Offset>2AE0</Offset>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"Prisoners Rescued"</Description>
+          <LastState Value="0" Activated="0" RealAddress="76A3B30D30"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MgsGroundZeroes.exe+1E63370</Address>
+          <Offsets>
+            <Offset>D0</Offset>
+            <Offset>2AE0</Offset>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"Helicopters Lost"</Description>
+          <LastState Value="0" Activated="0" RealAddress="76A3B30D20"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MgsGroundZeroes.exe+1E63370</Address>
+          <Offsets>
+            <Offset>C0</Offset>
+            <Offset>2AE0</Offset>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>21</ID>
+          <Description>"Retries"</Description>
+          <LastState Value="0" Activated="0" RealAddress="76A3B30CCC"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MgsGroundZeroes.exe+1E63370</Address>
+          <Offsets>
+            <Offset>6C</Offset>
+            <Offset>2AE0</Offset>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>53</ID>
+          <Description>"Score"</Description>
+          <LastState Value="0" Activated="0" RealAddress="76A3B30CA4"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>MgsGroundZeroes.exe+1E63370</Address>
+          <Offsets>
+            <Offset>44</Offset>
+            <Offset>2AE0</Offset>
+            <Offset>8</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>59</ID>
+          <Description>"Debug"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="0" RealAddress="00000000"/>
+          <Color>808000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>82</ID>
+              <Description>"Time"</Description>
+              <LastState Value="241773" Activated="0" RealAddress="76A3B30CD0"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>70</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>83</ID>
+              <Description>"Time?"</Description>
+              <LastState Value="6056" Activated="0" RealAddress="76A3B30CD8"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>78</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>54</ID>
+              <Description>"Time2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30E90"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>230</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>55</ID>
+              <Description>"Enemy Combat Alerts"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30D10"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>B0</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>56</ID>
+              <Description>"Kills"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30CF4"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>94</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>79</ID>
+              <Description>"Retries"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30CCC"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>6C</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57</ID>
+              <Description>"Helicopters Lost"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30D20"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>C0</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>58</ID>
+              <Description>"Prisoners Rescued"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30D30"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>D0</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>60</ID>
+              <Description>"Enemy Combat Alerts2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30E94"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>234</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>61</ID>
+              <Description>"Kills2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30E98"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>238</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>62</ID>
+              <Description>"Retries2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EA4"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>244</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>63</ID>
+              <Description>"Helicopters Lost2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EA0"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>240</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>64</ID>
+              <Description>"Prisoners Rescued2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30E9C"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>23C</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>65</ID>
+              <Description>"Time Score"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EAC"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>24C</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>66</ID>
+              <Description>"No Reflex?"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EB0"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>250</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>67</ID>
+              <Description>"Kills Bonus"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EB4"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>254</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>68</ID>
+              <Description>"Retries Bonus"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EC0"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>260</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>69</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EBC"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>25C</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>70</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EB8"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>258</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>71</ID>
+              <Description>"Time3"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30CDC"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>7C</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>72</ID>
+              <Description>"Extras Bonus"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30E74"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>214</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>73</ID>
+              <Description>"Extras"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30E78"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>218</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>74</ID>
+              <Description>"Extras2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EA8"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>248</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>75</ID>
+              <Description>"Extras Bonus2"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EC4"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>264</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>76</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30EC8"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>268</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>77</ID>
+              <Description>"No Reflex Bonus"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30ECC"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>26C</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>78</ID>
+              <Description>"Score"</Description>
+              <LastState Value="0" Activated="0" RealAddress="76A3B30CA4"/>
+              <Color>808000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>MgsGroundZeroes.exe+1E63370</Address>
+              <Offsets>
+                <Offset>44</Offset>
+                <Offset>2AE0</Offset>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>positionAOB</Name>
+      <Address>7FF773691B03</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>newState</Name>
+      <Address>5A83BE0010</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

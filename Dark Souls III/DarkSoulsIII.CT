@@ -1,0 +1,2784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="19">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>272</ID>
+      <Description>"Assemble"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+{$lua}
+debugProcess(2)
+local addr
+
+autoAssemble([[
+aobscanmodule(player1_aob,DarkSoulsIII.exe,48 8B 1D ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? 74 ?? 8B ?? 85 ?? 78)
+registersymbol(player1_aob)
+]])
+addr = getAddress("player1_aob")
+addr = addr + readInteger(addr + 3) + 7
+unregisterSymbol("player1_addr")
+registerSymbol("player1_addr", addr, true)
+
+autoAssemble([[
+aobscanmodule(player2_aob,DarkSoulsIII.exe,48 8B 05 ?? ?? ?? ?? 48 ?? ?? 74 ?? 48 ?? ?? ?? C3 F3 C3)
+registersymbol(player2_aob)
+]])
+addr = getAddress("player2_aob")
+addr = addr + readInteger(addr + 3) + 7
+unregisterSymbol("player2_addr")
+registerSymbol("player2_addr", addr, true)
+
+autoAssemble([[
+aobscanmodule(player3_aob,DarkSoulsIII.exe,48 8B 05 ?? ?? ?? ?? 48 8B 80 ?? ?? ?? ?? C3 CC 48 8B 05 ?? ?? ?? ?? C6 80 ?? ?? ?? ?? 01)
+registersymbol(player3_aob)
+]])
+addr = getAddress("player3_aob")
+addr = addr + readInteger(addr + 3) + 7
+unregisterSymbol("player3_addr")
+registerSymbol("player3_addr", addr, true)
+
+{$asm}
+[disable]
+unregisterSymbol(player1_addr)
+unregisterSymbol(player2_addr)
+unregisterSymbol(player3_addr)
+unregistersymbol(player1_aob)
+unregistersymbol(player2_aob)
+unregistersymbol(player3_aob)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>116</ID>
+          <Description>"Scripts"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>115</ID>
+              <Description>"Unkillable"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(hp_aob,DarkSoulsIII.exe,89 83 D8 00 00 00 85 C0 0F 8F ?? ?? ?? ?? E9)
+registersymbol(hp_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(stay_alive)
+label(after)
+label(return)
+
+detour:
+push rcx
+mov rcx,[player1_addr]
+test rcx,rcx
+jle after
+mov rcx,[rcx+80]
+test rcx,rcx
+jle after
+mov rcx,[rcx+1F70]
+test rcx,rcx
+jle after
+mov rcx,[rcx+18]
+test rcx,rcx
+jle after
+cmp rbx,rcx
+jne after
+cmp eax,1
+jle stay_alive
+jmp after
+
+stay_alive:
+mov eax,1
+jmp after
+
+after:
+mov [rbx+D8],eax
+pop rcx
+jmp return
+
+hp_aob:
+jmp detour
+nop
+return:
+
+[disable]
+hp_aob:
+db 89 83 D8 00 00 00
+
+unregistersymbol(hp_aob)
+dealloc(detour)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>124</ID>
+              <Description>"Infinite Focus"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(fp_aob,DarkSoulsIII.exe,89 83 E4 00 00 00 48 8B 5C 24 40 48 83 C4 20 5F C3 CC)
+registersymbol(fp_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(after)
+label(return)
+
+detour:
+push rdx
+mov rdx,[player1_addr]
+test rdx,rdx
+jle after
+mov rdx,[rdx+80]
+test rdx,rdx
+jle after
+mov rdx,[rdx+1F70]
+test rdx,rdx
+jle after
+mov rdx,[rdx+18]
+test rdx,rdx
+jle after
+cmp rbx,rdx
+jne after
+mov eax,[rdx+E8]
+jmp after
+
+after:
+mov [rbx+E4],eax
+pop rdx
+jmp return
+
+fp_aob:
+jmp detour
+nop
+return:
+
+[disable]
+fp_aob:
+db 89 83 E4 00 00 00
+
+unregistersymbol(fp_aob)
+dealloc(detour)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>251</ID>
+              <Description>"Infinite Stamina"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(stamina_aob,DarkSoulsIII.exe,8B 01 89 83 F0 00 00 00 48 8B 5C 24 30 48 83 C4 20 5F C3)
+registersymbol(stamina_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(after)
+label(return)
+
+detour:
+mov eax,[rcx]
+push rdx
+mov rdx,[player1_addr]
+test rdx,rdx
+jle after
+mov rdx,[rdx+80]
+test rdx,rdx
+jle after
+mov rdx,[rdx+1F70]
+test rdx,rdx
+jle after
+mov rdx,[rdx+18]
+test rdx,rdx
+jle after
+cmp rbx,rdx
+jne after
+mov eax,[rdx+F4]
+jmp after
+
+after:
+mov [rbx+F0],eax
+pop rdx
+jmp return
+
+stamina_aob:
+jmp detour
+db 90 90 90
+return:
+
+[disable]
+stamina_aob:
+db 8B 01 89 83 F0 00 00 00
+
+unregistersymbol(stamina_aob)
+dealloc(detour)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"Global Debug Play Speed"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(debug_speed_aob,DarkSoulsIII.exe,F3 0F 10 83 38 0A 00 00 F3 0F 59 83 60 09 00 00 F3 0F 59 D0)
+registersymbol(debug_speed_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(set_speed)
+label(after)
+label(return)
+
+alloc(debug_play_speed,8,DarkSoulsIII.exe)
+registersymbol(debug_play_speed)
+
+debug_play_speed:
+dd (float)1
+
+detour:
+push rax
+mov rax,[player1_addr]
+test rax,rax
+jle after
+mov rax,[rax+80]
+test rax,rax
+jle after
+mov rax,[rax+1F70]
+test rax,rax
+jle after
+mov rax,[rax+28]
+test rax,rax
+jle after
+cmp rbx,rax
+jne set_speed
+jmp after
+
+set_speed:
+movss xmm0,[debug_play_speed]
+movss [rbx+A38],xmm0
+jmp after
+
+after:
+movss xmm0,[rbx+A38]
+pop rax
+jmp return
+
+debug_speed_aob:
+jmp detour
+db 90 90 90
+return:
+
+[disable]
+debug_speed_aob:
+db F3 0F 10 83 38 0A 00 00
+
+unregistersymbol(debug_speed_aob)
+unregistersymbol(debug_play_speed)
+dealloc(detour)
+dealloc(debug_play_speed)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>120</ID>
+                  <Description>"Debug Play Speed"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>debug_play_speed</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>119</ID>
+              <Description>"Backstabbing for Dummies"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(rotation_aob,DarkSoulsIII.exe,66 0F 7F 61 70 C3)
+registersymbol(rotation_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(align)
+label(after)
+label(return)
+
+detour:
+push rax
+mov rax,[player1_addr]
+test rax,rax
+jle after
+mov rax,[rax+80]
+test rax,rax
+jle after
+mov rax,[rax+1F70]
+test rax,rax
+jle after
+mov rax,[rax+68]
+test rax,rax
+jle after
+cmp rcx,rax
+jne align
+jmp after
+
+align:
+movdqa xmm4,[rax+70]
+jmp after
+
+after:
+movdqa [rcx+70],xmm4
+pop rax
+jmp return
+
+rotation_aob:
+jmp detour
+return:
+
+[disable]
+rotation_aob:
+db 66 0F 7F 61 70
+
+unregistersymbol(rotation_aob)
+dealloc(detour)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>118</ID>
+              <Description>"Lock Enemy Positions"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(position_aob,DarkSoulsIII.exe,66 0F 7F B3 80 00 00 00 0F 57 C0)
+registersymbol(position_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(freeze)
+label(after)
+label(return)
+
+detour:
+push rax
+mov rax,[player1_addr]
+test rax,rax
+jle after
+mov rax,[rax+80]
+test rax,rax
+jle after
+mov rax,[rax+1F70]
+test rax,rax
+jle after
+mov rax,[rax+68]
+test rax,rax
+jle after
+cmp rbx,rax
+jne freeze
+jmp after
+
+freeze:
+movdqa xmm6,[rbx+80]
+jmp after
+
+after:
+movdqa [rbx+80],xmm6
+pop rax
+jmp return
+
+position_aob:
+jmp detour
+db 90 90 90
+return:
+
+[disable]
+position_aob:
+db 66 0F 7F B3 80 00 00 00
+
+unregistersymbol(position_aob)
+dealloc(detour)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>114</ID>
+              <Description>"Monster Vac"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(position_aob,DarkSoulsIII.exe,66 0F 7F B3 80 00 00 00 0F 57 C0)
+registersymbol(position_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(align)
+label(after)
+label(return)
+
+detour:
+push rax
+mov rax,[player1_addr]
+test rax,rax
+jle after
+mov rax,[rax+80]
+test rax,rax
+jle after
+mov rax,[rax+1F70]
+test rax,rax
+jle after
+mov rax,[rax+68]
+test rax,rax
+jle after
+cmp rbx,rax
+jne align
+jmp after
+
+align:
+movdqa xmm6,[rax+80]
+jmp after
+
+after:
+movdqa [rbx+80],xmm6
+pop rax
+jmp return
+
+position_aob:
+jmp detour
+db 90 90 90
+return:
+
+[disable]
+position_aob:
+db 66 0F 7F B3 80 00 00 00
+
+unregistersymbol(position_aob)
+dealloc(detour)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>324</ID>
+              <Description>"100% Drop Rate"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+aobscanmodule(droprate_aob,DarkSoulsIII.exe,45 ?? ?? ?? 40 41 ?? ?? ?? C3)
+registersymbol(droprate_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(return)
+
+detour:
+movzx r8d,word ptr [r9+40]
+mov r8,1
+jmp return
+
+droprate_aob:
+jmp detour
+return:
+
+[DISABLE]
+droprate_aob:
+db 45 0F B7 41 40
+
+unregistersymbol(droprate_aob)
+dealloc(newmem)
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>105</ID>
+          <Description>"Statistics"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>323</ID>
+              <Description>"Current HP"</Description>
+              <LastState Value="1805" RealAddress="7FF5AD1EE818"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>D8</Offset>
+                <Offset>18</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>35</ID>
+              <Description>"Maximum HP"</Description>
+              <LastState Value="1805" RealAddress="7FF5AD1EE81C"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>DC</Offset>
+                <Offset>18</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>36</ID>
+              <Description>"Current FP"</Description>
+              <LastState Value="93" RealAddress="7FF5AD1EE824"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>E4</Offset>
+                <Offset>18</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>37</ID>
+              <Description>"Maximum FP"</Description>
+              <LastState Value="93" RealAddress="7FF5AD1EE828"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>E8</Offset>
+                <Offset>18</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>38</ID>
+              <Description>"Current Stamina"</Description>
+              <LastState Value="174" RealAddress="7FF5AD1EE830"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>F0</Offset>
+                <Offset>18</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>39</ID>
+              <Description>"Maximum Stamina"</Description>
+              <LastState Value="174" RealAddress="7FF5AD1EE834"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>F4</Offset>
+                <Offset>18</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>18</ID>
+              <Description>"Souls"</Description>
+              <LastState Value="32269" RealAddress="7FF5A07BA8A4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>74</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>19</ID>
+              <Description>"Souls Earned"</Description>
+              <LastState Value="6991225" RealAddress="7FF5A07BA8A8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>78</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>29</ID>
+              <Description>"Item Discovery"</Description>
+              <LastState Value="110" RealAddress="7FF5A07BB13C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>90C</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>301</ID>
+              <Description>"Deaths"</Description>
+              <LastState Value="142" RealAddress="7FF5A07B9B90"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>90</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>273</ID>
+          <Description>"Status"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>305</ID>
+              <Description>"Faction"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA8B4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>84</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>302</ID>
+              <Description>"Hollowing"</Description>
+              <LastState Value="65536" RealAddress="7FF5A07BA92E"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>FE</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>279</ID>
+              <Description>"Lord of Cinder"</Description>
+              <LastState Value="1" RealAddress="7FF5A07BA930"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>100</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>308</ID>
+              <Description>"Hollow"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA93C"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>10C</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>299</ID>
+              <Description>"Multiplayer Attempts"</Description>
+              <LastState Value="4294967775" RealAddress="7FF5A07BA8E4"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>8 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>B4</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>298</ID>
+              <Description>"Multiplayer Successes"</Description>
+              <LastState Value="1" RealAddress="7FF5A07BA8E8"/>
+              <VariableType>8 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>B8</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>80</ID>
+              <Description>"Debug Play Speed"</Description>
+              <LastState Value="1" RealAddress="7FF5AD1EF3A8"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>A38</Offset>
+                <Offset>28</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>294</ID>
+              <Description>"New Game"</Description>
+              <LastState Value="1" RealAddress="7FF5A07B9B70"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>70</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>300</ID>
+              <Description>"Time Played (ms)"</Description>
+              <LastState Value="432472475" RealAddress="7FF5A07B9B9C"/>
+              <VariableType>8 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>9C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>104</ID>
+              <Description>"Character Slot"</Description>
+              <LastState Value="0" RealAddress="7FF5A07B9370"/>
+              <VariableType>Byte</VariableType>
+              <Address>player3_addr</Address>
+              <Offsets>
+                <Offset>A60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>297</ID>
+              <Description>"Last Bonfire"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">4002959:Start
+4002950:Firelink Shrine
+4002951:Cemetery of Ash
+4002952:Ludex Gundyr
+4002953:Untended Graves
+4002954:Champion Gundyr
+3002950:High Wall of Lothric
+3002955:Tower on the Wall
+3002952:Vordt of the Boreal Valley
+3002954:Dancer of the Boreal Valley
+3002951:Oceiros, the Consumed King
+3002960:High Wall of Lothric, Teleport
+3102954:Foot of the High Wall
+3102950:Undead Settlement
+3102952:Cliff Underside
+3102953:Dilipidated Bridge
+3102951:Pit of Hollows
+3302956:Road of Sacrifices
+3302950:Halfway Fortress
+3302957:Crucifixion Woods
+3302952:Crystal Sage
+3302953:Farron Keep
+3302954:Keep Ruins
+3302958:Farron Keep Perimeter
+3302955:Old Wolf of Farron
+3302951:Abyss Watchers
+3502953:Cathedral of the Deep
+3502950:Cleansing Chapel
+3502951:Deacons of the Deep
+3502952:Rosaria's Bed Chamber
+3802956:Catacombs of Carthus
+3802950:High Lord Wolnir
+3802951:Abandoned Tomb
+3802952:Old King's Antechamber
+3802953:Demon Ruins
+3802954:Old Demon King
+3702957:Irithyll of the Boreal valley
+3702954:central Irithyll
+3702950:Church of Yorshka
+3702955:Distant Manor
+3702951:Pontiff Sulyvahn
+3702956:Water Reserve
+3702953:Anor Londo
+3702958:Prison Tower
+3702952:Aldrich, Devourer of Gods
+3902950:Irithyll Dungeon
+3902952:Profaned Capital
+3902951:Yhorm The Giant
+3012950:Lothric Castle
+3012952:Dragon Barracks
+3012951:Dragonslayer Armour
+3412951:Grand Archives
+3412950:Twin Princes
+3202950:Archdragon Peak
+3202953:Dragon-Kin Mausoleum
+3202952:Great Belfry
+3202951:Nameless King
+4102950:Flameless Shrine
+4102951:Klin of the First Flame
+4102952:The First Flame
+</DropDownList>
+              <LastState Value="3002950" RealAddress="7FF5A07B93DC"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player3_addr</Address>
+              <Offsets>
+                <Offset>ACC</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"Attributes"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>283</ID>
+              <Description>"Level"</Description>
+              <LastState Value="125" RealAddress="7FF5A07BA8A0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>70</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>5</ID>
+              <Description>"Vigor"</Description>
+              <LastState Value="44" RealAddress="7FF5A07BA874"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>44</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>6</ID>
+              <Description>"Attunement"</Description>
+              <LastState Value="10" RealAddress="7FF5A07BA878"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>48</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>7</ID>
+              <Description>"Endurance"</Description>
+              <LastState Value="40" RealAddress="7FF5A07BA87C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>282</ID>
+              <Description>"Vitality"</Description>
+              <LastState Value="10" RealAddress="7FF5A07BA89C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>6C</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>13</ID>
+              <Description>"Strength"</Description>
+              <LastState Value="40" RealAddress="7FF5A07BA880"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>50</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9</ID>
+              <Description>"Dexterity"</Description>
+              <LastState Value="40" RealAddress="7FF5A07BA884"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>54</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10</ID>
+              <Description>"Intelligence"</Description>
+              <LastState Value="10" RealAddress="7FF5A07BA888"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>58</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>11</ID>
+              <Description>"Faith"</Description>
+              <LastState Value="10" RealAddress="7FF5A07BA88C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>5C</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>12</ID>
+              <Description>"Luck"</Description>
+              <LastState Value="10" RealAddress="7FF5A07BA890"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>60</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>106</ID>
+          <Description>"Position"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>107</ID>
+              <Description>"XYZ"</Description>
+              <LastState Value="7C 25 85 C1 58 EE 24 42 EE CC 81 C1" RealAddress="7FF5AD1EFC00"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>12</ByteLength>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>80</Offset>
+                <Offset>68</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>110</ID>
+              <Description>"X"</Description>
+              <LastState Value="-16.64330292" RealAddress="7FF5AD1EFC00"/>
+              <VariableType>Float</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>80</Offset>
+                <Offset>68</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108</ID>
+              <Description>"Y"</Description>
+              <LastState Value="-16.22506332" RealAddress="7FF5AD1EFC08"/>
+              <VariableType>Float</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>88</Offset>
+                <Offset>68</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>109</ID>
+              <Description>"Z"</Description>
+              <LastState Value="41.23275757" RealAddress="7FF5AD1EFC04"/>
+              <VariableType>Float</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>84</Offset>
+                <Offset>68</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>111</ID>
+              <Description>"Rotation"</Description>
+              <LastState Value="1.69895935058594" RealAddress="7FF5AD1EFBF0"/>
+              <VariableType>Double</VariableType>
+              <Address>player1_addr</Address>
+              <Offsets>
+                <Offset>70</Offset>
+                <Offset>68</Offset>
+                <Offset>1F70</Offset>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>132</ID>
+          <Description>"Appearance"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>17</ID>
+              <Description>"Name String"</Description>
+              <LastState RealAddress="7FF5A07BA8B8"/>
+              <VariableType>String</VariableType>
+              <Length>16</Length>
+              <Unicode>1</Unicode>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>88</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>295</ID>
+              <Description>"Name Bytes"</Description>
+              <LastState Value="53 00 61 00 65 00 73 00 68 00 79 00 6C 00 00 00" RealAddress="7FF5A07BA8B8"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>16</ByteLength>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>88</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>258</ID>
+              <Description>"Gender"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">1:Male
+0:Female
+</DropDownList>
+              <LastState Value="0" RealAddress="7FF5A07BA8DA"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>AA</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>260</ID>
+              <Description>"Age"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Young
+1:Mature
+2:Aged
+</DropDownList>
+              <LastState Value="0" RealAddress="7FF5A07BAEE8"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>6B8</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>133</ID>
+              <Description>"Voice"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Young
+1:Mature
+2:Aged
+</DropDownList>
+              <LastState Value="1" RealAddress="7FF5A07BA8DB"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>AB</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>259</ID>
+              <Description>"Class"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Knight
+1:Mercenary
+2:Warrior
+3:Herald
+4:Thief
+5:Assassin
+6:Sorcerer
+7:Pyromancer
+8:Cleric
+9:Deprived
+</DropDownList>
+              <LastState Value="9" RealAddress="7FF5A07BA8DE"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>AE</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>261</ID>
+              <Description>"Burial Gift"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:None
+1:Life Ring
+2:Divine Blessing
+3:Hidden Blessing
+4:Black Firebomb
+5:Fire Gem
+6:Sovereignless Soul
+7:Rusted Gold Coin
+8:Cracked Red Eye Orb
+9:Young White Branch
+</DropDownList>
+              <LastState Value="0" RealAddress="7FF5A07BA8E0"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>B0</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>138</ID>
+              <Description>"Build"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>134</ID>
+                  <Description>"Head"</Description>
+                  <LastState Value="68" RealAddress="7FF5A07BAF34"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>704</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>268</ID>
+                  <Description>"Chest"</Description>
+                  <LastState Value="64" RealAddress="7FF5A07BAF35"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>705</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>269</ID>
+                  <Description>"Abdomen"</Description>
+                  <LastState Value="0" RealAddress="7FF5A07BAF36"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>706</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>270</ID>
+                  <Description>"Arms"</Description>
+                  <LastState Value="0" RealAddress="7FF5A07BAF37"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>707</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>271</ID>
+                  <Description>"Legs"</Description>
+                  <LastState Value="0" RealAddress="7FF5A07BAF38"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>708</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>280</ID>
+              <Description>"Face Detail"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>281</ID>
+              <Description>"Skin Colour"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>262</ID>
+              <Description>"Hair"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>263</ID>
+                  <Description>"Type"</Description>
+                  <LastState Value="101" RealAddress="7FF5A07BAEEC"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6BC</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>264</ID>
+                  <Description>"RGB"</Description>
+                  <LastState Value="30 12 4" RealAddress="7FF5A07BAF10"/>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>3</ByteLength>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E0</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>265</ID>
+                  <Description>"Red"</Description>
+                  <LastState Value="30" RealAddress="7FF5A07BAF10"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E0</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>266</ID>
+                  <Description>"Green"</Description>
+                  <LastState Value="12" RealAddress="7FF5A07BAF11"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E1</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>267</ID>
+                  <Description>"Blue"</Description>
+                  <LastState Value="4" RealAddress="7FF5A07BAF12"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E2</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>143</ID>
+              <Description>"Left Eye"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>149</ID>
+                  <Description>"RGB"</Description>
+                  <LastState Value="110 30 10" RealAddress="7FF5A07BAF14"/>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>3</ByteLength>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E4</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>151</ID>
+                  <Description>"Red"</Description>
+                  <LastState Value="110" RealAddress="7FF5A07BAF14"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E4</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>141</ID>
+                  <Description>"Green"</Description>
+                  <LastState Value="30" RealAddress="7FF5A07BAF15"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E5</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>142</ID>
+                  <Description>"Blue"</Description>
+                  <LastState Value="10" RealAddress="7FF5A07BAF16"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E6</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>144</ID>
+              <Description>"Right Eye"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>148</ID>
+                  <Description>"RGB"</Description>
+                  <LastState Value="110 30 10" RealAddress="7FF5A07BAF18"/>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>3</ByteLength>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E8</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>152</ID>
+                  <Description>"Red"</Description>
+                  <LastState Value="110" RealAddress="7FF5A07BAF18"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E8</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>146</ID>
+                  <Description>"Green"</Description>
+                  <LastState Value="30" RealAddress="7FF5A07BAF19"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6E9</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>147</ID>
+                  <Description>"Blue"</Description>
+                  <LastState Value="10" RealAddress="7FF5A07BAF1A"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6EA</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>153</ID>
+              <Description>"Eyebrows"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>154</ID>
+                  <Description>"RGB"</Description>
+                  <LastState Value="10 10 10" RealAddress="7FF5A07BAF1C"/>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>3</ByteLength>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6EC</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>155</ID>
+                  <Description>"Red"</Description>
+                  <LastState Value="10" RealAddress="7FF5A07BAF1C"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6EC</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>156</ID>
+                  <Description>"Green"</Description>
+                  <LastState Value="10" RealAddress="7FF5A07BAF1D"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6ED</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>157</ID>
+                  <Description>"Blue"</Description>
+                  <LastState Value="10" RealAddress="7FF5A07BAF1E"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>6EE</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>310</ID>
+          <Description>"Covenants"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>311</ID>
+              <Description>"Current"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">A0002710:Blade of the Darkmoon
+A0002724:Watchdogs of Farron
+A000272E:Aldrich Faithful
+A0002738:Warrior of Sunlight
+A0002742:Mound-makers
+A000274C:Way of Blue
+A0002756:Blue Sentinels
+A0002760:Rosaria's Fingers
+</DropDownList>
+              <LastState Value="00000000" RealAddress="7FF5A07BAB58"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>328</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>312</ID>
+              <Description>"Blade of the Darkmoon"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA8FD"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>CD</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>313</ID>
+              <Description>"Warrior of Sunlight"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA8FE"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>CE</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>314</ID>
+              <Description>"Mound Makers"</Description>
+              <LastState Value="31" RealAddress="7FF5A07BA8FF"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>CF</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>315</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA900"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>D0</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>316</ID>
+              <Description>"Rosaria's Fingers"</Description>
+              <LastState Value="36" RealAddress="7FF5A07BA901"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>D1</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>317</ID>
+              <Description>"Watchdogs of Farron"</Description>
+              <LastState Value="10" RealAddress="7FF5A07BA902"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>D2</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>318</ID>
+              <Description>"Aldrich Faithful"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA903"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>D3</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>319</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA944"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>114</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>320</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" RealAddress="7FF5A07BA8E1"/>
+              <VariableType>Byte</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>B1</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>166</ID>
+          <Description>"Equipment"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>201</ID>
+              <Description>"Weapons"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>197</ID>
+                  <Description>"Right Hand 1"</Description>
+                  <LastState Value="10050005" RealAddress="7FF5A07BAB60"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>330</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>171</ID>
+                  <Description>"Right Hand 2"</Description>
+                  <LastState Value="6240310" RealAddress="7FF5A07BAB68"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>338</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>168</ID>
+                  <Description>"Right Hand 3"</Description>
+                  <LastState Value="110000" RealAddress="7FF5A07BAB70"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>340</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>172</ID>
+                  <Description>"Left Hand 1"</Description>
+                  <LastState Value="11010410" RealAddress="7FF5A07BAB5C"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>32C</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>174</ID>
+                  <Description>"Left Hand 2"</Description>
+                  <LastState Value="13400010" RealAddress="7FF5A07BAB64"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>334</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>175</ID>
+                  <Description>"Left Hand 3"</Description>
+                  <LastState Value="110000" RealAddress="7FF5A07BAB6C"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>33C</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>203</ID>
+              <Description>"Ammo"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>190</ID>
+                  <Description>"Arrows 1"</Description>
+                  <LastState Value="-1" RealAddress="7FF5A07BAB74"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>344</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>192</ID>
+                  <Description>"Arrows 2"</Description>
+                  <LastState Value="-1" RealAddress="7FF5A07BAB7C"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>34C</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>191</ID>
+                  <Description>"Bolts 1"</Description>
+                  <LastState Value="-1" RealAddress="7FF5A07BAB78"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>348</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>193</ID>
+                  <Description>"Bolts 2"</Description>
+                  <LastState Value="-1" RealAddress="7FF5A07BAB80"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>350</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>202</ID>
+              <Description>"Armour"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>177</ID>
+                  <Description>"Head"</Description>
+                  <LastState Value="77000000" RealAddress="7FF5A07BAB8C"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>35C</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>178</ID>
+                  <Description>"Body"</Description>
+                  <LastState Value="30101000" RealAddress="7FF5A07BAB90"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>360</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>179</ID>
+                  <Description>"Arms"</Description>
+                  <LastState Value="31002000" RealAddress="7FF5A07BAB94"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>364</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>180</ID>
+                  <Description>"Legs"</Description>
+                  <LastState Value="75503000" RealAddress="7FF5A07BAB98"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>368</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>204</ID>
+              <Description>"Rings"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>183</ID>
+                  <Description>"Ring 1"</Description>
+                  <LastState Value="20000" RealAddress="7FF5A07BABA0"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>370</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>184</ID>
+                  <Description>"Ring 2"</Description>
+                  <LastState Value="20380" RealAddress="7FF5A07BABA4"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>374</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>185</ID>
+                  <Description>"Ring 3"</Description>
+                  <LastState Value="20020" RealAddress="7FF5A07BABA8"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>378</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>186</ID>
+                  <Description>"Ring 4"</Description>
+                  <LastState Value="20030" RealAddress="7FF5A07BABAC"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>37C</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>205</ID>
+              <Description>"Quick Items"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>210</ID>
+                  <Description>"Slot 1"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>213</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="B00000A9" RealAddress="7FF5A07BACC0"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>490</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>212</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="0000008B" RealAddress="7FF5A07BACC4"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>494</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>211</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="400000AB" RealAddress="7FF5A07BADDC"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5AC</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>214</ID>
+                  <Description>"Slot 2"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>215</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BACC8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>498</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>216</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BACCC"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>49C</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>217</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADE0"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5B0</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>219</ID>
+                  <Description>"Slot 3"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>220</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BACD0"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4A0</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>221</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BACD4"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4A4</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>222</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADE4"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5B4</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>223</ID>
+                  <Description>"Slot 4"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>224</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BACD8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4A8</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>225</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BACDC"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4AC</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>226</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADE8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5B8</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>227</ID>
+                  <Description>"Slot 5"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>228</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BACE0"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4B0</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>229</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BACE4"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4B4</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>230</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADEC"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5BC</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>231</ID>
+                  <Description>"Slot 6"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>232</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BACE8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4B8</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>233</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BACEC"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4BC</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>234</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADF0"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5C0</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>235</ID>
+                  <Description>"Slot 7"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>236</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BACF0"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4C0</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>237</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BACF4"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4C4</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>238</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADF4"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5C4</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>239</ID>
+                  <Description>"Slot 8"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>240</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BACF8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4C8</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>241</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BACFC"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4CC</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>242</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADF8"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5C8</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>243</ID>
+                  <Description>"Slot 9"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>244</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BAD00"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4D0</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>245</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BAD04"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4D4</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>246</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BADFC"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5CC</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>247</ID>
+                  <Description>"Slot 10"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>248</ID>
+                      <Description>"InvItemId?"</Description>
+                      <LastState Value="00000000" RealAddress="7FF5A07BAD08"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4D8</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>249</ID>
+                      <Description>"ItemId"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BAD0C"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>4DC</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>250</ID>
+                      <Description>"InvItemToUse"</Description>
+                      <LastState Value="FFFFFFFF" RealAddress="7FF5A07BAE00"/>
+                      <ShowAsHex>1</ShowAsHex>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>player2_addr</Address>
+                      <Offsets>
+                        <Offset>5D0</Offset>
+                        <Offset>10</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>206</ID>
+              <Description>"Unknown"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>194</ID>
+                  <Description>"?"</Description>
+                  <LastState Value="-1" RealAddress="7FF5A07BAB84"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>354</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>195</ID>
+                  <Description>"?"</Description>
+                  <LastState Value="-1" RealAddress="7FF5A07BAB88"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>358</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>189</ID>
+                  <Description>"?"</Description>
+                  <LastState Value="-1" RealAddress="7FF5A07BAB9C"/>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>player2_addr</Address>
+                  <Offsets>
+                    <Offset>36C</Offset>
+                    <Offset>10</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>187</ID>
+              <Description>"Covenant"</Description>
+              <LastState Value="-1" RealAddress="7FF5A07BABB0"/>
+              <ShowAsSigned>1</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>380</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>196</ID>
+          <Description>"Effects"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>173</ID>
+              <Description>"Ring 1"</Description>
+              <LastState Value="A0004E20" RealAddress="7FF5A07BAB48"/>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>318</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>198</ID>
+              <Description>"Ring 2"</Description>
+              <LastState Value="A0004F9C" RealAddress="7FF5A07BAB4C"/>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>31C</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>199</ID>
+              <Description>"Ring 3"</Description>
+              <LastState Value="A0004E34" RealAddress="7FF5A07BAB50"/>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>320</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>200</ID>
+              <Description>"Ring 4"</Description>
+              <LastState Value="A0004E3E" RealAddress="7FF5A07BAB54"/>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player2_addr</Address>
+              <Offsets>
+                <Offset>324</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>123</ID>
+          <Description>"Items"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>122</ID>
+              <Description>"Infinite Item Usage"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(quantity_aob,DarkSoulsIII.exe,8B D7 48 8B CB E8 ?? ?? ?? ?? 90 48 8D 4C 24 28 E8 ?? ?? ?? ?? 8B C7)
+registersymbol(quantity_aob)
+
+alloc(detour,128,DarkSoulsIII.exe)
+label(after)
+label(return)
+
+detour:
+mov edx,edi
+mov rcx,rbx
+push rax
+mov eax,[rcx+08]
+cmp edx,eax
+jg after
+mov edx,eax
+jmp after
+
+after:
+pop rax
+jmp return
+
+quantity_aob:
+jmp detour
+return:
+
+[disable]
+quantity_aob:
+db 8B D7 48 8B CB
+
+unregistersymbol(quantity_aob)
+dealloc(detour)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>95</ID>
+              <Description>"Item Research"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+[disable]
+// Weapon
+// 4 bytes
+// 2 - Class Id / 2 - Subclass Id / 2 - Infusion / 2 - Level
+
+// Armour
+// 4 bytes
+// 4 - Item Id / 4 - Slot 0000/1000/2000/3000 - Head/Body/Arms/Legs
+
+// 8B C3 48 8B 5C 24 30 48 83 C4 20 5F C3 CC CC CC CC CC 8B 41 0C 89 02 48 8B C2 C3 CC CC CC CC CC CC CC 48 89 5C 24 08 48 89 74 24 10
+// replace
+{
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A51E - 8B C3                 - mov eax,ebx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A520 - 48 8B 5C 24 30        - mov rbx,[rsp+30]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A525 - 48 83 C4 20           - add rsp,20
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A529 - 5F                    - pop rdi
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A52A - C3                    - ret
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A52B - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A52C - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A52D - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A52E - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A52F - CC                    - int 3
+//
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A530 - 8B 41 0C              - mov eax,[rcx+0C]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A533 - 89 02                 - mov [rdx],eax
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A535 - 48 8B C2              - mov rax,rdx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A538 - C3                    - ret
+//
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A539 - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A53A - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A53B - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A53C - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A53D - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A53E - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A53F - CC                    - int 3
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A540 - 48 89 5C 24 08        - mov [rsp+08],rbx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+11A545 - 48 89 74 24 10        - mov [rsp+10],rsi
+}
+
+// inv loop
+// i &lt;&lt; 4 + 7FF5A07BB180
+{
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119C9E - 73 0C                 - jae DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CAC
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CA0 - 8B DA                 - mov ebx,edx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CA2 - 48 C1 E3 04           - shl rbx,04
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CA6 - 48 03 59 58           - add rbx,[rcx+58]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CAA - EB 0C                 - jmp DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CB8
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CAC - 2B D0                 - sub edx,eax
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CAE - 8B DA                 - mov ebx,edx
+//
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CB0 - 48 C1 E3 04           - shl rbx,04
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CB4 - 48 03 59 48           - add rbx,[rcx+48]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CB8 - 48 8B CB              - mov rcx,rbx
+//
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CBB - E8 409D4800           - call DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+5A3A00
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CC0 - 85 C0                 - test eax,eax
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CC2 - 48 0F45 FB            - cmovne rdi,rbx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CC6 - 48 8B 5C 24 30        - mov rbx,[rsp+30]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CCB - 48 8B C7              - mov rax,rdi
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+119CCE - 48 83 C4 20           - add rsp,20
+
+}
+
+{
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6A8 - 48 C7 44 24 20 FEFFFFFF - mov [rsp+20],FFFFFFFE
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6B1 - 48 89 5C 24 58        - mov [rsp+58],rbx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6B6 - 48 8B F2              - mov rsi,rdx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6B9 - 48 8B F9              - mov rdi,rcx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6BC - 83 39 00              - cmp dword ptr [rcx],00
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6BF - 0F84 53010000         - je DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F818
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6C5 - 48 8D 44 24 50        - lea rax,[rsp+50]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6CA - 48 89 44 24 60        - mov [rsp+60],rax
+//
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6CF - 8B 02                 - mov eax,[rdx]
+//
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6D1 - 89 44 24 50           - mov [rsp+50],eax
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6D5 - 48 8B 0D EC7FCC03     - mov rcx,[DarkSoulsIII.exe+46D0968]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6DC - 48 85 C9              - test rcx,rcx
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6DF - 75 26                 - jne DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F707
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6E1 - 4C 8D 0D 8862D301     - lea r9,[DarkSoulsIII.exe+273EC10]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6E8 - 4C 8D 05 01C02D03     - lea r8,[DarkSoulsIII.exe+3CE4990]
+DarkSoulsIII.Scaleform::Render::Matrix4x4&lt;float&gt;::SetIdentity+59F6EF - BA B1000000           - mov edx,000000B1
+}
+
+{
+140A08965 - 48 8D 44 24 50  - lea rax,[rsp+50]
+140A0896A - 48 89 44 24 60  - mov [rsp+60],rax
+140A0896F - 8B 02  - mov eax,[rdx] &lt;&lt;
+140A08971 - 89 44 24 50  - mov [rsp+50],eax
+140A08975 - 48 8B 0D EC7FCC03  - mov rcx,[DarkSoulsIII.exe+46D0968]
+
+RAX=00000000B000017C
+RBX=000000000014F0A8
+RCX=000000000014F0A8
+RDX=00007FF5A07BB340
+RSI=00007FF5A07BB340
+RDI=000000000014F0A8
+RSP=000000000014F000
+RBP=00007FF5A07BAC00
+RIP=0000000140A08971
+R8=000000000000009C
+R9=0000000000000085
+R10=0000000000000193
+R11=00007FF5A113E960
+R12=000000000014F1D0
+R13=0000000000000000
+R14=000000000000009F
+R15=0000000000000001
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>276</ID>
+          <Description>"Debug"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>808080</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>277</ID>
+              <Description>"player1_addr"</Description>
+              <LastState Value="00007FF5AA29E200" RealAddress="1446C5DC8"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>808080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>player1_addr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>278</ID>
+              <Description>"player2_addr"</Description>
+              <LastState Value="00007FF5A07B9B00" RealAddress="14469D118"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>808080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>player2_addr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>296</ID>
+              <Description>"player3_addr"</Description>
+              <LastState Value="00007FF5A07B8910" RealAddress="1446A0A30"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>808080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>player3_addr</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>325</ID>
+      <Description>"Disable Hitbox"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(iframe,DarkSoulsIII.exe,48 8B 59 58 49 8B CE)
+alloc(newmem,$1000,iframe)
+
+label(code)
+label(return)
+label(iframe_ptr)
+
+newmem:
+
+code:
+mov rbx,iframe_ptr
+mov [rbx],rcx
+mov rbx,[rcx+58]
+lea rbx,[rbx]
+mov rcx,r14
+jmp return
+
+iframe_ptr:
+dq 0
+
+iframe:
+jmp newmem
+nop
+nop
+return:
+registersymbol(iframe)
+registersymbol(iframe_ptr)
+
+aobscanmodule(iframe_write,DarkSoulsIII.exe,48 89 41 58 48 8D 59 60)
+alloc(newmem2,$1000,iframe_write)
+
+label(code2)
+label(return2)
+
+newmem2:
+mov rbp,iframe_ptr
+cmp [rbp],rcx
+jne code2
+or rax,1
+code2:
+mov [rcx+58],rax
+lea rbx,[rcx+60]
+jmp return2
+
+iframe_write:
+jmp newmem2
+nop
+nop
+nop
+return2:
+registersymbol(iframe_write)
+
+[DISABLE]
+iframe:
+db 48 8B 59 58 49 8B CE
+unregistersymbol(iframe)
+unregistersymbol(iframe_ptr)
+dealloc(newmem)
+iframe_write:
+db 48 89 41 58 48 8D 59 60
+unregistersymbol(iframe_write)
+dealloc(newmem2)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>326</ID>
+      <Description>"Disable Status Effects"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(effects,DarkSoulsIII.exe,45 2B C8 45 85 C9)
+effects:
+  db 90 90 90
+registersymbol(effects)
+
+[DISABLE]
+effects:
+  db 45 2B C8
+unregistersymbol(effects)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>327</ID>
+      <Description>"No description"</Description>
+      <LastState Value="45 2B C8 45 85 C9" RealAddress="1409C1CCB"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>6</ByteLength>
+      <Address>DarkSoulsIII.exe+9C1CCB</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>330</ID>
+      <Description>"No description"</Description>
+      <LastState Value="8B C3 48 8B 5C 24 30 48 83 C4 20 5F C3 CC CC CC CC CC 8B 41 0C 89 02 48 8B C2 C3 CC CC CC CC CC CC CC 48 89 5C 24 08 48 89 74 24 10" RealAddress="14058396E"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>44</ByteLength>
+      <Address>DarkSoulsIII.exe+58396E</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>331</ID>
+      <Description>"No description"</Description>
+      <LastState Value="48 8D 54 24 60 48 8B C8 E8 3B B0 B7 FF 8B 08 89 4F 10 EB 6C 8B CD E8 9D 00 00 00 8B D0 8B 0E" RealAddress="140A08938"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>Array of byte</VariableType>
+      <ByteLength>31</ByteLength>
+      <Address>DarkSoulsIII.exe+A08938</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>anticheat1_aob</Name>
+      <Address>145629317</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>anticheat2_aob</Name>
+      <Address>144BD66EE</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>iframe</Name>
+      <Address>1405D4B57</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>iframe_ptr</Name>
+      <Address>13FFF0025</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>iframe_write</Name>
+      <Address>14096AD9C</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="24">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>91</ID>
+      <Description>"[Scripts]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>97</ID>
+          <Description>"[Native Cheats]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(cheats_aob,Halo.exe,5C F9 2B 40 04 2E 2F 40)
+registersymbol(cheats_aob)
+
+[disable]
+unregistersymbol(cheats_aob)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>98</ID>
+              <Description>"Deathless Player"</Description>
+              <LastState Value="0" RealAddress="0087ABC0"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-10</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>99</ID>
+              <Description>"Jetpack"</Description>
+              <LastState Value="0" RealAddress="0087ABC1"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-f</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>100</ID>
+              <Description>"Infinite Ammo"</Description>
+              <LastState Value="1" RealAddress="0087ABC2"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-e</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>101</ID>
+              <Description>"Bump Possession"</Description>
+              <LastState Value="0" RealAddress="0087ABC3"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-d</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>102</ID>
+              <Description>"Super Jump"</Description>
+              <LastState Value="0" RealAddress="0087ABC4"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-c</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"Damage Self"</Description>
+              <LastState Value="0" RealAddress="0087ABC5"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-b</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>104</ID>
+              <Description>"Medusa"</Description>
+              <LastState Value="0" RealAddress="0087ABC6"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-a</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>105</ID>
+              <Description>"Omnipotent"</Description>
+              <LastState Value="0" RealAddress="0087ABC7"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-9</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>106</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" RealAddress="0087ABC8"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>107</ID>
+              <Description>"Bottomless Clip"</Description>
+              <LastState Value="0" RealAddress="0087ABC9"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-7</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" RealAddress="0087ABCA"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-6</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>109</ID>
+              <Description>"?"</Description>
+              <LastState Value="0" RealAddress="0087ABCB"/>
+              <VariableType>Byte</VariableType>
+              <Address>cheats_aob-5</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>112</ID>
+          <Description>"[Time Scale]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(time_scale_ptr_aob,halo.exe,83 ?? ?? 66 ?? ?? ?? 74 ?? 66 ?? ?? ?? 74 ?? ?? ?? ?? EB)
+registersymbol(time_scale_ptr_aob)
+
+alloc(time_scale_ptr,4,halo.exe)
+registersymbol(time_scale_ptr)
+
+time_scale_ptr:
+dd (float)1
+
+alloc(time_scale_ptr_cave,256,halo.exe)
+label(time_scale_ptr_ret)
+registersymbol(time_scale_ptr_cave)
+
+time_scale_ptr_cave:
+readmem(time_scale_ptr_aob,7)
+mov [time_scale_ptr],ecx
+jmp time_scale_ptr_ret
+
+time_scale_ptr_aob:
+jmp time_scale_ptr_cave
+db 90 90
+time_scale_ptr_ret:
+
+[disable]
+time_scale_ptr_aob:
+readmem(time_scale_ptr_cave,7)
+
+unregistersymbol(time_scale_ptr_aob)
+unregistersymbol(time_scale_ptr)
+unregistersymbol(time_scale_ptr_cave)
+dealloc(time_scale_ptr_cave)
+dealloc(time_scale_ptr)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"Scale"</Description>
+              <VariableType>Float</VariableType>
+              <Address>time_scale_ptr</Address>
+              <Offsets>
+                <Offset>18</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>92</ID>
+          <Description>"Freeze World Time"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(world_time_aob,Halo.exe,74 2A ?? ?? ?? ?? ?? ?? ?? ?? D3 ?? ?? ?? ?? 74 2A)
+registersymbol(world_time_aob)
+
+world_time_aob:
+db 75 39
+
+[disable]
+world_time_aob:
+db 74 2A
+
+unregistersymbol(world_time_aob)
+
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>80</ID>
+      <Description>"[Player]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+aobscanmodule(player_ptr_aob,halo.exe,8B 8E E0 00 00 00 8B 54 24 24 51)
+registersymbol(player_ptr_aob)
+
+alloc(player_ptr,4,halo.exe)
+registersymbol(player_ptr)
+
+player_ptr:
+dd 0
+
+alloc(player_ptr_cave,256,halo.exe)
+label(player_ptr_ret)
+
+player_ptr_cave:
+mov [player_ptr],esi
+mov ecx,[esi+E0]
+jmp player_ptr_ret
+
+player_ptr_aob:
+jmp player_ptr_cave
+nop
+player_ptr_ret:
+
+[disable]
+player_ptr_aob:
+db 8B 8E E0 00 00 00
+
+unregistersymbol(player_ptr_aob)
+unregistersymbol(player_ptr)
+dealloc(player_ptr_cave)
+dealloc(player_ptr)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>130</ID>
+          <Description>"Address"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_ptr</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>160</ID>
+          <Description>"Biped ID"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>player_ptr</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>86</ID>
+          <Description>"[Statistics]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>87</ID>
+              <Description>"Health"</Description>
+              <VariableType>Float</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>E0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>82</ID>
+              <Description>"Shields"</Description>
+              <VariableType>Float</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>E4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>83</ID>
+              <Description>"Frag Grenades"</Description>
+              <VariableType>Byte</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>31E</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>84</ID>
+              <Description>"Plasma Grenades"</Description>
+              <VariableType>Byte</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>31F</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>85</ID>
+          <Description>"[Position]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>81</ID>
+              <Description>"XYZ"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>12</ByteLength>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>5C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>90</ID>
+              <Description>"X"</Description>
+              <VariableType>Float</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>5C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>88</ID>
+              <Description>"Y"</Description>
+              <VariableType>Float</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>89</ID>
+              <Description>"Z"</Description>
+              <VariableType>Float</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>163</ID>
+              <Description>"[Dyson]"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(position_aob,Halo.exe,83 ?? ?? 89 ?? 89 ?? ?? 6A 00 51)
+registersymbol(position_aob)
+
+alloc(position_cave,256,Halo.exe)
+label(position_move)
+label(position_offset)
+label(position_ret)
+registersymbol(position_cave)
+
+position_cave:
+readmem(position_aob,14)
+push eax
+mov eax,[player_ptr]
+add eax,5C
+cmp edx,eax
+jne position_move
+pop eax
+jmp position_ret
+
+position_move:
+push esi
+mov esi,[eax]
+mov [edx],esi
+fld dword ptr [edx]
+fadd dword ptr [position_offset]
+fstp dword ptr [edx]
+add eax,4
+mov esi,[eax]
+mov [edx+04],esi
+add eax,4
+mov esi,[eax]
+mov [edx+08],esi
+pop esi
+pop eax
+jmp position_ret
+
+position_offset:
+dd (float)1
+
+position_aob:
+jmp position_cave
+db 90 90 90 90 90 90 90 90 90
+position_ret:
+
+[disable]
+position_aob:
+readmem(position_cave,14)
+
+unregistersymbol(position_cave)
+unregistersymbol(position_aob)
+dealloc(position_cave)
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>128</ID>
+      <Description>"[Entity]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+alloc(entity_ptr,4,halo.exe)
+registersymbol(entity_ptr)
+
+entity_ptr:
+dd 0
+
+[disable]
+unregistersymbol(entity_ptr)
+dealloc(entity_ptr)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>129</ID>
+          <Description>"Address"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>entity_ptr</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>161</ID>
+          <Description>"Biped ID"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>entity_ptr</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>117</ID>
+          <Description>"[Statistics]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>118</ID>
+              <Description>"Health"</Description>
+              <VariableType>Float</VariableType>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>E0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>119</ID>
+              <Description>"Shields"</Description>
+              <VariableType>Float</VariableType>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>E4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>120</ID>
+              <Description>"Frag Grenades"</Description>
+              <VariableType>Byte</VariableType>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>31E</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>121</ID>
+              <Description>"Plasma Grenades"</Description>
+              <VariableType>Byte</VariableType>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>31F</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>122</ID>
+          <Description>"[Position]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>123</ID>
+              <Description>"XYZ"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>12</ByteLength>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>5C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>124</ID>
+              <Description>"X"</Description>
+              <VariableType>Float</VariableType>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>5C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>125</ID>
+              <Description>"Y"</Description>
+              <VariableType>Float</VariableType>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>126</ID>
+              <Description>"Z"</Description>
+              <VariableType>Float</VariableType>
+              <Address>entity_ptr</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>116</ID>
+      <Description>"[Get Last Hit Entity]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+aobscanmodule(health_damage_aob,halo.exe,D9 ?? E0 00 00 00 ?? ?? ?? ?? D9 ?? E0 00 00 00)
+registersymbol(health_damage_aob)
+aobscanmodule(shield_damage_aob,halo.exe,D9 ?? E4 00 00 00 ?? ?? ?? ?? D9 ?? E4 00 00 00)
+registersymbol(shield_damage_aob)
+
+alloc(last_entity_ptr,4,halo.exe)
+registersymbol(last_entity_ptr)
+
+last_entity_ptr:
+dd 0
+
+alloc(health_damage_cave,256,halo.exe)
+label(health_damage_ret)
+registersymbol(health_damage_cave)
+alloc(shield_damage_cave,256,halo.exe)
+label(shield_damage_ret)
+registersymbol(shield_damage_cave)
+
+health_damage_cave:
+readmem(health_damage_aob,6)
+mov [last_entity_ptr],esi
+jmp health_damage_ret
+
+shield_damage_cave:
+readmem(shield_damage_aob,6)
+mov [last_entity_ptr],esi
+jmp shield_damage_ret
+
+health_damage_aob:
+jmp health_damage_cave
+nop
+health_damage_ret:
+
+shield_damage_aob:
+jmp shield_damage_cave
+nop
+shield_damage_ret:
+
+[disable]
+health_damage_aob:
+readmem(health_damage_cave, 6)
+
+shield_damage_aob:
+readmem(shield_damage_cave, 6)
+
+unregistersymbol(health_damage_cave)
+unregistersymbol(shield_damage_cave)
+unregistersymbol(last_entity_ptr)
+unregistersymbol(health_damage_aob)
+unregistersymbol(shield_damage_aob)
+dealloc(health_damage_cave)
+dealloc(shield_damage_cave)
+dealloc(last_entity_ptr)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>127</ID>
+          <Description>"Address"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>last_entity_ptr</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

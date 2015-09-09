@@ -1,0 +1,42 @@
+Body IDs
+0  - Custom Body
+1  - Custom Body (Blue)
+2  - Custom Body (Red)
+3  - Custom Body (Yellow)
+4  - Custom Body (Desperado Ver.)
+5  - Suit
+6  - Mariachi Uniform
+7  - Standard Cyborg Body
+8  - Original Cyborg Body
+9  - Gray Fox
+10 - White Armor
+11 - Inferno Armor
+12 - Commando Armor
+13 - Custom Body (Debug)
+14 - Standard Cyborg Body (R00)
+15 - Jetstream Sam
+
+Main Weapon IDs
+0  - High Frequency Blade
+1  - Stun Blade
+2  - Armor Breaker
+3  - High Frequency Long Sword
+4  - High Frequency Wooden Sword
+5  - High Frequency Murasama Blade
+6  - Fox Blade
+7  - High Frequency Machete
+8  - High Frequency Blade (Debug)
+9  - High Frequency Blade (R00)
+10 - High Frequency Murasama Blade (Debug)
+11 - High Frequency Chainsaw
+12 - High Frequency Blade (Invisible)
+
+Unique Weapon IDs
+2 - Polearm
+3 - Sai
+4 - Pincer Blades
+
+Wig IDs
+1 - Wig A
+2 - Wig B
+3 - Wig C

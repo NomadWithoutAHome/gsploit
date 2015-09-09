@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="18">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>57895</ID>
+      <Description>"Scripts"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>57652</ID>
+          <Description>"Infinite Magazine"</Description>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(mag_aob,mgsvmgo.exe,89 1C 48 49 8B 4A 58)
+registersymbol(mag_aob)
+
+mag_aob:
+db 90 90 90
+
+[disable]
+unregistersymbol(mag_aob)
+mag_aob:
+db 89 1C 48
+
+{
+mgsvmgo.exe+30B614C - EB 06                 - jmp mgsvmgo.exe+30B6154
+mgsvmgo.exe+30B614E - 8B 66 44              - mov esp,[rsi+44]
+mgsvmgo.exe+30B6151 - 89 1C 48              - mov [rax+rcx*2],ebx
+mgsvmgo.exe+30B6154 - 49 8B 4A 58           - mov rcx,[r10+58]
+mgsvmgo.exe+30B6158 - 45 89 D8              - mov r8d,r11d
+mgsvmgo.exe+30B615B - 48 8B 01              - mov rax,[rcx]
+mgsvmgo.exe+30B615E - FF A0 00010000        - jmp qword ptr [rax+00000100]
+mgsvmgo.exe+30B6164 - F3 C3                 - repe ret
+}
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57655</ID>
+          <Description>"Infinite Ammo"</Description>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(ammo_aob,mgsvmgo.exe,46 89 8C 19 84 01 00 00 C3)
+registersymbol(ammo_aob)
+
+ammo_aob:
+db 90 90 90 90 90 90 90 90
+
+[disable]
+unregistersymbol(ammo_aob)
+ammo_aob:
+db 46 89 8C 19 84 01 00 00
+
+{
+mgsvmgo.exe+281617E - D6                    - db D6
+mgsvmgo.exe+281617F - C8 0DD5 28            - enter D50D,28
+mgsvmgo.exe+2816183 - B8 70728889           - mov eax,89887270 : [07C007E0]
+mgsvmgo.exe+2816188 - C1 48 83 C0           - ror [rax-7D],-40
+mgsvmgo.exe+281618C - 0C 48                 - or al,48
+mgsvmgo.exe+281618E - C1 E0 05              - shl eax,05
+mgsvmgo.exe+2816191 - 48 C1 E1 05           - shl rcx,05
+mgsvmgo.exe+2816195 - 46 89 04 18           - mov [rax+r11],r8d
+mgsvmgo.exe+2816199 - 46 89 8C 19 84010000  - mov [rcx+r11+00000184],r9d
+mgsvmgo.exe+28161A1 - C3                    - ret
+mgsvmgo.exe+28161A2 - CC                    - int 3
+}
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57883</ID>
+          <Description>"Position"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(pos_update_aob,mgsvmgo.exe,48 89 45 E0 41 0F 28 58 20)
+registersymbol(pos_update_aob)
+
+alloc(cave,64,mgsvmgo.exe)
+label(return)
+
+alloc(pos,4,mgsvmgo.exe)
+registersymbol(pos)
+
+pos:
+db 00
+
+cave:
+mov [pos],r8
+movaps xmm3,[r8+20]
+jmp return
+
+pos_update_aob+4:
+jmp cave
+return:
+
+[disable]
+unregistersymbol(pos_update_aob)
+unregistersymbol(pos)
+dealloc(cave)
+dealloc(pos)
+
+pos_update_aob+4:
+db 41 0F 28 58 20
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>57884</ID>
+              <Description>"XYZ"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>80000008</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>12</ByteLength>
+              <Address>pos</Address>
+              <Offsets>
+                <Offset>20</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57887</ID>
+              <Description>"X"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>pos</Address>
+              <Offsets>
+                <Offset>20</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57890</ID>
+              <Description>"Y"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>pos</Address>
+              <Offsets>
+                <Offset>28</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57886</ID>
+              <Description>"Z"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>pos</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57885</ID>
+              <Description>"Rotation"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>pos</Address>
+              <Offsets>
+                <Offset>64</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57919</ID>
+              <Description>"Dyson"</Description>
+              <LastState Activated="0"/>
+              <Color>80000008</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(pos_write_aob,mgsvmgo.exe,0F 29 4B 30 41 0F 28 C3)
+registersymbol(pos_write_aob)
+
+alloc(cave,128,mgsvmgo.exe)
+label(dyson)
+label(offset)
+label(return)
+
+cave:
+push rax
+mov rax,[pos]
+sub rax,10
+cmp rbx,rax
+jne dyson
+pop rax
+movaps [rbx+30],xmm1
+movaps xmm0,xmm11
+jmp return
+
+dyson:
+movss xmm1,[rax+30]
+addss xmm1,[offset]
+movss [rbx+30],xmm1
+movss xmm1,[rax+38]
+movss [rbx+38],xmm1
+movss xmm1,[rax+34]
+movss [rbx+34],xmm1
+pop rax
+movaps xmm0,xmm11
+jmp return
+
+offset:
+dd (float)1
+
+pos_write_aob:
+jmp cave
+db 90 90 90
+return:
+
+[disable]
+unregistersymbol(pos_write_aob)
+dealloc(cave)
+
+pos_write_aob:
+db 0F 29 4B 30 41 0F 28 C3
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>57896</ID>
+      <Description>"Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>57889</ID>
+          <Description>"Next level up in"</Description>
+          <LastState Value="4238" Activated="0" RealAddress="1427A33D8"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>mgsvmgo.exe+27A33D8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>57888</ID>
+          <Description>"Gear Points"</Description>
+          <LastState Value="1610" Activated="0" RealAddress="141DE3A6C"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>mgsvmgo.exe+1DE3A6C</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>offline_gmp_aob</Name>
+      <Address>143E22C7E</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>online_gmp_aob</Name>
+      <Address>143E22C44</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>pos_aob</Name>
+      <Address>142A72A6B</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>

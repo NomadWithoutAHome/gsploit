@@ -1,0 +1,27 @@
+e20010 - Ground Zeroes
+e20015 - Ground Zeroes
+e20020 - Eliminate the Renegade Threat
+e20030 - Intel Operative Rescue
+e20040 - Classified Intel Acquisition
+e20050 - Destroy the Anti-Air Emplacements
+e20060 - Deja Vu
+e20070 - Jemais Vu
+
+PLTypeSneakingSuit
+PLTypeMgs1
+PLTypeRaiden
+PLTypeNinja
+
+States
+0 = Alive,
+1 = Dead,
+2 = Dying,
+3 = Sleep,
+4 = Faint,
+? = BrokenLArm,
+? = BrokenRArm,
+? = BrokenLLeg,
+? = BrokenRLeg,
+? = DropWeapon,
+? = HoldUp,
+? = HoldUpDown,

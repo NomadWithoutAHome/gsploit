@@ -1,0 +1,2270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="18">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>180</ID>
+      <Description>"Scripts"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>176</ID>
+          <Description>"Velocity Mod"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(velocityWrite,ffxiv.exe,F3 0F 11 46 68 F6 C4 44 7A 13)
+registersymbol(velocityWrite)
+alloc(newmem,18,ffxiv.exe)
+label(returnhere)
+label(exit)
+
+alloc(velocityMult,4,ffxiv.exe)
+registersymbol(velocityMult)
+
+velocityMult:
+dd (float)1
+
+newmem:
+mulss xmm0,[velocityMult]
+movss [esi+68],xmm0
+
+exit:
+jmp returnhere
+
+//ffxiv.exe+949D93:
+velocityWrite:
+jmp newmem
+returnhere:
+
+[DISABLE]
+unregistersymbol(velocityMult)
+unregistersymbol(velocityWrite)
+dealloc(velocityMult)
+dealloc(newmem)
+//ffxiv.exe+949D93:
+velocityWrite:
+db F3 0F 11 46 68
+//Alt: movss [esi+68],xmm0
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>177</ID>
+              <Description>"Velocity Multiplyer"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>velocityMult</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>237</ID>
+      <Description>"Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="0"/>
+      <Color>80000008</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+aobscanmodule(updLoop,ffxiv.exe,89 44 8E 04 FF 06 47 81 FF 58 01 00 00 72 DA 5F 5E 5D C2 04 00 CC)
+registersymbol(updLoop)
+
+alloc(baseAddrCpy,24,ffxiv.exe)
+label(baseAddrRet)
+
+alloc(baseAddr,4,ffxiv.exe)
+registersymbol(baseAddr)
+
+baseAddr:
+db 00
+
+baseAddrCpy:
+push eax
+mov eax,[esi+04]
+mov [baseAddr],eax
+pop eax
+mov [esi+ecx*4+04],eax
+inc [esi]
+jmp baseAddrRet
+
+updLoop:
+jmp baseAddrCpy
+nop
+baseAddrRet:
+
+[disable]
+unregistersymbol(updLoop)
+unregistersymbol(baseAddr)
+dealloc(baseAddrCpy)
+dealloc(baseAddr)
+
+updLoop:
+db 89 44 8E 04 FF 06
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>238</ID>
+          <Description>"Base Address"</Description>
+          <LastState Value="??" Activated="0" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>baseAddr</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>79</ID>
+          <Description>"EntityStruct"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="0" RealAddress="00000000"/>
+          <Color>80000008</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>80</ID>
+              <Description>"Begin"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>81</ID>
+              <Description>"Name"</Description>
+              <LastState Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>String</VariableType>
+              <Length>20</Length>
+              <Unicode>0</Unicode>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>82</ID>
+              <Description>"GUID"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>74</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>83</ID>
+              <Description>"NPC Id 1"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>78</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>84</ID>
+              <Description>"NPC Id 2"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>80</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>85</ID>
+              <Description>"Owner GUID"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>84</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>86</ID>
+              <Description>"Type"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>8A</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>87</ID>
+              <Description>"Target Type"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>8C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>88</ID>
+              <Description>"Gather Status"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>8F</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>89</ID>
+              <Description>"Distance"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>90</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>90</ID>
+              <Description>"XYZ"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>80000008</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>12</ByteLength>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>A0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>239</ID>
+              <Description>"X"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>A0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>91</ID>
+              <Description>"Y"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>A8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>92</ID>
+              <Description>"Z"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>A4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>93</ID>
+              <Description>"Orientation"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>B0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>94</ID>
+              <Description>"Fate"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>E4</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>95</ID>
+              <Description>"Gathering Invisible"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>11C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>96</ID>
+              <Description>"Model Id"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>174</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>100</ID>
+              <Description>"Status"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>17E</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>97</ID>
+              <Description>"Action Status"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>17C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>98</ID>
+              <Description>"IsGM"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>183</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>99</ID>
+              <Description>"Icon"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>18C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>102</ID>
+              <Description>"Claimed By GUID"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>180</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"Target GUID"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>188</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>104</ID>
+              <Description>"Player Target GUID"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>938</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>105</ID>
+              <Description>"Free Company"</Description>
+              <LastState Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>String</VariableType>
+              <Length>7</Length>
+              <Unicode>0</Unicode>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1528</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>127</ID>
+              <Description>"Job"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1540</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>106</ID>
+              <Description>"Level"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1541</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108</ID>
+              <Description>"Grand Company"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1543</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>107</ID>
+              <Description>"Grand Company Rank"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1544</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>110</ID>
+              <Description>"Title"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1546</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>111</ID>
+              <Description>"Current HP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1548</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>112</ID>
+              <Description>"Max HP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>154C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"Current MP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1550</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>114</ID>
+              <Description>"Max MP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1554</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>115</ID>
+              <Description>"Current TP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>2 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1558</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>116</ID>
+              <Description>"Current GP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>2 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>155A</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>117</ID>
+              <Description>"Max GP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>2 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>155C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>118</ID>
+              <Description>"Current CP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>2 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>155E</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>119</ID>
+              <Description>"Max CP"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>2 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>1560</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>285</ID>
+              <Description>"IsCasting"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>2A40</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>123</ID>
+              <Description>"Current Action Id"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>2 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>2A44</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>124</ID>
+              <Description>"Current Action Target GUID"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>2A50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>125</ID>
+              <Description>"Current Action Progress"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>2A74</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>126</ID>
+              <Description>"Current Action Cast"</Description>
+              <LastState Value="??" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <VariableType>Float</VariableType>
+              <Address>baseAddr</Address>
+              <Offsets>
+                <Offset>2A78</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>74</ID>
+          <Description>"Gear"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="0" RealAddress="00000000"/>
+          <Color>80000008</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>56</ID>
+              <Description>"Head"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>188</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>58</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E1</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>59</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E2</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>60</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E3</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>8</ID>
+              <Description>"Body"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>15</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>20</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E5</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>21</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E6</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>22</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E7</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9</ID>
+              <Description>"Hands"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>19</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>24</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26E9</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>25</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26EA</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26EB</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10</ID>
+              <Description>"Legs"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>23</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26EC</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>28</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26ED</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>29</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26EE</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>30</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26EF</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>11</ID>
+              <Description>"Feet"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>27</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>12</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F1</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>13</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F2</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>14</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F3</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"Ears"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>184</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>33</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F5</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>34</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F6</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>35</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>26F7</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>46</ID>
+              <Description>"Left Finger"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>47</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2700</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>48</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2701</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>49</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2702</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>50</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2703</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>51</ID>
+              <Description>"Right Finger"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>52</ID>
+                  <Description>"Set Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2704</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>53</ID>
+                  <Description>"Subset Id"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2705</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>54</ID>
+                  <Description>"Variation"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2706</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>55</ID>
+                  <Description>"Dye"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>2707</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>64</ID>
+              <Description>"Main Hand"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>63</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>1570</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>65</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>1571</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>66</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>1572</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>67</ID>
+                  <Description>"No description"</Description>
+                  <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>baseAddr</Address>
+                  <Offsets>
+                    <Offset>1573</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>185</ID>
+          <Description>"Glamit"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(gearEquipUpdate,ffxiv.exe,89 9C BE E0 26 00 00 83 FF 0A 72 04 33 C0)
+registersymbol(gearEquipUpdate)
+aobscanmodule(gearUpdateBlock,ffxiv.exe,8B 10 89 96 E0 26 00 00 8B 48 04)
+registersymbol(gearUpdateBlock)
+
+alloc(gearEquipOverride,128,ffxiv.exe)
+label(gearEquipRestore)
+label(gearEquipDefault)
+label(gearEquipReturn)
+
+alloc(gearUpdateOverride,128,ffxiv.exe)
+label(gearUpdateDefault)
+label(gearUpdateCheck)
+label(gearUpdateRestore)
+label(gearUpdateLoop)
+label(gearUpdateReturn)
+
+alloc(cache,4,ffxiv.exe)
+registersymbol(cache)
+
+alloc(gearArray,32,ffxiv.exe)
+registersymbol(gearArray)
+
+gearEquipOverride:
+push esi
+cmp [baseAddr],esi
+jne gearEquipDefault
+cmp ebx,0
+je gearEquipDefault
+mov esi,gearArray
+mov [cache],ebx
+mov ebx,[esi+edi*4]
+cmp ebx,0
+je gearEquipRestore
+jmp gearEquipDefault
+
+gearEquipRestore:
+mov ebx,[cache]
+jmp gearEquipDefault
+
+gearEquipDefault:
+pop esi
+mov [esi+edi*4+26E0],ebx
+jmp gearEquipReturn
+
+gearUpdateOverride:
+cmp [baseAddr],esi
+jne gearUpdateDefault
+push edi
+mov edi,0
+jmp gearUpdateCheck
+
+gearUpdateDefault:
+mov edx,[eax]
+mov [esi+000026E0],edx
+jmp gearUpdateReturn
+
+gearUpdateCheck:
+mov ecx,[eax+edi*4]
+cmp ecx,0
+je gearUpdateLoop
+push eax
+mov eax,gearArray
+mov [cache],ecx
+mov ecx,[eax+edi*4]
+pop eax
+cmp ecx,0
+je gearUpdateRestore
+jmp gearUpdateLoop
+
+gearUpdateRestore:
+mov ecx,[cache]
+jmp gearUpdateLoop
+
+gearUpdateLoop:
+mov [esi+edi*4+26E0],ecx
+inc edi
+cmp edi,9
+jne gearUpdateCheck
+mov eax,ecx
+pop edi
+jmp gearUpdateBlock+59
+
+cache:
+dd 0
+
+gearArray:
+dd 0
+
+gearEquipUpdate:
+jmp gearEquipOverride
+db 90 90
+gearEquipReturn:
+
+gearUpdateBlock:
+jmp gearUpdateOverride
+db 90 90 90
+gearUpdateReturn:
+
+[disable]
+unregistersymbol(gearEquipUpdate)
+unregistersymbol(gearUpdateBlock)
+unregistersymbol(cache)
+unregistersymbol(gearArray)
+dealloc(gearEquipOverride)
+dealloc(gearUpdateOverride)
+dealloc(cache)
+dealloc(gearArray)
+
+gearEquipUpdate:
+db 89 9C BE E0 26 00 00
+
+gearUpdateBlock:
+db 8B 10 89 96 E0 26 00 00
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>240</ID>
+              <Description>"Slots"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>192</ID>
+                  <Description>"Head"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>198</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>199</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+1</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>200</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+2</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>201</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+3</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>202</ID>
+                  <Description>"Body"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>203</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+4</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>204</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+5</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>205</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+6</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>206</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+7</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>207</ID>
+                  <Description>"Hands"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>208</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+8</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>209</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+9</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>210</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+A</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>211</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+B</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>212</ID>
+                  <Description>"Legs"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>213</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>214</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+D</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>215</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>216</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+F</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>217</ID>
+                  <Description>"Feet"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>218</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>219</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+11</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>220</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+12</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>221</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+13</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>222</ID>
+                  <Description>"Ears"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>223</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+14</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>224</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+15</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>225</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+16</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>226</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+17</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>227</ID>
+                  <Description>"Left Finger"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>228</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+20</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>229</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+21</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>230</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+22</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>231</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+23</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>232</ID>
+                  <Description>"Right Finger"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>233</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+24</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>234</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+25</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>235</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+26</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>236</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+27</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>241</ID>
+          <Description>"Glamit (change everyone else's gear)"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="0"/>
+          <Color>80000008</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(gearEquipUpdate,ffxiv.exe,89 9C BE E0 26 00 00 83 FF 0A 72 04 33 C0)
+registersymbol(gearEquipUpdate)
+aobscanmodule(gearUpdateBlock,ffxiv.exe,8B 10 89 96 E0 26 00 00 8B 48 04)
+registersymbol(gearUpdateBlock)
+
+alloc(gearEquipOverride,128,ffxiv.exe)
+label(gearEquipDefault)
+label(gearEquipReturn)
+
+alloc(gearUpdateOverride,128,ffxiv.exe)
+label(gearUpdateDefault)
+label(gearUpdateCheck)
+label(gearUpdateLoop)
+label(gearUpdateReturn)
+
+alloc(cache,4,ffxiv.exe)
+registersymbol(cache)
+
+alloc(gearArray,32,ffxiv.exe)
+registersymbol(gearArray)
+
+gearEquipOverride:
+push esi
+cmp [baseAddr],esi
+je gearEquipDefault
+mov esi,gearArray
+mov ebx,[esi+edi*4]
+jmp gearEquipDefault
+
+gearEquipDefault:
+pop esi
+mov [esi+edi*4+26E0],ebx
+jmp gearEquipReturn
+
+gearUpdateOverride:
+cmp [baseAddr],esi
+je gearUpdateDefault
+push edi
+mov edi,0
+jmp gearUpdateCheck
+
+gearUpdateDefault:
+mov edx,[eax]
+mov [esi+000026E0],edx
+jmp gearUpdateReturn
+
+gearUpdateCheck:
+push eax
+mov eax,gearArray
+mov ecx,[eax+edi*4]
+pop eax
+jmp gearUpdateLoop
+
+gearUpdateLoop:
+mov [esi+edi*4+26E0],ecx
+inc edi
+cmp edi,9
+jne gearUpdateCheck
+mov eax,ecx
+pop edi
+jmp gearUpdateBlock+59
+
+cache:
+dd 0
+
+gearArray:
+dd 0
+
+gearEquipUpdate:
+jmp gearEquipOverride
+db 90 90
+gearEquipReturn:
+
+gearUpdateBlock:
+jmp gearUpdateOverride
+db 90 90 90
+gearUpdateReturn:
+
+[disable]
+unregistersymbol(gearEquipUpdate)
+unregistersymbol(gearUpdateBlock)
+unregistersymbol(cache)
+unregistersymbol(gearArray)
+dealloc(gearEquipOverride)
+dealloc(gearUpdateOverride)
+dealloc(cache)
+dealloc(gearArray)
+
+gearEquipUpdate:
+db 89 9C BE E0 26 00 00
+
+gearUpdateBlock:
+db 8B 10 89 96 E0 26 00 00
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>242</ID>
+              <Description>"Slots"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" Activated="0" RealAddress="00000000"/>
+              <Color>80000008</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>243</ID>
+                  <Description>"Head"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>244</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>245</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+1</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>246</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+2</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>247</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+3</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>248</ID>
+                  <Description>"Body"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>249</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+4</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>250</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+5</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>251</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+6</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>252</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+7</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>253</ID>
+                  <Description>"Hands"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>254</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+8</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>255</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+9</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>256</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+A</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>257</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+B</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>258</ID>
+                  <Description>"Legs"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>259</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+C</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>260</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+D</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>261</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+E</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>262</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+F</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>263</ID>
+                  <Description>"Feet"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>264</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+10</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>265</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+11</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>266</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+12</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>267</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+13</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>268</ID>
+                  <Description>"Ears"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>269</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+14</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>270</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+15</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>271</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+16</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>272</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+17</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>273</ID>
+                  <Description>"Left Finger"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>274</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+20</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>275</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+21</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>276</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+22</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>277</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+23</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>278</ID>
+                  <Description>"Right Finger"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" Activated="0" RealAddress="00000000"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>80000008</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>279</ID>
+                      <Description>"Set Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+24</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>280</ID>
+                      <Description>"Subset Id"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+25</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>281</ID>
+                      <Description>"Variation"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+26</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>282</ID>
+                      <Description>"Dye"</Description>
+                      <LastState Value="??" Activated="0" RealAddress="00000000"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>80000008</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>gearArray+27</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>163</ID>
+      <Description>"Chocobo"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>154</ID>
+          <Description>"Current XP"</Description>
+          <LastState Value="??" Activated="0" RealAddress="020B6AF0"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>ffxiv.exe+1126AF0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>164</ID>
+          <Description>"Gear"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="0" RealAddress="00000000"/>
+          <Color>80000008</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>161</ID>
+              <Description>"Head"</Description>
+              <LastState Value="??" Activated="0" RealAddress="020B6AD8"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>ffxiv.exe+1126AD8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>159</ID>
+              <Description>"Body"</Description>
+              <LastState Value="??" Activated="0" RealAddress="020B6AD9"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>ffxiv.exe+1126AD9</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>160</ID>
+              <Description>"Legs"</Description>
+              <LastState Value="??" Activated="0" RealAddress="020B6ADA"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>ffxiv.exe+1126ADA</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>165</ID>
+          <Description>"Appearance"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="0" RealAddress="00000000"/>
+          <Color>80000008</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>152</ID>
+              <Description>"Name"</Description>
+              <LastState Activated="0" RealAddress="020B6ADB"/>
+              <Color>80000008</Color>
+              <VariableType>String</VariableType>
+              <Length>20</Length>
+              <Unicode>0</Unicode>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>ffxiv.exe+1126ADB</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>162</ID>
+              <Description>"Colour"</Description>
+              <LastState Value="??" Activated="0" RealAddress="020B6AFC"/>
+              <Color>80000008</Color>
+              <VariableType>Byte</VariableType>
+              <Address>ffxiv.exe+1126AFC</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>179</ID>
+      <Description>"Movement Data"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>78</ID>
+          <Description>"Current Velocity"</Description>
+          <LastState Value="??" Activated="0" RealAddress="020D2D98"/>
+          <Color>80000008</Color>
+          <VariableType>Float</VariableType>
+          <Address>ffxiv.exe+1142D98</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>172</ID>
+          <Description>"Velocity - Run"</Description>
+          <LastState Value="??" Activated="0" RealAddress="00000000"/>
+          <Color>80000008</Color>
+          <VariableType>Float</VariableType>
+          <Address>ffxiv.exe+1142DA0</Address>
+          <Offsets>
+            <Offset>C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>170</ID>
+          <Description>"Velocity - Walk"</Description>
+          <LastState Value="??" Activated="0" RealAddress="00000000"/>
+          <Color>80000008</Color>
+          <VariableType>Float</VariableType>
+          <Address>ffxiv.exe+1142DA0</Address>
+          <Offsets>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>175</ID>
+          <Description>"Velocity - Weapon Run"</Description>
+          <LastState Value="??" Activated="0" RealAddress="00000000"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>ffxiv.exe+1142DA0</Address>
+          <Offsets>
+            <Offset>2B</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>181</ID>
+          <Description>"Turning Percision"</Description>
+          <LastState Value="??" Activated="0" RealAddress="01EEA568"/>
+          <Color>80000008</Color>
+          <VariableType>Float</VariableType>
+          <Address>ffxiv.exe+F5A568</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>
