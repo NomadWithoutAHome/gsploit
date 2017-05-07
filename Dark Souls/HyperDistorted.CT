@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="24">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>2</ID>
+      <Description>"Made by Ashley"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>FF5555</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"twitter→@saeshyl"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>FF5555</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"[Hyper Distorted]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+    Made by Ashley
+    twitter→@saeshyl
+}
+
+[enable]
+aobscanmodule(FswEbaVr,DARKSOULS.exe,8B ?? ?? 8B ?? ?? ?? 66 ?? ?? ?? ?? ?? 66 ?? ?? ?? ?? ?? F3 ?? ?? ?? F3 ?? ?? ?? ?? 8D ?? ?? ?? 8B)
+registersymbol(FswEbaVr)
+aobscanmodule(h4PiOtXx,DARKSOULS.exe,8B ?? ?? 8B ?? ?? 85 ?? 74 ?? 8B ?? ?? 85 ?? 74 ?? F3)
+registersymbol(h4PiOtXx)
+alloc(wpuY6nc,1024,DARKSOULS.exe)
+label(NGZk5tY)
+label(3Tfy6qE)
+registersymbol(NGZk5tY)
+alloc(hivjoUM,1024,DARKSOULS.exe)
+label(aPPImRf)
+label(29ClYDr)
+label(igb73mI)
+label(b7LC25f)
+registersymbol(29ClYDr)
+alloc(RjDzonW,4,DARKSOULS.exe)
+registersymbol(RjDzonW)
+alloc(BJeV9tQ,4,DARKSOULS.exe)
+registersymbol(BJeV9tQ)
+
+RjDzonW:
+dd 0
+
+BJeV9tQ:
+dd 3F800000
+
+wpuY6nc:
+mov [RjDzonW],eax
+jmp NGZk5tY
+
+NGZk5tY:
+readmem(FswEbaVr,7)
+jmp 3Tfy6qE
+
+hivjoUM:
+push esi
+push ecx
+mov esi,[RjDzonW]
+cmp esi,0
+jle 29ClYDr
+mov esi,[esi+28]
+cmp esi,0
+jle 29ClYDr
+mov esi,[esi]
+cmp esi,0
+jle 29ClYDr
+mov ecx,[ebx+04]
+cmp ecx,esi
+je 29ClYDr
+mov ecx,[ecx+70]
+cmp ecx,00
+je 29ClYDr
+cmp ecx,08
+je 29ClYDr
+cmp ecx,01
+je 29ClYDr
+cmp ecx,02
+je 29ClYDr
+cmp ecx,0C
+je 29ClYDr
+cmp ecx,0D
+je 29ClYDr
+jmp aPPImRf
+
+aPPImRf:
+movss xmm0,[BJeV9tQ]
+jmp 29ClYDr
+
+29ClYDr:
+readmem(h4PiOtXx,6)
+jmp igb73mI
+
+igb73mI:
+pop esi
+pop ecx
+jmp b7LC25f
+
+FswEbaVr:
+jmp wpuY6nc
+db 90 90
+3Tfy6qE:
+
+h4PiOtXx:
+jmp hivjoUM
+db 90
+b7LC25f:
+
+[disable]
+FswEbaVr:
+readmem(NGZk5tY,7)
+
+h4PiOtXx:
+readmem(29ClYDr,6)
+
+unregistersymbol(FswEbaVr)
+unregistersymbol(wpuY6nc)
+unregistersymbol(RjDzonW)
+unregistersymbol(h4PiOtXx)
+unregistersymbol(29ClYDr)
+unregistersymbol(BJeV9tQ)
+dealloc(wpuY6nc)
+dealloc(RjDzonW)
+dealloc(hivjoUM)
+dealloc(BJeV9tQ)
+
+{
+     Made by Ashley
+     twitter→@saeshyl
+}
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"Play Speed"</Description>
+          <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:0%
+0.25:25%
+0.5:50%
+0.75:75%
+1:100%
+1.1:110%
+1.25:125%
+1.5:150%
+1.75:175%
+2:200%
+2.25:225%
+2.5:250%
+2.75:275%
+3:300%
+4:400%
+5:500%
+10:1000%
+50:5000%
+100:10000%
+</DropDownList>
+          <VariableType>Float</VariableType>
+          <Address>BJeV9tQ</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>rotationWrite</Name>
+      <Address>00EBD815</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>nDurDec</Name>
+      <Address>00C08B8D</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>sDurDec</Name>
+      <Address>00C08C4A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>plr1_orig</Name>
+      <Address>015E000A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>plr2_orig</Name>
+      <Address>015E008A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>rot_aob</Name>
+      <Address>00EBD80F</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>dmgcheck_aob</Name>
+      <Address>00E6B1E3</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>dmgcheck_init</Name>
+      <Address>25400082</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>speff_aob</Name>
+      <Address>00DC399A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>speff_jmp_aob</Name>
+      <Address>00DC39FE</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>speff_init</Name>
+      <Address>01800005</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>plr1_initial</Name>
+      <Address>016D000A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>plr2_initial</Name>
+      <Address>016D008A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>NGZk5tY</Name>
+      <Address>016D000A</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
