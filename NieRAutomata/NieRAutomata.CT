@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="24">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>115</ID>
+      <Description>"Scripts"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>111</ID>
+          <Description>"Selected Item"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(item_aob,NieRAutomata.exe,8B ?? ?? 48 ?? ?? ?? C3 41 ?? ?? E8)
+registersymbol(item_aob)
+
+alloc(item_cave,128,NieRAutomata.exe)
+label(item_initial)
+label(item_ret)
+registersymbol(item_initial)
+
+alloc(item_ptr,8,NieRAutomata.exe)
+registersymbol(item_ptr)
+
+item_cave:
+mov [item_ptr],rax
+jmp item_initial
+
+item_initial:
+readmem(item_aob,7) { mov eax,[rax+08] add rsp,28 }
+jmp item_ret
+
+item_aob:
+jmp item_cave
+db 90 90
+item_ret:
+
+[disable]
+item_aob:
+readmem(item_initial,7)
+
+unregistersymbol(item_aob)
+unregistersymbol(item_initial)
+unregistersymbol(item_ptr)
+dealloc(item_cave)
+dealloc(item_ptr)
+
+{
+NieRAutomata.exe+5D3C80 - 48 83 EC 28           - sub rsp,28
+NieRAutomata.exe+5D3C84 - 44 8B CA              - mov r9d,edx
+NieRAutomata.exe+5D3C87 - 83 FA FF              - cmp edx,-01
+NieRAutomata.exe+5D3C8A - 0F84 C7000000         - je NieRAutomata.exe+5D3D57
+NieRAutomata.exe+5D3C90 - E8 4B410000           - call NieRAutomata.exe+5D7DE0
+NieRAutomata.exe+5D3C95 - 83 F8 07              - cmp eax,07
+NieRAutomata.exe+5D3C98 - 0F87 B9000000         - ja NieRAutomata.exe+5D3D57
+NieRAutomata.exe+5D3C9E - 48 8D 15 5BC3A2FF     - lea rdx,[NieRAutomata.exe]
+NieRAutomata.exe+5D3CA5 - 48 98                 - cdqe
+NieRAutomata.exe+5D3CA7 - 8B 8C 82 603D5D00     - mov ecx,[rdx+rax*4+005D3D60]
+NieRAutomata.exe+5D3CAE - 48 03 CA              - add rcx,rdx
+NieRAutomata.exe+5D3CB1 - FF E1                 - jmp rcx
+NieRAutomata.exe+5D3CB3 - 45 33 C0              - xor r8d,r8d
+NieRAutomata.exe+5D3CB6 - 45 85 C0              - test r8d,r8d
+NieRAutomata.exe+5D3CB9 - 78 12                 - js NieRAutomata.exe+5D3CCD
+NieRAutomata.exe+5D3CBB - 41 8B C8              - mov ecx,r8d
+NieRAutomata.exe+5D3CBE - E8 DD6C2000           - call NieRAutomata.exe+7DA9A0
+NieRAutomata.exe+5D3CC3 - 48 85 C0              - test rax,rax
+NieRAutomata.exe+5D3CC6 - 74 05                 - je NieRAutomata.exe+5D3CCD
+NieRAutomata.exe+5D3CC8 - 44 39 08              - cmp [rax],r9d
+NieRAutomata.exe+5D3CCB - 74 12                 - je NieRAutomata.exe+5D3CDF
+NieRAutomata.exe+5D3CCD - 41 FF C0              - inc r8d
+NieRAutomata.exe+5D3CD0 - 41 81 F8 C8010000     - cmp r8d,000001C8
+NieRAutomata.exe+5D3CD7 - 0F8D 7A000000         - jnl NieRAutomata.exe+5D3D57
+NieRAutomata.exe+5D3CDD - EB D7                 - jmp NieRAutomata.exe+5D3CB6
+NieRAutomata.exe+5D3CDF - 8B 40 08              - mov eax,[rax+08] &lt;&lt;&lt;&lt;
+NieRAutomata.exe+5D3CE2 - 48 83 C4 28           - add rsp,28
+NieRAutomata.exe+5D3CE6 - C3                    - ret
+NieRAutomata.exe+5D3CE7 - 41 8B D1              - mov edx,r9d
+NieRAutomata.exe+5D3CEA - E8 E1A30000           - call NieRAutomata.exe+5DE0D0
+NieRAutomata.exe+5D3CEF - 85 C0                 - test eax,eax
+NieRAutomata.exe+5D3CF1 - 74 64                 - je NieRAutomata.exe+5D3D57
+NieRAutomata.exe+5D3CF3 - B8 01000000           - mov eax,00000001
+NieRAutomata.exe+5D3CF8 - 48 83 C4 28           - add rsp,28
+NieRAutomata.exe+5D3CFC - C3                    - ret
+}
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>112</ID>
+              <Description>"item_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>item_ptr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"Id"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>item_ptr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>114</ID>
+              <Description>"Quantity"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>item_ptr</Address>
+              <Offsets>
+                <Offset>8</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>103</ID>
+          <Description>"Selected Plug-in Chip"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+aobscanmodule(skills_chip_aob,NieRAutomata.exe,48 ?? ?? ?? 48 ?? ?? 83 ?? ?? ?? ?? ?? ?? ?? ?? ?? 39 ?? ?? ?? ?? ?? ?? 75 ?? 8B ?? ?? ?? ?? ?? ?? EB ?? 8B ?? 81)
+registersymbol(skills_chip_aob)
+aobscanmodule(fuse_chip_aob,NieRAutomata.exe,42 ?? ?? ?? ?? ?? ?? ?? ?? 74 ?? 42 ?? ?? ?? ?? ?? ?? ?? 75 ?? 46 ?? ?? ?? ?? ?? ?? ?? EB)
+registersymbol(fuse_chip_aob)
+
+alloc(skills_chip_cave,128,NieRAutomata.exe)
+label(skills_chip_ret)
+registersymbol(skills_chip_cave)
+
+alloc(fuse_chip_cave,128,NieRAutomata.exe)
+label(fuse_chip_ret)
+registersymbol(fuse_chip_cave)
+
+alloc(chip_ptr,8,NieRAutomata.exe)
+registersymbol(chip_ptr)
+
+skills_chip_cave:
+readmem(skills_chip_aob,7) { lea rcx,[rdi+rdi*2] add rcx,rcx }
+push rax
+lea rax,[rdx+rcx*8]
+mov [chip_ptr],rax
+pop rax
+jmp skills_chip_ret
+
+fuse_chip_cave:
+readmem(fuse_chip_aob,9) { cmp dword ptr [rax+r13*8+00001F54],-01 }
+push rdx
+lea rdx,[rax+r13*8]
+mov [chip_ptr],rdx
+pop rdx
+jmp fuse_chip_ret
+
+skills_chip_aob:
+jmp skills_chip_cave
+db 90 90
+skills_chip_ret:
+
+fuse_chip_aob:
+jmp fuse_chip_cave
+db 90 90 90 90
+fuse_chip_ret:
+
+[disable]
+skills_chip_aob:
+readmem(skills_chip_cave,7)
+
+fuse_chip_aob:
+readmem(fuse_chip_cave,9)
+
+unregistersymbol(skills_chip_aob)
+unregistersymbol(skills_chip_cave)
+unregistersymbol(fuse_chip_aob)
+unregistersymbol(fuse_chip_cave)
+unregistersymbol(chip_ptr)
+dealloc(skills_chip_cave)
+dealloc(fuse_chip_cave)
+dealloc(chip_ptr)
+
+{
+NieRAutomata.exe+6CFED2 - 48 8B 15 D706A100     - mov rdx,[NieRAutomata.exe+10E05B0]
+NieRAutomata.exe+6CFED9 - 33 DB                 - xor ebx,ebx
+NieRAutomata.exe+6CFEDB - 48 89 6C 24 38        - mov [rsp+38],rbp
+NieRAutomata.exe+6CFEE0 - 48 89 74 24 40        - mov [rsp+40],rsi
+NieRAutomata.exe+6CFEE5 - 81 FF 2B010000        - cmp edi,0000012B
+NieRAutomata.exe+6CFEEB - 77 23                 - ja NieRAutomata.exe+6CFF10
+NieRAutomata.exe+6CFEED - 48 8D 0C 7F           - lea rcx,[rdi+rdi*2] &lt;&lt;&lt;&lt;
+NieRAutomata.exe+6CFEF1 - 48 03 C9              - add rcx,rcx
+NieRAutomata.exe+6CFEF4 - 83 BC CA 541F0000 FF  - cmp dword ptr [rdx+rcx*8+00001F54],-01
+NieRAutomata.exe+6CFEFC - 74 12                 - je NieRAutomata.exe+6CFF10
+NieRAutomata.exe+6CFEFE - 39 9C CA 7C1F0000     - cmp [rdx+rcx*8+00001F7C],ebx
+NieRAutomata.exe+6CFF05 - 75 09                 - jne NieRAutomata.exe+6CFF10
+NieRAutomata.exe+6CFF07 - 8B AC CA 601F0000     - mov ebp,[rdx+rcx*8+00001F60]
+NieRAutomata.exe+6CFF0E - EB 02                 - jmp NieRAutomata.exe+6CFF12
+NieRAutomata.exe+6CFF10 - 8B EB                 - mov ebp,ebx
+NieRAutomata.exe+6CFF12 - 81 FF 2B010000        - cmp edi,0000012B
+NieRAutomata.exe+6CFF18 - 77 49                 - ja NieRAutomata.exe+6CFF63
+NieRAutomata.exe+6CFF1A - 41 8D 40 01           - lea eax,[r8+01]
+NieRAutomata.exe+6CFF1E - 83 F8 03              - cmp eax,03
+NieRAutomata.exe+6CFF21 - 77 40                 - ja NieRAutomata.exe+6CFF63
+NieRAutomata.exe+6CFF23 - 48 8D 04 7F           - lea rax,[rdi+rdi*2]
+NieRAutomata.exe+6CFF27 - 48 03 C0              - add rax,rax
+NieRAutomata.exe+6CFF2A - 83 BC C2 541F0000 FF  - cmp dword ptr [rdx+rax*8+00001F54],-01
+NieRAutomata.exe+6CFF32 - 74 2F                 - je NieRAutomata.exe+6CFF63
+NieRAutomata.exe+6CFF34 - 39 9C C2 7C1F0000     - cmp [rdx+rax*8+00001F7C],ebx
+NieRAutomata.exe+6CFF3B - 75 26                 - jne NieRAutomata.exe+6CFF63
+NieRAutomata.exe+6CFF3D - 41 83 F8 FF           - cmp r8d,-01
+NieRAutomata.exe+6CFF41 - 75 0C                 - jne NieRAutomata.exe+6CFF4F
+NieRAutomata.exe+6CFF43 - 48 8D 05 8A06A100     - lea rax,[NieRAutomata.exe+10E05D4]
+NieRAutomata.exe+6CFF4A - 8B 34 B8              - mov esi,[rax+rdi*4]
+NieRAutomata.exe+6CFF4D - EB 17                 - jmp NieRAutomata.exe+6CFF66
+NieRAutomata.exe+6CFF4F - 48 8D 0C 7F           - lea rcx,[rdi+rdi*2]
+NieRAutomata.exe+6CFF53 - 49 63 C0              - movsxd  rax,r8d
+}
+
+{
+NieRAutomata.exe+731A62 - 44 8B 8C CD 8CD88A01  - mov r9d,[rbp+rcx*8+018AD88C]
+NieRAutomata.exe+731A6A - 45 85 C9              - test r9d,r9d
+NieRAutomata.exe+731A6D - 7E A9                 - jle NieRAutomata.exe+731A18
+NieRAutomata.exe+731A6F - 4C 8D 05 E66B7300     - lea r8,[NieRAutomata.exe+E6865C]
+NieRAutomata.exe+731A76 - EB A7                 - jmp NieRAutomata.exe+731A1F
+NieRAutomata.exe+731A78 - 48 8B CA              - mov rcx,rdx
+NieRAutomata.exe+731A7B - 48 39 90 B0000000     - cmp [rax+000000B0],rdx
+NieRAutomata.exe+731A82 - 77 05                 - ja NieRAutomata.exe+731A89
+NieRAutomata.exe+731A84 - 48 8B CB              - mov rcx,rbx
+NieRAutomata.exe+731A87 - EB 0E                 - jmp NieRAutomata.exe+731A97
+NieRAutomata.exe+731A89 - 48 69 C9 D0040000     - imul rcx,rcx,000004D0
+NieRAutomata.exe+731A90 - 48 03 88 A0000000     - add rcx,[rax+000000A0]
+NieRAutomata.exe+731A97 - 48 85 C9              - test rcx,rcx
+NieRAutomata.exe+731A9A - 74 0A                 - je NieRAutomata.exe+731AA6
+NieRAutomata.exe+731A9C - 48 8D 54 24 20        - lea rdx,[rsp+20]
+NieRAutomata.exe+731AA1 - E8 EA9C0C00           - call NieRAutomata.exe+7FB790
+NieRAutomata.exe+731AA6 - 8B D7                 - mov edx,edi
+NieRAutomata.exe+731AA8 - 48 8B CE              - mov rcx,rsi
+NieRAutomata.exe+731AAB - E8 00090000           - call NieRAutomata.exe+7323B0
+NieRAutomata.exe+731AB0 - 41 81 FC 2B010000     - cmp r12d,0000012B
+NieRAutomata.exe+731AB7 - 77 26                 - ja NieRAutomata.exe+731ADF
+NieRAutomata.exe+731AB9 - 48 8B 05 F0EA9A00     - mov rax,[NieRAutomata.exe+10E05B0]
+NieRAutomata.exe+731AC0 - 42 83 BC E8 541F0000 FF - cmp dword ptr [rax+r13*8+00001F54],-01 &lt;&lt;&lt;&lt;
+NieRAutomata.exe+731AC9 - 74 14                 - je NieRAutomata.exe+731ADF
+NieRAutomata.exe+731ACB - 42 39 9C E8 7C1F0000  - cmp [rax+r13*8+00001F7C],ebx
+NieRAutomata.exe+731AD3 - 75 0A                 - jne NieRAutomata.exe+731ADF
+NieRAutomata.exe+731AD5 - 46 8B 8C E8 601F0000  - mov r9d,[rax+r13*8+00001F60]
+NieRAutomata.exe+731ADD - EB 03                 - jmp NieRAutomata.exe+731AE2
+NieRAutomata.exe+731ADF - 44 8B CB              - mov r9d,ebx
+NieRAutomata.exe+731AE2 - 4C 8D 05 57737300     - lea r8,[NieRAutomata.exe+E68E40]
+NieRAutomata.exe+731AE9 - 48 8D 4C 24 20        - lea rcx,[rsp+20]
+NieRAutomata.exe+731AEE - BA 40000000           - mov edx,00000040
+NieRAutomata.exe+731AF3 - E8 FCE22800           - call NieRAutomata.exe+9BFDF4
+NieRAutomata.exe+731AF8 - 49 8B 06              - mov rax,[r14]
+NieRAutomata.exe+731AFB - 4C 8B AC 24 C8000000  - mov r13,[rsp+000000C8]
+NieRAutomata.exe+731B03 - 48 85 C0              - test rax,rax
+NieRAutomata.exe+731B06 - 74 50                 - je NieRAutomata.exe+731B58
+NieRAutomata.exe+731B08 - 83 B8 80000000 01     - cmp dword ptr [rax+00000080],01
+NieRAutomata.exe+731B0F - 75 47                 - jne NieRAutomata.exe+731B58
+NieRAutomata.exe+731B11 - 0FB6 88 FE000000      - movzx ecx,byte ptr [rax+000000FE]
+NieRAutomata.exe+731B18 - 80 F9 FF              - cmp cl,-01
+NieRAutomata.exe+731B1B - 74 3B                 - je NieRAutomata.exe+731B58
+NieRAutomata.exe+731B1D - 48 0FBE D1            - movsx rdx,cl
+NieRAutomata.exe+731B21 - 84 C9                 - test cl,cl
+}
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>104</ID>
+              <Description>"chip_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>chip_ptr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108</ID>
+              <Description>"Id"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>chip_ptr</Address>
+              <Offsets>
+                <Offset>1f54</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>118</ID>
+              <Description>"Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>chip_ptr</Address>
+              <Offsets>
+                <Offset>1F5C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>107</ID>
+              <Description>"Cost"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>chip_ptr</Address>
+              <Offsets>
+                <Offset>1F60</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"Static"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>120</ID>
+          <Description>"World State"</Description>
+          <DropDownList DisplayValueAsItem="1">00002000:Pause
+00200000:Disable Input
+10000000:Disable World
+20000000:Disable Enemies
+40000000:Disable Player
+80000000:Disable All
+</DropDownList>
+          <LastState Value="00000000" RealAddress="1413FC3A0"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>NieRAutomata.exe+13FC3A0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"Player State"</Description>
+          <LastState Value="02001000" RealAddress="1413FC3C0"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>NieRAutomata.exe+13FC3C0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"Debug Flags"</Description>
+          <DropDownList DisplayValueAsItem="1">80000000:Debug Camera
+</DropDownList>
+          <LastState Value="00002000" RealAddress="1413FC410"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>NieRAutomata.exe+13FC410</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>41</ID>
+          <Description>"Status"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>0</ID>
+              <Description>"Funds (G)"</Description>
+              <LastState Value="1204885" RealAddress="141962940"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962940</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>15</ID>
+              <Description>"EXP"</Description>
+              <LastState Value="1085122" RealAddress="14196AAF0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196AAF0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>98</ID>
+              <Description>"Lv"</Description>
+              <LastState Value="82" RealAddress="14196BCAC"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196BCAC</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"Play Records"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>97</ID>
+              <Description>"Bodies collected"</Description>
+              <LastState Value="296" RealAddress="14196BFF0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196BFF0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>99</ID>
+              <Description>"Bodies uploaded"</Description>
+              <LastState Value="8" RealAddress="14196BFF4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196BFF4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>100</ID>
+              <Description>"Bodies infected"</Description>
+              <LastState Value="0" RealAddress="14196BFF8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196BFF8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>101</ID>
+              <Description>"Bodies bodies subdued"</Description>
+              <LastState Value="0" RealAddress="14196BFFC"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196BFFC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>95</ID>
+              <Description>"Items used"</Description>
+              <LastState Value="109" RealAddress="14196A92C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196A92C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>33</ID>
+              <Description>"Items harvested"</Description>
+              <LastState Value="1034" RealAddress="14196A930"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196A930</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>96</ID>
+              <Description>"Hacking games completed"</Description>
+              <LastState Value="167" RealAddress="14196A934"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196A934</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>34</ID>
+              <Description>"Number of deaths"</Description>
+              <LastState Value="0" RealAddress="14196A938"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196A938</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>94</ID>
+              <Description>"Enemies defeated"</Description>
+              <LastState Value="6262" RealAddress="14196A944"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+196A944</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"Item Quantities"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>36</ID>
+              <Description>"Copper Ore"</Description>
+              <LastState Value="44" RealAddress="141962A00"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A00</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>38</ID>
+              <Description>"Silver Ore"</Description>
+              <LastState Value="27" RealAddress="141962A18"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A18</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>65</ID>
+              <Description>"Amber"</Description>
+              <LastState Value="41" RealAddress="141962A30"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A30</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>71</ID>
+              <Description>"Tree Sap"</Description>
+              <LastState Value="26" RealAddress="141962A3C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A3C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>37</ID>
+              <Description>"Iron Ore"</Description>
+              <LastState Value="38" RealAddress="141962A48"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A48</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>82</ID>
+              <Description>"Machine Core"</Description>
+              <LastState Value="39" RealAddress="141962A54"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A54</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>62</ID>
+              <Description>"Crystal"</Description>
+              <LastState Value="41" RealAddress="141962A60"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A60</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>43</ID>
+              <Description>"Rusted Clump"</Description>
+              <LastState Value="82" RealAddress="141962A6C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A6C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>69</ID>
+              <Description>"Tree Seed"</Description>
+              <LastState Value="32" RealAddress="141962A84"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A84</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>70</ID>
+              <Description>"Plant Seed"</Description>
+              <LastState Value="44" RealAddress="141962A90"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A90</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>50</ID>
+              <Description>"Broken Circuit"</Description>
+              <LastState Value="95" RealAddress="141962A9C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962A9C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>73</ID>
+              <Description>"Eagle Eggs"</Description>
+              <LastState Value="23" RealAddress="141962AC0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962AC0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>53</ID>
+              <Description>"Small Gear"</Description>
+              <LastState Value="20" RealAddress="141962AD8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962AD8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>48</ID>
+              <Description>"Broken Key"</Description>
+              <LastState Value="79" RealAddress="141962AF0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962AF0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>51</ID>
+              <Description>"Stripped Screw"</Description>
+              <LastState Value="13" RealAddress="141962B20"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B20</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>68</ID>
+              <Description>"Simple Gadget"</Description>
+              <LastState Value="25" RealAddress="141962B2C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B2C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>80</ID>
+              <Description>"Natural Rubber"</Description>
+              <LastState Value="30" RealAddress="141962B38"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B38</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>44</ID>
+              <Description>"Dented Plate"</Description>
+              <LastState Value="78" RealAddress="141962B44"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B44</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>81</ID>
+              <Description>"Machine Oil"</Description>
+              <LastState Value="43" RealAddress="141962B50"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B50</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>67</ID>
+              <Description>"Meteorite"</Description>
+              <LastState Value="16" RealAddress="141962B5C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B5C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>49</ID>
+              <Description>"Stretched Coil"</Description>
+              <LastState Value="28" RealAddress="141962B74"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B74</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>56</ID>
+              <Description>"Severed Cable"</Description>
+              <LastState Value="84" RealAddress="141962B80"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B80</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>86</ID>
+              <Description>"Dented Socket"</Description>
+              <LastState Value="31" RealAddress="141962B8C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B8C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57</ID>
+              <Description>"Broken Battery"</Description>
+              <LastState Value="49" RealAddress="141962B98"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962B98</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>55</ID>
+              <Description>"Crushed Nut"</Description>
+              <LastState Value="31" RealAddress="141962BA4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962BA4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>77</ID>
+              <Description>"Thick Dictionary"</Description>
+              <LastState Value="10" RealAddress="141962BB0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962BB0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>42</ID>
+              <Description>"Gold Ore"</Description>
+              <LastState Value="13" RealAddress="141962BBC"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962BBC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>47</ID>
+              <Description>"Beast Hide"</Description>
+              <LastState Value="34" RealAddress="141962BC8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962BC8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>46</ID>
+              <Description>"Memory Alloy"</Description>
+              <LastState Value="31" RealAddress="141962BD4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962BD4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>75</ID>
+              <Description>"Torn Book"</Description>
+              <LastState Value="8" RealAddress="141962BE0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962BE0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>76</ID>
+              <Description>"Tech Manual"</Description>
+              <LastState Value="13" RealAddress="141962BF8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962BF8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>72</ID>
+              <Description>"Mushroom"</Description>
+              <LastState Value="43" RealAddress="141962C4C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962C4C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>78</ID>
+              <Description>"Pure Water"</Description>
+              <LastState Value="35" RealAddress="141962C58"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962C58</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>64</ID>
+              <Description>"Pyrite"</Description>
+              <LastState Value="27" RealAddress="141962C64"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962C64</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>66</ID>
+              <Description>"Moldavite"</Description>
+              <LastState Value="29" RealAddress="141962C70"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962C70</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>63</ID>
+              <Description>"Pearl"</Description>
+              <LastState Value="37" RealAddress="141962C7C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962C7C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>59</ID>
+              <Description>"Machine Arm"</Description>
+              <LastState Value="8" RealAddress="141962C88"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962C88</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>45</ID>
+              <Description>"Titanium Alloy"</Description>
+              <LastState Value="60" RealAddress="141962C94"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962C94</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>74</ID>
+              <Description>"Giant Egg"</Description>
+              <LastState Value="20" RealAddress="141962CA0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962CA0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>60</ID>
+              <Description>"Machine Leg"</Description>
+              <LastState Value="16" RealAddress="141962CF4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962CF4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>58</ID>
+              <Description>"Large Battery"</Description>
+              <LastState Value="29" RealAddress="141962D0C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962D0C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>54</ID>
+              <Description>"Large Gear"</Description>
+              <LastState Value="33" RealAddress="141962D60"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962D60</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>79</ID>
+              <Description>"Dye"</Description>
+              <LastState Value="22" RealAddress="141962D90"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962D90</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>52</ID>
+              <Description>"Pristine Screw"</Description>
+              <LastState Value="36" RealAddress="141962D9C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962D9C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>35</ID>
+              <Description>"Pristine Cable"</Description>
+              <LastState Value="35" RealAddress="141962DA8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962DA8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>61</ID>
+              <Description>"Machine Torso"</Description>
+              <LastState Value="11" RealAddress="141962DB4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962DB4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>88</ID>
+              <Description>"Tanning Agent"</Description>
+              <LastState Value="8" RealAddress="141962D6C"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962D6C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>87</ID>
+              <Description>"Machine Head"</Description>
+              <LastState Value="18" RealAddress="141962DC0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962DC0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>85</ID>
+              <Description>"New Bolt"</Description>
+              <LastState Value="44" RealAddress="141962DCC"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962DCC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>89</ID>
+              <Description>"Rusty Bolt"</Description>
+              <LastState Value="55" RealAddress="141962DD8"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962DD8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>90</ID>
+              <Description>"Black Pearl"</Description>
+              <LastState Value="18" RealAddress="141962DE4"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962DE4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>91</ID>
+              <Description>"Meteorite Shard"</Description>
+              <LastState Value="17" RealAddress="141962DF0"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962DF0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>102</ID>
+              <Description>"Machine Core"</Description>
+              <LastState Value="19" RealAddress="141962E08"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962E08</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>93</ID>
+              <Description>"Sturdy Socket"</Description>
+              <LastState Value="18" RealAddress="141962E14"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962E14</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>92</ID>
+              <Description>"Clean Nut"</Description>
+              <LastState Value="22" RealAddress="141962E20"/>
+              <VariableType>4 Bytes</VariableType>
+              <Address>NieRAutomata.exe+1962E20</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+aobscanmodule(plr_ptr_aob,NieRAutomata.exe,48 ?? ?? 48 ?? ?? FF ?? ?? 48 ?? ?? 74 ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? 74 ?? 48 ?? ?? 48 ?? ?? 75 ?? 33 ?? 48 ?? ?? 48 ?? ?? ?? ?? C3 33 ?? 48 ?? ?? ?? ?? C3 48 ?? ?? ?? ?? ?? 48 ?? ?? ?? 48 ?? ?? ?? ?? FE FF FF FF 48 ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? E8)
+registersymbol(plr_ptr_aob)
+
+alloc(plr_ptr_cave,128,NieRAutomata.exe)
+label(plr_ptr_ret)
+registersymbol(plr_ptr_cave)
+
+alloc(plr_ptr,8,NieRAutomata.exe)
+registersymbol(plr_ptr)
+
+plr_ptr:
+dq 00
+
+plr_ptr_cave:
+readmem(plr_ptr_aob,6)
+mov [plr_ptr],rbx
+jmp plr_ptr_ret
+
+plr_ptr_aob:
+jmp plr_ptr_cave
+nop
+plr_ptr_ret:
+
+[disable]
+plr_ptr_aob:
+readmem(plr_ptr_cave,6)
+
+unregistersymbol(plr_ptr_aob)
+unregistersymbol(plr_ptr_cave)
+unregistersymbol(plr_ptr)
+dealloc(plr_ptr_cave)
+dealloc(plr_ptr)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"plr_ptr"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>8 Bytes</VariableType>
+          <Address>plr_ptr</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"Freeze Model"</Description>
+          <DropDownList DisplayValueAsItem="1">198:Default
+0:Freeze
+114:Freeze Skirt
+</DropDownList>
+          <VariableType>4 Bytes</VariableType>
+          <Address>plr_ptr</Address>
+          <Offsets>
+            <Offset>568</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"Statistics"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>19</ID>
+              <Description>"HP"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>plr_ptr</Address>
+              <Offsets>
+                <Offset>10668</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"Position"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>22</ID>
+              <Description>"X"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>12</ByteLength>
+              <Address>plr_ptr</Address>
+              <Offsets>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>84</ID>
+              <Description>"X"</Description>
+              <VariableType>Float</VariableType>
+              <Address>plr_ptr</Address>
+              <Offsets>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>21</ID>
+              <Description>"Y"</Description>
+              <VariableType>Float</VariableType>
+              <Address>plr_ptr</Address>
+              <Offsets>
+                <Offset>58</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"Z"</Description>
+              <VariableType>Float</VariableType>
+              <Address>plr_ptr</Address>
+              <Offsets>
+                <Offset>54</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>134</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC3FC"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC3FC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>121</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC400"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC400</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>122</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC404"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC404</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>123</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC408"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC408</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>124</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC40C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC40C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>125</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00002000" RealAddress="1413FC410"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC410</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>127</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC414"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC414</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>128</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC418"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC418</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>126</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC41C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC41C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>129</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC420"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC420</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>132</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC424"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC424</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>131</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC428"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC428</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>130</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC42C"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC42C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>133</ID>
+      <Description>"No description"</Description>
+      <LastState Value="00000000" RealAddress="1413FC430"/>
+      <ShowAsHex>1</ShowAsHex>
+      <VariableType>4 Bytes</VariableType>
+      <Address>NieRAutomata.exe+13FC430</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>hp</Name>
+      <Address>13FFF001C</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>_hp</Name>
+      <Address>1401F5FF0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>NierRA_EXP_AOB</Name>
+      <Address>14058E383</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>NRA_Inf_Item_AOB</Name>
+      <Address>1405D3E16</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>NRA_Inf_HP_AOB</Name>
+      <Address>1401F8952</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
