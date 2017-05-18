@@ -202,7 +202,6 @@ unregistersymbol(allnoupdateai)
             <CheatEntry>
               <ID>12674</ID>
               <Description>"FPS Limit"</Description>
-              <LastState Value="60" RealAddress="696E6134"/>
               <VariableType>4 Bytes</VariableType>
               <Address>DINPUT8.dll+76134</Address>
             </CheatEntry>
@@ -368,7 +367,6 @@ unregistersymbol(mp_base)
             <CheatEntry>
               <ID>12761</ID>
               <Description>"plr_dynamic_base"</Description>
-              <LastState Value="0AC9D0A0" RealAddress="0137D644"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -377,7 +375,6 @@ unregistersymbol(mp_base)
             <CheatEntry>
               <ID>12339</ID>
               <Description>"plr_static_base"</Description>
-              <LastState Value="0C6B01F0" RealAddress="01378700"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -386,7 +383,6 @@ unregistersymbol(mp_base)
             <CheatEntry>
               <ID>12569</ID>
               <Description>"plr_world_base"</Description>
-              <LastState Value="04920DA0" RealAddress="013784A0"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -395,7 +391,6 @@ unregistersymbol(mp_base)
             <CheatEntry>
               <ID>91692</ID>
               <Description>"plr_flags_base"</Description>
-              <LastState Value="0C6B00B0" RealAddress="0137D7D4"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -404,7 +399,6 @@ unregistersymbol(mp_base)
             <CheatEntry>
               <ID>12397</ID>
               <Description>"plr_debug_base"</Description>
-              <LastState Value="0ACA2C40" RealAddress="0137D648"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -413,7 +407,6 @@ unregistersymbol(mp_base)
             <CheatEntry>
               <ID>12572</ID>
               <Description>"followcam_base"</Description>
-              <LastState Value="05B52730" RealAddress="0137D6DC"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>followcam_base</Address>
@@ -421,7 +414,6 @@ unregistersymbol(mp_base)
             <CheatEntry>
               <ID>91693</ID>
               <Description>"mp_base"</Description>
-              <LastState Value="04920220" RealAddress="0137E204"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>mp_base</Address>
@@ -545,7 +537,7 @@ je speffect_exit
 cmp edi,#5214 // Egghead _LV2
 je speffect_exit
 cmp [edx+70],#8
-je speffect_init
+jne speffect_init
 cmp edi,#3230 // Humanity Restored
 je speffect_exit
 jmp speffect_init
@@ -858,14 +850,12 @@ dealloc(playspeed_world)
                 <CheatEntry>
                   <ID>12341</ID>
                   <Description>"Player Speed"</Description>
-                  <LastState Value="0" RealAddress="016B0400"/>
                   <VariableType>Float</VariableType>
                   <Address>playspeed_player</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>12342</ID>
                   <Description>"World Speed"</Description>
-                  <LastState Value="0" RealAddress="016B0404"/>
                   <VariableType>Float</VariableType>
                   <Address>playspeed_world</Address>
                 </CheatEntry>
@@ -919,7 +909,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12427</ID>
               <Description>"CHR_ID"</Description>
-              <LastState RealAddress="05E011F8"/>
               <Color>000000</Color>
               <VariableType>String</VariableType>
               <Length>10</Length>
@@ -937,7 +926,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90738</ID>
               <Description>"Area"</Description>
-              <LastState Value="-2" RealAddress="05E01444"/>
               <ShowAsSigned>1</ShowAsSigned>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -951,7 +939,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>91682</ID>
               <Description>"HP"</Description>
-              <LastState Value="1768" RealAddress="05E01494"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -964,7 +951,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>91251</ID>
               <Description>"Max HP"</Description>
-              <LastState Value="1474" RealAddress="04922604"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -976,7 +962,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>17</ID>
               <Description>"Stamina"</Description>
-              <LastState Value="192" RealAddress="05E014A4"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -989,7 +974,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>18</ID>
               <Description>"Max Stamina"</Description>
-              <LastState Value="160" RealAddress="04922620"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1008,7 +992,6 @@ unregistersymbol(queue_aob)
 000000100000000D:COLISEUM
 0000000600000005:MONSTER
 </DropDownList>
-              <LastState Value="0000000100000000" RealAddress="05E01230"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>8 Bytes</VariableType>
@@ -1022,7 +1005,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12343</ID>
               <Description>"CHR_TYPE"</Description>
-              <LastState Value="0" RealAddress="05E01230"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -1035,7 +1017,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>153</ID>
               <Description>"TEAM_TYPE"</Description>
-              <LastState Value="1" RealAddress="05E01234"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -1048,7 +1029,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12398</ID>
               <Description>"MOVER"</Description>
-              <LastState Value="00000000" RealAddress="0ACA2D28"/>
               <ShowAsHex>1</ShowAsHex>
               <ShowAsSigned>0</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
@@ -1060,7 +1040,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12399</ID>
               <Description>"CAMERA"</Description>
-              <LastState Value="00000000" RealAddress="0ACA2D2C"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_debug_base</Address>
@@ -1071,7 +1050,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>10090</ID>
               <Description>"Soft Humanity"</Description>
-              <LastState Value="99" RealAddress="04922668"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1083,7 +1061,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>10322</ID>
               <Description>"Humanity"</Description>
-              <LastState Value="99" RealAddress="0492266C"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1095,7 +1072,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>53</ID>
               <Description>"Souls"</Description>
-              <LastState Value="999999999" RealAddress="0492267C"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1161,7 +1137,6 @@ unregistersymbol(queue_aob)
 1812960:Undead Asylum(1st bonfire,courtyard)
 1812961:Undead Asylum(2nd bonfire)
 </DropDownList>
-              <LastState Value="1022960" RealAddress="049218A4"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_world_base</Address>
@@ -1172,7 +1147,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>113</ID>
               <Description>"NG"</Description>
-              <LastState Value="0" RealAddress="0492262C"/>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
               <Address>plr_static_base</Address>
@@ -1184,7 +1158,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>406</ID>
               <Description>"Save Slot"</Description>
-              <LastState Value="0" RealAddress="04921810"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_world_base</Address>
@@ -1195,7 +1168,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>209</ID>
               <Description>"Indictments"</Description>
-              <LastState Value="313" RealAddress="049226DC"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1207,7 +1179,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>228</ID>
               <Description>"Total Souls Collected"</Description>
-              <LastState Value="999999999" RealAddress="04922680"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1219,7 +1190,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12501</ID>
               <Description>"Time Played (ms)"</Description>
-              <LastState Value="555188996" RealAddress="0C6B0258"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1238,7 +1208,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>216</ID>
                   <Description>"Max Item Load"</Description>
-                  <LastState Value="116.4000015" RealAddress="04922A3C"/>
                   <Color>000000</Color>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
@@ -1250,7 +1219,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>211</ID>
                   <Description>"Poise"</Description>
-                  <LastState Value="21" RealAddress="04922A9C"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_static_base</Address>
@@ -1262,7 +1230,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>214</ID>
                   <Description>"Bleed Resist"</Description>
-                  <LastState Value="204" RealAddress="04922A94"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_static_base</Address>
@@ -1274,7 +1241,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>212</ID>
                   <Description>"Poison Resist"</Description>
-                  <LastState Value="110" RealAddress="04922A8C"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_static_base</Address>
@@ -1286,7 +1252,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>227</ID>
                   <Description>"Toxin Resist"</Description>
-                  <LastState Value="110" RealAddress="04922A90"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_static_base</Address>
@@ -1298,7 +1263,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>213</ID>
                   <Description>"Curse Resist"</Description>
-                  <LastState Value="155" RealAddress="04922A98"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_static_base</Address>
@@ -1321,7 +1285,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90740</ID>
               <Description>"Soul Level"</Description>
-              <LastState Value="135" RealAddress="04922678"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1333,7 +1296,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>57</ID>
               <Description>"Vitality"</Description>
-              <LastState Value="48" RealAddress="04922628"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1345,7 +1307,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>63</ID>
               <Description>"Attunement"</Description>
-              <LastState Value="10" RealAddress="04922630"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1357,7 +1318,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>62</ID>
               <Description>"Endurance"</Description>
-              <LastState Value="57" RealAddress="04922638"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1369,7 +1329,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>60</ID>
               <Description>"Strength"</Description>
-              <LastState Value="28" RealAddress="04922640"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1381,7 +1340,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>59</ID>
               <Description>"Dexterity"</Description>
-              <LastState Value="45" RealAddress="04922648"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1393,7 +1351,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>61</ID>
               <Description>"Resistance"</Description>
-              <LastState Value="11" RealAddress="04922670"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1405,7 +1362,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>58</ID>
               <Description>"Intelligence"</Description>
-              <LastState Value="8" RealAddress="04922650"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1417,7 +1373,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>56</ID>
               <Description>"Faith"</Description>
-              <LastState Value="10" RealAddress="04922658"/>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
@@ -1445,7 +1400,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>222</ID>
                   <Description>"Current"</Description>
-                  <LastState Value="110" RealAddress="05E014C0"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1458,7 +1412,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>226</ID>
                   <Description>"Max"</Description>
-                  <LastState Value="110" RealAddress="05E014D0"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1479,7 +1432,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>220</ID>
                   <Description>"Current"</Description>
-                  <LastState Value="110" RealAddress="05E014C4"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1492,7 +1444,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>225</ID>
                   <Description>"Max"</Description>
-                  <LastState Value="110" RealAddress="05E014D4"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1513,7 +1464,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>221</ID>
                   <Description>"Current"</Description>
-                  <LastState Value="204" RealAddress="05E014C8"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1526,7 +1476,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>224</ID>
                   <Description>"Max"</Description>
-                  <LastState Value="204" RealAddress="05E014D8"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1547,7 +1496,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>219</ID>
                   <Description>"Current"</Description>
-                  <LastState Value="155" RealAddress="05E014CC"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1560,7 +1508,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>223</ID>
                   <Description>"Max"</Description>
-                  <LastState Value="155" RealAddress="05E014DC"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1584,7 +1531,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12367</ID>
               <Description>"Disable Event Backread State"</Description>
-              <LastState Value="0" RealAddress="05E011D4"/>
               <VariableType>Byte</VariableType>
               <Address>plr_dynamic_base</Address>
               <Offsets>
@@ -1596,7 +1542,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12366</ID>
               <Description>"Mask"</Description>
-              <LastState Value="12000000" RealAddress="05E01584"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -1609,7 +1554,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>91684</ID>
               <Description>"No Dead"</Description>
-              <LastState Value="0" RealAddress="05E01584"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>5</BitStart>
@@ -1625,7 +1569,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12368</ID>
               <Description>"No Damage"</Description>
-              <LastState Value="0" RealAddress="05E01584"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>6</BitStart>
@@ -1641,7 +1584,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12369</ID>
               <Description>"No Hit"</Description>
-              <LastState Value="0" RealAddress="05E01584"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>7</BitStart>
@@ -1657,7 +1599,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12370</ID>
               <Description>"No Attack"</Description>
-              <LastState Value="0" RealAddress="05E01585"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>0</BitStart>
@@ -1673,7 +1614,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12371</ID>
               <Description>"No Move"</Description>
-              <LastState Value="0" RealAddress="05E01585"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>1</BitStart>
@@ -1689,7 +1629,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12372</ID>
               <Description>"No Stamina Consume"</Description>
-              <LastState Value="0" RealAddress="05E01585"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>2</BitStart>
@@ -1705,7 +1644,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12373</ID>
               <Description>"No MP Consume"</Description>
-              <LastState Value="0" RealAddress="05E01585"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>3</BitStart>
@@ -1721,7 +1659,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12375</ID>
               <Description>"No Update"</Description>
-              <LastState Value="0" RealAddress="05E01585"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>7</BitStart>
@@ -1737,7 +1674,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12374</ID>
               <Description>"No Goods Consume"</Description>
-              <LastState Value="0" RealAddress="05E01587"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>0</BitStart>
@@ -1763,7 +1699,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90725</ID>
               <Description>"XYZ"</Description>
-              <LastState Value="B1 02 27 C2 B4 9E 6B C2 DD 2F 65 42" RealAddress="05E02710"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>Array of byte</VariableType>
@@ -1779,7 +1714,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>91674</ID>
               <Description>"X"</Description>
-              <LastState Value="-41.75262833" RealAddress="05E02710"/>
               <Color>000000</Color>
               <VariableType>Float</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -1793,7 +1727,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90728</ID>
               <Description>"Y"</Description>
-              <LastState Value="57.29674149" RealAddress="05E02718"/>
               <Color>000000</Color>
               <VariableType>Float</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -1807,7 +1740,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90729</ID>
               <Description>"Z"</Description>
-              <LastState Value="-58.90498352" RealAddress="05E02714"/>
               <Color>000000</Color>
               <VariableType>Float</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -1821,7 +1753,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90730</ID>
               <Description>"Rotation"</Description>
-              <LastState Value="-1.265035391" RealAddress="05E02704"/>
               <Color>000000</Color>
               <VariableType>Float</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -1844,7 +1775,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>12426</ID>
               <Description>"Disable Gravity"</Description>
-              <LastState Value="0" RealAddress="05E013BD"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>6</BitStart>
@@ -1860,7 +1790,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90727</ID>
               <Description>"Disable Collision"</Description>
-              <LastState Value="0" RealAddress="05E01F04"/>
               <Color>000000</Color>
               <VariableType>Binary</VariableType>
               <BitStart>4</BitStart>
@@ -1883,7 +1812,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>90731</ID>
                   <Description>"XYZ"</Description>
-                  <LastState Value="B1 02 27 C2 B4 9E 6B C2 DD 2F 65 42" RealAddress="0DFCF060"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>000000</Color>
                   <VariableType>Array of byte</VariableType>
@@ -1901,7 +1829,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>90735</ID>
                   <Description>"X"</Description>
-                  <LastState Value="-41.75262833" RealAddress="0DFCF060"/>
                   <Color>000000</Color>
                   <VariableType>Float</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1917,7 +1844,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>90736</ID>
                   <Description>"Y"</Description>
-                  <LastState Value="57.29674149" RealAddress="0DFCF068"/>
                   <Color>000000</Color>
                   <VariableType>Float</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1933,7 +1859,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>90737</ID>
                   <Description>"Z"</Description>
-                  <LastState Value="-58.90498352" RealAddress="0DFCF064"/>
                   <Color>000000</Color>
                   <VariableType>Float</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -1960,7 +1885,6 @@ unregistersymbol(queue_aob)
             <CheatEntry>
               <ID>90720</ID>
               <Description>"Death Cam"</Description>
-              <LastState Value="0" RealAddress="0AC9D0E0"/>
               <VariableType>Byte</VariableType>
               <Address>plr_dynamic_base</Address>
               <Offsets>
@@ -1977,7 +1901,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>91687</ID>
                   <Description>"Additional Range"</Description>
-                  <LastState Value="0" RealAddress="06353868"/>
                   <Color>000000</Color>
                   <VariableType>Float</VariableType>
                   <Address>DARKSOULS.exe+F7D6C8</Address>
@@ -1988,7 +1911,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>91689</ID>
                   <Description>"Lock-on FollowCam"</Description>
-                  <LastState Value="1" RealAddress="063538B0"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>DARKSOULS.exe+F7D6C8</Address>
@@ -1999,7 +1921,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>91688</ID>
                   <Description>"Lock-on Movement"</Description>
-                  <LastState Value="1" RealAddress="063538B1"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>DARKSOULS.exe+F7D6C8</Address>
@@ -2019,7 +1940,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12491</ID>
                   <Description>"ChrOrgOffsetX"</Description>
-                  <LastState Value="0" RealAddress="05B806B0"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2031,7 +1951,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12580</ID>
                   <Description>"ChrOrgOffsetY"</Description>
-                  <LastState Value="1.419999957" RealAddress="05B806B4"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2043,7 +1962,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12581</ID>
                   <Description>"ChrOrgOffsetZ"</Description>
-                  <LastState Value="0" RealAddress="05B806B8"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2055,7 +1973,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12618</ID>
                   <Description>"FovY"</Description>
-                  <LastState Value="0.7504920959" RealAddress="05B805A0"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2067,7 +1984,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12578</ID>
                   <Description>"RotX"</Description>
-                  <LastState Value="-45.1854248" RealAddress="05B80630"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2079,7 +1995,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>91680</ID>
                   <Description>"RotY"</Description>
-                  <LastState Value="58.38100052" RealAddress="05B80638"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2091,7 +2006,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>91681</ID>
                   <Description>"RotZ"</Description>
-                  <LastState Value="-57.46237564" RealAddress="05B80634"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2103,7 +2017,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12604</ID>
                   <Description>"PosX"</Description>
-                  <LastState Value="-45.5667572" RealAddress="05B80650"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2115,7 +2028,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12600</ID>
                   <Description>"PosY"</Description>
-                  <LastState Value="58.50175476" RealAddress="05B80658"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2127,7 +2039,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12601</ID>
                   <Description>"PosZ"</Description>
-                  <LastState Value="-57.45992279" RealAddress="05B80654"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2139,7 +2050,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>91679</ID>
                   <Description>"CamRotX"</Description>
-                  <LastState Value="0.006284733303" RealAddress="05B80690"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2151,7 +2061,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12574</ID>
                   <Description>"TargetRotX"</Description>
-                  <LastState Value="0.006284728646" RealAddress="05B806A0"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2163,7 +2072,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12597</ID>
                   <Description>"CamDistTarget"</Description>
-                  <LastState Value="4.000004292" RealAddress="05B806D8"/>
                   <VariableType>Float</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2175,7 +2083,6 @@ unregistersymbol(queue_aob)
                 <CheatEntry>
                   <ID>12573</ID>
                   <Description>"IsHandControl"</Description>
-                  <LastState Value="0" RealAddress="05B806AC"/>
                   <VariableType>Byte</VariableType>
                   <Address>followcam_base</Address>
                   <Offsets>
@@ -2360,7 +2267,6 @@ dealloc(fov)
                 <CheatEntry>
                   <ID>12495</ID>
                   <Description>"FovY"</Description>
-                  <LastState Value="3.144241329E13" RealAddress="01710400"/>
                   <VariableType>Float</VariableType>
                   <Address>fov</Address>
                 </CheatEntry>
@@ -2419,7 +2325,6 @@ dealloc(distance)
                 <CheatEntry>
                   <ID>12677</ID>
                   <Description>"CamDistTarget"</Description>
-                  <LastState Value="3.144241329E13" RealAddress="01710400"/>
                   <VariableType>Float</VariableType>
                   <Address>distance</Address>
                 </CheatEntry>
@@ -2437,7 +2342,6 @@ dealloc(distance)
             <CheatEntry>
               <ID>91685</ID>
               <Description>"Area"</Description>
-              <LastState Value="-2" RealAddress="04920C34"/>
               <ShowAsSigned>1</ShowAsSigned>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -2449,7 +2353,6 @@ dealloc(distance)
             <CheatEntry>
               <ID>91686</ID>
               <Description>"FRPG-NET"</Description>
-              <LastState Value="1" RealAddress="04920D88"/>
               <ShowAsSigned>1</ShowAsSigned>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
@@ -2461,7 +2364,6 @@ dealloc(distance)
             <CheatEntry>
               <ID>12568</ID>
               <Description>"Multiplayer Channel"</Description>
-              <LastState Value="7" RealAddress="04920D89"/>
               <ShowAsSigned>1</ShowAsSigned>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
@@ -2483,7 +2385,6 @@ dealloc(distance)
 -11:SESSION_INVADEBOUNTY
 -12:SESSION_COLISEUM
 </DropDownList>
-              <LastState Value="0" RealAddress="04921984"/>
               <ShowAsSigned>1</ShowAsSigned>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
@@ -2495,14 +2396,12 @@ dealloc(distance)
             <CheatEntry>
               <ID>12529</ID>
               <Description>"Red Invasion Cooldown"</Description>
-              <LastState Value="0" RealAddress="013795E0"/>
               <VariableType>Float</VariableType>
               <Address>DARKSOULS.exe+F795E0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>12530</ID>
               <Description>"Blue Invasion Cooldown"</Description>
-              <LastState Value="0" RealAddress="01379658"/>
               <VariableType>Float</VariableType>
               <Address>DARKSOULS.exe+F79658</Address>
             </CheatEntry>
@@ -2516,7 +2415,6 @@ dealloc(distance)
                 <CheatEntry>
                   <ID>90760</ID>
                   <Description>"mp1_ptr"</Description>
-                  <LastState Value="00000000" RealAddress="05CDEC90"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -5385,7 +5283,6 @@ dealloc(distance)
                 <CheatEntry>
                   <ID>91259</ID>
                   <Description>"mp2_ptr"</Description>
-                  <LastState Value="00000000" RealAddress="05CDECB0"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -8254,7 +8151,6 @@ dealloc(distance)
                 <CheatEntry>
                   <ID>91467</ID>
                   <Description>"mp3_ptr"</Description>
-                  <LastState Value="00000000" RealAddress="05CDECD0"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -12121,7 +12017,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>312</ID>
                       <Description>"Left Hand 1 Index"</Description>
-                      <LastState Value="00000040" RealAddress="049227C4"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12133,7 +12028,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>313</ID>
                       <Description>"Right Hand 1 Index"</Description>
-                      <LastState Value="00000040" RealAddress="049227C8"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12145,7 +12039,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>231</ID>
                       <Description>"Left Hand 2 Index"</Description>
-                      <LastState Value="0000009E" RealAddress="049227CC"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12157,7 +12050,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>314</ID>
                       <Description>"Right Hand 2 Index"</Description>
-                      <LastState Value="000000A0" RealAddress="049227D0"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12169,7 +12061,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>288</ID>
                       <Description>"Left Hand 1 ID"</Description>
-                      <LastState Value="900000" RealAddress="0492283C"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12181,7 +12072,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>287</ID>
                       <Description>"Right Hand 1 ID"</Description>
-                      <LastState Value="900000" RealAddress="04922840"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12193,7 +12083,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>289</ID>
                       <Description>"Left Hand 2 ID"</Description>
-                      <LastState Value="1332500" RealAddress="04922844"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12205,7 +12094,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>290</ID>
                       <Description>"Right Hand 2 ID"</Description>
-                      <LastState Value="103105" RealAddress="04922848"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12227,7 +12115,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>317</ID>
                       <Description>"Head Index"</Description>
-                      <LastState Value="0000004A" RealAddress="049227E4"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12239,7 +12126,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>234</ID>
                       <Description>"Chest Index"</Description>
-                      <LastState Value="000000A7" RealAddress="049227E8"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12251,7 +12137,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>235</ID>
                       <Description>"Hand Index"</Description>
-                      <LastState Value="0000005A" RealAddress="049227EC"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12263,7 +12148,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>236</ID>
                       <Description>"Leg Index"</Description>
-                      <LastState Value="000000A6" RealAddress="049227F0"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12275,7 +12159,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>298</ID>
                       <Description>"Head ID"</Description>
-                      <LastState Value="900000" RealAddress="0492285C"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12287,7 +12170,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>299</ID>
                       <Description>"Chest ID"</Description>
-                      <LastState Value="641010" RealAddress="04922860"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12299,7 +12181,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>300</ID>
                       <Description>"Hand ID"</Description>
-                      <LastState Value="532005" RealAddress="04922864"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12311,7 +12192,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>301</ID>
                       <Description>"Leg ID"</Description>
-                      <LastState Value="53010" RealAddress="04922868"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12333,7 +12213,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>278</ID>
                       <Description>"Arrow 1 Index"</Description>
-                      <LastState Value="FFFFFFFF" RealAddress="049227D4"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12345,7 +12224,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>280</ID>
                       <Description>"Arrow 2 Index"</Description>
-                      <LastState Value="FFFFFFFF" RealAddress="049227DC"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12357,7 +12235,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>279</ID>
                       <Description>"Bolt 1 Index"</Description>
-                      <LastState Value="FFFFFFFF" RealAddress="049227D8"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12369,7 +12246,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>281</ID>
                       <Description>"Bolt 2 Index"</Description>
-                      <LastState Value="FFFFFFFF" RealAddress="049227E0"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12381,7 +12257,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>294</ID>
                       <Description>"Arrow 1 ID"</Description>
-                      <LastState Value="-1" RealAddress="0492284C"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12393,7 +12268,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>296</ID>
                       <Description>"Arrow 2 ID"</Description>
-                      <LastState Value="-1" RealAddress="04922854"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12405,7 +12279,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>295</ID>
                       <Description>"Bolt 1 ID"</Description>
-                      <LastState Value="-1" RealAddress="04922850"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12417,7 +12290,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>297</ID>
                       <Description>"Bolt 2 ID"</Description>
-                      <LastState Value="-1" RealAddress="04922858"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12439,7 +12311,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>276</ID>
                       <Description>"Accessory 1 Index"</Description>
-                      <LastState Value="0000007E" RealAddress="049227F8"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12451,7 +12322,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>277</ID>
                       <Description>"Accessory 2 Index"</Description>
-                      <LastState Value="0000006B" RealAddress="049227FC"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12463,7 +12333,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>303</ID>
                       <Description>"Accessory 1 ID"</Description>
-                      <LastState Value="143" RealAddress="04922870"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12475,7 +12344,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>304</ID>
                       <Description>"Accessory 2 ID"</Description>
-                      <LastState Value="128" RealAddress="04922874"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12497,7 +12365,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>282</ID>
                       <Description>"Item 1 Index"</Description>
-                      <LastState Value="00000056" RealAddress="04922800"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12509,7 +12376,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>283</ID>
                       <Description>"Item 2 Index"</Description>
-                      <LastState Value="00000058" RealAddress="04922804"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12521,7 +12387,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>284</ID>
                       <Description>"Item 3 Index"</Description>
-                      <LastState Value="00000087" RealAddress="04922808"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12533,7 +12398,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>285</ID>
                       <Description>"Item 4 Index"</Description>
-                      <LastState Value="FFFFFFFF" RealAddress="0492280C"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12545,7 +12409,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>286</ID>
                       <Description>"Item 5 Index"</Description>
-                      <LastState Value="0000005D" RealAddress="04922810"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12557,7 +12420,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>306</ID>
                       <Description>"Item 1 ID"</Description>
-                      <LastState Value="240" RealAddress="04922878"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12569,7 +12431,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>307</ID>
                       <Description>"Item 2 ID"</Description>
-                      <LastState Value="230" RealAddress="0492287C"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12581,7 +12442,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>308</ID>
                       <Description>"Item 3 ID"</Description>
-                      <LastState Value="501" RealAddress="04922880"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12593,7 +12453,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>309</ID>
                       <Description>"Item 4 ID"</Description>
-                      <LastState Value="-1" RealAddress="04922884"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12605,7 +12464,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>310</ID>
                       <Description>"Item 5 ID"</Description>
-                      <LastState Value="371" RealAddress="04922888"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12636,7 +12494,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10276</ID>
                       <Description>"Magic Type Slot 1"</Description>
-                      <LastState Value="4110" RealAddress="0C6B029C"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12649,7 +12506,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10279</ID>
                       <Description>"Magic Type Slot 2"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02A4"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12662,7 +12518,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10282</ID>
                       <Description>"Magic Type Slot 3"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02AC"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12675,7 +12530,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10285</ID>
                       <Description>"Magic Type Slot 4"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02B4"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12688,7 +12542,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10288</ID>
                       <Description>"Magic Type Slot 5"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02BC"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12701,7 +12554,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10291</ID>
                       <Description>"Magic Type Slot 6"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02C4"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12714,7 +12566,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10294</ID>
                       <Description>"Magic Type Slot 7"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02CC"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12727,7 +12578,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10297</ID>
                       <Description>"Magic Type Slot 8"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02D4"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12740,7 +12590,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10300</ID>
                       <Description>"Magic Type Slot 9"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02DC"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12753,7 +12602,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10303</ID>
                       <Description>"Magic Type Slot 10"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02E4"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12766,7 +12614,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10306</ID>
                       <Description>"Magic Type Slot 11"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02EC"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12779,7 +12626,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10309</ID>
                       <Description>"Magic Type Slot 12"</Description>
-                      <LastState Value="-1" RealAddress="0C6B02F4"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
@@ -12801,7 +12647,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10277</ID>
                       <Description>"Magic Uses Slot 1"</Description>
-                      <LastState Value="24" RealAddress="0C6B02A0"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12813,7 +12658,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10280</ID>
                       <Description>"Magic Uses Slot 2"</Description>
-                      <LastState Value="0" RealAddress="0C6B02A8"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12825,7 +12669,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10283</ID>
                       <Description>"Magic Uses Slot 3"</Description>
-                      <LastState Value="0" RealAddress="0C6B02B0"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12837,7 +12680,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10286</ID>
                       <Description>"Magic Uses Slot 4"</Description>
-                      <LastState Value="0" RealAddress="0C6B02B8"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12849,7 +12691,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10289</ID>
                       <Description>"Magic Uses Slot 5"</Description>
-                      <LastState Value="0" RealAddress="0C6B02C0"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12861,7 +12702,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10292</ID>
                       <Description>"Magic Uses Slot 6"</Description>
-                      <LastState Value="0" RealAddress="0C6B02C8"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12873,7 +12713,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10295</ID>
                       <Description>"Magic Uses Slot 7"</Description>
-                      <LastState Value="0" RealAddress="0C6B02D0"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12885,7 +12724,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10298</ID>
                       <Description>"Magic Uses Slot 8"</Description>
-                      <LastState Value="0" RealAddress="0C6B02D8"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12897,7 +12735,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10301</ID>
                       <Description>"Magic Uses Slot 9"</Description>
-                      <LastState Value="0" RealAddress="0C6B02E0"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12909,7 +12746,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10304</ID>
                       <Description>"Magic Uses Slot 10"</Description>
-                      <LastState Value="0" RealAddress="0C6B02E8"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12921,7 +12757,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10307</ID>
                       <Description>"Magic Uses Slot 11"</Description>
-                      <LastState Value="0" RealAddress="0C6B02F0"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12933,7 +12768,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10310</ID>
                       <Description>"Magic Uses Slot 12"</Description>
-                      <LastState Value="0" RealAddress="0C6B02F8"/>
                       <VariableType>4 Bytes</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -12970,7 +12804,6 @@ dealloc(HandMem)
 8:Darkmoon Blade
 9:Chaos Servant
 </DropDownList>
-              <LastState Value="4" RealAddress="049226FB"/>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
               <Address>plr_static_base</Address>
@@ -12988,7 +12821,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>202</ID>
                   <Description>"Warrior of Sunlight"</Description>
-                  <LastState Value="99" RealAddress="049226D5"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -13002,7 +12834,6 @@ dealloc(HandMem)
                   <Description>"Darkmoon Blade"</Description>
                   <DropDownList>99:Max
 </DropDownList>
-                  <LastState Value="99" RealAddress="049226DA"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -13016,7 +12847,6 @@ dealloc(HandMem)
                   <Description>"Chaos Servant"</Description>
                   <DropDownList>99:Max
 </DropDownList>
-                  <LastState Value="99" RealAddress="049226DB"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -13030,7 +12860,6 @@ dealloc(HandMem)
                   <Description>"Darkwraith"</Description>
                   <DropDownList>99:Max
 </DropDownList>
-                  <LastState Value="99" RealAddress="049226D6"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -13042,7 +12871,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>204</ID>
                   <Description>"Path of the Dragon"</Description>
-                  <LastState Value="99" RealAddress="049226D7"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -13054,7 +12882,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>205</ID>
                   <Description>"Gravelord Servant"</Description>
-                  <LastState Value="99" RealAddress="049226D8"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -13066,7 +12893,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>206</ID>
                   <Description>"Forest Hunter"</Description>
-                  <LastState Value="99" RealAddress="049226D9"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -13090,7 +12916,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>151</ID>
               <Description>"Name String"</Description>
-              <LastState RealAddress="04922690"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>String</VariableType>
@@ -13106,7 +12931,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>10319</ID>
               <Description>"Name Array"</Description>
-              <LastState Value="72 00 69 00 63 00 65 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00" RealAddress="04922690"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000000</Color>
               <VariableType>Array of byte</VariableType>
@@ -13120,7 +12944,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>93</ID>
               <Description>"Sex"</Description>
-              <LastState Value="0" RealAddress="049226B2"/>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
               <Address>plr_static_base</Address>
@@ -13132,7 +12955,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>103</ID>
               <Description>"Class"</Description>
-              <LastState Value="255" RealAddress="049226B6"/>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
               <Address>plr_static_base</Address>
@@ -13144,7 +12966,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>102</ID>
               <Description>"Gift"</Description>
-              <LastState Value="255" RealAddress="049226B8"/>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
               <Address>plr_static_base</Address>
@@ -13164,7 +12985,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>101</ID>
                   <Description>"Type"</Description>
-                  <LastState Value="255" RealAddress="049226FC"/>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13189,7 +13009,6 @@ dealloc(HandMem)
 83 76 80 7A 87 9D 90 6A 8E 9B 9F A4 74 4C 7A 4E 96 94 6F 8E 8F 7B 68 8F 68 7E AB 75 84 51 44 7C 50 5A 1D 86 79 A5 69 B0 9E 52 99 7C 93 65 8A 56 89 30 2E FC A4 77 8D BA 66 9A 72 40 3A 57 56 B8 65 62 94 8C 78 2E CF 98 76 9D 6A 64 95 75 8B 67 89 92 C2 A8 B3 A1 5A 8F 5B 77 66 82 8C 63 41 55 A4 9C 73 67:Undead Default Female
 8E 85 91 70 84 7F 98 9D 8B 89 78 7C 88 60 64 71 AA B4 78 90 B8 8F AF C3 6C 94 86 65 75 95 92 8E 9C 61 6C 9C 90 76 80 9B 9B 89 84 7A 54 7D 81 82 65 AF 2E D7 A4 67 8E A3 DF 58 52 7F 72 1D D9 4E 59 80 A1 5F 99 60 A4 95 54 53 98 6D 63 7B 84 7F 64 91 64 90 A5 80 7D B0 86 6D 2B 72 B3 83 BF 39 80 BD C4 72:Undead Custom Male
 </DropDownList>
-                      <LastState Value="87 77 7F 7F 8F 9C 9C 68 86 8E A6 AD 70 56 6C 60 86 CA 84 88 9A 70 71 86 7D 7D A2 4E 9F 60 32 90 5A 44 2D 70 92 8D 83 A9 88 4A 9E 70 9A 46 82 57 89 30 2E FC A4 77 8D BA 66 9A 72 40 3A 57 56 B8 65 62 94 8C 78 2E CF 98 76 9D 6A 64 95 75 8B 67 89 92 C2 A8 B3 A1 5A 8F 5B 77 66 82 8C 63 41 55 A4 9C 73 67" RealAddress="04922990"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>100</ByteLength>
@@ -13202,7 +13021,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10041</ID>
                       <Description>"Face Width (00=Wide, FF=Narrow) "</Description>
-                      <LastState Value="135" RealAddress="04922990"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13213,7 +13031,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10048</ID>
                       <Description>"Face Height (00=Short, FF=Tall) "</Description>
-                      <LastState Value="119" RealAddress="04922991"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13224,7 +13041,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10047</ID>
                       <Description>"Face Depth (00=Shallow, FF=Deep) "</Description>
-                      <LastState Value="127" RealAddress="04922992"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13235,7 +13051,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10046</ID>
                       <Description>"Face Horizontal Spacing (00=Wide, FF=Narrow)"</Description>
-                      <LastState Value="127" RealAddress="04922993"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13246,7 +13061,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10045</ID>
                       <Description>"Face Vertical Spacing (00=Short, FF=Long) "</Description>
-                      <LastState Value="143" RealAddress="04922994"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13257,7 +13071,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10044</ID>
                       <Description>"Nose Length (00=Short, FF=Long) "</Description>
-                      <LastState Value="156" RealAddress="04922995"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13268,7 +13081,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10056</ID>
                       <Description>"Nose to Forehead Ratio (00=Nose, FF=Forehead) "</Description>
-                      <LastState Value="156" RealAddress="04922996"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13279,7 +13091,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10055</ID>
                       <Description>"Face Emphasis, Vertical (00=Large Forehead, FF=Large Nose) "</Description>
-                      <LastState Value="104" RealAddress="04922997"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13290,7 +13101,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10054</ID>
                       <Description>"Face Emphasis, Horizontal (00=Narrow Sides, FF=Wide Sides) "</Description>
-                      <LastState Value="134" RealAddress="04922998"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13301,7 +13111,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10053</ID>
                       <Description>"Eye to Nose/Mouth Ratio (00=Large Nose, FF=Large Eyes) "</Description>
-                      <LastState Value="142" RealAddress="04922999"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13312,7 +13121,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10052</ID>
                       <Description>"Facial Feature Width to Depth Ratio (00=Narrow/Deep, FF=Wide/Shallow) "</Description>
-                      <LastState Value="166" RealAddress="0492299A"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13323,7 +13131,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10072</ID>
                       <Description>"Brow Width (00=Wide/Large Brow Ridge, FF=Narrow/Small Brow Ridge) "</Description>
-                      <LastState Value="173" RealAddress="0492299B"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13334,7 +13141,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10071</ID>
                       <Description>"Brow/Eye Socket Depth (00=Deep, FF=Shallow) "</Description>
-                      <LastState Value="112" RealAddress="0492299C"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13345,7 +13151,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10070</ID>
                       <Description>"Distance between Eyebrow and Eye (00=Long, FF=Short) "</Description>
-                      <LastState Value="86" RealAddress="0492299D"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13356,7 +13161,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10069</ID>
                       <Description>"Distance between Features (00=Short, FF=Long)"</Description>
-                      <LastState Value="108" RealAddress="0492299E"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13367,7 +13171,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10068</ID>
                       <Description>"Nose Width to other Features (00=Narrow nose/Wide features, FF=Wide Nose/Narrow Features) "</Description>
-                      <LastState Value="96" RealAddress="0492299F"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13378,7 +13181,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10067</ID>
                       <Description>"Mouth Size (00=Large, FF=Small)"</Description>
-                      <LastState Value="134" RealAddress="049229A0"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13389,7 +13191,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10066</ID>
                       <Description>"Nose Width (00=Wide, FF=Narrow)"</Description>
-                      <LastState Value="202" RealAddress="049229A1"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13400,7 +13201,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10065</ID>
                       <Description>"Feature Arch (00=Downward, FF=Upward)"</Description>
-                      <LastState Value="132" RealAddress="049229A2"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13411,7 +13211,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10064</ID>
                       <Description>"Eye Size (00=Large, FF=Small) "</Description>
-                      <LastState Value="136" RealAddress="049229A3"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13422,7 +13221,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10063</ID>
                       <Description>"Eye Position (00=Up, FF=Down) "</Description>
-                      <LastState Value="154" RealAddress="049229A4"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13433,7 +13231,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10062</ID>
                       <Description>"Jaw Shape (00=Round, FF=Sharp) "</Description>
-                      <LastState Value="112" RealAddress="049229A5"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13444,7 +13241,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10061</ID>
                       <Description>"Feature Slant (00=Inward, FF=Outward)"</Description>
-                      <LastState Value="113" RealAddress="049229A6"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13455,7 +13251,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10060</ID>
                       <Description>"Mouth Expression (00=Happy, FF=Sad) "</Description>
-                      <LastState Value="134" RealAddress="049229A7"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13466,7 +13261,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10059</ID>
                       <Description>"Lip Shape (00=Pursed, FF=Closed) "</Description>
-                      <LastState Value="125" RealAddress="049229A8"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13477,7 +13271,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10058</ID>
                       <Description>"Lip Fullness (00=Large, FF=Small) "</Description>
-                      <LastState Value="125" RealAddress="049229A9"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13488,7 +13281,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10057</ID>
                       <Description>"Lip Asperity (00=Concave , FF=Convex) "</Description>
-                      <LastState Value="162" RealAddress="049229AA"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13499,7 +13291,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10051</ID>
                       <Description>"Lip Thickness (00=Small, FF=Large) "</Description>
-                      <LastState Value="78" RealAddress="049229AB"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13510,7 +13301,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10050</ID>
                       <Description>"Mouth Asperity (00=Convex, FF=Concave)"</Description>
-                      <LastState Value="159" RealAddress="049229AC"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13521,7 +13311,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10049</ID>
                       <Description>"Mouth Slant (00=Up, FF=Down) "</Description>
-                      <LastState Value="96" RealAddress="049229AD"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13532,7 +13321,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10043</ID>
                       <Description>"Occlusion (00=Down, FF=Up) "</Description>
-                      <LastState Value="50" RealAddress="049229AE"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13543,7 +13331,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10042</ID>
                       <Description>"Lip Thickness (00=Thin, FF=Thick)"</Description>
-                      <LastState Value="144" RealAddress="049229AF"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13554,7 +13341,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10318</ID>
                       <Description>"Skin Pale/Blush (00=Pale, FF=Blush)"</Description>
-                      <LastState Value="137" RealAddress="049229C0"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13565,7 +13351,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>12332</ID>
                       <Description>"Cheek White/Red (00=White, FF=Red)"</Description>
-                      <LastState Value="48" RealAddress="049229C1"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13576,7 +13361,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>12331</ID>
                       <Description>"Skin Light/Dark (00=Dark, FF=Light)"</Description>
-                      <LastState Value="46" RealAddress="049229C2"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13587,7 +13371,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>12315</ID>
                       <Description>"Skin Orange/Blue (00=Orange, FF=Blue)"</Description>
-                      <LastState Value="115" RealAddress="049229F2"/>
                       <VariableType>Byte</VariableType>
                       <Address>plr_static_base</Address>
                       <Offsets>
@@ -13598,7 +13381,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>10317</ID>
                       <Description>"Skin"</Description>
-                      <LastState Value="89 30 2E FC A4 77 8D BA 66 9A 72 40 3A 57 56 B8 65 62 94 8C 78 2E CF 98 76 9D 6A 64 95 75 8B 67 89 92 C2 A8 B3 A1 5A 8F 5B 77 66 82 8C 63 41 55 A4 9C 73 67" RealAddress="049229C0"/>
                       <ShowAsHex>1</ShowAsHex>
                       <VariableType>Array of byte</VariableType>
                       <ByteLength>52</ByteLength>
@@ -13634,7 +13416,6 @@ dealloc(HandMem)
 8:M:Curly F:Bun
 9:M:Bobbed F:Braided
 </DropDownList>
-                  <LastState Value="255" RealAddress="049226FD"/>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13666,7 +13447,6 @@ dealloc(HandMem)
 3800:Bun
 3900:Braided
 </DropDownList>
-                  <LastState Value="3300" RealAddress="0492286C"/>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13698,7 +13478,6 @@ dealloc(HandMem)
 8:Dark Purple
 9:Red
 </DropDownList>
-                  <LastState Value="255" RealAddress="049226FE"/>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13709,7 +13488,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>94</ID>
                   <Description>"RGB"</Description>
-                  <LastState Value="CD CC 4C 3E CD CC 4C 3E CD CC 4C 3E" RealAddress="04922970"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>12</ByteLength>
@@ -13722,7 +13500,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12266</ID>
                   <Description>"Red"</Description>
-                  <LastState Value="0.200000003" RealAddress="04922970"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13733,7 +13510,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>96</ID>
                   <Description>"Green"</Description>
-                  <LastState Value="0.200000003" RealAddress="04922974"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13744,7 +13520,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>97</ID>
                   <Description>"Blue"</Description>
-                  <LastState Value="0.200000003" RealAddress="04922978"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13755,7 +13530,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>157</ID>
                   <Description>"Alpha"</Description>
-                  <LastState Value="1" RealAddress="0492297C"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13776,7 +13550,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>106</ID>
                   <Description>"RGB"</Description>
-                  <LastState Value="00 00 48 42 00 00 A0 41 00 00 A0 40" RealAddress="04922980"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>12</ByteLength>
@@ -13789,7 +13562,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12267</ID>
                   <Description>"Red"</Description>
-                  <LastState Value="50" RealAddress="04922980"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13800,7 +13572,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>107</ID>
                   <Description>"Green"</Description>
-                  <LastState Value="20" RealAddress="04922984"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13811,7 +13582,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>105</ID>
                   <Description>"Blue"</Description>
-                  <LastState Value="5" RealAddress="04922988"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13822,7 +13592,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>156</ID>
                   <Description>"Alpha"</Description>
-                  <LastState Value="1" RealAddress="0492298C"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13853,7 +13622,6 @@ dealloc(HandMem)
 7:Top-heavy
 8:Tiny Head
 </DropDownList>
-                  <LastState Value="2" RealAddress="049226B7"/>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13864,7 +13632,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>108</ID>
                   <Description>"Head"</Description>
-                  <LastState Value="-1" RealAddress="0492289C"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13875,7 +13642,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>87</ID>
                   <Description>"Chest"</Description>
-                  <LastState Value="-1" RealAddress="049228A0"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13886,7 +13652,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>88</ID>
                   <Description>"Waist"</Description>
-                  <LastState Value="-1" RealAddress="049228A4"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13897,7 +13662,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>89</ID>
                   <Description>"Hands"</Description>
-                  <LastState Value="-1" RealAddress="049228A8"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13908,7 +13672,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>90</ID>
                   <Description>"Legs"</Description>
-                  <LastState Value="-1" RealAddress="049228AC"/>
                   <VariableType>Float</VariableType>
                   <Address>plr_static_base</Address>
                   <Offsets>
@@ -13930,7 +13693,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>12673</ID>
               <Description>"break"</Description>
-              <LastState Value="0" RealAddress="05E02258"/>
               <Color>000000</Color>
               <VariableType>Byte</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -13943,7 +13705,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>12661</ID>
               <Description>"SADurabilityCurrent"</Description>
-              <LastState Value="21" RealAddress="05E01380"/>
               <Color>000000</Color>
               <VariableType>Float</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -13956,7 +13717,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>12669</ID>
               <Description>"SADurabilityMax"</Description>
-              <LastState Value="21" RealAddress="05E01384"/>
               <Color>000000</Color>
               <VariableType>Float</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -13969,7 +13729,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>12668</ID>
               <Description>"recoverTime"</Description>
-              <LastState Value="-0.01666666754" RealAddress="05E0138C"/>
               <Color>000000</Color>
               <VariableType>Float</VariableType>
               <Address>plr_dynamic_base</Address>
@@ -13982,7 +13741,6 @@ dealloc(HandMem)
             <CheatEntry>
               <ID>91683</ID>
               <Description>"EventSuperArmor"</Description>
-              <LastState Value="0" RealAddress="05E013BE"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Binary</VariableType>
               <BitStart>0</BitStart>
@@ -14013,7 +13771,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>13</ID>
                   <Description>"ID"</Description>
-                  <LastState Value="2250" RealAddress="0C926FA8"/>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -14027,7 +13784,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12430</ID>
                   <Description>"Duration"</Description>
-                  <LastState Value="-1" RealAddress="0C926F80"/>
                   <Color>000000</Color>
                   <VariableType>Float</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -14059,7 +13815,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12722</ID>
                   <Description>"Slot 0 ID"</Description>
-                  <LastState Value="-1" RealAddress="0A59E5A4"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -14077,7 +13832,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12721</ID>
                   <Description>"Slot 1 ID"</Description>
-                  <LastState Value="0" RealAddress="0A59FFE4"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -14095,7 +13849,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12712</ID>
                   <Description>"Slot 2 ID"</Description>
-                  <LastState Value="-1" RealAddress="0A5A01A4"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -14113,7 +13866,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12714</ID>
                   <Description>"Slot 3 ID"</Description>
-                  <LastState Value="-1" RealAddress="0A5A0364"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -14131,7 +13883,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12716</ID>
                   <Description>"Slot 4 ID"</Description>
-                  <LastState Value="-1" RealAddress="0A5A0524"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -14149,7 +13900,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12718</ID>
                   <Description>"Slot 5 ID"</Description>
-                  <LastState Value="-1" RealAddress="0A5A06E4"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -14167,7 +13917,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12720</ID>
                   <Description>"Slot 6 ID"</Description>
-                  <LastState Value="-1" RealAddress="0A5A08A4"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -14194,7 +13943,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>152</ID>
                   <Description>"Play Speed"</Description>
-                  <LastState Value="1" RealAddress="0A59E4C4"/>
                   <Color>000000</Color>
                   <VariableType>Float</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -14215,7 +13963,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>12725</ID>
                       <Description>"AnimationID"</Description>
-                      <LastState Value="-1" RealAddress="05E021A8"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <Color>000000</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -14239,7 +13986,6 @@ dealloc(HandMem)
                     <CheatEntry>
                       <ID>12764</ID>
                       <Description>"AnimationID"</Description>
-                      <LastState Value="-1" RealAddress="05E021B0"/>
                       <ShowAsSigned>1</ShowAsSigned>
                       <Color>000000</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -14257,7 +14003,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12765</ID>
                   <Description>"ActiveStateID"</Description>
-                  <LastState Value="0" RealAddress="05E01E1C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
@@ -14277,7 +14022,6 @@ dealloc(HandMem)
                   <DropDownList DisplayValueAsItem="1">0: False
 1: True
 </DropDownList>
-                  <LastState Value="0" RealAddress="05E022D0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
@@ -14296,7 +14040,6 @@ dealloc(HandMem)
                   <DropDownList DisplayValueAsItem="1">0:False
 100:True
 </DropDownList>
-                  <LastState Value="100" RealAddress="05E021CC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
@@ -14315,7 +14058,6 @@ dealloc(HandMem)
                   <DropDownList DisplayValueAsItem="1">0:False
 45:True
 </DropDownList>
-                  <LastState Value="44" RealAddress="05E015C8"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
@@ -14348,7 +14090,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>268</ID>
                   <Description>"Point forward"</Description>
-                  <LastState Value="3" RealAddress="0C6B0378"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14361,7 +14102,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>269</ID>
                   <Description>"Point up"</Description>
-                  <LastState Value="5" RealAddress="0C6B037C"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14374,7 +14114,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>270</ID>
                   <Description>"Point down"</Description>
-                  <LastState Value="7" RealAddress="0C6B0380"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14387,7 +14126,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>271</ID>
                   <Description>"Beckon"</Description>
-                  <LastState Value="9" RealAddress="0C6B0384"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14400,7 +14138,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>272</ID>
                   <Description>"Wave"</Description>
-                  <LastState Value="11" RealAddress="0C6B0388"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14413,7 +14150,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>273</ID>
                   <Description>"Bow"</Description>
-                  <LastState Value="13" RealAddress="0C6B038C"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14426,7 +14162,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>274</ID>
                   <Description>"Proper bow"</Description>
-                  <LastState Value="15" RealAddress="0C6B0390"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14439,7 +14174,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>275</ID>
                   <Description>"Hurrah!"</Description>
-                  <LastState Value="17" RealAddress="0C6B0394"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14452,7 +14186,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>9690</ID>
                   <Description>"Joy"</Description>
-                  <LastState Value="19" RealAddress="0C6B0398"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14465,7 +14198,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>9691</ID>
                   <Description>"Shrug"</Description>
-                  <LastState Value="21" RealAddress="0C6B039C"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14478,7 +14210,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>9692</ID>
                   <Description>"Look skyward"</Description>
-                  <LastState Value="23" RealAddress="0C6B03A0"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14491,7 +14222,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>9693</ID>
                   <Description>"Well! What is it!"</Description>
-                  <LastState Value="25" RealAddress="0C6B03A4"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14504,7 +14234,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>9694</ID>
                   <Description>"Prostration"</Description>
-                  <LastState Value="27" RealAddress="0C6B03A8"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14517,7 +14246,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>9695</ID>
                   <Description>"Prayer"</Description>
-                  <LastState Value="29" RealAddress="0C6B03AC"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14530,7 +14258,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>9696</ID>
                   <Description>"Praise the Sun"</Description>
-                  <LastState Value="31" RealAddress="0C6B03B0"/>
                   <Color>000000</Color>
                   <VariableType>Byte</VariableType>
                   <Address>plr_static_base</Address>
@@ -14552,7 +14279,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12513</ID>
                   <Description>"Gwyn"</Description>
-                  <LastState Value="0" RealAddress="0C810282"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -14566,7 +14292,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12525</ID>
                   <Description>"Seath"</Description>
-                  <LastState Value="0" RealAddress="0C810282"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>1</BitStart>
                   <BitLength>1</BitLength>
@@ -14580,7 +14305,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12511</ID>
                   <Description>"Four Kings"</Description>
-                  <LastState Value="0" RealAddress="0C810282"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>2</BitStart>
                   <BitLength>1</BitLength>
@@ -14594,7 +14318,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12520</ID>
                   <Description>"Ornstein and Smough"</Description>
-                  <LastState Value="0" RealAddress="0C810282"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14608,7 +14331,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12528</ID>
                   <Description>"Iron Golem"</Description>
-                  <LastState Value="0" RealAddress="0C810282"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>4</BitStart>
                   <BitLength>1</BitLength>
@@ -14622,7 +14344,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12504</ID>
                   <Description>"Bed of Chaos"</Description>
-                  <LastState Value="0" RealAddress="0C810282"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -14636,7 +14357,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12523</ID>
                   <Description>"Quelaag"</Description>
-                  <LastState Value="0" RealAddress="0C810282"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>6</BitStart>
                   <BitLength>1</BitLength>
@@ -14650,7 +14370,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12519</ID>
                   <Description>"Gravelord Nito"</Description>
-                  <LastState Value="0" RealAddress="0C810283"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -14664,7 +14383,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12521</ID>
                   <Description>"Pinwheel"</Description>
-                  <LastState Value="0" RealAddress="0C810283"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>1</BitStart>
                   <BitLength>1</BitLength>
@@ -14678,7 +14396,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12526</ID>
                   <Description>"Sif"</Description>
-                  <LastState Value="0" RealAddress="0C810283"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>2</BitStart>
                   <BitLength>1</BitLength>
@@ -14692,7 +14409,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12522</ID>
                   <Description>"Priscilla"</Description>
-                  <LastState Value="0" RealAddress="0C810283"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14706,7 +14422,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12503</ID>
                   <Description>"Bell Gargoyles"</Description>
-                  <LastState Value="0" RealAddress="0C810283"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>4</BitStart>
                   <BitLength>1</BitLength>
@@ -14720,7 +14435,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12512</ID>
                   <Description>"Gaping Dragon"</Description>
-                  <LastState Value="0" RealAddress="0C810283"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -14734,7 +14448,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12505</ID>
                   <Description>"Capra Demon"</Description>
-                  <LastState Value="0" RealAddress="0C8111F3"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>1</BitStart>
                   <BitLength>1</BitLength>
@@ -14748,7 +14461,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12527</ID>
                   <Description>"Taurus Demon"</Description>
-                  <LastState Value="0" RealAddress="0C8111F3"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>2</BitStart>
                   <BitLength>1</BitLength>
@@ -14762,7 +14474,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12515</ID>
                   <Description>"Kalameet"</Description>
-                  <LastState Value="0" RealAddress="0C812583"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14776,7 +14487,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12516</ID>
                   <Description>"Manus"</Description>
-                  <LastState Value="0" RealAddress="0C812583"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -14790,7 +14500,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12498</ID>
                   <Description>"Artorias"</Description>
-                  <LastState Value="0" RealAddress="0C812583"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>6</BitStart>
                   <BitLength>1</BitLength>
@@ -14804,7 +14513,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12524</ID>
                   <Description>"Sanctuary Guardian"</Description>
-                  <LastState Value="0" RealAddress="0C812583"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>7</BitStart>
                   <BitLength>1</BitLength>
@@ -14818,7 +14526,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12517</ID>
                   <Description>"Moonlight Butterfly"</Description>
-                  <LastState Value="0" RealAddress="0C8120F3"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14832,7 +14539,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12510</ID>
                   <Description>"Demon Firesage"</Description>
-                  <LastState Value="0" RealAddress="0C813EB0"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -14846,7 +14552,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12508</ID>
                   <Description>"Centipede Demon"</Description>
-                  <LastState Value="0" RealAddress="0C813EF3"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>2</BitStart>
                   <BitLength>1</BitLength>
@@ -14860,7 +14565,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12507</ID>
                   <Description>"Ceaseless Discharge"</Description>
-                  <LastState Value="0" RealAddress="0C813EF3"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14874,7 +14578,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12509</ID>
                   <Description>"Dark Anor Londo"</Description>
-                  <LastState Value="0" RealAddress="0C8148B1"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>7</BitStart>
                   <BitLength>1</BitLength>
@@ -14888,7 +14591,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12514</ID>
                   <Description>"Gwynolin"</Description>
-                  <LastState Value="0" RealAddress="0C8148F3"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14902,7 +14604,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12518</ID>
                   <Description>"New Londo Drained"</Description>
-                  <LastState Value="0" RealAddress="0C814D8F"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14925,7 +14626,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12544</ID>
                   <Description>"Repairbox"</Description>
-                  <LastState Value="1" RealAddress="0C81029C"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -14939,7 +14639,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12542</ID>
                   <Description>"Armor Smithbox"</Description>
-                  <LastState Value="1" RealAddress="0C81029C"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>4</BitStart>
                   <BitLength>1</BitLength>
@@ -14953,7 +14652,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12541</ID>
                   <Description>"Weapon Smithbox"</Description>
-                  <LastState Value="1" RealAddress="0C81029C"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -14967,7 +14665,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12543</ID>
                   <Description>"Bottomless Box"</Description>
-                  <LastState Value="1" RealAddress="0C8102A3"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -14981,7 +14678,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12539</ID>
                   <Description>"Lordvessel"</Description>
-                  <LastState Value="1" RealAddress="0C8102DB"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>1</BitStart>
                   <BitLength>1</BitLength>
@@ -15004,7 +14700,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12565</ID>
                   <Description>"Crystal Cave"</Description>
-                  <LastState Value="1" RealAddress="0C810298"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>4</BitStart>
                   <BitLength>1</BitLength>
@@ -15018,7 +14713,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12550</ID>
                   <Description>"The Duke's Archives"</Description>
-                  <LastState Value="1" RealAddress="0C810298"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -15032,7 +14726,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12549</ID>
                   <Description>"Tomb of Giants"</Description>
-                  <LastState Value="1" RealAddress="0C810298"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>6</BitStart>
                   <BitLength>1</BitLength>
@@ -15046,7 +14739,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12548</ID>
                   <Description>"Painted World of Ariamis"</Description>
-                  <LastState Value="1" RealAddress="0C810298"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>7</BitStart>
                   <BitLength>1</BitLength>
@@ -15060,7 +14752,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12547</ID>
                   <Description>"Undead Parish"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -15074,7 +14765,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12557</ID>
                   <Description>"Depths"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>1</BitStart>
                   <BitLength>1</BitLength>
@@ -15088,7 +14778,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12556</ID>
                   <Description>"Oolacile Township Dungeon"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>2</BitStart>
                   <BitLength>1</BitLength>
@@ -15102,7 +14791,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12555</ID>
                   <Description>"Chasm of the Abyss"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -15116,7 +14804,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12554</ID>
                   <Description>"Oolacile Township"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>4</BitStart>
                   <BitLength>1</BitLength>
@@ -15130,7 +14817,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12553</ID>
                   <Description>"Oolacile Sanctuary"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -15144,7 +14830,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12552</ID>
                   <Description>"Sanctuary Garden"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>6</BitStart>
                   <BitLength>1</BitLength>
@@ -15158,7 +14843,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12551</ID>
                   <Description>"Darkmoon Tomb"</Description>
-                  <LastState Value="1" RealAddress="0C810299"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>7</BitStart>
                   <BitLength>1</BitLength>
@@ -15172,7 +14856,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12546</ID>
                   <Description>"Chamber of the Princess"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>0</BitStart>
                   <BitLength>1</BitLength>
@@ -15186,7 +14869,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12564</ID>
                   <Description>"Altar of the Gravelord"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>1</BitStart>
                   <BitLength>1</BitLength>
@@ -15200,7 +14882,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12563</ID>
                   <Description>"Sunlight Altar"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>2</BitStart>
                   <BitLength>1</BitLength>
@@ -15214,7 +14895,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12562</ID>
                   <Description>"The Abyss"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>3</BitStart>
                   <BitLength>1</BitLength>
@@ -15228,7 +14908,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12561</ID>
                   <Description>"Anor Londo"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>4</BitStart>
                   <BitLength>1</BitLength>
@@ -15242,7 +14921,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12560</ID>
                   <Description>"Daughter of Chaos"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>5</BitStart>
                   <BitLength>1</BitLength>
@@ -15256,7 +14934,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12559</ID>
                   <Description>"Stone Dragon"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>6</BitStart>
                   <BitLength>1</BitLength>
@@ -15270,7 +14947,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12558</ID>
                   <Description>"Firelink Shrine"</Description>
-                  <LastState Value="1" RealAddress="0C81029A"/>
                   <VariableType>Binary</VariableType>
                   <BitStart>7</BitStart>
                   <BitLength>1</BitLength>
@@ -15302,7 +14978,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>12309</ID>
                   <Description>"pos_ptr"</Description>
-                  <LastState Value="05E02700" RealAddress="05CDEC88"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>4 Bytes</VariableType>
                   <Address>plr_dynamic_base</Address>
@@ -15314,7 +14989,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>90739</ID>
                   <Description>"plr_static_ptr"</Description>
-                  <LastState Value="049225F0" RealAddress="05E015D4"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -15328,7 +15002,6 @@ dealloc(HandMem)
                 <CheatEntry>
                   <ID>90719</ID>
                   <Description>"mp_ptr"</Description>
-                  <LastState Value="05CDEC70" RealAddress="05E011CC"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -15365,7 +15038,6 @@ dealloc(HandMem)
 7701:Bonfire Sitting
 7702:Bonfire Stand Up
 </DropDownList>
-                  <LastState Value="-1" RealAddress="0A59F2A8"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -15396,7 +15068,6 @@ dealloc(HandMem)
 7701:Bonfire Sitting
 7702:Bonfire Stand Up
 </DropDownList>
-                  <LastState Value="-1" RealAddress="0A59FB30"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>000000</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -15707,54 +15378,4 @@ mov [esi+000000D4],00000005
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols>
-    <SymbolEntry>
-      <Name>frameratewarn_aob</Name>
-      <Address>00EFC39A</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>ndur_aob</Name>
-      <Address>00C08B8D</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>sdur_aob</Name>
-      <Address>00C08C4A</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>item_aob</Name>
-      <Address>00C09766</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>speffect_aob</Name>
-      <Address>00D1B693</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>speffect_init</Name>
-      <Address>01BB00CC</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>version1_aob</Name>
-      <Address>00BE6BBA</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>version2_aob</Name>
-      <Address>00BE695D</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>version3_aob</Name>
-      <Address>00BE69E9</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>buildtype1_aob</Name>
-      <Address>00BE6BBA</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>buildtype2_aob</Name>
-      <Address>00BE695D</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>buildtype3_aob</Name>
-      <Address>00BE69E9</Address>
-    </SymbolEntry>
-  </UserdefinedSymbols>
 </CheatTable>
