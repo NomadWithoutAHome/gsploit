@@ -2,6 +2,13 @@
 <CheatTable CheatEngineTableVersion="24">
   <CheatEntries>
     <CheatEntry>
+      <ID>91695</ID>
+      <Description>"by Ashley (Saeshyl) → github.com/saeshyl → twitter.com/saeshyl"</Description>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>453C3A</Color>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+    <CheatEntry>
       <ID>91677</ID>
       <Description>"[Global]"</Description>
       <Options moHideChildren="1"/>
@@ -796,16 +803,16 @@ playspeed_cave:
 push esi
 push ecx
 mov ecx,[ebx+04]
-test ecx,0
+cmp ecx,0
 jle playspeed_init
 mov esi,[plr_dynamic_base]
-test esi,0
+cmp esi,0
 jle playspeed_init
 mov esi,[esi+28]
-test esi,0
+cmp esi,0
 jle playspeed_init
 mov esi,[esi]
-test esi,0
+cmp esi,0
 jle playspeed_init
 cmp ecx,esi
 je playspeed_p
@@ -1133,10 +1140,12 @@ unregistersymbol(queue_aob)
 1801354:Kiln of the First Flame
 1802130:Lord Gwyn
 1802960:Firelink Altar
+1812100:Undead Asylum(Start)
 1812900:Undead Asylum(Prison Cell)
 1812960:Undead Asylum(1st bonfire,courtyard)
 1812961:Undead Asylum(2nd bonfire)
 </DropDownList>
+              <ShowAsSigned>1</ShowAsSigned>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>plr_world_base</Address>
@@ -1145,18 +1154,17 @@ unregistersymbol(queue_aob)
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>113</ID>
+              <ID>12501</ID>
               <Description>"NG"</Description>
               <Color>000000</Color>
-              <VariableType>Byte</VariableType>
+              <VariableType>4 Bytes</VariableType>
               <Address>plr_static_base</Address>
               <Offsets>
                 <Offset>3C</Offset>
-                <Offset>8</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>406</ID>
+              <ID>91700</ID>
               <Description>"Save Slot"</Description>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -1166,7 +1174,7 @@ unregistersymbol(queue_aob)
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>209</ID>
+              <ID>91710</ID>
               <Description>"Indictments"</Description>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -1188,7 +1196,7 @@ unregistersymbol(queue_aob)
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>12501</ID>
+              <ID>91714</ID>
               <Description>"Time Played (ms)"</Description>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -15378,4 +15386,10 @@ mov [esi+000000D4],00000005
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>frameratewarn_aob</Name>
+      <Address> 00EFC39A</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
 </CheatTable>
