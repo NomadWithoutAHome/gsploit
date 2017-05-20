@@ -3,7 +3,7 @@
   <CheatEntries>
     <CheatEntry>
       <ID>91695</ID>
-      <Description>"by Ashley (Saeshyl) → github.com/saeshyl → twitter.com/saeshyl"</Description>
+      <Description>"by Ashley (saeshyl) → github.com/saeshyl → twitter.com/saeshyl"</Description>
       <LastState Value="" RealAddress="00000000"/>
       <Color>453C3A</Color>
       <GroupHeader>1</GroupHeader>
@@ -313,6 +313,7 @@ aobscanmodule(plr_dynamic_aob,DarkSouls.exe,?? ?? ?? ?? 8B ?? ?? 8B ?? ?? ?? 66 
 aobscanmodule(plr_static_aob,DarkSouls.exe,?? ?? ?? ?? 8B ?? ?? 8D ?? ?? ?? ?? ?? 33 ?? 38 ?? ?? ?? 8B ?? 0F ?? ?? C7)
 aobscanmodule(plr_world_aob,DarkSouls.exe,?? ?? ?? ?? 80 ?? ?? ?? ?? ?? ?? 75 ?? 8B ?? 85 ?? 7F)
 aobscanmodule(plr_flags_aob,DarkSouls.exe,?? ?? ?? ?? 38 ?? ?? ?? ?? ?? 74 ?? 8B ?? ?? ?? ?? ?? 8B ?? 3B)
+aobscanmodule(plr_internal_aob,DarkSouls.exe,?? ?? ?? ?? 8B ?? ?? 89 ?? ?? ?? 3B ?? 0F 84 ?? ?? ?? ?? 8D ?? ?? ?? ?? ?? ?? F6)
 aobscanmodule(plr_debug_aob,DarkSouls.exe,?? ?? ?? ?? 8B ?? ?? ?? ?? ?? 85 ?? 75 ?? 8B ?? ?? ?? ?? ?? 8B ?? ?? 85 ?? 0F ?? ?? ?? ?? ?? 85)
 aobscanmodule(followcam_aob,DarkSouls.exe,?? ?? ?? ?? 89 ?? ?? A1 ?? ?? ?? ?? 8B ?? ?? 8B ?? ?? ?? ?? ?? 83 ?? ?? 85)
 aobscanmodule(mp_aob,DarkSouls.exe,?? ?? ?? ?? 0F ?? ?? ?? ?? ?? ?? 8A ?? ?? ?? ?? ?? 8A ?? ?? ?? ?? ?? 88 ?? ?? ?? 8A)
@@ -325,6 +326,8 @@ label(plr_world_base)
 registersymbol(plr_world_base)
 label(plr_flags_base)
 registersymbol(plr_flags_base)
+label(plr_internal_base)
+registersymbol(plr_internal_base)
 label(plr_debug_base)
 registersymbol(plr_debug_base)
 label(followcam_base)
@@ -344,6 +347,9 @@ plr_world_base:
 [plr_flags_aob]:
 plr_flags_base:
 
+[plr_internal_aob]:
+plr_internal_base:
+
 [plr_debug_aob]:
 plr_debug_base:
 
@@ -358,6 +364,7 @@ unregistersymbol(plr_dynamic_base)
 unregistersymbol(plr_static_base)
 unregistersymbol(plr_world_base)
 unregistersymbol(plr_flags_base)
+unregistersymbol(plr_internal_base)
 unregistersymbol(plr_debug_base)
 unregistersymbol(followcam_base)
 unregistersymbol(mp_base)
@@ -404,6 +411,14 @@ unregistersymbol(mp_base)
               <Address>plr_flags_base</Address>
             </CheatEntry>
             <CheatEntry>
+              <ID>91839</ID>
+              <Description>"plr_internal_base"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>plr_internal_base</Address>
+            </CheatEntry>
+            <CheatEntry>
               <ID>12397</ID>
               <Description>"plr_debug_base"</Description>
               <ShowAsHex>1</ShowAsHex>
@@ -425,6 +440,45 @@ unregistersymbol(mp_base)
               <VariableType>4 Bytes</VariableType>
               <Address>mp_base</Address>
             </CheatEntry>
+            <CheatEntry>
+              <ID>90760</ID>
+              <Description>"mp1_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>plr_dynamic_base</Address>
+              <Offsets>
+                <Offset>20</Offset>
+                <Offset>0C</Offset>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>91259</ID>
+              <Description>"mp2_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>plr_dynamic_base</Address>
+              <Offsets>
+                <Offset>40</Offset>
+                <Offset>0C</Offset>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>91467</ID>
+              <Description>"mp3_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>plr_dynamic_base</Address>
+              <Offsets>
+                <Offset>60</Offset>
+                <Offset>0C</Offset>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
@@ -437,7 +491,7 @@ unregistersymbol(mp_base)
           <CheatEntries>
             <CheatEntry>
               <ID>12258</ID>
-              <Description>"[Disable Durability Damage]"</Description>
+              <Description>"[Disable Durability Update]"</Description>
               <LastState/>
               <Color>000000</Color>
               <VariableType>Auto Assembler Script</VariableType>
@@ -914,6 +968,19 @@ unregistersymbol(queue_aob)
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
+              <ID>12343</ID>
+              <Description>"HANDLE"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>plr_dynamic_base</Address>
+              <Offsets>
+                <Offset>4</Offset>
+                <Offset>0</Offset>
+                <Offset>28</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
               <ID>12427</ID>
               <Description>"CHR_ID"</Description>
               <Color>000000</Color>
@@ -995,7 +1062,8 @@ unregistersymbol(queue_aob)
               <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0000000100000000:HUMAN
 0000000400000008:HOLLOW
 0000000200000001:WHITE
-0000001000000002:BLACK
+0000001000000002:RED
+0000000D0000000C:DRAGON
 000000100000000D:COLISEUM
 0000000600000005:MONSTER
 </DropDownList>
@@ -1010,7 +1078,7 @@ unregistersymbol(queue_aob)
               </Offsets>
             </CheatEntry>
             <CheatEntry>
-              <ID>12343</ID>
+              <ID>91838</ID>
               <Description>"CHR_TYPE"</Description>
               <Color>000000</Color>
               <VariableType>4 Bytes</VariableType>
@@ -2421,19 +2489,6 @@ dealloc(distance)
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>90760</ID>
-                  <Description>"mp1_ptr"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>20</Offset>
-                    <Offset>0C</Offset>
-                    <Offset>3C</Offset>
-                  </Offsets>
-                </CheatEntry>
-                <CheatEntry>
                   <ID>91233</ID>
                   <Description>"[Network?]"</Description>
                   <Options moHideChildren="1"/>
@@ -2661,6 +2716,20 @@ dealloc(distance)
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
+                      <ID>91231</ID>
+                      <Description>"HANDLE"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>4</Offset>
+                        <Offset>20</Offset>
+                        <Offset>0C</Offset>
+                        <Offset>3C</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
                       <ID>90759</ID>
                       <Description>"CHR_ID"</Description>
                       <Color>000000</Color>
@@ -2679,7 +2748,7 @@ dealloc(distance)
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
-                      <ID>91231</ID>
+                      <ID>91846</ID>
                       <Description>"HP"</Description>
                       <Color>000000</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -4996,6 +5065,820 @@ dealloc(distance)
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
+                      <ID>91849</ID>
+                      <Description>"[Slots]"</Description>
+                      <Options moHideChildren="1"/>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <GroupHeader>1</GroupHeader>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>91850</ID>
+                          <Description>"Slot 0"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91851</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91852</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91853</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91854</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91855</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91856</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>91857</ID>
+                          <Description>"Slot 1"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91858</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91859</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91860</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91861</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91862</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91863</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>91864</ID>
+                          <Description>"Slot 2"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91865</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91866</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91867</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91868</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91869</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91870</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>91871</ID>
+                          <Description>"Slot 3"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91872</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91873</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91874</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91875</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91876</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91877</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>91878</ID>
+                          <Description>"Slot 4"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91879</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91880</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91881</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91882</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91883</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91884</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>91885</ID>
+                          <Description>"Slot 5"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91886</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91887</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91888</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91889</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91890</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91891</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>91892</ID>
+                          <Description>"Slot 6"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91893</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91894</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91895</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91896</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91897</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91898</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>20</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
                       <ID>91109</ID>
                       <Description>"[Slots]"</Description>
                       <Options moHideChildren="1"/>
@@ -5289,19 +6172,6 @@ dealloc(distance)
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>91259</ID>
-                  <Description>"mp2_ptr"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>40</Offset>
-                    <Offset>0C</Offset>
-                    <Offset>3C</Offset>
-                  </Offsets>
-                </CheatEntry>
-                <CheatEntry>
                   <ID>91260</ID>
                   <Description>"[Network?]"</Description>
                   <Options moHideChildren="1"/>
@@ -5528,6 +6398,20 @@ dealloc(distance)
                   <Color>000000</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
+                    <CheatEntry>
+                      <ID>91847</ID>
+                      <Description>"HANDLE"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>4</Offset>
+                        <Offset>40</Offset>
+                        <Offset>0C</Offset>
+                        <Offset>3C</Offset>
+                      </Offsets>
+                    </CheatEntry>
                     <CheatEntry>
                       <ID>91277</ID>
                       <Description>"CHR_ID"</Description>
@@ -7864,137 +8748,816 @@ dealloc(distance)
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
-                      <ID>91448</ID>
+                      <ID>91899</ID>
                       <Description>"[Slots]"</Description>
                       <Options moHideChildren="1"/>
                       <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
-                          <ID>91449</ID>
-                          <Description>"Slot 0 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>0</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>40</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91900</ID>
+                          <Description>"Slot 0"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91901</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91902</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91903</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91904</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91905</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91906</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91450</ID>
-                          <Description>"Slot 1 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>4</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>40</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91907</ID>
+                          <Description>"Slot 1"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91908</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91909</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91910</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91911</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91912</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91913</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91451</ID>
-                          <Description>"Slot 2 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>8</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>40</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91914</ID>
+                          <Description>"Slot 2"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91915</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91916</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91917</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91918</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91919</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91920</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91452</ID>
-                          <Description>"Slot 3 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>C</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>40</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91921</ID>
+                          <Description>"Slot 3"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91922</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91923</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91924</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91925</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91926</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91927</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91453</ID>
-                          <Description>"Slot 4 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>10</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>40</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91928</ID>
+                          <Description>"Slot 4"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91929</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91930</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91931</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91932</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91933</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91934</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91454</ID>
-                          <Description>"Slot 5 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>14</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>40</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91935</ID>
+                          <Description>"Slot 5"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91936</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91937</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91938</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91939</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91940</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91941</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91455</ID>
-                          <Description>"Slot 6 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>18</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>40</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91942</ID>
+                          <Description>"Slot 6"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91943</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91944</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91945</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91946</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91947</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91948</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>40</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                       </CheatEntries>
                     </CheatEntry>
@@ -8156,19 +9719,6 @@ dealloc(distance)
               <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
-                <CheatEntry>
-                  <ID>91467</ID>
-                  <Description>"mp3_ptr"</Description>
-                  <ShowAsHex>1</ShowAsHex>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>60</Offset>
-                    <Offset>0C</Offset>
-                    <Offset>3C</Offset>
-                  </Offsets>
-                </CheatEntry>
                 <CheatEntry>
                   <ID>91468</ID>
                   <Description>"[Network?]"</Description>
@@ -8396,6 +9946,20 @@ dealloc(distance)
                   <Color>000000</Color>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
+                    <CheatEntry>
+                      <ID>91848</ID>
+                      <Description>"HANDLE"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>4</Offset>
+                        <Offset>60</Offset>
+                        <Offset>0C</Offset>
+                        <Offset>3C</Offset>
+                      </Offsets>
+                    </CheatEntry>
                     <CheatEntry>
                       <ID>91485</ID>
                       <Description>"CHR_ID"</Description>
@@ -10732,137 +12296,816 @@ dealloc(distance)
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
-                      <ID>91656</ID>
+                      <ID>91949</ID>
                       <Description>"[Slots]"</Description>
                       <Options moHideChildren="1"/>
                       <LastState Value="" RealAddress="00000000"/>
                       <GroupHeader>1</GroupHeader>
                       <CheatEntries>
                         <CheatEntry>
-                          <ID>91657</ID>
-                          <Description>"Slot 0 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>0</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>60</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91950</ID>
+                          <Description>"Slot 0"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91951</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91952</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91953</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91954</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91955</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91956</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*0</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91658</ID>
-                          <Description>"Slot 1 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>4</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>60</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91957</ID>
+                          <Description>"Slot 1"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91958</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91959</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91960</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91961</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91962</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91963</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*1</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91659</ID>
-                          <Description>"Slot 2 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>8</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>60</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91964</ID>
+                          <Description>"Slot 2"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91965</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91966</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91967</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91968</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91969</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91970</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*2</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91660</ID>
-                          <Description>"Slot 3 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>C</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>60</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91971</ID>
+                          <Description>"Slot 3"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91972</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91973</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91974</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91975</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91976</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91977</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*3</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91661</ID>
-                          <Description>"Slot 4 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>10</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>60</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91978</ID>
+                          <Description>"Slot 4"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91979</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91980</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91981</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91982</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91983</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91984</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*4</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91662</ID>
-                          <Description>"Slot 5 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>14</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>60</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91985</ID>
+                          <Description>"Slot 5"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91986</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91987</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91988</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91989</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91990</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91991</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*5</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                         <CheatEntry>
-                          <ID>91663</ID>
-                          <Description>"Slot 6 ID"</Description>
-                          <ShowAsSigned>1</ShowAsSigned>
-                          <Color>000000</Color>
-                          <VariableType>4 Bytes</VariableType>
-                          <Address>plr_dynamic_base</Address>
-                          <Offsets>
-                            <Offset>144</Offset>
-                            <Offset>18</Offset>
-                            <Offset>11B0</Offset>
-                            <Offset>18</Offset>
-                            <Offset>28</Offset>
-                            <Offset>60</Offset>
-                            <Offset>0C</Offset>
-                            <Offset>3C</Offset>
-                          </Offsets>
+                          <ID>91992</ID>
+                          <Description>"Slot 6"</Description>
+                          <LastState Value="" RealAddress="00000000"/>
+                          <GroupHeader>1</GroupHeader>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>91993</ID>
+                              <Description>"ID"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>0</Offset>
+                                <Offset>10+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91994</ID>
+                              <Description>"Wei"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>3C</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91995</ID>
+                              <Description>"Speed"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>40</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91996</ID>
+                              <Description>"Duration"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>8</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91997</ID>
+                              <Description>"Loops"</Description>
+                              <ShowAsSigned>1</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>44</Offset>
+                                <Offset>4+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>91998</ID>
+                              <Description>"Total Duration"</Description>
+                              <ShowAsSigned>0</ShowAsSigned>
+                              <Color>000000</Color>
+                              <VariableType>Float</VariableType>
+                              <Address>plr_dynamic_base</Address>
+                              <Offsets>
+                                <Offset>14+60*6</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                                <Offset>28</Offset>
+                                <Offset>60</Offset>
+                                <Offset>0C</Offset>
+                                <Offset>3C</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
                         </CheatEntry>
                       </CheatEntries>
                     </CheatEntry>
@@ -13821,123 +16064,767 @@ dealloc(HandMem)
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>12722</ID>
-                  <Description>"Slot 0 ID"</Description>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>144</Offset>
-                    <Offset>0</Offset>
-                    <Offset>11B0</Offset>
-                    <Offset>18</Offset>
-                    <Offset>28</Offset>
-                    <Offset>0</Offset>
-                    <Offset>28</Offset>
-                  </Offsets>
+                  <ID>91737</ID>
+                  <Description>"Slot 0"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>91787</ID>
+                      <Description>"ID"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>0</Offset>
+                        <Offset>10+60*0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91785</ID>
+                      <Description>"Wei"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>3C</Offset>
+                        <Offset>4+60*0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91784</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>4+60*0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91768</ID>
+                      <Description>"Duration"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>4+60*0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91786</ID>
+                      <Description>"Loops"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>4+60*0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91729</ID>
+                      <Description>"Total Duration"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>14+60*0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12721</ID>
-                  <Description>"Slot 1 ID"</Description>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>144</Offset>
-                    <Offset>4</Offset>
-                    <Offset>11B0</Offset>
-                    <Offset>18</Offset>
-                    <Offset>28</Offset>
-                    <Offset>0</Offset>
-                    <Offset>28</Offset>
-                  </Offsets>
+                  <ID>91788</ID>
+                  <Description>"Slot 1"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>91789</ID>
+                      <Description>"ID"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>0</Offset>
+                        <Offset>10+60*1</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91790</ID>
+                      <Description>"Wei"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>3C</Offset>
+                        <Offset>4+60*1</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91791</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>4+60*1</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91792</ID>
+                      <Description>"Duration"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>4+60*1</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91793</ID>
+                      <Description>"Loops"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>4+60*1</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91794</ID>
+                      <Description>"Total Duration"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>14+60*1</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12712</ID>
-                  <Description>"Slot 2 ID"</Description>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>144</Offset>
-                    <Offset>8</Offset>
-                    <Offset>11B0</Offset>
-                    <Offset>18</Offset>
-                    <Offset>28</Offset>
-                    <Offset>0</Offset>
-                    <Offset>28</Offset>
-                  </Offsets>
+                  <ID>91795</ID>
+                  <Description>"Slot 2"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>91796</ID>
+                      <Description>"ID"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>0</Offset>
+                        <Offset>10+60*2</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91797</ID>
+                      <Description>"Wei"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>3C</Offset>
+                        <Offset>4+60*2</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91798</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>4+60*2</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91799</ID>
+                      <Description>"Duration"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>4+60*2</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91800</ID>
+                      <Description>"Loops"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>4+60*2</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91801</ID>
+                      <Description>"Total Duration"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>14+60*2</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12714</ID>
-                  <Description>"Slot 3 ID"</Description>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>144</Offset>
-                    <Offset>C</Offset>
-                    <Offset>11B0</Offset>
-                    <Offset>18</Offset>
-                    <Offset>28</Offset>
-                    <Offset>0</Offset>
-                    <Offset>28</Offset>
-                  </Offsets>
+                  <ID>91802</ID>
+                  <Description>"Slot 3"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>91803</ID>
+                      <Description>"ID"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>0</Offset>
+                        <Offset>10+60*3</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91804</ID>
+                      <Description>"Wei"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>3C</Offset>
+                        <Offset>4+60*3</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91805</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>4+60*3</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91806</ID>
+                      <Description>"Duration"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>4+60*3</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91807</ID>
+                      <Description>"Loops"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>4+60*3</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91808</ID>
+                      <Description>"Total Duration"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>14+60*3</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12716</ID>
-                  <Description>"Slot 4 ID"</Description>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>144</Offset>
-                    <Offset>10</Offset>
-                    <Offset>11B0</Offset>
-                    <Offset>18</Offset>
-                    <Offset>28</Offset>
-                    <Offset>0</Offset>
-                    <Offset>28</Offset>
-                  </Offsets>
+                  <ID>91809</ID>
+                  <Description>"Slot 4"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>91810</ID>
+                      <Description>"ID"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>0</Offset>
+                        <Offset>10+60*4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91811</ID>
+                      <Description>"Wei"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>3C</Offset>
+                        <Offset>4+60*4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91812</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>4+60*4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91813</ID>
+                      <Description>"Duration"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>4+60*4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91814</ID>
+                      <Description>"Loops"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>4+60*4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91815</ID>
+                      <Description>"Total Duration"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>14+60*4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12718</ID>
-                  <Description>"Slot 5 ID"</Description>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>144</Offset>
-                    <Offset>14</Offset>
-                    <Offset>11B0</Offset>
-                    <Offset>18</Offset>
-                    <Offset>28</Offset>
-                    <Offset>0</Offset>
-                    <Offset>28</Offset>
-                  </Offsets>
+                  <ID>91816</ID>
+                  <Description>"Slot 5"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>91817</ID>
+                      <Description>"ID"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>0</Offset>
+                        <Offset>10+60*5</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91818</ID>
+                      <Description>"Wei"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>3C</Offset>
+                        <Offset>4+60*5</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91819</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>4+60*5</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91820</ID>
+                      <Description>"Duration"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>4+60*5</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91821</ID>
+                      <Description>"Loops"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>4+60*5</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91822</ID>
+                      <Description>"Total Duration"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>14+60*5</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12720</ID>
-                  <Description>"Slot 6 ID"</Description>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <Color>000000</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>plr_dynamic_base</Address>
-                  <Offsets>
-                    <Offset>144</Offset>
-                    <Offset>18</Offset>
-                    <Offset>11B0</Offset>
-                    <Offset>18</Offset>
-                    <Offset>28</Offset>
-                    <Offset>0</Offset>
-                    <Offset>28</Offset>
-                  </Offsets>
+                  <ID>91823</ID>
+                  <Description>"Slot 6"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>91824</ID>
+                      <Description>"ID"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>0</Offset>
+                        <Offset>10+60*6</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91825</ID>
+                      <Description>"Wei"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>3C</Offset>
+                        <Offset>4+60*6</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91826</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                        <Offset>4+60*6</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91827</ID>
+                      <Description>"Duration"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>4+60*6</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91828</ID>
+                      <Description>"Loops"</Description>
+                      <ShowAsSigned>1</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>44</Offset>
+                        <Offset>4+60*6</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91829</ID>
+                      <Description>"Total Duration"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>000000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>plr_dynamic_base</Address>
+                      <Offsets>
+                        <Offset>14+60*6</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>0</Offset>
+                        <Offset>28</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
               </CheatEntries>
             </CheatEntry>
@@ -14064,6 +16951,7 @@ dealloc(HandMem)
                   <ID>12760</ID>
                   <Description>"canInput? (readonly)"</Description>
                   <DropDownList DisplayValueAsItem="1">0:False
+44:True
 45:True
 </DropDownList>
                   <ShowAsSigned>0</ShowAsSigned>
@@ -15094,302 +17982,6 @@ dealloc(HandMem)
         </CheatEntry>
       </CheatEntries>
     </CheatEntry>
-    <CheatEntry>
-      <ID>91678</ID>
-      <Description>"[Research]"</Description>
-      <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
-        <CheatEntry>
-          <ID>12424</ID>
-          <Description>"Change Version Number"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-//code from here to '[DISABLE]' will be used to enable the cheat
-
-// 2C is the version number of debug, 2E is current release
-DARKSOULS.exe+7E73FA:
-mov byte ptr [esp+1C],3C
-
-DARKSOULS.exe+7E719D:
-cmp byte ptr [eax],3C
-
-DARKSOULS.exe+7E7229:
-cmp byte ptr [eax],3C
-
-[DISABLE]
-//code from here till the end of the code will be used to disable the cheat
-DARKSOULS.exe+7E73FA:
-mov byte ptr [esp+1C],2E
-
-DARKSOULS.exe+7E719D:
-cmp byte ptr [eax],2E
-
-DARKSOULS.exe+7E7229:
-cmp byte ptr [eax],2E
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>91675</ID>
-          <Description>"Multiphantom Patch"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-"DARKSOULS.exe"+A63CA6:
-push 00000120//(desired num of phantoms * 0x20)
-
-"DARKSOULS.exe"+A63CBA:
-push 00000120
-
-"DARKSOULS.exe"+A63CC1:
-mov [edi],00000009//number of character slots
-
-//one of these governs red signs, another white
-//(probably some other around governs dragon)
-"DARKSOULS.exe"+9B51B7:
-push 09 //max number of summons before signs dissapear
-"DARKSOULS.exe"+9B51EB:
-push 09 //max number of summons before signs dissapear
-
-//Check that sums up all phantoms
-"DARKSOULS.exe"+9B11BE:
-cmp edx,3f //this is more than number of phantoms, but not sure by how much
-
-//not 100% on these ones
-"DARKSOULS.exe"+92A47C:
-cmp dword ptr [eax+10],09
-"DARKSOULS.exe"+92A465:
-cmp dword ptr [eax+90],09
-
-//I dunno
-alloc(forceshowsigns_newmem,64)
-label(forceshowsigns_returnhere)
-
-forceshowsigns_newmem:
-cmp eax,9
-jmp forceshowsigns_returnhere
-
-"DARKSOULS.exe"+9B1271:
-jmp forceshowsigns_newmem
-nop
-forceshowsigns_returnhere:
-
-"DARKSOULS.exe"+AA2554:
-cmp edx,09
-"DARKSOULS.exe"+AA2569:
-cmp ebx,09
-
-//allocation of the summon_chars_data array put in the info_about_summons struct
-"DARKSOULS.exe"+806848:
-push 2AD0 //16 + 1216*number of character slots
-
-//counter limit for initing all items in summon_chars_data array
-"DARKSOULS.exe"+8068A4:
-cmp esi,09
-"DARKSOULS.exe"+806ADE:
-cmp ebx,2AC0//this is not index, but byte offset. So 1216*number of character slots
-
-//believe this is length of summon_chars_data array, stored in struct
-"DARKSOULS.exe"+8068A9:
-mov [ecx-04],00000009
-
-//bounds checks
-"DARKSOULS.exe"+8037A7:
-cmp edx,09
-"DARKSOULS.exe"+8037BF:
-cmp ecx,2AC0//1216*number of chars
-
-//size of summon_char_types array in info_about_summons struct
-"DARKSOULS.exe"+8068C3:
-push 09
-
-//write to a variable to alert us if inject was done in time
-globalalloc(sucessful_phantomfix,4)
-
-//init rest of the summon_char_types array to zero
-alloc(summon_char_types_newmem,64)
-label(summon_char_types_returnhere)
-summon_char_types_newmem:
-mov [edx+02],bl
-mov [edx+03],bl
-mov [edx+04],bl
-mov [edx+05],bl
-mov [edx+06],bl
-mov [edx+07],bl
-mov [edx+08],bl
-mov [sucessful_phantomfix], 1//success marker
-call DARKSOULS.exe+1629C0
-jmp summon_char_types_returnhere
-
-sucessful_phantomfix:
-dd 0
-
-"DARKSOULS.exe"+8068DF:
-jmp summon_char_types_newmem
-nop
-nop
-nop
-summon_char_types_returnhere:
-
-//hardcoded limits for summon_char_types length (some are &lt;=)
-"DARKSOULS.exe"+802CB7:
-cmp eax,09
-"DARKSOULS.exe"+802C80:
-cmp ecx,08
-"DARKSOULS.exe"+92E7A9:
-cmp ebx,08
-"DARKSOULS.exe"+92E6AF:
-cmp ebx,08
-"DARKSOULS.exe"+92FB73:
-cmp esi,08
-"DARKSOULS.exe"+92FDF1:
-cmp edi,08
-"DARKSOULS.exe"+930431:
-cmp eax,08
-"DARKSOULS.exe"+931C66:
-cmp esi,08
-"DARKSOULS.exe"+928135:
-cmp eax,08
-"DARKSOULS.exe"+92B19A:
-cmp edi,08
-"DARKSOULS.exe"+AE2B8A:
-cmp eax,08
-
-//size to init an array of char pointers to
-"DARKSOULS.exe"+322A00:
-push 09
-
-//number of black signs visible
-//this aob is in memory for the defaults dark souls normally sets. Will not work with we change
-// - BlackSos.[First/Second/Third]LevelRange[Max/Min]
-aobscan(BlackSosNum,05 00 00 00 03 00 00 00 03 00 00 00 05 00 00 00 05 00 00 00 0A 00 00 00 0A 00 00 00)
-BlackSosNum:
- db 08 00 00 00
-
-//something to do with number of allowed invaders? just adding to be safe
-//this aob is in memory for the defaults dark souls normally sets. Will not work with we change
-// - Invade.[First/Second/Third]LevelRange[Max/Min]
-aobscan(InvadeNum,05 00 00 00 FA FF FF FF 08 00 00 00 FC FF FF FF 0A 00 00 00 FE FF FF FF 0C 00 00 00)
-InvadeNum:
- db 08 00 00 00
-
-//max connection tickets
-//Alt AOB: 05 00 00 00 00 00 90 41 00 00 10 42 00 00 A0 40 00 00 20 41 00 00 A0 41
-DARKSOULS.exe+EDE2CC:
- db 08 00 00 00
-
- //Lobby Access Max Count
-"DARKSOULS.exe"+7E9AD1:
-mov [esi+000000D4],00000008
-
-[DISABLE]
-"DARKSOULS.exe"+A63CA6:
-push 00000080
-
-"DARKSOULS.exe"+A63CBA:
-push 00000080
-
-"DARKSOULS.exe"+A63CC1:
-mov [edi],00000004
-
-dealloc(forceshowsigns_newmem)
-"DARKSOULS.exe"+9B51B7:
-push 03
-
-"DARKSOULS.exe"+9B51EB:
-push 02
-
-"DARKSOULS.exe"+9B11BE:
-cmp edx,03
-
-"DARKSOULS.exe"+92A47C:
-cmp dword ptr [eax+10],02
-"DARKSOULS.exe"+92A465:
-cmp dword ptr [eax+90],03
-
-"DARKSOULS.exe"+9B1271:
-cmp eax,[esi+00000168]
-
-"DARKSOULS.exe"+AA2554:
-cmp edx,04
-"DARKSOULS.exe"+AA2569:
-cmp ebx,04
-
-"DARKSOULS.exe"+806848:
-push 00000E50
-
-"DARKSOULS.exe"+8068A4:
-cmp esi,03
-"DARKSOULS.exe"+806ADE:
-cmp ebx,0E40
-
-"DARKSOULS.exe"+8068A9:
-mov [ecx-04],00000003
-
-"DARKSOULS.exe"+8037A7:
-cmp edx,02
-"DARKSOULS.exe"+8037BF:
-cmp ecx,00000E40
-
-"DARKSOULS.exe"+8068C3:
-push 03
-
-unregistersymbol(sucessful_phantomfix)
-dealloc(sucessful_phantomfix)
-
-dealloc(summon_char_types_newmem)
-"DARKSOULS.exe"+8068DF:
-mov [edx+02],bl
-call DARKSOULS.exe+1629C0
-
-"DARKSOULS.exe"+802CB7:
-cmp eax,03
-"DARKSOULS.exe"+802C80:
-cmp ecx,02
-"DARKSOULS.exe"+92E7A9:
-cmp ebx,02
-"DARKSOULS.exe"+92E6AF:
-cmp ebx,02
-"DARKSOULS.exe"+92FB73:
-cmp esi,02
-"DARKSOULS.exe"+92FDF1:
-cmp edi,02
-"DARKSOULS.exe"+930431:
-cmp eax,02
-"DARKSOULS.exe"+931C66:
-cmp esi,02
-"DARKSOULS.exe"+928135:
-cmp eax,02
-"DARKSOULS.exe"+92B19A:
-cmp edi,02
-"DARKSOULS.exe"+AE2B8A:
-cmp eax,02
-
-"DARKSOULS.exe"+322A00:
-push 05
-
-BlackSosNum:
- db 05 00 00 00
-
-InvadeNum:
- db 05 00 00 00
-
-DARKSOULS.exe+EDE2CC:
- db 05 00 00 00
-
-"DARKSOULS.exe"+7E9AD1:
-mov [esi+000000D4],00000005
-</AssemblerScript>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols>
-    <SymbolEntry>
-      <Name>frameratewarn_aob</Name>
-      <Address> 00EFC39A</Address>
-    </SymbolEntry>
-  </UserdefinedSymbols>
+  <UserdefinedSymbols/>
 </CheatTable>
