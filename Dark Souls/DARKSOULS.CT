@@ -3,7 +3,7 @@
   <CheatEntries>
     <CheatEntry>
       <ID>91695</ID>
-      <Description>"by Ashley (saeshyl) → http://ashl.io"</Description>
+      <Description>"by Ashley (saeshyl) → https://ashl.io"</Description>
       <LastState Value="" RealAddress="00000000"/>
       <Color>453C3A</Color>
       <GroupHeader>1</GroupHeader>
@@ -916,6 +916,105 @@ dealloc(playspeed_world)
                 </CheatEntry>
                 <CheatEntry>
                   <ID>12342</ID>
+                  <Description>"World Speed"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>playspeed_world</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>91999</ID>
+              <Description>"[Dark Souls but every time you level it gets faster]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <Color>000000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(playspeed_aob,DarkSouls.exe,8B ?? ?? 8B ?? ?? 85 ?? 74 ?? 8B ?? ?? 85 ?? 74 ?? F3)
+registersymbol(playspeed_aob)
+
+alloc(playspeed_cave,1024,DarkSouls.exe)
+label(playspeed_w)
+label(playspeed_init)
+label(playspeed_exit)
+label(playspeed_ret)
+registersymbol(playspeed_init)
+
+alloc(playspeed_world,4,DarkSouls.exe)
+registersymbol(playspeed_world)
+alloc(playspeed_div,4,DarkSouls.exe)
+registersymbol(playspeed_div)
+
+playspeed_world:
+dd (float)1
+
+playspeed_div:
+dd (float)10
+
+playspeed_cave:
+push esi
+push ecx
+mov ecx,[ebx+04]
+cmp ecx,0
+jle playspeed_init
+mov esi,[plr_dynamic_base]
+cmp esi,0
+jle playspeed_init
+mov esi,[esi+28]
+cmp esi,0
+jle playspeed_init
+mov esi,[esi]
+cmp esi,0
+jle playspeed_init
+cmp ecx,esi
+jne playspeed_w
+jmp playspeed_init
+
+playspeed_w:
+mov ecx,[plr_static_base]
+cmp ecx,0
+jle playspeed_init
+mov ecx,[ecx+08]
+cmp ecx,0
+jle playspeed_init
+mov ecx,[ecx+88]
+cmp ecx,0
+jle playspeed_init
+cvtsi2ss xmm0,ecx
+divss xmm0,[playspeed_div]
+movss [playspeed_world],xmm0
+jmp playspeed_init
+
+playspeed_init:
+readmem(playspeed_aob,6) { mov edx,[ebx+04] mov eax,[edx+28] }
+jmp playspeed_exit
+
+playspeed_exit:
+pop esi
+pop ecx
+jmp playspeed_ret
+
+playspeed_aob:
+jmp playspeed_cave
+db 90
+playspeed_ret:
+
+[disable]
+playspeed_aob:
+readmem(playspeed_init,6)
+
+unregistersymbol(playspeed_aob)
+unregistersymbol(playspeed_init)
+unregistersymbol(playspeed_player)
+unregistersymbol(playspeed_world)
+dealloc(playspeed_cave)
+dealloc(playspeed_player)
+dealloc(playspeed_world)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>92001</ID>
                   <Description>"World Speed"</Description>
                   <VariableType>Float</VariableType>
                   <Address>playspeed_world</Address>
