@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="19">
+<CheatTable CheatEngineTableVersion="24">
   <CheatEntries>
     <CheatEntry>
       <ID>70</ID>
@@ -11,7 +11,6 @@
         <CheatEntry>
           <ID>75</ID>
           <Description>"Client Build"</Description>
-          <LastState RealAddress="00A30BE6"/>
           <VariableType>String</VariableType>
           <Length>36</Length>
           <Unicode>0</Unicode>
@@ -21,7 +20,6 @@
         <CheatEntry>
           <ID>79</ID>
           <Description>"Realm Name"</Description>
-          <LastState RealAddress="00C79B9E"/>
           <VariableType>String</VariableType>
           <Length>32</Length>
           <Unicode>0</Unicode>
@@ -31,7 +29,6 @@
         <CheatEntry>
           <ID>80</ID>
           <Description>"Realm Address:Port"</Description>
-          <LastState RealAddress="00C79C9E"/>
           <VariableType>String</VariableType>
           <Length>20</Length>
           <Unicode>0</Unicode>
@@ -41,7 +38,6 @@
         <CheatEntry>
           <ID>77</ID>
           <Description>"AccountName"</Description>
-          <LastState RealAddress="00C79620"/>
           <VariableType>String</VariableType>
           <Length>32</Length>
           <Unicode>0</Unicode>
@@ -51,7 +47,6 @@
         <CheatEntry>
           <ID>81</ID>
           <Description>"PlayerName"</Description>
-          <LastState RealAddress="00C79D18"/>
           <VariableType>String</VariableType>
           <Length>12</Length>
           <Unicode>0</Unicode>
@@ -68,7 +63,6 @@
             <CheatEntry>
               <ID>97</ID>
               <Description>"View Distance"</Description>
-              <LastState Value="791.666687" RealAddress="00CD7748"/>
               <VariableType>Float</VariableType>
               <Address>Wow.exe+8D7748</Address>
             </CheatEntry>
@@ -84,49 +78,42 @@
             <CheatEntry>
               <ID>11</ID>
               <Description>"PlayerGUID"</Description>
-              <LastState Value="1" RealAddress="00CA1238"/>
               <VariableType>4 Bytes</VariableType>
               <Address>CA1238</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>12</ID>
               <Description>"TargetGUID"</Description>
-              <LastState Value="0" RealAddress="00BD07B0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>BD07B0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>14</ID>
               <Description>"FocusGUID"</Description>
-              <LastState Value="0" RealAddress="00BD07D0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>BD07D0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>13</ID>
               <Description>"MouseoverGUID"</Description>
-              <LastState Value="0" RealAddress="00BD07A0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>BD07A0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>17</ID>
               <Description>"PetGUID"</Description>
-              <LastState Value="0" RealAddress="00C234D0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>C234D0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>15</ID>
               <Description>"FollowGUID"</Description>
-              <LastState Value="0" RealAddress="00CA11F8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>CA11F8</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>16</ID>
               <Description>"InteractGUID"</Description>
-              <LastState Value="0" RealAddress="00BD07A8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>BD07A8</Address>
             </CheatEntry>
@@ -151,7 +138,6 @@
             <CheatEntry>
               <ID>30</ID>
               <Description>"GUID"</Description>
-              <LastState Value="1" RealAddress="24640498"/>
               <VariableType>8 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -165,7 +151,6 @@
             <CheatEntry>
               <ID>59</ID>
               <Description>"Type"</Description>
-              <LastState Value="25" RealAddress="246404A0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -179,7 +164,6 @@
             <CheatEntry>
               <ID>58</ID>
               <Description>"Entry"</Description>
-              <LastState Value="0" RealAddress="246404A4"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -193,7 +177,6 @@
             <CheatEntry>
               <ID>57</ID>
               <Description>"Scale"</Description>
-              <LastState Value="1" RealAddress="246404A8"/>
               <VariableType>Float</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -216,7 +199,6 @@
             <CheatEntry>
               <ID>46</ID>
               <Description>"UnitBytes0"</Description>
-              <LastState Value="00000B08" RealAddress="246404F4"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
@@ -231,7 +213,6 @@
             <CheatEntry>
               <ID>47</ID>
               <Description>"Health"</Description>
-              <LastState Value="27437" RealAddress="246404F8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -245,7 +226,6 @@
             <CheatEntry>
               <ID>48</ID>
               <Description>"Mana"</Description>
-              <LastState Value="6437" RealAddress="246404FC"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -259,7 +239,6 @@
             <CheatEntry>
               <ID>49</ID>
               <Description>"Rage"</Description>
-              <LastState Value="0" RealAddress="24640500"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -273,7 +252,6 @@
             <CheatEntry>
               <ID>50</ID>
               <Description>"Energy"</Description>
-              <LastState Value="100" RealAddress="24640508"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -287,7 +265,6 @@
             <CheatEntry>
               <ID>51</ID>
               <Description>"MaxHealth"</Description>
-              <LastState Value="27437" RealAddress="24640518"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -301,7 +278,6 @@
             <CheatEntry>
               <ID>52</ID>
               <Description>"MaxMana"</Description>
-              <LastState Value="6456" RealAddress="2464051C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -315,7 +291,6 @@
             <CheatEntry>
               <ID>53</ID>
               <Description>"MaxRage"</Description>
-              <LastState Value="1000" RealAddress="24640520"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -329,7 +304,6 @@
             <CheatEntry>
               <ID>54</ID>
               <Description>"MaxEnergy"</Description>
-              <LastState Value="100" RealAddress="24640528"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -343,7 +317,6 @@
             <CheatEntry>
               <ID>55</ID>
               <Description>"DisplayID"</Description>
-              <LastState Value="1478" RealAddress="246405A4"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -357,7 +330,6 @@
             <CheatEntry>
               <ID>56</ID>
               <Description>"NativeDisplayID"</Description>
-              <LastState Value="1478" RealAddress="246405A8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -380,7 +352,6 @@
             <CheatEntry>
               <ID>63</ID>
               <Description>"DuelArbiter"</Description>
-              <LastState Value="0" RealAddress="246406E8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -394,7 +365,6 @@
             <CheatEntry>
               <ID>67</ID>
               <Description>"Flags"</Description>
-              <LastState Value="2048" RealAddress="246406F0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -408,7 +378,6 @@
             <CheatEntry>
               <ID>68</ID>
               <Description>"GuildID"</Description>
-              <LastState Value="0" RealAddress="246406F4"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -422,7 +391,6 @@
             <CheatEntry>
               <ID>69</ID>
               <Description>"GuildRank"</Description>
-              <LastState Value="0" RealAddress="246406F8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -436,7 +404,6 @@
             <CheatEntry>
               <ID>66</ID>
               <Description>"PlayerBytes"</Description>
-              <LastState Value="00000000" RealAddress="246406FC"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
@@ -451,7 +418,6 @@
             <CheatEntry>
               <ID>64</ID>
               <Description>"PlayerBytes2"</Description>
-              <LastState Value="00000000" RealAddress="24640700"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
@@ -466,7 +432,6 @@
             <CheatEntry>
               <ID>65</ID>
               <Description>"PlayerBytes3"</Description>
-              <LastState Value="1" RealAddress="24640704"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -480,7 +445,6 @@
             <CheatEntry>
               <ID>72</ID>
               <Description>"VisibleItem1EntryId"</Description>
-              <LastState Value="31968" RealAddress="24640904"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -494,7 +458,6 @@
             <CheatEntry>
               <ID>73</ID>
               <Description>"VisibleItem2EntryId"</Description>
-              <LastState Value="51357" RealAddress="2464090C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -508,7 +471,6 @@
             <CheatEntry>
               <ID>74</ID>
               <Description>"ChosenTitle"</Description>
-              <LastState Value="0" RealAddress="2464099C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -531,7 +493,6 @@
             <CheatEntry>
               <ID>34</ID>
               <Description>"XYZ"</Description>
-              <LastState Value="7D 51 83 45 BE 26 B4 43 58 41 6A 42" RealAddress="2463F2D8"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>Array of byte</VariableType>
               <ByteLength>12</ByteLength>
@@ -547,7 +508,6 @@
             <CheatEntry>
               <ID>35</ID>
               <Description>"X"</Description>
-              <LastState Value="4202.186035" RealAddress="2463F2D8"/>
               <VariableType>Float</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -561,7 +521,6 @@
             <CheatEntry>
               <ID>36</ID>
               <Description>"Y"</Description>
-              <LastState Value="58.56381226" RealAddress="2463F2E0"/>
               <VariableType>Float</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -575,7 +534,6 @@
             <CheatEntry>
               <ID>37</ID>
               <Description>"Z"</Description>
-              <LastState Value="360.3026733" RealAddress="2463F2DC"/>
               <VariableType>Float</VariableType>
               <Address>Wow.exe+399804</Address>
               <Offsets>
@@ -600,7 +558,6 @@
         <CheatEntry>
           <ID>84</ID>
           <Description>"XYZ"</Description>
-          <LastState Value="C5 A3 83 45 86 34 B6 43 B7 16 85 42" RealAddress="1AA6F908"/>
           <ShowAsHex>1</ShowAsHex>
           <VariableType>Array of byte</VariableType>
           <ByteLength>12</ByteLength>
@@ -613,7 +570,6 @@
         <CheatEntry>
           <ID>88</ID>
           <Description>"X"</Description>
-          <LastState Value="4212.471191" RealAddress="1AA6F908"/>
           <VariableType>Float</VariableType>
           <Address>B7436C</Address>
           <Offsets>
@@ -624,7 +580,6 @@
         <CheatEntry>
           <ID>85</ID>
           <Description>"Y"</Description>
-          <LastState Value="66.54436493" RealAddress="1AA6F910"/>
           <VariableType>Float</VariableType>
           <Address>B7436C</Address>
           <Offsets>
@@ -635,7 +590,6 @@
         <CheatEntry>
           <ID>86</ID>
           <Description>"Z"</Description>
-          <LastState Value="364.4103394" RealAddress="1AA6F90C"/>
           <VariableType>Float</VariableType>
           <Address>B7436C</Address>
           <Offsets>
@@ -651,7 +605,6 @@
       <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">74:Disabled
 75:Enabled
 </DropDownList>
-      <LastState Value="74" RealAddress="0075E439"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>Byte</VariableType>
       <Address>Wow.exe+35E439</Address>
@@ -662,7 +615,6 @@
       <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">84:Enabled
 85:Disabled
 </DropDownList>
-      <LastState Value="84" RealAddress="007A50D0"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>Byte</VariableType>
       <Address>Wow.exe+3A50D0</Address>
@@ -673,21 +625,47 @@
       <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">75:Enabled
 74:Disabled
 </DropDownList>
-      <LastState Value="75" RealAddress="007AE7EA"/>
       <ShowAsHex>1</ShowAsHex>
       <VariableType>Byte</VariableType>
       <Address>Wow.exe+3AE7EA</Address>
     </CheatEntry>
     <CheatEntry>
-      <ID>94</ID>
-      <Description>"Protected Lua Functions"</Description>
-      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">74:Locked
-EB:Unlocked
-</DropDownList>
-      <LastState Value="74" RealAddress="005191D2"/>
+      <ID>103</ID>
+      <Description>"Unprotect Lua"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+Wow.exe+41922C:
+db EB
+
+Wow.exe+41AE2A:
+db EB
+
+[disable]
+Wow.exe+41922C:
+db 75
+
+Wow.exe+41AE2A:
+db 75
+
+{
+Wow.exe+94139C
+stores address for blocked lua?
+
+Wow.exe+40DA72 - call Wow.exe+40CCE0
+    Wow.exe+40D059 - call Wow.exe+1191C0
+    Wow.exe+40D061 - test eax,eax // 1 = non-protected function, 0 = protected function
+    Wow.exe+40D063 - je Wow.exe+40D249
+}
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>104</ID>
+      <Description>"?"</Description>
       <ShowAsHex>1</ShowAsHex>
-      <VariableType>Byte</VariableType>
-      <Address>Wow.exe+1191D2</Address>
+      <VariableType>4 Bytes</VariableType>
+      <Address>Wow.exe+94139C</Address>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols/>
