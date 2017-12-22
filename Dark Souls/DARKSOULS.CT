@@ -14688,83 +14688,98 @@ dealloc(hitem_ptr)
               </CheatEntries>
             </CheatEntry>
             <CheatEntry>
-              <ID>12450</ID>
-              <Description>"[Item Pickup]"</Description>
+              <ID>95290</ID>
+              <Description>"[DropItem]"</Description>
               <Options moHideChildren="1"/>
               <LastState/>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>[enable]
-aobscanmodule(pickup_aob,DarkSouls.exe,8B ?? ?? ?? 8B ?? 81 ?? FF FF FF 0F 81 ?? FF FF FF 0F)
-registersymbol(pickup_aob)
+aobscanmodule(DropItemLua,DarkSouls.exe,8B ?? ?? ?? ?? ?? 83 ?? ?? 81 ?? ?? ?? ?? ?? 74 ?? 8B ?? C1)
+registersymbol(DropItemLua)
 
-alloc(pickup_cave,1024,DarkSouls.exe)
-label(pickup_init)
-label(pickup_exit)
-label(pickup_ret)
-registersymbol(pickup_init)
+aobscanmodule(dropitem_base_aob,DarkSouls.exe,?? ?? ?? ?? 83 ?? ?? D9 ?? ?? ?? D9 ?? ?? 8D ?? ?? ?? 6A ?? 8B ?? E8)
+aobscanmodule(item_dbg_base_aob,DarkSouls.exe,?? ?? ?? ?? 0F 84 ?? ?? ?? ?? 0F 57 ?? 83 ?? ?? 0F 2F ?? C7 ?? ?? ?? FFFFFFFF)
 
-alloc(pickup_item,12,DarkSouls.exe)
-registersymbol(pickup_item)
+label(dropitem_base)
+registersymbol(dropitem_base)
+label(item_dbg_base)
+registersymbol(item_dbg_base)
 
-pickup_item:
-dq 0
+[dropitem_base_aob]:
+dropitem_base:
 
-pickup_item+8:
-dd 1
-
-pickup_cave:
-cmp [pickup_item+04],0
-jle pickup_init
-mov ebx,[pickup_item]
-or ebx,[pickup_item+04]
-mov [esp+20],ebx
-mov ebx,[pickup_item+08]
-mov [esp+28],ebx
-mov [pickup_item],0
-mov [pickup_item+04],0
-mov [pickup_item+08],1
-jmp pickup_init
-
-pickup_init:
-readmem(pickup_aob,6)
-{
-mov ebx,[esp+20]
-mov ebp,ebx
-}
-jmp pickup_exit
-
-pickup_exit:
-jmp pickup_ret
-
-pickup_aob:
-jmp pickup_cave
-db 90
-pickup_ret:
+[item_dbg_base_aob]:
+item_dbg_base:
 
 [disable]
-pickup_aob:
-readmem(pickup_init,6)
-
-unregistersymbol(pickup_aob)
-unregistersymbol(pickup_init)
-unregistersymbol(pickup_item)
-dealloc(pickup_cave)
-dealloc(pickup_item)
+unregistersymbol(DropItemLua)
+unregistersymbol(dropitem_base)
+unregistersymbol(item_dbg_base)
 
 </AssemblerScript>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>12451</ID>
-                  <Description>"Item"</Description>
+                  <ID>95278</ID>
+                  <Description>"Category"</Description>
                   <ShowAsHex>1</ShowAsHex>
-                  <VariableType>8 Bytes</VariableType>
-                  <Address>pickup_item</Address>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>item_dbg_base</Address>
+                  <Offsets>
+                    <Offset>828</Offset>
+                  </Offsets>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>12452</ID>
-                  <Description>"Quantity"</Description>
+                  <ID>95279</ID>
+                  <Description>"Id"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>1</ShowAsSigned>
                   <VariableType>4 Bytes</VariableType>
-                  <Address>pickup_item+8</Address>
+                  <Address>item_dbg_base</Address>
+                  <Offsets>
+                    <Offset>82C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>95280</ID>
+                  <Description>"Owner"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>item_dbg_base</Address>
+                  <Offsets>
+                    <Offset>830</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>95281</ID>
+                  <Description>"Quantity"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>item_dbg_base</Address>
+                  <Offsets>
+                    <Offset>834</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>95282</ID>
+                  <Description>"CreateDrop"</Description>
+                  <LastState/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[enable]
+alloc(CreateDrop,1024,DarkSouls.exe)
+
+CreateDrop:
+mov eax,[dropitem_base]
+push eax
+call DropItemLua
+ret
+
+createthread(CreateDrop)
+
+[disable]
+dealloc(CreateDrop)
+
+</AssemblerScript>
                 </CheatEntry>
               </CheatEntries>
             </CheatEntry>
@@ -28638,7 +28653,7 @@ unregistersymbol(world_obj_base)
                           <ID>94490</ID>
                           <Description>"4"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" Activated="1" RealAddress="00000000"/>
+                          <LastState Value="" RealAddress="00000000"/>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
                             <CheatEntry>
@@ -31041,18 +31056,4 @@ dealloc(buildtype3_initial)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols>
-    <SymbolEntry>
-      <Name>rot_aob</Name>
-      <Address> 00EBD80F</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>rot_init</Name>
-      <Address>17A40044</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>insufficient_framerate_aob</Name>
-      <Address> 00EFC39F</Address>
-    </SymbolEntry>
-  </UserdefinedSymbols>
 </CheatTable>
