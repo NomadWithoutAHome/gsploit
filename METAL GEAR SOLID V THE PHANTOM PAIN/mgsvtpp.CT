@@ -6107,7 +6107,6 @@ unregistersymbol(mbs_FormerStaffAOB)
                       <DropDownList DisplayValueAsItem="1">10000000:AHA
 100000000:oHo
 </DropDownList>
-                      <LastState Value="" RealAddress="00000000"/>
                       <ShowAsHex>1</ShowAsHex>
                       <Color>FF00FF</Color>
                       <VariableType>Custom</VariableType>
@@ -6243,7 +6242,6 @@ unregistersymbol(mbs_SMemberAOB)
                       <DropDownList DisplayValueAsItem="1">10000000:AHA
 100000000:oHo
 </DropDownList>
-                      <LastState Value="" RealAddress="00000000"/>
                       <ShowAsHex>1</ShowAsHex>
                       <Color>FF00FF</Color>
                       <VariableType>Custom</VariableType>
@@ -6359,7 +6357,7 @@ A6D15F80:Ziang Tan
                           <ID>337</ID>
                           <Description>"Seed"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
+                          <LastState Value="" Activated="1" RealAddress="00000000"/>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
                             <CheatEntry>
@@ -6713,7 +6711,7 @@ E9:Wild Stallion
                           <ID>345</ID>
                           <Description>"Header (Stats)"</Description>
                           <Options moHideChildren="1"/>
-                          <LastState Value="" RealAddress="00000000"/>
+                          <LastState Value="" Activated="1" RealAddress="00000000"/>
                           <GroupHeader>1</GroupHeader>
                           <CheatEntries>
                             <CheatEntry>
@@ -15152,7 +15150,7 @@ mgsvtpp.exe+3A63FC4 - CC                    - int 3
         <CheatEntry>
           <ID>57795</ID>
           <Description>"Espionage Points"</Description>
-          <LastState Value="1495555" RealAddress="09632884"/>
+          <LastState Value="1492366" RealAddress="09632884"/>
           <Color>000000</Color>
           <VariableType>4 Bytes</VariableType>
           <Address>mgsvtpp.exe+2BC5EA0</Address>
@@ -15164,26 +15162,219 @@ mgsvtpp.exe+3A63FC4 - CC                    - int 3
           <ID>57928</ID>
           <Description>"[Model]"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>57929</ID>
-              <Description>"Uniform Base"</Description>
+              <ID>57932</ID>
+              <Description>"Face"</Description>
+              <DropDownList DisplayValueAsItem="1">0:Default
+1:Snake
+65537:Snake Bandana
+550:Soldier Balaclava (2 Cutouts)
+551:Soldier Balaclava (1 Cutout)
+552:Soldier Helmet (Male)
+555:Soldier Helmet (Female)
+558:Soldier Gas Mask (Male)
+559:Soldier Gas Mask (Female)
+560:Soldier Gas Mask Reinforced (Male)
+560:Soldier Gas Mask Helmet (Male)
+602:Spying Harrier
+613:Zoologist
+618:Arms Dealer
+623:Bloody Soldier
+627:Palitz
+628:Glaz
+636:Headshot Soldier
+646:Master Gunsmith
+680:Emerald Hound
+681:Viridian Hound
+682:Garnet Canine
+683:Crimson Canine
+684:Gold Fox
+685:Amber Fox
+686:Ivory Skull
+687:Silver Skull
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>ec</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>58048</ID>
+              <Description>"Gender"</Description>
+              <DropDownList DisplayValueAsItem="1">0:Snake
+1:Male Soldier
+2:Female Soldier
+3:Avatar
+</DropDownList>
               <VariableType>Byte</VariableType>
               <Address>player_ptr</Address>
               <Offsets>
-                <Offset>e8</Offset>
+                <Offset>eb</Offset>
                 <Offset>10</Offset>
               </Offsets>
             </CheatEntry>
             <CheatEntry>
               <ID>57930</ID>
-              <Description>"Uniform Variant"</Description>
+              <Description>"Uniform"</Description>
+              <DropDownList DisplayValueAsItem="1">0:Olive Drab
+1:Splitter
+2:Square
+3:Tiger Stripe
+4:Golden Tiger
+5:Desert Fox
+6:Woodland
+7:Wetwork
+8:Gray Urban
+9:Blue Urban
+10:Apd
+11:?
+12:?
+13:Black Ocelot
+14:Sv-Sneaking Suit
+15:Sneaking Suit
+16:Battle Dress
+17:Parasite Suit
+18:?
+19:Leather Jacket
+20:Solid Snake
+21:Cyborg Ninja
+22:Raiden
+23:Hospital
+24:Naked (Gold)
+25:Naked (Silver)
+26:Animals
+27:Head + Torso
+28:Fatigues (Ns) (Standard)
+29:Fatigues (Ns) (Naked)
+30:Sneaking Suit (Ns)
+31:Tuxedo
+32:Jumpsuit (Eva) (Standard)
+33:Jumpsuit (Eva) (Naked)
+34:Sneaking Suit (Tb) (Standard)
+35:Sneaking Suit (Tb) (Naked)
+36:Woodland Fleck
+37:Ambush
+38:Solum
+39:Dead Leaf
+40:Lichen
+41:Stone
+42:Parasite Mist
+43:Old Rose
+44:Brick Red
+45:Iron Blue
+46:Steel Grey
+47:Tselinoyarsk
+48:Night Splitter
+49:Rain
+50:Green Tiger
+51:Birch Leaf
+52:Desert Ambush
+53:Dark Leaf Fleck
+54:Night Bush
+55:Grass
+56:Ripple
+57:Citrullus
+58:Digital Bush
+59:Zebra
+60:Desert Sand
+61:Steel Khaki
+62:Dark Rubber
+63:Gray
+64:Camouflage Yellow
+65:Camouflage Green
+66:Iron Green
+67:Light Rubber
+68:Red Rust
+69:Steel Green
+70:Steel Orange
+71:Mud
+72:Steel Blue
+73:Dark Rust
+74:Citrullus 2t
+75:Gold Tiger 2t
+76:Birch Leaf 2t
+77:Stone 2t
+78:Khaki Urban 2t
+79:Swimsuit (Olv Drb)
+80:Swimsuit (Tgr St)
+81:Swimsuit (Gld Tgr)
+82:Swimsuit (Dsrt Fx)
+83:Swimsuit (Wet Wrk)
+84:Swimsuit (Splittr)
+85:Swimsuit (Prst Mst)
+86:Swimsuit (Old Rs)
+87:Swimsuit (Camo Gr)
+88:Swimsuit (Iron Bl)
+89:Swimsuit (Red Rst)
+90:Swimsuit (Mud)
+91:Gob Suit (Olv Drb)
+92:Gob Suit (Tgr St)
+93:Gob Suit (Gld Tgr)
+94:Gob Suit (Dsrt Fx)
+95:Gob Suit (Wet Wrk)
+96:Gob Suit (Splittr)
+97:Gob Suit (Prst Mst)
+98:Gob Suit (Old Rs)
+99:Gob Suit (Camo Gr)
+100:Gob Suit (Iron Bl)
+101:Gob Suit (Red Rst)
+102:Gob Suit (Mud)
+103:Meg Suit (Olv Drb)
+104:Meg Suit (Tgr St)
+105:Meg Suit (Gld Tgr)
+106:Meg Suit (Dsrt Fx)
+107:Meg Suit (Wet Wrk)
+108:Meg Suit (Splittr)
+109:Meg Suit (Prst Mst)
+110:Meg Suit (Old Rs)
+111:Meg Suit (Camo Gr)
+112:Meg Suit (Iron Bl)
+113:Meg Suit (Red Rst)
+114:Meg Suit (Mud)
+</DropDownList>
               <VariableType>Byte</VariableType>
               <Address>player_ptr</Address>
               <Offsets>
                 <Offset>e9</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57929</ID>
+              <Description>"Model"</Description>
+              <DropDownList DisplayValueAsItem="1">0:Camo Normal
+1:Camo Scarf
+2:Sv-Sneaking Suit
+3:Hospital
+4:MGS1 Snake
+5:MGS2 Gray Fox
+6:Raiden
+7:Camo Naked
+8:Sneaking Suit
+9:Battle Dress
+10:Parasite Suit
+11:Leather Jacket
+12:Naked (Gold)
+13:Naked (Silver)
+14:Head + Torso
+15:Fatigues (Ns) (Normal)
+16:Fatigues (Ns) (Naked)
+17:Sneaking Suit (Ns)
+18:Tuxedo
+19:Eva Jumpsuit (Normal)
+20:Eva Jumpsuit (Naked)
+21:Sneaking Suit (Tb) (Normal)
+22:Sneaking Suit (Tb) (Naked)
+</DropDownList>
+              <VariableType>Byte</VariableType>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>e8</Offset>
                 <Offset>10</Offset>
               </Offsets>
             </CheatEntry>
@@ -15194,16 +15385,6 @@ mgsvtpp.exe+3A63FC4 - CC                    - int 3
               <Address>player_ptr</Address>
               <Offsets>
                 <Offset>ea</Offset>
-                <Offset>10</Offset>
-              </Offsets>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>57932</ID>
-              <Description>"Gender"</Description>
-              <VariableType>Byte</VariableType>
-              <Address>player_ptr</Address>
-              <Offsets>
-                <Offset>eb</Offset>
                 <Offset>10</Offset>
               </Offsets>
             </CheatEntry>
