@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="24">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1093</ID>
+      <Description>"Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[enable]
+aobscanmodule(ent_base_aob,VRChat.exe,48 ?? ?? ?? C3 CC 48 ?? ?? ?? ?? 57 48 ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? ?? 48 ?? ?? ?? 8B ?? 45)
+registersymbol(ent_base_aob)
+
+alloc(ent_base_cave,1024,VRChat.exe)
+label(ent_base_init)
+label(ent_base_exit)
+label(ent_base_ret)
+registersymbol(ent_base_init)
+
+alloc(ent_base,8,VRChat.exe)
+registersymbol(ent_base)
+alloc(plr_base,8,VRChat.exe)
+registersymbol(plr_base)
+
+ent_base:
+dd 0
+
+plr_base:
+dd 0
+
+ent_base_cave:
+push rax
+push rdx
+mov rax,[rcx]
+mov [ent_base],rax
+mov rax,8
+mov rdx,9
+mul rdx
+add rax,rcx
+mov rax,[rax]
+mov [plr_base],rax
+pop rdx
+pop rax
+jmp ent_base_init
+
+ent_base_init:
+readmem(ent_base_aob,5) { mov rax,[rcx+rax*8] ret }
+jmp ent_base_exit
+
+ent_base_exit:
+jmp ent_base_ret
+
+ent_base_aob:
+jmp ent_base_cave
+ent_base_ret:
+
+[disable]
+ent_base_aob:
+readmem(ent_base_init,5)
+
+unregistersymbol(ent_base_aob)
+unregistersymbol(ent_base_init)
+unregistersymbol(ent_base)
+unregistersymbol(plr_base)
+dealloc(ent_base_cave)
+dealloc(ent_base)
+dealloc(plr_base)
+
+{
+VRChat.exe+19F4B0 - 48 63 C1              - movsxd  rax,ecx
+VRChat.exe+19F4B3 - 48 8D 0D 86C32801     - lea rcx,[VRChat.exe+142B840]
+&gt;&gt;&gt; VRChat.exe+19F4BA - 48 8B 04 C1           - mov rax,[rcx+rax*8]
+VRChat.exe+19F4BE - C3                    - ret
+VRChat.exe+19F4BF - CC                    - int 3
+VRChat.exe+19F4C0 - 48 89 74 24 08        - mov [rsp+08],rsi
+VRChat.exe+19F4C5 - 57                    - push rdi
+VRChat.exe+19F4C6 - 48 83 EC 20           - sub rsp,20
+VRChat.exe+19F4CA - 48 8D 05 EF6FF300     - lea rax,[VRChat.exe+10D64C0]
+VRChat.exe+19F4D1 - 48 8B F1              - mov rsi,rcx
+VRChat.exe+19F4D4 - 48 83 C1 18           - add rcx,18
+VRChat.exe+19F4D8 - 48 89 41 E8           - mov [rcx-18],rax
+VRChat.exe+19F4DC - 8B FA                 - mov edi,edx
+VRChat.exe+19F4DE - 45 33 C0              - xor r8d,r8d
+VRChat.exe+19F4E1 - 33 D2                 - xor edx,edx
+VRChat.exe+19F4E3 - 48 C7 41 10 00000000  - mov [rcx+10],00000000
+}
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1094</ID>
+          <Description>"ent_base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>8 Bytes</VariableType>
+          <Address>ent_base</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1096</ID>
+          <Description>"plr_base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>8 Bytes</VariableType>
+          <Address>plr_base</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1106</ID>
+          <Description>"[Position]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>1089</ID>
+              <Description>"XYZ"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>12</ByteLength>
+              <Address>plr_base</Address>
+              <Offsets>
+                <Offset>140</Offset>
+                <Offset>60</Offset>
+                <Offset>30</Offset>
+                <Offset>170</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1092</ID>
+              <Description>"X"</Description>
+              <VariableType>Float</VariableType>
+              <Address>plr_base</Address>
+              <Offsets>
+                <Offset>140</Offset>
+                <Offset>60</Offset>
+                <Offset>30</Offset>
+                <Offset>170</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1090</ID>
+              <Description>"Y"</Description>
+              <VariableType>Float</VariableType>
+              <Address>plr_base</Address>
+              <Offsets>
+                <Offset>148</Offset>
+                <Offset>60</Offset>
+                <Offset>30</Offset>
+                <Offset>170</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1091</ID>
+              <Description>"Z"</Description>
+              <VariableType>Float</VariableType>
+              <Address>plr_base</Address>
+              <Offsets>
+                <Offset>144</Offset>
+                <Offset>60</Offset>
+                <Offset>30</Offset>
+                <Offset>170</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1160</ID>
+              <Description>"[WeirdPos]"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(plr_pos_aob,VRChat.exe,48 ?? ?? 48 ?? ?? ?? 89 ?? ?? 49 ?? ?? ?? ?? ?? ?? 48 ?? ?? 48 ?? ?? ?? 48 ?? ?? ?? 89)
+registersymbol(plr_pos_aob)
+
+alloc(plr_pos_cave,1024,VRChat.exe)
+label(plr_pos_init)
+label(plr_pos_exit)
+label(plr_pos_ret)
+registersymbol(plr_pos_init)
+
+alloc(plr_pos_ptr,4,VRChat.exe)
+registersymbol(plr_pos_ptr)
+
+plr_pos_ptr:
+dd 0
+
+plr_pos_cave:
+mov [plr_pos_ptr],rax
+jmp plr_pos_init
+
+plr_pos_init:
+readmem(plr_pos_aob,7) { mov [rax],rcx movsxd  rcx,dword ptr [rbp-68] }
+jmp plr_pos_exit
+
+plr_pos_exit:
+jmp plr_pos_ret
+
+plr_pos_aob:
+jmp plr_pos_cave
+db 90 90
+plr_pos_ret:
+
+[disable]
+plr_pos_aob:
+readmem(plr_pos_init,7)
+
+unregistersymbol(plr_pos_aob)
+unregistersymbol(plr_pos_init)
+unregistersymbol(plr_pos_ptr)
+dealloc(plr_pos_cave)
+dealloc(plr_pos_ptr)
+
+{
+21561A07 - 83 38 00              - cmp dword ptr [rax],00
+21561A0A - 49 BB E058301800000000 - mov r11,00000000183058E0
+21561A14 - 41 FF D3              - call r11
+21561A17 - 48 83 C4 20           - add rsp,20
+21561A1B - 49 8D 87 88000000     - lea rax,[r15+00000088]
+21561A22 - 48 8B 4D 90           - mov rcx,[rbp-70]
+21561A26 - 48 89 08              - mov [rax],rcx
+21561A29 - 48 63 4D 98           - movsxd  rcx,dword ptr [rbp-68]
+21561A2D - 89 48 08              - mov [rax+08],ecx
+21561A30 - 49 8D 87 88000000     - lea rax,[r15+00000088]
+21561A37 - 48 8B 08              - mov rcx,[rax]
+21561A3A - 48 89 4D A0           - mov [rbp-60],rcx
+21561A3E - 48 63 40 08           - movsxd  rax,dword ptr [rax+08]
+21561A42 - 89 45 A8              - mov [rbp-58],eax
+21561A45 - 48 8B CD              - mov rcx,rbp
+21561A48 - 48 83 C1 B0           - add rcx,-50
+21561A4C - 48 8B D6              - mov rdx,rsi
+21561A4F - 48 83 EC 10           - sub rsp,10
+}
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>1159</ID>
+              <Description>"[Weird]"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>1155</ID>
+                  <Description>"XYZ"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>12</ByteLength>
+                  <Address>plr_base</Address>
+                  <Offsets>
+                    <Offset>88</Offset>
+                    <Offset>28</Offset>
+                    <Offset>10</Offset>
+                    <Offset>0</Offset>
+                    <Offset>18</Offset>
+                    <Offset>1A0</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>170</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1158</ID>
+                  <Description>"X"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>plr_base</Address>
+                  <Offsets>
+                    <Offset>88</Offset>
+                    <Offset>28</Offset>
+                    <Offset>10</Offset>
+                    <Offset>0</Offset>
+                    <Offset>18</Offset>
+                    <Offset>1A0</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>170</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1156</ID>
+                  <Description>"Y"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>plr_base</Address>
+                  <Offsets>
+                    <Offset>90</Offset>
+                    <Offset>28</Offset>
+                    <Offset>10</Offset>
+                    <Offset>0</Offset>
+                    <Offset>18</Offset>
+                    <Offset>1A0</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>170</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>1157</ID>
+                  <Description>"Z"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>plr_base</Address>
+                  <Offsets>
+                    <Offset>8C</Offset>
+                    <Offset>28</Offset>
+                    <Offset>10</Offset>
+                    <Offset>0</Offset>
+                    <Offset>18</Offset>
+                    <Offset>1A0</Offset>
+                    <Offset>D8</Offset>
+                    <Offset>170</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>1110</ID>
+      <Description>"Some Matricies Shit"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1105</ID>
+          <Description>"?"</Description>
+          <LastState Value="0" RealAddress="7FF6B132E020"/>
+          <VariableType>Float</VariableType>
+          <Address>VRChat.exe+10BE020</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1109</ID>
+          <Description>"?"</Description>
+          <LastState Value="1" RealAddress="7FF6B132E030"/>
+          <VariableType>Float</VariableType>
+          <Address>VRChat.exe+10BE030</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1108</ID>
+          <Description>"?"</Description>
+          <LastState Value="0.5" RealAddress="7FF6B132E0D0"/>
+          <VariableType>Float</VariableType>
+          <Address>VRChat.exe+10BE0D0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1111</ID>
+          <Description>"?"</Description>
+          <LastState Value="0" RealAddress="7FF6B132E0D4"/>
+          <VariableType>Float</VariableType>
+          <Address>VRChat.exe+10BE0D4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>1107</ID>
+          <Description>"?"</Description>
+          <LastState Value="2" RealAddress="7FF6B132E0E0"/>
+          <VariableType>Float</VariableType>
+          <Address>VRChat.exe+10BE0E0</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
