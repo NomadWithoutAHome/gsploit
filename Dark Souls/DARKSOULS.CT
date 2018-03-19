@@ -2023,6 +2023,37 @@ unregistersymbol(insufficient_framerate_aob)
                           </Offsets>
                         </CheatEntry>
                         <CheatEntry>
+                          <ID>100609</ID>
+                          <Description>"AnimFlags?"</Description>
+                          <ShowAsHex>1</ShowAsHex>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <Color>000000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>WorldChrBase</Address>
+                          <Offsets>
+                            <Offset>80</Offset>
+                            <Offset>2C</Offset>
+                            <Offset>28</Offset>
+                            <Offset>0</Offset>
+                            <Offset>28</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>100610</ID>
+                          <Description>"result?"</Description>
+                          <ShowAsHex>1</ShowAsHex>
+                          <ShowAsSigned>0</ShowAsSigned>
+                          <Color>000000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>WorldChrBase</Address>
+                          <Offsets>
+                            <Offset>C4</Offset>
+                            <Offset>28</Offset>
+                            <Offset>0</Offset>
+                            <Offset>28</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
                           <ID>97080</ID>
                           <Description>"Slots"</Description>
                           <LastState Value="" RealAddress="00000000"/>
@@ -22929,6 +22960,67 @@ DARKSOULS.exe+B65E31 - C3                    - ret
                   <Address>phantom_type_id+3</Address>
                 </CheatEntry>
               </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>100598</ID>
+              <Description>"Force Allow Rotation in Animations"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
+aobscanmodule(AnimRotAob1,DarkSouls.exe,83 ?? 08 01 ?? ?? ?? ?? ?? ?? C3 83 ?? 08 10)
+registersymbol(AnimRotAob1)
+aobscanmodule(AnimRotAob2,DarkSouls.exe,83 ?? 08 01 ?? ?? ?? C3 ?? ?? 28 ?? 01)
+registersymbol(AnimRotAob2)
+
+AnimRotAob1:
+db 90 90 90 90
+
+AnimRotAob2:
+db 90 90 90 90
+
+[disable]
+AnimRotAob1:
+db 83 4F 08 01
+
+AnimRotAob2:
+db 83 48 08 01
+
+unregistersymbol(AnimRotAob1)
+unregistersymbol(AnimRotAob2)
+
+{
+DARKSOULS.exe+A651BA - C3                    - ret
+DARKSOULS.exe+A651BB - 83 4F 08 04           - or dword ptr [edi+08],04
+DARKSOULS.exe+A651BF - 5F                    - pop edi
+DARKSOULS.exe+A651C0 - 5E                    - pop esi
+DARKSOULS.exe+A651C1 - 5B                    - pop ebx
+DARKSOULS.exe+A651C2 - 8B E5                 - mov esp,ebp
+DARKSOULS.exe+A651C4 - 5D                    - pop ebp
+DARKSOULS.exe+A651C5 - C3                    - ret
+DARKSOULS.exe+A651C6 - 83 4F 08 08           - or dword ptr [edi+08],08
+DARKSOULS.exe+A651CA - 5F                    - pop edi
+DARKSOULS.exe+A651CB - 5E                    - pop esi
+DARKSOULS.exe+A651CC - 5B                    - pop ebx
+DARKSOULS.exe+A651CD - 8B E5                 - mov esp,ebp
+DARKSOULS.exe+A651CF - 5D                    - pop ebp
+DARKSOULS.exe+A651D0 - C3                    - ret
+&gt;&gt;&gt; DARKSOULS.exe+A651D1 - 83 4F 08 01           - or dword ptr [edi+08],01
+DARKSOULS.exe+A651D5 - 5F                    - pop edi
+DARKSOULS.exe+A651D6 - 5E                    - pop esi
+DARKSOULS.exe+A651D7 - 5B                    - pop ebx
+DARKSOULS.exe+A651D8 - 8B E5                 - mov esp,ebp
+DARKSOULS.exe+A651DA - 5D                    - pop ebp
+DARKSOULS.exe+A651DB - C3                    - ret
+DARKSOULS.exe+A651DC - 83 4F 08 10           - or dword ptr [edi+08],10
+DARKSOULS.exe+A651E0 - 5F                    - pop edi
+DARKSOULS.exe+A651E1 - 5E                    - pop esi
+DARKSOULS.exe+A651E2 - 5B                    - pop ebx
+DARKSOULS.exe+A651E3 - 8B E5                 - mov esp,ebp
+DARKSOULS.exe+A651E5 - 5D                    - pop ebp
+DARKSOULS.exe+A651E6 - C3                    - ret
+DARKSOULS.exe+A651E7 - 8B C7                 - mov eax,edi
+}
+</AssemblerScript>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
