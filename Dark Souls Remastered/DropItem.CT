@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>97387</ID>
+      <Description>"[DropItem]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$lua}
+[enable]
+autoAssemble([[
+aobScanModule(DropItemLua,DarkSoulsRemastered.exe,48 ?? ?? ?? ?? 48 ?? ?? ?? ?? 57 48 ?? ?? ?? ?? ?? ?? 0F B6 ?? 48 ?? ?? E8)
+registerSymbol(DropItemLua)
+aobScanModule(DropItemBaseAob,DarkSoulsRemastered.exe,?? ?? ?? ?? 33 ?? E8 ?? ?? ?? ?? 80 ?? ?? ?? 44 ?? ?? 48 ?? ?? ?? ?? ?? ?? 8B)
+registerSymbol(DropItemBaseAob)
+aobScanModule(ItemDbgBaseAob,DarkSoulsRemastered.exe,?? ?? ?? ?? 89 ?? 3C 08 00 00 8B ?? ?? 89 ?? 40 08 00 00 8B ?? ?? 89 ?? 44 08 00 00 8B ?? ?? 89 ?? 48 08 00 00 C3)
+registerSymbol(ItemDbgBaseAob)
+]])
+unregisterSymbol("DropItemBase")
+registerSymbol("DropItemBase", resolveAddress64(getAddress("DropItemBaseAob")), true)
+unregisterSymbol("ItemDbgBase")
+registerSymbol("ItemDbgBase", resolveAddress64(getAddress("ItemDbgBaseAob")), true)
+
+[disable]
+unregisterSymbol("DropItemLua")
+unregisterSymbol("DropItemBaseAob")
+unregisterSymbol("DropItemBase")
+unregisterSymbol("ItemDbgBaseAob")
+unregisterSymbol("ItemDbgBase")
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>97388</ID>
+          <Description>"Category"</Description>
+          <DropDownList DisplayValueAsItem="1">00000000:weapon
+10000000:armor
+20000000:ring
+40000000:goods
+</DropDownList>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>1</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>ItemDbgBase</Address>
+          <Offsets>
+            <Offset>83C</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>97389</ID>
+          <Description>"Id"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>1</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>ItemDbgBase</Address>
+          <Offsets>
+            <Offset>840</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>97390</ID>
+          <Description>"Durability"</Description>
+          <ShowAsSigned>1</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>ItemDbgBase</Address>
+          <Offsets>
+            <Offset>844</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>97391</ID>
+          <Description>"Quantity"</Description>
+          <ShowAsSigned>1</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>ItemDbgBase</Address>
+          <Offsets>
+            <Offset>848</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>97392</ID>
+          <Description>"CreateDrop"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[enable]
+alloc(CreateDrop,1024,DarkSoulsRemastered.exe)
+
+CreateDrop:
+mov rcx,[DropItemBase]
+sub rsp,38
+call DropItemLua
+add rsp,38
+ret
+
+createthread(CreateDrop)
+
+[disable]
+dealloc(CreateDrop)
+
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
