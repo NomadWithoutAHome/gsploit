@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="24">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"[Game]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{$lua}
+[enable]
+autoAssemble([[
+aobScanModule(PlrBaseAob,ffxv_s.exe,?? ?? ?? ?? 48 ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? E8 ?? ?? ?? ?? 41 ?? ?? 44 ?? ?? ?? ?? ?? ?? 89)
+registerSymbol(PlrBaseAob)
+]])
+unregisterSymbol("PlrBase")
+registerSymbol("PlrBase", (getAddress("PlrBaseAob") + readInteger(getAddress("PlrBaseAob")) + 4) - 0x100000000, true)
+
+[disable]
+unregisterSymbol("PlrBaseAob")
+unregisterSymbol("PlrBase")
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>6</ID>
+          <Description>"PlrBaseAob"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>PlrBaseAob</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"PlrBase"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>PlrBase</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"Current XP"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>2</ID>
+              <Description>"Noctis"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>PlrBase</Address>
+              <Offsets>
+                <Offset>D7C0*0+30+698</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>15</ID>
+              <Description>"Gladiolus"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>PlrBase</Address>
+              <Offsets>
+                <Offset>D7C0*1+30+698</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>16</ID>
+              <Description>"Ignis"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>PlrBase</Address>
+              <Offsets>
+                <Offset>D7C0*2+30+698</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>17</ID>
+              <Description>"Prompto"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>PlrBase</Address>
+              <Offsets>
+                <Offset>D7C0*3+30+698</Offset>
+                <Offset>10</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Gil"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>PlrBase</Address>
+          <Offsets>
+            <Offset>200710+5650</Offset>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"AP"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>PlrBase</Address>
+          <Offsets>
+            <Offset>200710+565C</Offset>
+            <Offset>10</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>PlrBaseAob</Name>
+      <Address> 149668D6E</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
