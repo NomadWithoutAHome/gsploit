@@ -1,0 +1,1486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="26">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>215</ID>
+      <Description>"[Enable]"</Description>
+      <LastState Activated="1"/>
+      <Color>000080</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+
+aobscanmodule( GetWorld_AOB, ACOrigins.exe, 488B05????????4885C07408488B80C0000000C3C3 )
+label( GetWorld )
+registersymbol( GetWorld )
+GetWorld_AOB:
+GetWorld:
+
+/*
+aobscanmodule( GetPlayer_AOB, ACOrigins.exe,  )
+label( GetPlayer )
+registersymbol( GetPlayer )
+GetPlayer_AOB:
+GetPlayer:
+*/
+
+[DISABLE]
+
+//unregistersymbol( GetPlayer )
+unregistersymbol( GetWorld )
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>216</ID>
+          <Description>"[Cheat Handler]"</Description>
+          <LastState Activated="1"/>
+          <Color>000080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+alloc( KeyHandlerThread, 0x1000, ACOrigins.exe )
+registersymbol( KeyHandlerThread )
+CreateThread( KeyHandlerThread )
+label( KeyHandlerOff )
+registersymbol( KeyHandlerOff )
+label( ExitKeyHandler )
+label( KeyHandlerThread_loop )
+
+// pointers
+
+label( pWorld )
+registersymbol( pWorld )
+label( pEntity )
+registersymbol( pEntity )
+label( pBhvAssassin )
+registersymbol( pBhvAssassin )
+label( pStore )
+label( pCharacterAI )
+registersymbol( pCharacterAI )
+label( pImmunityDataItem )
+registersymbol( pImmunityDataItem )
+
+label( lbl_0 )
+label( lbl_1 )
+label( lbl_2 )
+label( lbl_3 )
+
+// functions
+
+label( GetPointers_do )
+label( GetPlayer )
+label( GetImmunityDataItem )
+
+KeyHandlerThread:
+sub rsp,28
+
+KeyHandlerThread_loop:
+mov rcx,A
+call Sleep
+
+cmp [KeyHandlerOff],1
+je ExitKeyHandler
+
+  mov rcx,60 // VK_NUMPAD0
+  call GetAsyncKeyState
+  test ax,ax
+  jne GetPointers_do
+
+jmp KeyHandlerThread_loop
+
+//*******************************
+//*                             *
+//*          Functions          *
+//*                             *
+//*******************************
+
+GetPointers_do:
+call GetWorld
+mov [pWorld],rax
+mov rdx,[rax+98]
+mov [pEntity],rdx
+lea rcx,[pStore]
+call GetPlayer
+//call ACOrigins.exe+C7B850
+mov [pBhvAssassin],rax
+mov rax,[rax+30]
+mov [pCharacterAI],rax
+call GetImmunityDataItem
+mov [pImmunityDataItem],rax
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+ExitKeyHandler:
+add rsp,28
+mov [KeyHandlerOff],2
+ret
+
+GetPlayer:
+mov [rsp+10],rbx
+push rdi
+sub rsp,20
+cmp byte ptr [rcx+1],-2
+mov rdi,rdx
+mov rbx,rcx
+jne short @f
+  call ACOrigins.exe+C65830
+  jmp short lbl_0
+@@:
+movzx eax,byte ptr [rdx+22E]
+cmp al,[rcx]
+je short lbl_0
+  mov [rcx],al
+  call ACOrigins.exe+156C710 // BhvAssassin-&gt;GetName()
+  //call ACOrigins.exe+216D5C0 // ImmunityDataItem-&gt;GetName()
+  mov rdx,rax
+  lea r8,[rsp+30]
+  mov rcx,rdi
+  call ACOrigins.exe+1137F00
+  mov eax,[rdi+E8]
+  mov rcx,[rsp+30]
+  shr eax,11
+  shl eax,3
+  add rax,[rdi+E0]
+  cmp rcx,rax
+  je short @f
+    mov eax,ecx
+    sub eax,[rdi+E0]
+	sar rax,3
+	mov [rbx+1],al
+	jmp short lbl_0
+  @@:
+  mov byte ptr [rbx+1],-1
+lbl_0:
+movzx eax,byte ptr [rbx+1]
+cmp al,-1
+je short @f
+  movzx ecx,al
+  mov rax,[rdi+E0]
+  mov rax,[rax+rcx*8]
+  mov rbx,[rsp+38]
+  add rsp,20
+  pop rdi
+  ret
+@@:
+xor eax,eax
+mov rbx,[rsp+38]
+add rsp,20
+pop rdi
+ret
+
+GetImmunityDataItem:
+sub rsp,28
+mov rax,[pBhvAssassin]
+test rax,rax
+je lbl_1
+  mov rax,[rax+30] // CharacterAI
+  test rax,rax
+  je lbl_1
+    mov r9,rax
+    mov r8d,[r9+BC]
+	xor eax,eax
+	mov rcx,[r9+B4]
+	shr r8d,11
+	shl r8d,2
+	add r8,rcx
+	cmp rcx,r8
+	je short @f
+	  lbl_3:
+	  cmp [rcx],5EB03CEC
+	  je short lbl_2
+	    inc eax
+		add rcx,4
+		cmp rcx,r8
+		jne short lbl_3
+	lbl_1:
+	xor eax,eax
+	add rsp,28
+	ret
+lbl_2:
+lea ecx,[rax*8]
+mov rax,[r9+A8]
+mov rax,[rcx+rax]
+add rsp,28
+ret
+
+KeyHandlerOff:
+dd 0
+pWorld:
+dq 0
+pEntity:
+dq 0
+pBhvAssassin:
+dq 0
+pCharacterAI:
+dq 0
+pImmunityDataItem:
+dq 0
+pStore:
+dq 0
+
+[DISABLE]
+
+{$lua}
+
+if( syntaxcheck == false ) then --actual execution
+  local starttime = getTickCount()
+
+if readInteger( "KeyHandlerOff" ) == 0 then --could be 2 already
+  writeInteger( "KeyHandlerOff", 1 ) --tell the thread to kill itself
+end
+
+while( getTickCount() &lt; starttime + 1000 ) and ( readInteger( "KeyHandlerOff" ) ~= 2 ) do --wait till it has finished
+  sleep( 20 )
+end
+
+if( getTickCount() &gt; starttime + 1000 ) then --could happen when the window is shown
+  showMessage( 'Disabling the thread failed!' )
+  error( 'Thread disabling failed!' )
+end
+  sleep( 1 )
+end
+
+{$asm}
+
+unregistersymbol( pImmunityDataItem )
+unregistersymbol( pCharacterAI )
+unregistersymbol( pBhvAssassin )
+unregistersymbol( pEntity )
+unregistersymbol( pWorld )
+
+unregistersymbol( KeyHandlerOff )
+unregistersymbol( KeyHandlerThread )
+dealloc( KeyHandlerThread )
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>224</ID>
+              <Description>"pWorld"</Description>
+              <LastState Value="000000001186F820" RealAddress="2000C022B"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pWorld</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>385</ID>
+                  <Description>"pEntity"</Description>
+                  <LastState Value="00000001E5941050" RealAddress="2000C0233"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>pEntity</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>226</ID>
+              <Description>"pBhvAssassin (Player)"</Description>
+              <LastState Value="00000001EA947700" RealAddress="2000C023B"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pBhvAssassin</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>384</ID>
+                  <Description>"pHuman"</Description>
+                  <LastState Value="00000001EA89DD70" RealAddress="1EA947738"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>pBhvAssassin</Address>
+                  <Offsets>
+                    <Offset>38</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>388</ID>
+                  <Description>"bInvisible"</Description>
+                  <LastState Value="01" RealAddress="1EA9477A1"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Byte</VariableType>
+                  <Address>pBhvAssassin</Address>
+                  <Offsets>
+                    <Offset>A1</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>377</ID>
+              <Description>"pCharacterAI"</Description>
+              <LastState Value="00000001EA841EC0" RealAddress="2000C0243"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pCharacterAI</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>379</ID>
+                  <Description>"bCharInvisible"</Description>
+                  <LastState Value="0" RealAddress="1EA842018"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>pCharacterAI</Address>
+                  <Offsets>
+                    <Offset>158</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>386</ID>
+                  <Description>"bGodMode"</Description>
+                  <LastState Value="0" RealAddress="1EA8BDA0C"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>pCharacterAI</Address>
+                  <Offsets>
+                    <Offset>-11C</Offset>
+                    <Offset>70</Offset>
+                    <Offset>160</Offset>
+                    <Offset>40</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>378</ID>
+              <Description>"pImmunityDataItem"</Description>
+              <LastState Value="00000001EA950BB0" RealAddress="2000C024B"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pImmunityDataItem</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>376</ID>
+                  <Description>"bInfiniteOxygen"</Description>
+                  <LastState Value="0" RealAddress="1EA950BE5"/>
+                  <VariableType>Byte</VariableType>
+                  <Address>pImmunityDataItem</Address>
+                  <Offsets>
+                    <Offset>35</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>332</ID>
+      <Description>"[Debug]"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>C0C0C0</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>333</ID>
+          <Description>"[Enable]"</Description>
+          <LastState/>
+          <Color>000080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+aobscanmodule( TogglePlayerVanish_AOB, ACS.exe, 48895C2408574883EC70498BF88BD9 ) // NUMPAD_0
+label( TogglePlayerVanish )
+registersymbol( TogglePlayerVanish )
+TogglePlayerVanish_AOB:
+TogglePlayerVanish:
+
+aobscanmodule( GodMode_AOB, ACS.exe, 48895C241848896C2420574883EC20488B5A20498BE88BF94885DB ) // NUMPAD_DEL
+label( GodMode )
+registersymbol( GodMode )
+GodMode_AOB:
+GodMode:
+
+aobscanmodule( RefillAllEquipment_AOB, ACS.exe, 4885D2740D83F9017508488BCAE9????????F3C3CCCCCCCCCCCCCCCCCCCCCCCC4883EC28 ) // NUMPAD_1
+label( RefillAllEquipment )
+registersymbol( RefillAllEquipment )
+RefillAllEquipment_AOB:
+RefillAllEquipment:
+
+aobscanmodule( Invisible_AOB, ACS.exe, 48895C2408574883EC20498BF8488BDA85C9754B488BCA ) // NUMPAD_2
+label( Invisible )
+registersymbol( Invisible )
+Invisible_AOB:
+Invisible:
+
+aobscanmodule( OneHitKill_AOB, ACS.exe, 4885D20F84C001000056574883EC38 ) // NUMPAD_3
+label( OneHitKill )
+registersymbol( OneHitKill )
+OneHitKill_AOB:
+OneHitKill:
+
+aobscanmodule( RefillPlayerHealth_AOB, ACS.exe, 4883EC284885D2742283F901751D ) // NUMPAD_4
+label( RefillPlayerHealth )
+registersymbol( RefillPlayerHealth )
+RefillPlayerHealth_AOB:
+RefillPlayerHealth:
+
+aobscanmodule( pBase_AOB, ACS.exe, 488B05????????4885C07408488B8098000000C3F3C3 )
+label( pBase )
+registersymbol( pBase )
+pBase_AOB:
+pBase:
+
+aobscanmodule( GetPlayer_AOB, ACS.exe, 0FB6C8488B8788000000488B04C8488B5C24384883C4205FC333C0488B5C24384883C4205FC3CCCCCCCCCC48895C241857 )
+label( GetPlayer )
+registersymbol( GetPlayer )
+GetPlayer_AOB-75:
+GetPlayer:
+
+aobscanmodule( GetPExperience_AOB, ACS.exe, 4883EC28488B0D????????4883C130E8????????84C00F94C04883C428C3 )
+label( GetPExperience )
+registersymbol( GetPExperience )
+GetPExperience_AOB:
+GetPExperience:
+
+aobscanmodule( GetExperience_AOB, ACS.exe, 40574883EC20488BFA488D9168010000 )
+label( GetExperience )
+registersymbol( GetExperience )
+GetExperience_AOB:
+GetExperience:
+
+aobscanmodule( MapBase_AOB, ACS.exe, ????0000FD13FE13 )
+label( MapBase )
+registersymbol( MapBase )
+MapBase_AOB-48:
+MapBase:
+
+aobscanmodule( MapBaseFunc, ACS.exe, 4883EC20E8????????4885C00F84????????488B98C80A0000 )
+registersymbol( MapBaseFunc )
+
+aobscanmodule( GetMapPointer_AOB, ACS.exe, 48895C240848896C24104889742418574883EC200FB77132488B5928 )
+label( GetMapPointer )
+registersymbol( GetMapPointer )
+GetMapPointer_AOB:
+GetMapPointer:
+
+aobscanmodule( GetInventory_AOB, ACS.exe, 4883EC28E8????????4885C074??48895C2430488B98??00000048897C24200FB7B8??000000C1E7034803FB483BDF74??488B0BE8????????3D42655754 )
+label( GetInventory )
+registersymbol( GetInventory )
+GetInventory_AOB:
+GetInventory:
+
+aobscanmodule( GetPCollision_AOB, ACS.exe, 488B51084885D274094883C11AE9????????33C0C3CCCC )
+label( GetPCollision )
+registersymbol( GetPCollision )
+GetPCollision_AOB:
+GetPCollision:
+
+[DISABLE]
+
+unregistersymbol( GetPCollision )
+unregistersymbol( GetInventory )
+unregistersymbol( GetMapPointer )
+unregistersymbol( MapBaseFunc )
+unregistersymbol( MapBase )
+unregistersymbol( GetExperience )
+unregistersymbol( GetPExperience )
+unregistersymbol( GetPlayer )
+unregistersymbol( pBase )
+unregistersymbol( RefillPlayerHealth )
+unregistersymbol( OneHitKill )
+unregistersymbol( Invisible )
+unregistersymbol( RefillAllEquipment )
+unregistersymbol( GodMode )
+unregistersymbol( TogglePlayerVanish )
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>334</ID>
+          <Description>"[Cheat Handler]"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>000080</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+alloc( KeyHandlerThread, 8192, ACS.exe )
+registersymbol( KeyHandlerThread )
+CreateThread( KeyHandlerThread )
+label( KeyHandlerOff )
+registersymbol( KeyHandlerOff )
+label( ExitKeyHandler )
+label( KeyHandlerThread_loop )
+label( GetMenuParameters )
+label( pMenu )
+registersymbol( pMenu )
+label( pPlayer )
+registersymbol( pPlayer )
+label( pExperience )
+registersymbol( pExperience )
+label( pMapPointer )
+registersymbol( pMapPointer )
+
+// functions list start
+
+label( TogglePlayerVanish_do )
+label( GodMode_do )
+label( RefillAllEquipment_do )
+label( Invisible_do )
+label( OneHitKill_do )
+label( RefillPlayerHealth_do )
+
+// end of Functions list
+
+label( GetStuff_do )
+label( Teleport_do )
+label( Teleport_do_exit )
+label( Teleport_do_skip )
+label( Teleport_do_check )
+label( GetInventoryItemAddress )
+label( GetInventoryItemAddress_exit )
+label( loc_a )
+label( loc_b )
+
+// inventory defines
+
+label( pMoney )
+registersymbol( pMoney )
+label( pVoltaicBombs )
+registersymbol( pVoltaicBombs )
+label( pSmokeBombs )
+registersymbol( pSmokeBombs )
+label( pThrowingKnives )
+registersymbol( pThrowingKnives )
+label( pMedicine )
+registersymbol( pMedicine )
+label( pHallucinogenicDarts )
+registersymbol( pHallucinogenicDarts )
+label( pBullets )
+registersymbol( pBullets )
+label( pFearBombs )
+registersymbol( pFearBombs )
+label( pSpikes )
+registersymbol( pSpikes )
+label( pLeather )
+registersymbol( pLeather )
+label( pIron )
+registersymbol( pIron )
+label( pThread )
+registersymbol( pThread )
+label( pChemicals )
+registersymbol( pChemicals )
+
+// teleporter stuff
+
+label( pCollision )
+registersymbol( pCollision )
+label( dwTeleportEnabled )
+
+KeyHandlerThread+800:
+KeyHandlerOff:
+dd 0
+
+KeyHandlerThread+810:
+pMoney:
+dq 0
+pVoltaicBombs:
+dq 0
+pSmokeBombs:
+dq 0
+pThrowingKnives:
+dq 0
+pMedicine:
+dq 0
+pHallucinogenicDarts:
+dq 0
+pBullets:
+dq 0
+pFearBombs:
+dq 0
+pSpikes:
+dq 0
+pLeather:
+dq 0
+pIron:
+dq 0
+pThread:
+dq 0
+pChemicals:
+dq 0
+pPlayer:
+dq 0
+pExperience:
+dq 0
+pMapPointer:
+dq 0
+pCollision:
+dq 0
+dwTeleportEnabled:
+dd 0
+pMenu:
+dq 0
+
+KeyHandlerThread:
+sub rsp,28
+
+KeyHandlerThread_loop:
+mov rcx,0a
+call Sleep
+
+cmp [KeyHandlerOff],1
+je ExitKeyHandler
+
+mov rcx,60 // VK_NUMPAD0
+call GetAsyncKeyState
+test ax,ax
+jne TogglePlayerVanish_do
+
+mov rcx,6E // VK_DECIMAL
+call GetAsyncKeyState
+test ax,ax
+jne GodMode_do
+
+mov rcx,61 // VK_NUMPAD1
+call GetAsyncKeyState
+test ax,ax
+jne RefillAllEquipment_do
+
+mov rcx,62 // VK_NUMPAD2
+call GetAsyncKeyState
+test ax,ax
+jne Invisible_do
+
+mov rcx,63 // VK_NUMPAD3
+call GetAsyncKeyState
+test ax,ax
+jne OneHitKill_do
+
+mov rcx,64 // VK_NUMPAD4
+call GetAsyncKeyState
+test ax,ax
+jne RefillPlayerHealth_do
+
+mov rcx,6A // VK_MULTIPLY
+call GetAsyncKeyState
+test ax,ax
+jne GetStuff_do
+
+mov rcx,69 // VK_NUMPAD9
+call GetAsyncKeyState
+test ax,ax
+jne Teleport_do
+
+jmp KeyHandlerThread_loop
+
+//******************************************
+//*                                        *
+//*          Debug Menu Functions          *
+//*                                        *
+//******************************************
+
+TogglePlayerVanish_do:
+call GetMenuParameters
+mov rdx,pMenu
+mov rcx,1
+call TogglePlayerVanish
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+GodMode_do:
+call GetMenuParameters
+mov rdx,pMenu
+mov rcx,1
+call GodMode
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+RefillAllEquipment_do:
+call GetMenuParameters
+mov rdx,pMenu
+mov rcx,1
+call RefillAllEquipment
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+Invisible_do:
+call GetMenuParameters
+mov rdx,pMenu
+mov rcx,1
+call Invisible
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+OneHitKill_do:
+call GetMenuParameters
+mov rdx,pMenu
+mov rcx,1
+call OneHitKill
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+RefillPlayerHealth_do:
+call GetMenuParameters
+mov rdx,pMenu
+mov rcx,1
+call RefillPlayerHealth
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+GetStuff_do:
+call GetMenuParameters
+// GetExperience
+call GetPExperience
+lea rdi,[rcx-30]
+mov rdx,pExperience
+mov rcx,rdi
+call GetExperience
+// GetMapPointer
+sub rsp,20
+call pBase
+mov rcx,[rax+AC8]
+lea rax,[MapBase]
+mov rdx,rax
+call GetMapPointer
+mov [pMapPointer],rax
+add rsp,20
+// FetchInventory
+mov rcx,[pMenu+20]
+call GetInventory
+lea rcx,[rax+8]
+mov r8d,1 // Money
+mov rbp,pMoney
+call GetInventoryItemAddress
+mov r8d,8 // Voltaic Bombs
+mov rbp,pVoltaicBombs
+call GetInventoryItemAddress
+mov r8d,5 // Smoke Bombs
+mov rbp,pSmokeBombs
+call GetInventoryItemAddress
+mov r8d,2B // Throwing Knives
+mov rbp,pThrowingKnives
+call GetInventoryItemAddress
+mov r8d,2D // Medicine
+mov rbp,pMedicine
+call GetInventoryItemAddress
+mov r8d,2C // Hallucinogenic Darts
+mov rbp,pHallucinogenicDarts
+call GetInventoryItemAddress
+mov r8d,E // Bullets
+mov rbp,pBullets
+call GetInventoryItemAddress
+mov r8d,9 // Fear Bombs
+mov rbp,pFearBombs
+call GetInventoryItemAddress
+mov r8d,A // Spikes
+mov rbp,pSpikes
+call GetInventoryItemAddress
+mov r8d,38 // Leather
+mov rbp,pLeather
+call GetInventoryItemAddress
+mov r8d,39 // Iron
+mov rbp,pIron
+call GetInventoryItemAddress
+mov r8d,3C // Thread
+mov rbp,pThread
+call GetInventoryItemAddress
+mov r8d,3A // Chemicals
+mov rbp,pChemicals
+call GetInventoryItemAddress
+// exit
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+GetMenuParameters:
+sub rsp,10 // because of GetPlayer
+call pBase
+mov rdx,[rax+E0]
+mov qword [pMenu+20],rdx
+mov rbx,pMenu
+mov rdx,[rbx+20]
+lea rcx,[rbx+7F4]
+call GetPlayer
+mov qword [pPlayer],rax
+mov [pMenu+18],rax
+mov rdx,[rax+D0]
+mov [pMenu+28],rdx
+call pBase
+add rsp,10 // restore
+ret
+
+GetInventoryItemAddress:
+push rcx
+sub rsp,20
+mov rax,[rcx]
+mov edi,r8d
+mov rsi,rcx
+call qword ptr [rax]
+test rax,rax
+je GetInventoryItemAddress_exit
+movzx edx,word ptr [rax+12]
+mov r9,[rax+8]
+shl edx,3
+add rdx,r9
+loc_a:
+mov rcx,[r9]
+cmp [rcx+8],edi
+je loc_b
+add r9,8
+cmp r9,rdx
+jne loc_a
+loc_b:
+mov rax,rcx
+lea rax,[rax+28]
+mov [rbp],rax
+GetInventoryItemAddress_exit:
+add rsp,20
+pop rcx
+ret
+
+Teleport_do:
+cmp [dwTeleportEnabled],1
+je Teleport_do_check
+mov rax,[pMapPointer]
+test rax,rax
+je Teleport_do_exit
+cmp byte ptr [rax+B8],1
+jne Teleport_do_exit
+mov rbx,[pMenu+20]
+test rbx,rbx
+je Teleport_do_exit
+mov ecx,[rax+C8]
+cmp ecx,(float)0.0
+jne Teleport_do_skip
+mov ecx,(float)8.0
+Teleport_do_skip:
+mov r12d,ecx
+mov [rbx+68],r12d // Z first
+mov ecx,[rax+C0]
+mov r13d,ecx
+mov [rbx+60],r13d // X
+mov ecx,[rax+C4]
+mov r14d,ecx
+mov [rbx+64],r14d // Y
+mov rax,[pMenu+28]
+mov rcx,[rax+1B8]
+call GetPCollision
+mov [pCollision],rax
+mov [rax+F08],78000408
+mov byte ptr [rax+4A],0
+mov [rax+FA0],r13d
+mov [rax+FA4],r14d
+mov [rax+FA8],r12d
+mov [dwTeleportEnabled],1
+jmp Teleport_do
+Teleport_do_check:
+mov rax,[pMenu+20]
+cmp byte ptr [rax+98],7C
+jne Teleport_do
+mov rax,[pCollision]
+mov [rax+F08],78000410
+mov byte ptr [rax+4A],1
+Teleport_do_exit:
+mov [dwTeleportEnabled],0
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+ExitKeyHandler:
+add rsp,28
+mov [KeyHandlerOff],2
+ret
+
+[DISABLE]
+
+{$lua}
+
+if( syntaxcheck == false ) then --actual execution
+  local starttime = getTickCount()
+
+if readInteger( "KeyHandlerOff" ) == 0 then --could be 2 already
+  writeInteger( "KeyHandlerOff", 1 ) --tell the thread to kill itself
+end
+
+while( getTickCount() &lt; starttime + 1000 ) and ( readInteger( "KeyHandlerOff" ) ~=2 ) do --wait till it has finished
+  sleep( 20 )
+end
+
+if( getTickCount() &gt; starttime + 1000 ) then --could happen when the window is shown
+  showMessage( 'Disabling the thread failed!' )
+  error( 'Thread disabling failed!' )
+end
+  sleep( 1 )
+end
+
+{$asm}
+
+unregistersymbol( pCollision )
+unregistersymbol( pChemicals )
+unregistersymbol( pThread )
+unregistersymbol( pIron )
+unregistersymbol( pLeather )
+unregistersymbol( pSpikes )
+unregistersymbol( pFearBombs )
+unregistersymbol( pBullets )
+unregistersymbol( pHallucinogenicDarts )
+unregistersymbol( pMedicine )
+unregistersymbol( pThrowingKnives )
+unregistersymbol( pSmokeBombs )
+unregistersymbol( pVoltaicBombs )
+unregistersymbol( pMoney )
+unregistersymbol( pMapPointer )
+unregistersymbol( pExperience )
+unregistersymbol( pPlayer )
+unregistersymbol( pMenu )
+unregistersymbol( KeyHandlerOff )
+unregistersymbol( KeyHandlerThread )
+dealloc( KeyHandlerThread )
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>335</ID>
+              <Description>"pContext"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pMenu+20</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>336</ID>
+              <Description>"pPlayer"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pMenu+18</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>337</ID>
+                  <Description>"Invisible (0-&gt;1)"</Description>
+                  <VariableType>Byte</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>D8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>338</ID>
+                  <Description>"God (?-&gt;1)"</Description>
+                  <VariableType>Byte</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>FFFFFE8E</Offset>
+                    <Offset>18</Offset>
+                    <Offset>120</Offset>
+                    <Offset>40</Offset>
+                    <Offset>C8</Offset>
+                  </Offsets>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>339</ID>
+                      <Description>"GodMode (status)"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Byte</VariableType>
+                      <Address>pPlayer</Address>
+                      <Offsets>
+                        <Offset>FFFFFE98</Offset>
+                        <Offset>18</Offset>
+                        <Offset>120</Offset>
+                        <Offset>40</Offset>
+                        <Offset>C8</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>340</ID>
+                  <Description>"Current Health"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>FFFFFE90</Offset>
+                    <Offset>18</Offset>
+                    <Offset>120</Offset>
+                    <Offset>40</Offset>
+                    <Offset>C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>341</ID>
+                  <Description>"Maximum Health"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>FFFFFE94</Offset>
+                    <Offset>18</Offset>
+                    <Offset>120</Offset>
+                    <Offset>40</Offset>
+                    <Offset>C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>342</ID>
+                  <Description>"Desync (?-&gt;1)"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Byte</VariableType>
+                  <Address>pPlayer</Address>
+                  <Offsets>
+                    <Offset>FFFFFFB4</Offset>
+                    <Offset>18</Offset>
+                    <Offset>120</Offset>
+                    <Offset>40</Offset>
+                    <Offset>C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>343</ID>
+              <Description>"pExperience"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pExperience</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>344</ID>
+                  <Description>"Experience"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pExperience</Address>
+                  <Offsets>
+                    <Offset>124</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>345</ID>
+              <Description>"[Teleporter]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>800080</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>346</ID>
+                  <Description>"Map_Marker_Set"</Description>
+                  <VariableType>Byte</VariableType>
+                  <Address>pMapPointer</Address>
+                  <Offsets>
+                    <Offset>B8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>347</ID>
+                  <Description>"Target_Coord_X"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>pMapPointer</Address>
+                  <Offsets>
+                    <Offset>C0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>348</ID>
+                  <Description>"Target_Coord_Y"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>pMapPointer</Address>
+                  <Offsets>
+                    <Offset>C4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>349</ID>
+                  <Description>"Target_Coord_Z"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>pMapPointer</Address>
+                  <Offsets>
+                    <Offset>C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>350</ID>
+                  <Description>"Player_X"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>pMenu+20</Address>
+                  <Offsets>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>351</ID>
+                  <Description>"Player_Y"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>pMenu+20</Address>
+                  <Offsets>
+                    <Offset>64</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>352</ID>
+                  <Description>"Player_Z"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>pMenu+20</Address>
+                  <Offsets>
+                    <Offset>68</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>353</ID>
+                  <Description>"Collision"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pCollision</Address>
+                  <Offsets>
+                    <Offset>F08</Offset>
+                  </Offsets>
+                  <Hotkeys>
+                    <Hotkey>
+                      <Action>Set Value</Action>
+                      <Keys>
+                        <Key>103</Key>
+                      </Keys>
+                      <Value>78000408</Value>
+                      <ID>0</ID>
+                    </Hotkey>
+                    <Hotkey>
+                      <Action>Set Value</Action>
+                      <Keys>
+                        <Key>104</Key>
+                      </Keys>
+                      <Value>78000410</Value>
+                      <ID>1</ID>
+                    </Hotkey>
+                  </Hotkeys>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>354</ID>
+                      <Description>"?? (if set to 0, will disable updating player coordinates)"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>Byte</VariableType>
+                      <Address>pCollision</Address>
+                      <Offsets>
+                        <Offset>4A</Offset>
+                      </Offsets>
+                      <Hotkeys>
+                        <Hotkey>
+                          <Action>Set Value</Action>
+                          <Keys>
+                            <Key>103</Key>
+                          </Keys>
+                          <Value>0</Value>
+                          <ID>0</ID>
+                        </Hotkey>
+                        <Hotkey>
+                          <Action>Set Value</Action>
+                          <Keys>
+                            <Key>104</Key>
+                          </Keys>
+                          <Value>1</Value>
+                          <ID>1</ID>
+                        </Hotkey>
+                      </Hotkeys>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>355</ID>
+                      <Description>"?? (set to 0, you can't move; default: 65)"</Description>
+                      <VariableType>Float</VariableType>
+                      <Address>pCollision</Address>
+                      <Offsets>
+                        <Offset>F18</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>356</ID>
+                      <Description>"X"</Description>
+                      <VariableType>Float</VariableType>
+                      <Address>pCollision</Address>
+                      <Offsets>
+                        <Offset>FA0</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>357</ID>
+                      <Description>"Y"</Description>
+                      <VariableType>Float</VariableType>
+                      <Address>pCollision</Address>
+                      <Offsets>
+                        <Offset>FA4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>358</ID>
+                      <Description>"Z"</Description>
+                      <VariableType>Float</VariableType>
+                      <Address>pCollision</Address>
+                      <Offsets>
+                        <Offset>FA8</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>359</ID>
+              <Description>"[Inventory]"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>800080</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>360</ID>
+                  <Description>"Money"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pMoney</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>361</ID>
+                  <Description>"Voltaic Bombs"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pVoltaicBombs</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>362</ID>
+                  <Description>"Smoke Bombs"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pSmokeBombs</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>363</ID>
+                  <Description>"Throwing Knives"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pThrowingKnives</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>364</ID>
+                  <Description>"Medicine"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pMedicine</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>365</ID>
+                  <Description>"Hallucinogenic Darts"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pHallucinogenicDarts</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>366</ID>
+                  <Description>"Bullets"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pBullets</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>367</ID>
+                  <Description>"Fear Bombs (active only in DLC)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pFearBombs</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>368</ID>
+                  <Description>"Spikes (active only in DLC)"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pSpikes</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>369</ID>
+                  <Description>"Leather"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pLeather</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>370</ID>
+                  <Description>"Iron"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pIron</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>371</ID>
+                  <Description>"Thread"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pThread</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>372</ID>
+                  <Description>"Chemicals"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pChemicals</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>373</ID>
+          <Description>"TestHandler"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+alloc( KeyHandlerThread, 2048, ACS.exe )
+registersymbol( KeyHandlerThread )
+CreateThread( KeyHandlerThread )
+alloc( KeyHandlerOff, 4, ACS.exe )
+registersymbol( KeyHandlerOff )
+label( ExitKeyHandler )
+label( KeyHandlerThread_loop )
+
+// functions list start
+
+label( TestA_do )
+label( TestB_do )
+
+// end of Functions list
+
+KeyHandlerOff:
+dd 0
+
+KeyHandlerThread:
+sub rsp,28
+
+KeyHandlerThread_loop:
+mov rcx,0a
+call Sleep
+
+cmp [KeyHandlerOff],1
+je ExitKeyHandler
+
+mov rcx,6E // VK_NUMPAD.
+call GetAsyncKeyState
+test ax,ax
+jne TestA_do
+
+mov rcx,6F // VK_NUMPAD */
+call GetAsyncKeyState
+test ax,ax
+jne TestB_do
+
+jmp KeyHandlerThread_loop
+
+TestA_do:
+mov rdx,9C652400
+mov rcx,1
+call 140FFC3D0 // Nuke Youreself
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+TestB_do:
+call 140B7AA10 // ??
+mov rcx,C8
+call Sleep
+jmp KeyHandlerThread_loop
+
+ExitKeyHandler:
+add rsp,28
+mov [KeyHandlerOff],2
+ret
+
+[DISABLE]
+
+{$lua}
+
+if( syntaxcheck == false ) then --actual execution
+  local starttime = getTickCount()
+
+if readInteger( "KeyHandlerOff" ) == 0 then --could be 2 already
+  writeInteger( "KeyHandlerOff", 1 ) --tell the thread to kill itself
+end
+
+while( getTickCount() &lt; starttime + 1000 ) and ( readInteger( "KeyHandlerOff" ) ~=2 ) do --wait till it has finished
+  sleep( 20 )
+end
+
+if( getTickCount() &gt; starttime + 1000 ) then --could happen when the window is shown
+  showMessage( 'Disabling the thread failed!' )
+  error( 'Thread disabling failed!' )
+end
+  sleep( 1 )
+end
+
+{$asm}
+
+unregistersymbol( KeyHandlerOff )
+dealloc( KeyHandlerOff )
+unregistersymbol( KeyHandlerThread )
+dealloc( KeyHandlerThread )
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Structures StructVersion="2">
+    <Structure Name="ObjStruct" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" DisplayMethod="Unsigned Integer">
+          <Structure Name="Autocreated from 143293E28" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+            <Elements>
+              <Element Offset="56" Vartype="8 Bytes" Bytesize="8" Description="GetName" DisplayMethod="Hexadecimal"/>
+            </Elements>
+          </Structure>
+        </Element>
+      </Elements>
+    </Structure>
+    <Structure Name="GetName" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" DisplayMethod="Unsigned Integer">
+          <Structure Name="Autocreated from 143E97F30" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+            <Elements>
+              <Element Offset="24" Vartype="Pointer" Bytesize="8" DisplayMethod="Unsigned Integer">
+                <Structure Name="Autocreated from 143275230" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+                  <Elements>
+                    <Element Offset="0" Vartype="String" Bytesize="100" DisplayMethod="Unsigned Integer"/>
+                  </Elements>
+                </Structure>
+              </Element>
+            </Elements>
+          </Structure>
+        </Element>
+      </Elements>
+    </Structure>
+  </Structures>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"ACOrigins.exe"+178B403</Address>
+      <Comment>&lt;-- Update Health
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"ACOrigins.exe"+836B560</Address>
+      <Comment>&lt;-- UpdateCurrentHealth
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>
