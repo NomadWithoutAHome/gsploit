@@ -1,0 +1,2904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="31">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3872</ID>
+      <Description>"Unlimited Health"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(uv0,EoCApp.exe,89 B3 D8 01 00 00 48 8D 54 24 40)
+alloc(newmem,$800,uv0)
+
+label(code)
+label(return)
+
+newmem:
+mov edx,[rbx+00000240]
+cmp edx,1
+jne code
+mov esi,[rbx+00000330]
+code:
+mov [rbx+000001D8],esi
+jmp return
+
+uv0:
+jmp newmem
+db 90
+return:
+registersymbol(uv0)
+
+[DISABLE]
+uv0:
+db 89 B3 D8 01 00 00
+
+unregistersymbol(uv0)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3883</ID>
+      <Description>"Unlimited Carry Weight"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(weight,EoCApp.exe,E8 ?? ?? ?? ?? 0F AF C3 66 0F 6E C0 0F 5B C0 F3 0F 59 C2)
+alloc(mem_copy,$800,weight)
+
+label(code)
+
+mem_copy:
+readmem(weight,5)
+code:
+mov eax,#9999
+ret
+
+weight:
+call code
+
+registersymbol(weight)
+registersymbol(mem_copy)
+
+[DISABLE]
+weight:
+readmem(mem_copy,5)
+unregistersymbol(weight)
+unregistersymbol(mem_copy)
+dealloc(mem_copy)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10537</ID>
+      <Description>"Unlimited Action Points"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(ap_inject,EoCApp.exe,48 8B 83 38 01 00 00 2B F7)
+alloc(newmem,$800,ap_inject)
+
+label(code)
+label(return)
+
+newmem:
+  mov rax,["EoCApp.exe"+029E08D8]
+  test rax,rax
+  jle code
+mov rax,[rax+00000190]
+cmp [rax],rbx
+je return+08
+cmp [rax+08],rbx
+je return+08
+cmp [rax+10],rbx
+je return+08
+cmp [rax+18],rbx
+je return+08
+code:
+  mov rax,[rbx+00000138]
+  jmp return
+
+ap_inject:
+  jmp newmem
+  db 90 90
+return:
+registersymbol(ap_inject)
+
+[DISABLE]
+
+ap_inject:
+  db 48 8B 83 38 01 00 00
+
+unregistersymbol(ap_inject)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10332</ID>
+      <Description>"Unlimited Magical Armor"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(magic_armour,EoCApp.exe,41 8B C3 0F 4F C1 89 82 E0 01 00 00 E9)
+aobscanmodule(magic_armour0,EoCApp.exe,41 8B C3 0F 4F C1 89 82 E0 01 00 00)
+alloc(newmem,$1000,magic_armour)
+
+label(newmem0)
+label(code0)
+label(return0)
+label(code)
+label(return)
+
+newmem:
+  mov rax,["EoCApp.exe"+029E08D8]
+  test rax,rax
+  jle code
+mov rax,[rax+00000190]
+cmp [rax],r13
+je return+06
+cmp [rax+08],r13
+je return+06
+cmp [rax+10],r13
+je return+06
+cmp [rax+18],r13
+je return+06
+code:
+  mov eax,r11d
+  cmovg eax,ecx
+  jmp return
+newmem0:
+  mov rax,["EoCApp.exe"+029E08D8]
+  test rax,rax
+  jle code0
+mov rax,[rax+00000190]
+cmp [rax],r13
+je return0+06
+cmp [rax+08],r13
+je return0+06
+cmp [rax+10],r13
+je return0+06
+cmp [rax+18],r13
+je return0+06
+code0:
+mov eax,r11d
+cmovg eax,ecx
+jmp return0
+
+magic_armour:
+  jmp newmem
+  nop
+return:
+magic_armour0:
+  jmp newmem0
+  nop
+return0:
+
+registersymbol(magic_armour)
+registersymbol(magic_armour0)
+
+[DISABLE]
+magic_armour:
+db 41 8B C3 0F 4F C1
+magic_armour0:
+db 41 8B C3 0F 4F C1 89 82 E0 01 00 00
+
+unregistersymbol(magic_armour)
+unregistersymbol(magic_armour0)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10333</ID>
+      <Description>"Unlimited Source Uses"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(sp_inject,EoCApp.exe,41 8B 84 24 EC 01 00 00 2B C6 85 C0 44 0F 4F F8)
+alloc(newmem,$800,sp_inject)
+
+label(code)
+label(return)
+
+newmem:
+  mov eax,[r12+00000240]
+  cmp eax,01
+  jne code
+mov eax,[r12+000001EC]
+mov r15d,eax
+jmp return+08
+code:
+mov eax,[r12+000001EC]
+jmp return
+
+sp_inject:
+  jmp newmem
+db 90 90 90
+return:
+registersymbol(sp_inject)
+
+[DISABLE]
+
+sp_inject:
+  db 41 8B 84 24 EC 01 00 00
+
+unregistersymbol(sp_inject)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3552</ID>
+      <Description>"Remove Skill Cooldown"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(cooldown,EoCApp.exe,F3 0F 10 4B 34 76)
+cooldown:
+  db 0F 57 C9 90 90
+registersymbol(cooldown)
+
+[DISABLE]
+cooldown:
+  db F3 0F 10 4B 34
+unregistersymbol(cooldown)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3595</ID>
+      <Description>"Unlimited Durability"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(durability,EoCApp.exe,29 B3 ? ? 00 00 8B 83 ? ? 00 00 41 0F 48 C6)
+
+durability:
+db EB 04
+durability+C:
+db 90 90 90 90
+registersymbol(durability)
+
+[DISABLE]
+durability:
+db 29 B3
+durability+C:
+db 41 0F 48 C6
+unregistersymbol(durability)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10588</ID>
+      <Description>"Set Treasure Level"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(tl_aob,EoCApp.exe,80 BD F4 03 00 00 00 74 2E 4D 85 F6 74 19)
+alloc(code,$800,tl_aob)
+
+label(return)
+label(tl_value)
+
+code:
+cmp [tl_value],0
+jle return+1E
+mov ebp,[tl_value]
+jmp return+34
+tl_value:
+dd 0
+
+tl_aob:
+jmp code
+nop 4
+return:
+registersymbol(tl_aob)
+registersymbol(tl_value)
+
+[DISABLE]
+tl_aob:
+db 80 BD F4 03 00 00 00 74 2E
+
+unregistersymbol(tl_aob)
+unregistersymbol(tl_value)
+dealloc(code)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10281</ID>
+          <Description>"Treasure Level"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>tl_value</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10502</ID>
+      <Description>"Immunity"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(immunity,EoCApp.exe,8B 84 83 50 03 00 00 44 0F A3 C0)
+alloc(newmem,$800,immunity)
+
+label(code)
+label(return)
+
+newmem:
+mov edx,[rbx+00000240]
+cmp edx,01
+jne code
+or [rbx+00000350],263FF9FF
+or [rbx+00000354],0009A1AC
+code:
+mov eax,[rbx+rax*4+00000350]
+jmp return
+
+immunity:
+  jmp newmem
+  db 90 90
+return:
+registersymbol(immunity)
+
+[DISABLE]
+
+immunity:
+db 8B 84 83 50 03 00 00
+
+unregistersymbol(immunity)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10504</ID>
+      <Description>"Testing Physical Armor"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(upa0,EoCApp.exe,41 3B CA 44 0F 4C D1 41 2B CA 8B 82 38)
+alloc(newmem,$1000,upa0)
+
+label(code)
+label(return)
+
+newmem:
+mov eax,[rdx+00000240]
+cmp eax,01
+je return+03
+code:
+xor r10d,r10d
+mov ecx,r10d
+mov eax,[rdx+00000330]
+add [rsp+64],eax
+add [rbx],eax
+jmp return+03
+
+upa0:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(upa0)
+
+[DISABLE]
+upa0:
+  db 41 3B CA 44 0F 4C D1
+
+unregistersymbol(upa0)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3574</ID>
+      <Description>"Last Moved Item in Backpack"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(last_item,EoCApp.exe,4C 8B E0 4C 89 7D)
+alloc(newmem,$800,last_item)
+
+label(return)
+label(item_ptr)
+label(item_bkp)
+
+newmem:
+  mov r12,item_ptr
+  mov [r12],rax
+item_bkp:
+  readmem(last_item,7)
+  jmp return
+item_ptr:
+  dq 0
+
+last_item:
+jmp newmem
+db 90 90
+return:
+registersymbol(last_item)
+registersymbol(item_ptr)
+registersymbol(item_bkp)
+
+[DISABLE]
+last_item:
+  readmem(item_bkp,7)
+unregistersymbol(last_item)
+unregistersymbol(item_ptr)
+unregistersymbol(item_bkp)
+dealloc(newmem)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3573</ID>
+          <Description>"Base Address"</Description>
+          <LastState RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>String</VariableType>
+          <Length>0</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>item_ptr</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3526</ID>
+              <Description>"Display Name"</Description>
+              <VariableType>String</VariableType>
+              <Length>64</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>+138</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3572</ID>
+              <Description>"Quantity"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+16C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3541</ID>
+              <Description>"Current Durability"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+140</Address>
+              <Offsets>
+                <Offset>214</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4060</ID>
+              <Description>"Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+140</Address>
+              <Offsets>
+                <Offset>C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10331</ID>
+              <Description>"Number of uses"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+140</Address>
+              <Offsets>
+                <Offset>25C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>3667</ID>
+              <Description>"Rarity"</Description>
+              <VariableType>String</VariableType>
+              <Length>32</Length>
+              <Unicode>0</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>+1e8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3567</ID>
+      <Description>"Unlimited Item Quantity"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(items,EoCApp.exe,2B DD 48 8B C8 8B D3 E8)
+aobscanmodule(item0,EoCApp.exe,FF CB 48 8B C8 8B D3 E8 ? ? ? ? 85 DB)
+
+items:
+db 90 90
+item0:
+db 90 90
+
+registersymbol(items)
+registersymbol(item0)
+
+[DISABLE]
+items:
+db 2B DD
+item0:
+db FF CB
+
+unregistersymbol(items)
+unregistersymbol(item0)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3863</ID>
+      <Description>"Unlimited Item Split"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(split,EoCApp.exe,48 85 C0 0F 84 ? 00 00 00 29 ? 6C 01 00 00)
+
+split:
+db 48 85 C0 EB 0A
+registersymbol(split)
+
+[DISABLE]
+split:
+db 48 85 C0 0F 84
+unregistersymbol(split)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4059</ID>
+      <Description>"Treat Containers as New"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(magic_find,EoCApp.exe,75 30 48 8B 01 FF 50 50 48 05)
+magic_find:
+  db 90 90
+registersymbol(magic_find)
+
+aobscanmodule(magic2,EoCApp.exe,0F B6 81 88 00 00 00 4C 8B ?? ?? ?? ?? A8 10)
+magic2:
+  db 31 C0 90 90 90 90 90
+registersymbol(magic2)
+
+[DISABLE]
+magic_find:
+  db 75 30
+unregistersymbol(magic_find)
+
+magic2:
+  db 0F B6 81 88 00 00 00
+unregistersymbol(magic2)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3666</ID>
+      <Description>"Find Items in New Containers"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(magic4,EoCApp.exe,48 8B 8C 24 D0 00 00 00 41 8B D5)
+alloc(newmem,$1000,magic4)
+
+label(code)
+label(return)
+label(spawnId)
+
+newmem:
+  cmp rsi,1
+  je code
+  mov rax,spawnId
+  mov eax,[rax]
+code:
+  mov rcx,[rsp+000000D0]
+  jmp return
+
+spawnId:
+  dd #442
+
+magic4:
+jmp newmem
+db 90 90 90
+return:
+registersymbol(magic4)
+registersymbol(spawnId)
+
+[DISABLE]
+magic4:
+db 48 8B 8C 24 D0 00 00 00
+unregistersymbol(magic4)
+unregistersymbol(spawnId)
+dealloc(newmem)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3660</ID>
+          <Description>"Item ID"</Description>
+          <DropDownList DisplayValueAsItem="1">8:WeaponShield_HighestRarity
+17:RingAmuletBelt_HighestRarity
+20:Armor_HighestRarity
+33:ST_Potions
+34:ST_PotionsSpecial
+35:ST_Ingredients
+36:ST_Grenades
+37:ST_Arrows
+40:ST_Scrolls
+41:ST_RareIngredient
+42:ST_PaperWork
+72:ST_Skillbook
+83:ST_AllPotions
+84:ST_Neo_LegendaryPotions
+295:QuestReward_Fixed_Impossible
+300:QuestReward_Choice_Impossible
+442:Luck
+498:CheatRuneFraming
+523:EquipAllRarities
+</DropDownList>
+          <VariableType>4 Bytes</VariableType>
+          <Address>spawnId</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10329</ID>
+      <Description>"More Experience"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(Multi_Exp,EoCApp.exe,01 BB F8 01 00 00 75 0E 8B 43 0C)
+alloc(newmem,$800,Multi_Exp)
+
+label(code)
+label(return)
+
+newmem:
+shl edi,3
+code:
+  add [rbx+000001F8],edi
+  jmp return
+
+Multi_Exp:
+  jmp newmem
+  nop
+return:
+registersymbol(Multi_Exp)
+
+[DISABLE]
+Multi_Exp:
+  db 01 BB F8 01 00 00
+
+unregistersymbol(Multi_Exp)
+dealloc(newmem)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10586</ID>
+      <Description>"Source Infusion"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(sp_added,EoCApp.exe,3B D0 0F 8E E0 00 00 00 2B C8 41 89 84 24 EC 01 00 00)
+aobscanmodule(sp_infused,EoCApp.exe,3B C3 0F 8D 2C 0D 00 00 48 8B 07)
+sp_added:
+db 3B D0 90 E9
+sp_infused:
+db eb 06
+
+registersymbol(sp_infused)
+registersymbol(sp_added)
+
+[DISABLE]
+sp_added:
+db 3B D0 0F 8E E0 00 00 00
+sp_infused:
+db 3B C3
+
+unregistersymbol(sp_infused)
+unregistersymbol(sp_added)
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10348</ID>
+      <Description>"First Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3499</ID>
+          <Description>"Attributes"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3500</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>320</Offset>
+                <Offset>0</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3501</ID>
+                  <Description>"Strength"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3502</ID>
+                  <Description>"Finesse"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3503</ID>
+                  <Description>"Intelligence"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3504</ID>
+                  <Description>"Constitution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+c</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3505</ID>
+                  <Description>"Memory"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3506</ID>
+                  <Description>"Wits"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3608</ID>
+          <Description>"Skills"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3609</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>340</Offset>
+                <Offset>0</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3610</ID>
+                  <Description>"Warfare"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3612</ID>
+                  <Description>"Huntsman"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3613</ID>
+                  <Description>"Scoundrel"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3614</ID>
+                  <Description>"Single-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3615</ID>
+                  <Description>"Two-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3616</ID>
+                  <Description>"Retribution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3617</ID>
+                  <Description>"Ranged"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+18</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3626</ID>
+                  <Description>"Pyrokinetic"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+34</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3627</ID>
+                  <Description>"Hydrosophist"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+38</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3628</ID>
+                  <Description>"Aerotheurge"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+3C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3629</ID>
+                  <Description>"Geomancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+40</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3630</ID>
+                  <Description>"Necromancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+44</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3631</ID>
+                  <Description>"Summoning"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+48</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3632</ID>
+                  <Description>"Polymorph"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3633</ID>
+                  <Description>"Telekinesis"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+50</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3635</ID>
+                  <Description>"Sneaking"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+58</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3637</ID>
+                  <Description>"Thievery"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+60</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3638</ID>
+                  <Description>"LoreMaster"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+64</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3640</ID>
+                  <Description>"Bartering"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+6C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3644</ID>
+                  <Description>"Persuasion"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+7C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3645</ID>
+                  <Description>"Leadership"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+80</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3646</ID>
+                  <Description>"Lucky Charm"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+84</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3647</ID>
+                  <Description>"Dual Wielding"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+88</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3649</ID>
+                  <Description>"Perseverance"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+90</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3517</ID>
+          <Description>"Points"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3518</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>18</Offset>
+                <Offset>0</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>3549</ID>
+                  <Description>"Attributes"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2E8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3520</ID>
+                  <Description>"Combat Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2EC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3521</ID>
+                  <Description>"Civil Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>3522</ID>
+                  <Description>"Talents"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F4</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10325</ID>
+          <Description>"Name"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>String</VariableType>
+          <Length>32</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>30</Offset>
+            <Offset>138</Offset>
+            <Offset>0</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10320</ID>
+          <Description>"Base Address"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>138</Offset>
+            <Offset>0</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10328</ID>
+              <Description>"Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10323</ID>
+              <Description>"Health"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1d8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10321</ID>
+              <Description>"Physical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1dC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10322</ID>
+              <Description>"Magical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1e0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10324</ID>
+              <Description>"Source Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1EC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10326</ID>
+              <Description>"Action Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10327</ID>
+              <Description>"Experience"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10336</ID>
+              <Description>"Immunities"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>+350</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10349</ID>
+      <Description>"Second Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10350</ID>
+          <Description>"Attributes"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10351</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>320</Offset>
+                <Offset>8</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10352</ID>
+                  <Description>"Strength"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10353</ID>
+                  <Description>"Finesse"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10354</ID>
+                  <Description>"Intelligence"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10355</ID>
+                  <Description>"Constitution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+c</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10356</ID>
+                  <Description>"Memory"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10357</ID>
+                  <Description>"Wits"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10358</ID>
+          <Description>"Skills"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10359</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>340</Offset>
+                <Offset>8</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10360</ID>
+                  <Description>"Warfare"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10361</ID>
+                  <Description>"Huntsman"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10362</ID>
+                  <Description>"Scoundrel"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10363</ID>
+                  <Description>"Single-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10364</ID>
+                  <Description>"Two-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10365</ID>
+                  <Description>"Retribution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10366</ID>
+                  <Description>"Ranged"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+18</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10367</ID>
+                  <Description>"Pyrokinetic"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+34</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10368</ID>
+                  <Description>"Hydrosophist"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+38</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10369</ID>
+                  <Description>"Aerotheurge"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+3C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10370</ID>
+                  <Description>"Geomancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+40</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10371</ID>
+                  <Description>"Necromancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+44</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10372</ID>
+                  <Description>"Summoning"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+48</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10373</ID>
+                  <Description>"Polymorph"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10374</ID>
+                  <Description>"Telekinesis"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+50</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10375</ID>
+                  <Description>"Sneaking"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+58</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10376</ID>
+                  <Description>"Thievery"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+60</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10377</ID>
+                  <Description>"LoreMaster"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+64</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10378</ID>
+                  <Description>"Bartering"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+6C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10379</ID>
+                  <Description>"Persuasion"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+7C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10380</ID>
+                  <Description>"Leadership"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+80</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10381</ID>
+                  <Description>"Lucky Charm"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+84</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10382</ID>
+                  <Description>"Dual Wielding"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+88</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10383</ID>
+                  <Description>"Perseverance"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+90</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10384</ID>
+          <Description>"Points"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10385</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>18</Offset>
+                <Offset>8</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10386</ID>
+                  <Description>"Attributes"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2E8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10387</ID>
+                  <Description>"Combat Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2EC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10388</ID>
+                  <Description>"Civil Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10389</ID>
+                  <Description>"Talents"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F4</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10390</ID>
+          <Description>"Name"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>String</VariableType>
+          <Length>32</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>30</Offset>
+            <Offset>138</Offset>
+            <Offset>8</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10391</ID>
+          <Description>"Base Address"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>138</Offset>
+            <Offset>8</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10392</ID>
+              <Description>"Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10393</ID>
+              <Description>"Health"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1d8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10394</ID>
+              <Description>"Physical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1dC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10395</ID>
+              <Description>"Magical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1e0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10396</ID>
+              <Description>"Source Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1EC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10397</ID>
+              <Description>"Action Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10398</ID>
+              <Description>"Experience"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10399</ID>
+              <Description>"Immunities"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>+350</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10400</ID>
+      <Description>"Third Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10401</ID>
+          <Description>"Attributes"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10402</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>320</Offset>
+                <Offset>10</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10403</ID>
+                  <Description>"Strength"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10404</ID>
+                  <Description>"Finesse"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10405</ID>
+                  <Description>"Intelligence"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10406</ID>
+                  <Description>"Constitution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+c</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10407</ID>
+                  <Description>"Memory"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10408</ID>
+                  <Description>"Wits"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10409</ID>
+          <Description>"Skills"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10410</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>340</Offset>
+                <Offset>10</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10411</ID>
+                  <Description>"Warfare"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10412</ID>
+                  <Description>"Huntsman"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10413</ID>
+                  <Description>"Scoundrel"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10414</ID>
+                  <Description>"Single-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10415</ID>
+                  <Description>"Two-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10416</ID>
+                  <Description>"Retribution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10417</ID>
+                  <Description>"Ranged"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+18</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10418</ID>
+                  <Description>"Pyrokinetic"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+34</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10419</ID>
+                  <Description>"Hydrosophist"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+38</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10420</ID>
+                  <Description>"Aerotheurge"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+3C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10421</ID>
+                  <Description>"Geomancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+40</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10422</ID>
+                  <Description>"Necromancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+44</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10423</ID>
+                  <Description>"Summoning"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+48</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10424</ID>
+                  <Description>"Polymorph"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10425</ID>
+                  <Description>"Telekinesis"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+50</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10426</ID>
+                  <Description>"Sneaking"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+58</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10427</ID>
+                  <Description>"Thievery"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+60</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10428</ID>
+                  <Description>"LoreMaster"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+64</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10429</ID>
+                  <Description>"Bartering"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+6C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10430</ID>
+                  <Description>"Persuasion"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+7C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10431</ID>
+                  <Description>"Leadership"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+80</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10432</ID>
+                  <Description>"Lucky Charm"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+84</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10433</ID>
+                  <Description>"Dual Wielding"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+88</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10434</ID>
+                  <Description>"Perseverance"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+90</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10435</ID>
+          <Description>"Points"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10436</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>18</Offset>
+                <Offset>10</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10437</ID>
+                  <Description>"Attributes"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2E8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10438</ID>
+                  <Description>"Combat Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2EC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10439</ID>
+                  <Description>"Civil Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10440</ID>
+                  <Description>"Talents"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F4</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10441</ID>
+          <Description>"Name"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>String</VariableType>
+          <Length>32</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>30</Offset>
+            <Offset>138</Offset>
+            <Offset>10</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10442</ID>
+          <Description>"Base Address"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>138</Offset>
+            <Offset>10</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10443</ID>
+              <Description>"Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10444</ID>
+              <Description>"Health"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1d8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10445</ID>
+              <Description>"Physical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1dC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10446</ID>
+              <Description>"Magical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1e0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10447</ID>
+              <Description>"Source Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1EC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10448</ID>
+              <Description>"Action Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10449</ID>
+              <Description>"Experience"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10450</ID>
+              <Description>"Immunities"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>+350</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10451</ID>
+      <Description>"Fourth Player"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>10452</ID>
+          <Description>"Attributes"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10453</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>320</Offset>
+                <Offset>18</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10454</ID>
+                  <Description>"Strength"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10455</ID>
+                  <Description>"Finesse"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10456</ID>
+                  <Description>"Intelligence"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10457</ID>
+                  <Description>"Constitution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+c</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10458</ID>
+                  <Description>"Memory"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10459</ID>
+                  <Description>"Wits"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10460</ID>
+          <Description>"Skills"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10461</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>340</Offset>
+                <Offset>18</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10462</ID>
+                  <Description>"Warfare"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10463</ID>
+                  <Description>"Huntsman"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10464</ID>
+                  <Description>"Scoundrel"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10465</ID>
+                  <Description>"Single-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10466</ID>
+                  <Description>"Two-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10467</ID>
+                  <Description>"Retribution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10468</ID>
+                  <Description>"Ranged"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+18</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10469</ID>
+                  <Description>"Pyrokinetic"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+34</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10470</ID>
+                  <Description>"Hydrosophist"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+38</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10471</ID>
+                  <Description>"Aerotheurge"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+3C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10472</ID>
+                  <Description>"Geomancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+40</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10473</ID>
+                  <Description>"Necromancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+44</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10474</ID>
+                  <Description>"Summoning"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+48</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10475</ID>
+                  <Description>"Polymorph"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10476</ID>
+                  <Description>"Telekinesis"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+50</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10477</ID>
+                  <Description>"Sneaking"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+58</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10478</ID>
+                  <Description>"Thievery"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+60</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10479</ID>
+                  <Description>"LoreMaster"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+64</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10480</ID>
+                  <Description>"Bartering"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+6C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10481</ID>
+                  <Description>"Persuasion"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+7C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10482</ID>
+                  <Description>"Leadership"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+80</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10483</ID>
+                  <Description>"Lucky Charm"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+84</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10484</ID>
+                  <Description>"Dual Wielding"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+88</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10485</ID>
+                  <Description>"Perseverance"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+90</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10486</ID>
+          <Description>"Points"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10487</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>"EoCApp.exe"+029E08D8</Address>
+              <Offsets>
+                <Offset>18</Offset>
+                <Offset>18</Offset>
+                <Offset>190</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10488</ID>
+                  <Description>"Attributes"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2E8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10489</ID>
+                  <Description>"Combat Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2EC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10490</ID>
+                  <Description>"Civil Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10491</ID>
+                  <Description>"Talents"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F4</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10492</ID>
+          <Description>"Name"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>String</VariableType>
+          <Length>32</Length>
+          <Unicode>0</Unicode>
+          <CodePage>0</CodePage>
+          <ZeroTerminate>1</ZeroTerminate>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>30</Offset>
+            <Offset>138</Offset>
+            <Offset>18</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10493</ID>
+          <Description>"Base Address"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>"EoCApp.exe"+029E08D8</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>138</Offset>
+            <Offset>18</Offset>
+            <Offset>190</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10494</ID>
+              <Description>"Level"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+C</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10495</ID>
+              <Description>"Health"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1d8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10496</ID>
+              <Description>"Physical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1dC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10497</ID>
+              <Description>"Magical Armor"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1e0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10498</ID>
+              <Description>"Source Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1EC</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10499</ID>
+              <Description>"Action Points"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F0</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10500</ID>
+              <Description>"Experience"</Description>
+              <VariableType>4 Bytes</VariableType>
+              <Address>+1F8</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10501</ID>
+              <Description>"Immunities"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>8 Bytes</VariableType>
+              <Address>+350</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>3545</ID>
+      <Description>"Selected Character"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(player_aob,EoCApp.exe,48 8B 03 BA 00 02 10 00)
+alloc(code,$800,player_aob)
+
+label(return)
+label(player_ptr)
+
+code:
+mov rax,player_ptr
+mov [rax],rbx
+mov rax,[rbx]
+mov edx,00100200
+jmp return
+
+player_ptr:
+dq 0
+
+player_aob:
+jmp code
+db 90 90 90
+return:
+registersymbol(player_aob)
+registersymbol(player_ptr)
+
+[DISABLE]
+player_aob:
+db 48 8B 03 BA 00 02 10 00
+unregistersymbol(player_aob)
+unregistersymbol(player_ptr)
+dealloc(code)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>3496</ID>
+          <Description>"Base Address"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>0</ByteLength>
+          <Address>player_ptr</Address>
+          <Offsets>
+            <Offset>0</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10276</ID>
+              <Description>"Is GM"</Description>
+              <VariableType>Binary</VariableType>
+              <BitStart>6</BitStart>
+              <BitLength>1</BitLength>
+              <ShowAsBinary>0</ShowAsBinary>
+              <Address>+C1</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10538</ID>
+          <Description>"Attributes"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10539</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>320</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10540</ID>
+                  <Description>"Strength"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10541</ID>
+                  <Description>"Finesse"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10542</ID>
+                  <Description>"Intelligence"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10543</ID>
+                  <Description>"Constitution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+c</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10544</ID>
+                  <Description>"Memory"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10545</ID>
+                  <Description>"Wits"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3507</ID>
+          <Description>"Stats"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>3508</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>138</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10578</ID>
+                  <Description>"Level"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10579</ID>
+                  <Description>"Health"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+1d8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10580</ID>
+                  <Description>"Physical Armor"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+1dC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10581</ID>
+                  <Description>"Magical Armor"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+1e0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10582</ID>
+                  <Description>"Source Points"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+1EC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10583</ID>
+                  <Description>"Action Points"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+1F0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10584</ID>
+                  <Description>"Experience"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+1F8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10585</ID>
+                  <Description>"Max Source Points"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+374</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10161</ID>
+                  <Description>"Unit Name"</Description>
+                  <VariableType>String</VariableType>
+                  <Length>64</Length>
+                  <Unicode>0</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
+                  <Address>+30</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10546</ID>
+          <Description>"Skills"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10547</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>340</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10548</ID>
+                  <Description>"Warfare"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10549</ID>
+                  <Description>"Huntsman"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10550</ID>
+                  <Description>"Scoundrel"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10551</ID>
+                  <Description>"Single-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10552</ID>
+                  <Description>"Two-Handed"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10553</ID>
+                  <Description>"Retribution"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10554</ID>
+                  <Description>"Ranged"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+18</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10555</ID>
+                  <Description>"Pyrokinetic"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+34</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10556</ID>
+                  <Description>"Hydrosophist"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+38</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10557</ID>
+                  <Description>"Aerotheurge"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+3C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10558</ID>
+                  <Description>"Geomancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+40</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10559</ID>
+                  <Description>"Necromancer"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+44</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10560</ID>
+                  <Description>"Summoning"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+48</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10561</ID>
+                  <Description>"Polymorph"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10562</ID>
+                  <Description>"Telekinesis"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+50</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10563</ID>
+                  <Description>"Sneaking"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+58</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10564</ID>
+                  <Description>"Thievery"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+60</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10565</ID>
+                  <Description>"Lore Master"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+64</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10566</ID>
+                  <Description>"Bartering"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+6C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10567</ID>
+                  <Description>"Persuasion"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+7C</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10568</ID>
+                  <Description>"Leadership"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+80</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10569</ID>
+                  <Description>"Lucky Charm"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+84</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10570</ID>
+                  <Description>"Dual Wielding"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+88</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10571</ID>
+                  <Description>"Perseverance"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+90</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10572</ID>
+          <Description>"Points"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10573</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>18</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10574</ID>
+                  <Description>"Attributes"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2E8</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10575</ID>
+                  <Description>"Combat Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2EC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10576</ID>
+                  <Description>"Civil Abilities"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F0</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10577</ID>
+                  <Description>"Talents"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+2F4</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10169</ID>
+          <Description>"Tags"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>10135</ID>
+              <Description>"Base Address"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>0</ByteLength>
+              <Address>player_ptr</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>10170</ID>
+                  <Description>"Number of Active Tags"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>+4D4</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>10137</ID>
+                  <Description>"List of Tags"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>0</ByteLength>
+                  <Address>+4C8</Address>
+                  <Offsets>
+                    <Offset>0</Offset>
+                  </Offsets>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>10139</ID>
+                      <Description>"Tag 1 Address"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>+0</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>10140</ID>
+                          <Description>""</Description>
+                          <VariableType>String</VariableType>
+                          <Length>128</Length>
+                          <Unicode>0</Unicode>
+                          <CodePage>0</CodePage>
+                          <ZeroTerminate>1</ZeroTerminate>
+                          <Address>+0</Address>
+                          <Offsets>
+                            <Offset>0</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>10141</ID>
+                      <Description>"Tag 2 Address"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>+8</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>10142</ID>
+                          <Description>""</Description>
+                          <VariableType>String</VariableType>
+                          <Length>128</Length>
+                          <Unicode>0</Unicode>
+                          <CodePage>0</CodePage>
+                          <ZeroTerminate>1</ZeroTerminate>
+                          <Address>+0</Address>
+                          <Offsets>
+                            <Offset>0</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>10143</ID>
+                      <Description>"Tag 3 Address"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>+10</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>10144</ID>
+                          <Description>""</Description>
+                          <VariableType>String</VariableType>
+                          <Length>128</Length>
+                          <Unicode>0</Unicode>
+                          <CodePage>0</CodePage>
+                          <ZeroTerminate>1</ZeroTerminate>
+                          <Address>+0</Address>
+                          <Offsets>
+                            <Offset>0</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>10145</ID>
+                      <Description>"Tag 4 Address"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>+18</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>10146</ID>
+                          <Description>""</Description>
+                          <VariableType>String</VariableType>
+                          <Length>128</Length>
+                          <Unicode>0</Unicode>
+                          <CodePage>0</CodePage>
+                          <ZeroTerminate>1</ZeroTerminate>
+                          <Address>+0</Address>
+                          <Offsets>
+                            <Offset>0</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>10147</ID>
+                      <Description>"Tag 5 Address"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>+20</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>10148</ID>
+                          <Description>""</Description>
+                          <VariableType>String</VariableType>
+                          <Length>128</Length>
+                          <Unicode>0</Unicode>
+                          <CodePage>0</CodePage>
+                          <ZeroTerminate>1</ZeroTerminate>
+                          <Address>+0</Address>
+                          <Offsets>
+                            <Offset>0</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>10149</ID>
+                      <Description>"Tag 6 Address"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>+28</Address>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>10150</ID>
+                          <Description>""</Description>
+                          <VariableType>String</VariableType>
+                          <Length>128</Length>
+                          <Unicode>0</Unicode>
+                          <CodePage>0</CodePage>
+                          <ZeroTerminate>1</ZeroTerminate>
+                          <Address>+0</Address>
+                          <Offsets>
+                            <Offset>0</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4037</ID>
+      <Description>"Print Global Variables"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+local variables = readPointer("EoCApp.exe+29E07B8")
+variables = readPointer(variables + 0x2E0)
+local size = readInteger(variables) - 1
+variables = readPointer(variables + 0x8)
+for i = 0, size do
+  local variable = readPointer(variables + i * 8)
+  repeat
+    local name = readString(readPointer(variable + 0x8))
+    local address = variable + 0x10
+    local value = readFloat(address)
+    local result = string.format("%012X %s (%0.3f)", address, name, value)
+    print(result)
+    variable = readPointer(variable)
+  until variable == 0
+end
+assert(false)
+{$asm}
+[DISABLE]
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4062</ID>
+      <Description>"Print Treasure Identifiers"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+local treasure = readPointer("EoCApp.exe+29E07B8") + 0x1B0
+local size = readInteger(treasure + 0x40) - 1
+treasure = readPointer(treasure + 0x10)
+for i = 0, size do
+  local item = readPointer(i * 8 + treasure)
+  local name = readString(readPointer(item))
+  print(i..":"..name)
+end
+assert(false)
+{$asm}
+[DISABLE]
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>gold</Name>
+      <Address>7FF7D20FCC25</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>inventory</Name>
+      <Address>7FF617F688C1</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>actions_save</Name>
+      <Address>7FF618840000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>att_search</Name>
+      <Address>7FF6494E30A0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>combat_turn</Name>
+      <Address>7FF7A088D707</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>combat_turn_ptr</Name>
+      <Address>7FF79F920021</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>last_item_moved</Name>
+      <Address>7FF7A08EE77B</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>last_item_moved_ptr</Name>
+      <Address>7FF79F910021</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>full_durability</Name>
+      <Address>7FF7A09C36FD</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
