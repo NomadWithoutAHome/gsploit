@@ -1,0 +1,1898 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="34">
+  <Files>
+    <infAmmo Encoding="Ascii85">GiG35C]z?@ORY%NHgYjAGj{%Tax@wEbh0!wFfed7GchqTF*{c4wQzK^G%z:Hb2G89a56Cl00</infAmmo>
+    <infExplosives Encoding="Ascii85">GiP96C]z?@ORY%NHgvQ!HM2D0GBL4ma(_Fs29o9]78Xt{W@R[I(ITZ,vy,8_iHVVkk%6lP00</infExplosives>
+    <infLockpicks Encoding="Ascii85">Gh$$1C]z?@ORY%NHa2u{GBb4KGBI=rG(C=UFfp_-bvAHwGIO;tF=2IAb,$CIuy8UlHZ{kN</infLockpicks>
+    <modifyWeaponDamage Encoding="Ascii85">)]R5^C]z?@ORY%Nb}d+#F=Hm!aI!Ekb}ZFHu({f,HZ:e.Oe]#n%]FWr4BRYCU5o)</modifyWeaponDamage>
+    <fireRate Encoding="Ascii85">Gh$$1C]z?@ORY%NHgYv_HZnBhax-:[G[WwYa5gkBa5HsuHZZZUFm+99H,3}JH8uuv4FL</fireRate>
+    <fastReload Encoding="Ascii85">Gh_=3C]z?@ORY%NHgYmEbTW43ax-:[G[U_dLjwa76E]C[X9G7QOLG$:6LT:%5(!</fastReload>
+    <maxLei Encoding="Ascii85">vtVFgC]z?@ORY%NHZpc_HZ!x{GIut#u(@_7F_jbQuy8UlGc@Fx#=A)YU[O^Mb#XE]0RR</maxLei>
+    <craftCheck Encoding="Ascii85">Gh$$1C]z?@ORY%NHZ-s[Ft%^wGIy}sGcmBRa56D6u]}bz6Cm5g%+oZ%4ajkIGBE?I</craftCheck>
+    <noRecipeCost Encoding="Ascii85">Gh_=3C]z?@ORY%NHnem#Ffw!Gax+Znu)U99wlFj;FtM/3GBGzbFmX1vG(eA]aI-KqG6Mh</noRecipeCost>
+    <itemShowDistance Encoding="Ascii85">Ghkp}C]z?@ORY%NHa0LdH8VHoax-:[wQw@uF_^ypb#b#Wb#+i[Ffg(OaI!GBv.Z.z</itemShowDistance>
+    <turnOnFlashlight Encoding="Ascii85">GiG35C]z?@ORY%NHZ-zubv1S6a/g:EHn1:-cQiFLFfnm,GIKUCF=BOBbv6VEnpqf[7y/w</turnOnFlashlight>
+    <itemMouseover Encoding="Ascii85">GiP96C]z?@ORY%NHZn7@a5l2!GO?6+G/7yIu;dj5O@i$o4NT2{Y-3kvBLfpl3nw;[j1vF</itemMouseover>
+    <animationSpeed Encoding="Ascii85">GiG35C]z?@ORY%NHnuQzG[Ww@ax-:[wKO,0adx#ZF*)y-GIDbR3ptwsDMLdGa{yH*</animationSpeed>
+    <tankGun Encoding="Ascii85">Gh$$1C]z?@ORY%Nb}12vHQ.hKGchtWFfg(Oa56D81/{Ul7KRoE:B6fKDMLdO3jh</tankGun>
+    <infTimer Encoding="Ascii85">GiP96C]z?@ORY%NHZn0bH8pnRGI2I=GBG![FtIdtu]sc*aB=.Vk+3Z-1qL9Nxe1VE0RR</infTimer>
+    <scoreGain Encoding="Ascii85">Gh/,2C]z?@ORY%NHZ+WDbTx9}GBk5Dv?o%-a56DAH2}7a/]#w*2Ii)[:3qfrLy)^o00</scoreGain>
+    <ignoreCPCost Encoding="Ascii85">GiP96C]z?@ORY%NHgYs[GI4X@a/g:CHZZZUFm@UEGB9.?Hg=7WOe[E</ignoreCPCost>
+    <getPlayer Encoding="Ascii85">Gi6_4C]z?@ORY%NHZn1CGjlWLGO?65GIVh;F=Vq;H#e}]wlp@_v?o%7Gck2;b#+cZNxQfL00</getPlayer>
+    <getLei Encoding="Ascii85">Ghtw0C]z?@ORY%NHZ)DIG(OePGO:)oF+S9xv?mfow:l7:Fm+OCH=agVoJ/YO3[t:dMgR</getLei>
+  </Files>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>110</ID>
+      <Description>"Enable"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 
+	Date	: May 07, 2021
+	Author	: aSwedishMagyar
+}
+{$lua}
+-------------------------------------------------------------------------------------------------------------------
+--AOB Saver Section
+-------------------------------------------------------------------------------------------------------------------
+function saveAOBLocation(name)
+	if name == nil then return end
+	local file = refreshTableFile(name)
+    local addr = getAddressSafe(name)
+	local AOBITEM = getNameFromAddress(addr,true,false)
+    if AOBITEM == nil then AOBITEM = "NIL" end
+	local byteFunc = createByteTableString(readBytes(addr,20,true))
+    local bytes = stringToByteTable(AOBITEM.."\n"..byteFunc)
+    tableFileWriteBytes(file,bytes)
+end
+function readAOBLocation(name)
+	local file = findTableFile(name)
+    if file == nil then return nil end
+    local addressList = createStringList()
+    local stringStream = createStringStream()
+    stringStream.copyFrom(file.Stream,file.Stream.Size)
+    addressList.Text = stringStream.DataString
+	stringStream.destroy()
+	local addr = addressList[0]
+	local bytes = addressList[1]
+	addressList.destroy()
+	local checkBytes = createByteTableString(readBytes(addr,20,true))
+	if bytes == checkBytes then
+		unregisterSymbol(name)
+		registerSymbol(name,addr)
+		return true
+	end
+    return nil
+end
+function destroyTableFiles()
+    local symbolList = generateAOBList()
+    for i = 1,#symbolList do
+        local file = findTableFile(symbolList[i][2])
+        if file ~= nil then file.delete() end
+    end
+end
+function refreshTableFile(name)
+	local file = findTableFile(name)
+    if file then file.Delete() end
+    return createTableFile(name)
+end
+function tableFileWriteBytes(file,bytes)
+	file.Stream.Position = 0
+    file.Stream.write(bytes,#bytes)
+end
+function createByteTableString(byteTable)
+	if byteTable == nil or type(byteTable) ~= 'table' then return end
+    local str = ""
+	for i = 1,#byteTable do
+		local byte = string.format('%0X',byteTable[i])
+        str = str..byte
+    end
+    return str
+end
+-------------------------------------------------------------------------------------------------------------------
+--AOB Generation Section
+-------------------------------------------------------------------------------------------------------------------
+function generateAOBList()
+	local getPlayerAOB = '488B??????????4839????480F????EB??488B??488B????4839????74??0F57??E9????????488B??????????4533??4889????????????E8????????458B??488B??488B??488B??E8????????488B????4839????0F85'
+	local getLeiAOB = '480F????????????4885??74??488B????4885??75??4533??418D????E8????????488B'
+    local infAmmoAOB = 'A341B901000000'
+    local infExplosivesAOB = '448BCD4C8BC7488BD60F'
+    local infLockpicksAOB = '41B9010000004585C0'
+    local infTimerAOB = '4C2B47184903D8'
+    local tankGunAOB = 'C6??????488B????4883??????75??C6??????488B????4883??????75??F3????????4883??????75'
+    local modifyWeaponDamageAOB = '8B803C0100008983'
+    local fireRateAOB = 'F30F10878C0100000F5AC04885D275'
+    local fastReloadAOB = 'F30F10808001000044'
+    local maxLeiAOB = '7C18894D48'
+    local ignoreCPCostAOB = '0F9DC04883C4205E'
+    local craftCheckAOB = '7D864088B42490000000'
+    local noRecipeCostAOB = '0F00008986C8010000'
+    local itemMouseoverAOB = '4889??????4889??????574883????498B??488B??488B??488B????498B????4883'
+    local itemShowDistanceAOB = 'F30F58F14584ED'
+    local turnOnFlashlightAOB = '0F9FC0807A5100'
+    local animationSpeedAOB = 'F30F59714C'
+    local scoreGainAOB = '016F18488B4350'
+	return {	{getPlayerAOB,'getPlayer'},{getLeiAOB,'getLei'},
+    			{infAmmoAOB,'infAmmo'},{infExplosivesAOB,'infExplosives'},{infLockpicksAOB,'infLockpicks'},{infTimerAOB,'infTimer'},
+                {tankGunAOB,'tankGun'},{modifyWeaponDamageAOB,'modifyWeaponDamage'},{fireRateAOB,'fireRate'},{fastReloadAOB,'fastReload'},{maxLeiAOB,'maxLei'},
+				{ignoreCPCostAOB,'ignoreCPCost'},{craftCheckAOB,'craftCheck'},{noRecipeCostAOB,'noRecipeCost'},{itemMouseoverAOB,'itemMouseover'},
+                {itemShowDistanceAOB,'itemShowDistance'},{turnOnFlashlightAOB,'turnOnFlashlight'},
+                {animationSpeedAOB,'animationSpeed'},
+                {scoreGainAOB,'scoreGain'}}
+end
+function lua_scan(bytes)
+	local base = getAddressSafe(process)
+	local size = getModuleSize(process)
+	if not base then base = 0; size = 0x7FFFFFFFFFFF end
+	local memScanner = createMemScan()
+	local memFoundList = createFoundList(memScanner)
+	memScanner.firstScan(soExactValue,vtByteArray,rtRounded,bytes,nil,
+	base,base+size,"",fsmNotAligned,"",true,false,false,false)
+	memScanner.waitTillDone()
+	memFoundList.initialize()
+	local foundAdder = nil
+	if memFoundList.Count == 1 then
+		foundAdder = getAddressSafe(memFoundList.Address[0])
+    end
+	memScanner.destroy()
+	memFoundList.destroy()
+	return foundAdder
+end
+function getAddressFromOpcode(opAddr)
+	local disassembler = createDisassembler()
+	disassembler.disassemble(opAddr)
+    local disTable = disassembler.getLastDisassembleData()
+    if disTable.modrmValueType == 1 then return disTable.modrmValue end
+	return nil
+end
+-------------------------------------------------------------------------------------------------------------------
+--Enable/Disable Section
+-------------------------------------------------------------------------------------------------------------------
+function onEnable()
+	local luaEngine = GetLuaEngine()
+    luaEngine.MenuItem5.doClick()
+	local AOBList = generateAOBList()
+    for i = 1,#AOBList do
+        local bytes = AOBList[i][1]
+        local name = AOBList[i][2]
+	    if readAOBLocation(name) == nil then
+		    local opAddr = lua_scan(bytes)
+            if opAddr then
+                unregisterSymbol(name)
+                registerSymbol(name,opAddr)
+                saveAOBLocation(name)
+                print("Sucessfully Hooked: "..name)
+            end
+        end
+	end
+    registerBaseAddresses()
+    setUpdateTimer(100)
+    luaEngine.hide()
+end
+function onDisable()
+	local AOBList = generateAOBList()
+    for i = 1,#AOBList do unregisterSymbol(AOBList[i][2]) end
+    unregisterBaseAddresses()
+    setUpdateTimer(1000)
+end
+function registerBaseAddresses()
+	local symbolList = {{'getPlayer','basePlayer'},{'getLei','baseLei'}}
+    for i = 1,#symbolList do
+	    local opAddr = getAddressSafe(symbolList[i][1])
+        if opAddr then
+    	    local addr = getAddressFromOpcode(opAddr)
+            local name = symbolList[i][2]
+            if addr then unregisterSymbol(name);registerSymbol(name,addr) end
+        end
+    end
+end
+function unregisterBaseAddresses()
+	local symbolList = {'basePlayer','baseLei'}
+    for i = 1,#symbolList do
+        unregisterSymbol(symbolList[i])
+    end
+end
+function setUpdateTimer(time)
+	local upTimer = getUpdateTimer()
+    upTimer.SetInterval(time)
+end
+-------------------------------------------------------------------------------------------------------------------
+--Teleport Section
+-------------------------------------------------------------------------------------------------------------------
+tpLocation = nil
+function saveTPLocation()
+    local base = AddressList[('X Coord')].CurrentAddress
+    if base then
+        tpLocation = readBytes(base,0xC,true)
+        return
+    end
+	tpLocation = nil
+end
+function recallTPLocation()
+    local base = AddressList[('X Coord')].CurrentAddress
+    if base and tpLocation then
+        writeBytes(base,tpLocation)
+    end
+end
+if syntaxcheck then return end
+[ENABLE]
+onEnable()
+[DISABLE]
+onDisable()
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>201</ID>
+          <Description>"Player Base"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="1D407DB0"/>
+          <ShowAsSigned>0</ShowAsSigned>
+          <GroupHeader>1</GroupHeader>
+          <Address>basePlayer</Address>
+          <Offsets>
+            <Offset>0</Offset>
+            <Offset>78</Offset>
+            <Offset>68</Offset>
+            <Offset>1F8</Offset>
+          </Offsets>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>202</ID>
+              <Description>"Lei"</Description>
+              <LastState Value="9999999" RealAddress="207A3F48"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseLei</Address>
+              <Offsets>
+                <Offset>48</Offset>
+                <Offset>60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>198</ID>
+              <Description>"FOV"</Description>
+              <LastState Value="" RealAddress="C65849F0"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <GroupHeader>1</GroupHeader>
+              <Address>+128</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>50</Offset>
+                <Offset>20</Offset>
+                <Offset>20</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>124</ID>
+                  <Description>"FOV Value Idle"</Description>
+                  <LastState Value="95" RealAddress="C6584A28"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+38</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>193</ID>
+                  <Description>"FOV Value ADS"</Description>
+                  <LastState Value="70" RealAddress="C6584A2C"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+3C</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>199</ID>
+              <Description>"Movement Speed"</Description>
+              <LastState Value="" RealAddress="1F118060"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <GroupHeader>1</GroupHeader>
+              <Address>+80</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>183</ID>
+                  <Description>"Multiplier"</Description>
+                  <LastState Value="1" RealAddress="1F1181C4"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+164</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>144</ID>
+              <Description>"Health"</Description>
+              <LastState Value="" RealAddress="1F117B00"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <GroupHeader>1</GroupHeader>
+              <Address>+68</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>48</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>143</ID>
+                  <Description>"Max Health"</Description>
+                  <LastState Value="1000" RealAddress="1F117B10"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+10</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>145</ID>
+                  <Description>"Current Health"</Description>
+                  <LastState Value="1000" RealAddress="1F117B14"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>185</ID>
+              <Description>"Coordinates"</Description>
+              <LastState Value="" RealAddress="1F118350"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <GroupHeader>1</GroupHeader>
+              <Address>+78</Address>
+              <Offsets>
+                <Offset>0</Offset>
+                <Offset>50</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>35</ID>
+                  <Description>"X Coord"</Description>
+                  <LastState Value="-7.720526218" RealAddress="1F1184D0"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+180</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>36</ID>
+                  <Description>"Y Coord"</Description>
+                  <LastState Value="-6.338538647" RealAddress="1F1184D4"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+184</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>37</ID>
+                  <Description>"Z Coord"</Description>
+                  <LastState Value="-0.2711201906" RealAddress="1F1184D8"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Float</VariableType>
+                  <Address>+188</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>148</ID>
+          <Description>"Inf Health"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 
+	Date	: May 10, 2021
+	Author	: aSwedishMagyar
+}
+{$lua}
+function setGodmode(val)
+	local base = getAddressSafe('[[[[[basePlayer]+1F8]+68]+78]+60]+30')
+    if base then writeBytes(base,val) end
+end
+if syntaxcheck then return end
+[ENABLE]
+godT = createTimer()
+godT.setInterval(500)
+godT.OnTimer = function() setGodmode(0) end
+[DISABLE]
+godT.destroy()
+setGodmode(1)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>107</ID>
+          <Description>"Inf Ammo"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+infAmmo+03:
+  db 00
+
+[DISABLE]
+infAmmo+03:
+  db 01
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+2D067C4
+
+re8.exe+2D0677F: C3                 - ret 
+re8.exe+2D06780: 41 B9 01 00 00 00  - mov r9d,00000001
+re8.exe+2D06786: E8 55 17 37 FF     - call re8.exe+2077EE0
+re8.exe+2D0678B: 48 8B 43 50        - mov rax,[rbx+50]
+re8.exe+2D0678F: 48 83 78 18 00     - cmp qword ptr [rax+18],00
+re8.exe+2D06794: 75 B8              - jne re8.exe+2D0674E
+re8.exe+2D06796: 48 8B D7           - mov rdx,rdi
+re8.exe+2D06799: 48 8B CB           - mov rcx,rbx
+re8.exe+2D0679C: E8 CF 88 65 FD     - call re8.exe+35F070
+re8.exe+2D067A1: 48 8B 4B 50        - mov rcx,[rbx+50]
+re8.exe+2D067A5: 48 8B D0           - mov rdx,rax
+re8.exe+2D067A8: 48 83 79 18 00     - cmp qword ptr [rcx+18],00
+re8.exe+2D067AD: 75 9F              - jne re8.exe+2D0674E
+re8.exe+2D067AF: 48 8B 47 58        - mov rax,[rdi+58]
+re8.exe+2D067B3: 48 85 C0           - test rax,rax
+re8.exe+2D067B6: 74 87              - je re8.exe+2D0673F
+re8.exe+2D067B8: 4C 8B 40 10        - mov r8,[rax+10]
+re8.exe+2D067BC: 48 8B CB           - mov rcx,rbx
+re8.exe+2D067BF: 48 85 D2           - test rdx,rdx
+re8.exe+2D067C2: 74 A3              - je re8.exe+2D06767
+// ---------- INJECTING HERE ----------
+re8.exe+2D067C4: 41 B9 01 00 00 00  - mov r9d,00000001
+// ---------- DONE INJECTING  ----------
+re8.exe+2D067CA: C6 44 24 20 00     - mov byte ptr [rsp+20],00
+re8.exe+2D067CF: E8 AC 90 75 FF     - call re8.exe+245F880
+re8.exe+2D067D4: 48 8B 43 50        - mov rax,[rbx+50]
+re8.exe+2D067D8: 48 83 78 18 00     - cmp qword ptr [rax+18],00
+re8.exe+2D067DD: 0F 85 6B FF FF FF  - jne re8.exe+2D0674E
+re8.exe+2D067E3: 48 8B D7           - mov rdx,rdi
+re8.exe+2D067E6: 48 8B CB           - mov rcx,rbx
+re8.exe+2D067E9: E8 52 35 13 00     - call re8.exe+2E39D40
+re8.exe+2D067EE: 48 8B 43 50        - mov rax,[rbx+50]
+re8.exe+2D067F2: 48 83 78 18 00     - cmp qword ptr [rax+18],00
+re8.exe+2D067F7: 0F 94 C0           - sete al
+re8.exe+2D067FA: 48 8B 5C 24 40     - mov rbx,[rsp+40]
+re8.exe+2D067FF: 48 83 C4 30        - add rsp,30
+re8.exe+2D06803: 5F                 - pop rdi
+re8.exe+2D06804: C3                 - ret 
+re8.exe+2D06805: 48 8B 5C 24 40     - mov rbx,[rsp+40]
+re8.exe+2D0680A: B0 01              - mov al,01
+re8.exe+2D0680C: 48 83 C4 30        - add rsp,30
+re8.exe+2D06810: 5F                 - pop rdi
+re8.exe+2D06811: C3                 - ret 
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>108</ID>
+          <Description>"Inf Explosives"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+infExplosives:
+  xor r9d,r9d
+
+[DISABLE]
+infExplosives:
+  db 44 8B CD
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+1A95692
+
+re8.exe+1A95640: E9 EB 31 8F 01           - jmp re8.exe+3388830
+re8.exe+1A95645: 48 89 74 24 40           - mov [rsp+40],rsi
+re8.exe+1A9564A: 48 8B 71 60              - mov rsi,[rcx+60]
+re8.exe+1A9564E: 48 85 F6                 - test rsi,rsi
+re8.exe+1A95651: 74 57                    - je re8.exe+1A956AA
+re8.exe+1A95653: 48 83 3D 9D C5 71 08 00  - cmp qword ptr [re8.exe+A1B1BF8],00
+re8.exe+1A9565B: 48 8B CB                 - mov rcx,rbx
+re8.exe+1A9565E: 48 0F 45 15 82 92 70 08  - cmovne rdx,[re8.exe+A19E8E8]
+re8.exe+1A95666: 48 85 D2                 - test rdx,rdx
+re8.exe+1A95669: 75 0E                    - jne re8.exe+1A95679
+re8.exe+1A9566B: 45 33 C0                 - xor r8d,r8d
+re8.exe+1A9566E: 41 8D 50 38              - lea edx,[r8+38]
+re8.exe+1A95672: E8 B9 31 8F 01           - call re8.exe+3388830
+re8.exe+1A95677: EB 31                    - jmp re8.exe+1A956AA
+re8.exe+1A95679: 45 8B 40 3C              - mov r8d,[r8+3C]
+re8.exe+1A9567D: E8 5E 28 5E 00           - call re8.exe+2077EE0
+re8.exe+1A95682: 48 8B 43 50              - mov rax,[rbx+50]
+re8.exe+1A95686: 48 83 78 18 00           - cmp qword ptr [rax+18],00
+re8.exe+1A9568B: 75 1D                    - jne re8.exe+1A956AA
+re8.exe+1A9568D: 80 7C 24 60 00           - cmp byte ptr [rsp+60],00
+// ---------- INJECTING HERE ----------
+re8.exe+1A95692: 44 8B CD                 - mov r9d,ebp
+// ---------- DONE INJECTING  ----------
+re8.exe+1A95695: 4C 8B C7                 - mov r8,rdi
+re8.exe+1A95698: 48 8B D6                 - mov rdx,rsi
+re8.exe+1A9569B: 0F 95 C0                 - setne al
+re8.exe+1A9569E: 48 8B CB                 - mov rcx,rbx
+re8.exe+1A956A1: 88 44 24 20              - mov [rsp+20],al
+re8.exe+1A956A5: E8 D6 A1 9C 00           - call re8.exe+245F880
+re8.exe+1A956AA: 48 8B 74 24 40           - mov rsi,[rsp+40]
+re8.exe+1A956AF: 48 8B 5C 24 48           - mov rbx,[rsp+48]
+re8.exe+1A956B4: 48 8B 6C 24 50           - mov rbp,[rsp+50]
+re8.exe+1A956B9: 48 83 C4 30              - add rsp,30
+re8.exe+1A956BD: 5F                       - pop rdi
+re8.exe+1A956BE: C3                       - ret 
+re8.exe+1A956BF: CC                       - int 3 
+re8.exe+1A956C0: 40 53                    - push rbx
+re8.exe+1A956C2: 55                       - push rbp
+re8.exe+1A956C3: 57                       - push rdi
+re8.exe+1A956C4: 41 55                    - push r13
+re8.exe+1A956C6: 41 57                    - push r15
+re8.exe+1A956C8: 48 83 EC 70              - sub rsp,70
+re8.exe+1A956CC: 48 8B FA                 - mov rdi,rdx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>109</ID>
+          <Description>"Inf Lockpicks"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+infLockpicks+2:
+  db 00
+
+[DISABLE]
+infLockpicks+2:
+  db 01
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+31BB61A
+
+re8.exe+31BB5CC: 48 8B 47 50        - mov rax,[rdi+50]
+re8.exe+31BB5D0: 48 8B 50 18        - mov rdx,[rax+18]
+re8.exe+31BB5D4: 48 85 D2           - test rdx,rdx
+re8.exe+31BB5D7: 0F 85 94 03 00 00  - jne re8.exe+31BB971
+re8.exe+31BB5DD: 48 85 C9           - test rcx,rcx
+re8.exe+31BB5E0: 74 A2              - je re8.exe+31BB584
+re8.exe+31BB5E2: 4C 8B 71 60        - mov r14,[rcx+60]
+re8.exe+31BB5E6: 4D 85 F6           - test r14,r14
+re8.exe+31BB5E9: 0F 84 0F 01 00 00  - je re8.exe+31BB6FE
+re8.exe+31BB5EF: 45 33 C9           - xor r9d,r9d
+re8.exe+31BB5F2: 41 B8 1B 17 52 11  - mov r8d,1152171B
+re8.exe+31BB5F8: 41 8B D4           - mov edx,r12d
+re8.exe+31BB5FB: 48 8B CF           - mov rcx,rdi
+re8.exe+31BB5FE: E8 1D 9C E5 FE     - call re8.exe+2015220
+re8.exe+31BB603: 44 0F B6 C0        - movzx r8d,al
+re8.exe+31BB607: 48 8B 47 50        - mov rax,[rdi+50]
+re8.exe+31BB60B: 48 8B 50 18        - mov rdx,[rax+18]
+re8.exe+31BB60F: 48 85 D2           - test rdx,rdx
+re8.exe+31BB612: 0F 85 59 03 00 00  - jne re8.exe+31BB971
+re8.exe+31BB618: 32 C0              - xor al,al
+// ---------- INJECTING HERE ----------
+re8.exe+31BB61A: 41 B9 01 00 00 00  - mov r9d,00000001
+// ---------- DONE INJECTING  ----------
+re8.exe+31BB620: 45 85 C0           - test r8d,r8d
+re8.exe+31BB623: 0F B6 C8           - movzx ecx,al
+re8.exe+31BB626: 41 0F 45 C9        - cmovne ecx,r9d
+re8.exe+31BB62A: 48 8B 43 30        - mov rax,[rbx+30]
+re8.exe+31BB62E: 48 85 C0           - test rax,rax
+re8.exe+31BB631: 0F 84 4D FF FF FF  - je re8.exe+31BB584
+re8.exe+31BB637: 48 39 70 18        - cmp [rax+18],rsi
+re8.exe+31BB63B: 75 2E              - jne re8.exe+31BB66B
+re8.exe+31BB63D: 84 C9              - test cl,cl
+re8.exe+31BB63F: 40 88 74 24 28     - mov [rsp+28],sil
+re8.exe+31BB644: 45 8B C4           - mov r8d,r12d
+re8.exe+31BB647: 49 8B D6           - mov rdx,r14
+re8.exe+31BB64A: 0F 95 C0           - setne al
+re8.exe+31BB64D: 48 8B CF           - mov rcx,rdi
+re8.exe+31BB650: 88 44 24 20        - mov [rsp+20],al
+re8.exe+31BB654: E8 67 44 2A FF     - call re8.exe+245FAC0
+re8.exe+31BB659: 48 8B 47 50        - mov rax,[rdi+50]
+re8.exe+31BB65D: 48 8B 50 18        - mov rdx,[rax+18]
+re8.exe+31BB661: 48 85 D2           - test rdx,rdx
+re8.exe+31BB664: 74 40              - je re8.exe+31BB6A6
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>186</ID>
+          <Description>"Walk Through Walls (Buggy Use at Own Risk)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 
+	Date	: May 13, 2021
+	Author	: aSwedishMagyar
+}
+{$lua}
+if syntaxcheck then return end
+local base = getAddressSafe('[[[[[[basePlayer]+1F8]+68]+78]+78]+50]+30')
+[ENABLE]
+writeBytes(base,00)
+[DISABLE]
+writeBytes(base,01)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>161</ID>
+          <Description>"No Tank Gun Cooldown"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-11
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+registersymbol(codetankGun)
+alloc(newtankGun,100,tankGun)
+label(codetankGun)
+label(returntankGun)
+
+newtankGun:
+  xorps xmm2,xmm2
+codetankGun:
+  readmem(tankGun,8)
+  jmp returntankGun
+
+tankGun:
+  jmp newtankGun
+  nop 3
+returntankGun:
+
+[DISABLE]
+tankGun:
+  readmem(codetankGun,8)
+
+unregistersymbol(codetankGun)
+dealloc(newtankGun)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+B0EE0
+
+re8.exe+B0EC0: 48 8B 5C 24 30                 - mov rbx,[rsp+30]
+re8.exe+B0EC5: FF C8                          - dec eax
+re8.exe+B0EC7: 48 83 C4 20                    - add rsp,20
+re8.exe+B0ECB: 5F                             - pop rdi
+re8.exe+B0ECC: C3                             - ret 
+re8.exe+B0ECD: CC                             - int 3 
+re8.exe+B0ECE: CC                             - int 3 
+re8.exe+B0ECF: CC                             - int 3 
+re8.exe+B0ED0: E9 FB AA DB 02                 - jmp re8.exe+2E6B9D0
+re8.exe+B0ED5: CC                             - int 3 
+re8.exe+B0ED6: CC                             - int 3 
+re8.exe+B0ED7: CC                             - int 3 
+re8.exe+B0ED8: CC                             - int 3 
+re8.exe+B0ED9: CC                             - int 3 
+re8.exe+B0EDA: CC                             - int 3 
+re8.exe+B0EDB: CC                             - int 3 
+re8.exe+B0EDC: CC                             - int 3 
+re8.exe+B0EDD: CC                             - int 3 
+re8.exe+B0EDE: CC                             - int 3 
+re8.exe+B0EDF: CC                             - int 3 
+// ---------- INJECTING HERE ----------
+re8.exe+B0EE0: C6 42 10 00                    - mov byte ptr [rdx+10],00
+// ---------- DONE INJECTING  ----------
+re8.exe+B0EE4: 48 8B 41 50                    - mov rax,[rcx+50]
+re8.exe+B0EE8: 48 83 78 18 00                 - cmp qword ptr [rax+18],00
+re8.exe+B0EED: 75 04                          - jne re8.exe+B0EF3
+re8.exe+B0EEF: C6 42 11 01                    - mov byte ptr [rdx+11],01
+re8.exe+B0EF3: 48 8B 41 50                    - mov rax,[rcx+50]
+re8.exe+B0EF7: 48 83 78 18 00                 - cmp qword ptr [rax+18],00
+re8.exe+B0EFC: 75 11                          - jne re8.exe+B0F0F
+re8.exe+B0EFE: F3 0F 11 52 14                 - movss [rdx+14],xmm2
+re8.exe+B0F03: 48 83 78 18 00                 - cmp qword ptr [rax+18],00
+re8.exe+B0F08: 75 05                          - jne re8.exe+B0F0F
+re8.exe+B0F0A: F3 0F 11 52 18                 - movss [rdx+18],xmm2
+re8.exe+B0F0F: C3                             - ret 
+re8.exe+B0F10: 48 89 5C 24 08                 - mov [rsp+08],rbx
+re8.exe+B0F15: 57                             - push rdi
+re8.exe+B0F16: 48 83 EC 20                    - sub rsp,20
+re8.exe+B0F1A: 48 8D 15 87 94 0F 0A           - lea rdx,[re8.exe+A1AA3A8]
+re8.exe+B0F21: 48 B8 00 00 00 00 00 00 00 80  - mov rax,8000000000000000
+re8.exe+B0F2B: 48 0B D0                       - or rdx,rax
+re8.exe+B0F2E: 48 8B F9                       - mov rdi,rcx
+re8.exe+B0F31: 7C 08                          - jl re8.exe+B0F3B
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>53</ID>
+          <Description>"Modify Weapon Power"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+registersymbol(weapDamageMult)
+alloc(newmodifyWeaponDamage,100,modifyWeaponDamage)
+label(codemodifyWeaponDamage)
+label(returnmodifyWeaponDamage)
+label(weapDamageMult)
+newmodifyWeaponDamage:
+  mov eax,[rax+0000013C]
+codemodifyWeaponDamage:
+  push eax
+  movss xmm0,[esp]
+  mulss xmm0,[weapDamageMult]
+  movss [esp],xmm0
+  pop eax
+  jmp returnmodifyWeaponDamage
+weapDamageMult:
+  dd (float)1
+modifyWeaponDamage:
+  jmp newmodifyWeaponDamage
+  nop
+returnmodifyWeaponDamage:
+
+[DISABLE]
+modifyWeaponDamage:
+  db 8B 80 3C 01 00 00
+unregistersymbol(weapDamageMult)
+dealloc(newmodifyWeaponDamage)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+C7845A
+
+re8.exe+C783F8: E8 B3 6F 6F 02              - call re8.exe+336F3B0
+re8.exe+C783FD: 48 8B 8B 48 01 00 00        - mov rcx,[rbx+00000148]
+re8.exe+C78404: 48 8B C1                    - mov rax,rcx
+re8.exe+C78407: F0 48 0F B1 B3 48 01 00 00  - lock cmpxchg [rbx+00000148],rsi
+re8.exe+C78410: 74 23                       - je re8.exe+C78435
+re8.exe+C78412: 0F 0D 8B 48 01 00 00        - prefetchw [rbx+00000148]
+re8.exe+C78419: 0F 1F 80 00 00 00 00        - nop dword ptr [rax+00000000]
+re8.exe+C78420: 48 8B 8B 48 01 00 00        - mov rcx,[rbx+00000148]
+re8.exe+C78427: 48 8B C1                    - mov rax,rcx
+re8.exe+C7842A: F0 48 0F B1 B3 48 01 00 00  - lock cmpxchg [rbx+00000148],rsi
+re8.exe+C78433: 75 EB                       - jne re8.exe+C78420
+re8.exe+C78435: 48 85 C9                    - test rcx,rcx
+re8.exe+C78438: 74 05                       - je re8.exe+C7843F
+re8.exe+C7843A: E8 91 7A 6F 02              - call re8.exe+336FED0
+re8.exe+C7843F: 48 8B 83 48 01 00 00        - mov rax,[rbx+00000148]
+re8.exe+C78446: 48 85 C0                    - test rax,rax
+re8.exe+C78449: 74 26                       - je re8.exe+C78471
+re8.exe+C7844B: 48 8B 4F 50                 - mov rcx,[rdi+50]
+re8.exe+C7844F: 48 83 79 18 00              - cmp qword ptr [rcx+18],00
+re8.exe+C78454: 0F 85 EA 02 00 00           - jne re8.exe+C78744
+// ---------- INJECTING HERE ----------
+re8.exe+C7845A: 8B 80 3C 01 00 00           - mov eax,[rax+0000013C]
+// ---------- DONE INJECTING  ----------
+re8.exe+C78460: 89 83 50 01 00 00           - mov [rbx+00000150],eax
+re8.exe+C78466: 48 83 79 18 00              - cmp qword ptr [rcx+18],00
+re8.exe+C7846B: 0F 85 D3 02 00 00           - jne re8.exe+C78744
+re8.exe+C78471: 48 8B 47 50                 - mov rax,[rdi+50]
+re8.exe+C78475: 48 8B 48 18                 - mov rcx,[rax+18]
+re8.exe+C78479: 48 8D 50 18                 - lea rdx,[rax+18]
+re8.exe+C7847D: 48 85 C9                    - test rcx,rcx
+re8.exe+C78480: 0F 85 BE 02 00 00           - jne re8.exe+C78744
+re8.exe+C78486: 4C 89 B4 24 80 01 00 00     - mov [rsp+00000180],r14
+re8.exe+C7848E: 4C 8B 73 58                 - mov r14,[rbx+58]
+re8.exe+C78492: 4D 85 F6                    - test r14,r14
+re8.exe+C78495: 74 0A                       - je re8.exe+C784A1
+re8.exe+C78497: 49 39 4E 10                 - cmp [r14+10],rcx
+re8.exe+C7849B: 74 04                       - je re8.exe+C784A1
+re8.exe+C7849D: 32 C0                       - xor al,al
+re8.exe+C7849F: EB 02                       - jmp re8.exe+C784A3
+re8.exe+C784A1: B0 01                       - mov al,01
+re8.exe+C784A3: 0F B6 C0                    - movzx eax,al
+re8.exe+C784A6: 85 C0                       - test eax,eax
+re8.exe+C784A8: 75 69                       - jne re8.exe+C78513
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>52</ID>
+              <Description>"Multiplier"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>weapDamageMult</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>48</ID>
+          <Description>"Modify Fire Rate"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+registersymbol(fireRateMult)
+alloc(newfireRate,100,fireRate)
+label(codefireRate)
+label(returnfireRate)
+label(fireRateMult)
+newfireRate:
+  movss xmm0,[rdi+0000018C]
+codefireRate:
+  divss xmm0,[fireRateMult]
+  jmp returnfireRate
+fireRateMult:
+  dd (float)1
+fireRate:
+  jmp newfireRate
+  nop 3
+returnfireRate:
+
+[DISABLE]
+fireRate:
+  db F3 0F 10 87 8C 01 00 00
+
+unregistersymbol(fireRateMult)
+dealloc(newfireRate)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+2E1C216
+
+re8.exe+2E1C1C2: 44 0F 29 48 B8           - movaps [rax-48],xmm9
+re8.exe+2E1C1C7: F3 45 0F 10 48 10        - movss xmm9,[r8+10]
+re8.exe+2E1C1CD: 44 0F 29 50 A8           - movaps [rax-58],xmm10
+re8.exe+2E1C1D2: F3 45 0F 10 50 14        - movss xmm10,[r8+14]
+re8.exe+2E1C1D8: 44 0F 29 58 98           - movaps [rax-68],xmm11
+re8.exe+2E1C1DD: F3 45 0F 10 58 18        - movss xmm11,[r8+18]
+re8.exe+2E1C1E3: 48 85 D2                 - test rdx,rdx
+re8.exe+2E1C1E6: 75 0E                    - jne re8.exe+2E1C1F6
+re8.exe+2E1C1E8: 45 33 C0                 - xor r8d,r8d
+re8.exe+2E1C1EB: 41 8D 50 38              - lea edx,[r8+38]
+re8.exe+2E1C1EF: E8 3C C6 56 00           - call re8.exe+3388830
+re8.exe+2E1C1F4: EB 4D                    - jmp re8.exe+2E1C243
+re8.exe+2E1C1F6: 48 8B 02                 - mov rax,[rdx]
+re8.exe+2E1C1F9: 4C 8B 40 F0              - mov r8,[rax-10]
+re8.exe+2E1C1FD: 41 FF 50 38              - call qword ptr [r8+38]
+re8.exe+2E1C201: 48 8B 43 50              - mov rax,[rbx+50]
+re8.exe+2E1C205: 48 83 78 18 00           - cmp qword ptr [rax+18],00
+re8.exe+2E1C20A: 75 37                    - jne re8.exe+2E1C243
+re8.exe+2E1C20C: 48 8B 97 78 01 00 00     - mov rdx,[rdi+00000178]
+re8.exe+2E1C213: 48 8B CB                 - mov rcx,rbx
+// ---------- INJECTING HERE ----------
+re8.exe+2E1C216: F3 0F 10 87 8C 01 00 00  - movss xmm0,[rdi+0000018C]
+// ---------- DONE INJECTING  ----------
+re8.exe+2E1C21E: 0F 5A C0                 - cvtps2pd xmm0,xmm0
+re8.exe+2E1C221: 48 85 D2                 - test rdx,rdx
+re8.exe+2E1C224: 75 0E                    - jne re8.exe+2E1C234
+re8.exe+2E1C226: 45 33 C0                 - xor r8d,r8d
+re8.exe+2E1C229: 41 8D 50 38              - lea edx,[r8+38]
+re8.exe+2E1C22D: E8 FE C5 56 00           - call re8.exe+3388830
+re8.exe+2E1C232: EB 0F                    - jmp re8.exe+2E1C243
+re8.exe+2E1C234: 48 8B 02                 - mov rax,[rdx]
+re8.exe+2E1C237: 66 0F 5A D0              - cvtpd2ps xmm2,xmm0
+re8.exe+2E1C23B: 4C 8B 40 F0              - mov r8,[rax-10]
+re8.exe+2E1C23F: 41 FF 50 28              - call qword ptr [r8+28]
+re8.exe+2E1C243: 48 8B 43 50              - mov rax,[rbx+50]
+re8.exe+2E1C247: 48 83 78 18 00           - cmp qword ptr [rax+18],00
+re8.exe+2E1C24C: 74 07                    - je re8.exe+2E1C255
+re8.exe+2E1C24E: 33 C0                    - xor eax,eax
+re8.exe+2E1C250: E9 C8 01 00 00           - jmp re8.exe+2E1C41D
+re8.exe+2E1C255: 80 BC 24 E8 00 00 00 00  - cmp byte ptr [rsp+000000E8],00
+re8.exe+2E1C25D: C6 87 B1 02 00 00 00     - mov byte ptr [rdi+000002B1],00
+re8.exe+2E1C264: 75 1D                    - jne re8.exe+2E1C283
+re8.exe+2E1C266: 48 8B D7                 - mov rdx,rdi
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>49</ID>
+              <Description>"Multiplier"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>fireRateMult</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"Fast Reload"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+alloc(newfastReload,100,fastReload)
+label(fastReloadVal)
+label(returnfastReload)
+
+newfastReload:
+  movss xmm0,[fastReloadVal]
+  jmp returnfastReload
+fastReloadVal:
+  dd (float)0.001
+fastReload:
+  jmp newfastReload
+  nop 3
+returnfastReload:
+
+[DISABLE]
+fastReload:
+  db F3 0F 10 80 80 01 00 00
+
+dealloc(newfastReload)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+2B61B3E
+
+re8.exe+2B61AF0: 0F 85 4F 07 00 00        - jne re8.exe+2B62245
+re8.exe+2B61AF6: 48 8B 57 10              - mov rdx,[rdi+10]
+re8.exe+2B61AFA: 48 8B CB                 - mov rcx,rbx
+re8.exe+2B61AFD: 48 85 D2                 - test rdx,rdx
+re8.exe+2B61B00: 75 11                    - jne re8.exe+2B61B13
+re8.exe+2B61B02: 45 33 C0                 - xor r8d,r8d
+re8.exe+2B61B05: 41 8D 50 38              - lea edx,[r8+38]
+re8.exe+2B61B09: E8 22 6D 82 00           - call re8.exe+3388830
+re8.exe+2B61B0E: E9 32 07 00 00           - jmp re8.exe+2B62245
+re8.exe+2B61B13: E8 B8 35 64 FD           - call re8.exe+1A50D0
+re8.exe+2B61B18: 48 8B 4B 50              - mov rcx,[rbx+50]
+re8.exe+2B61B1C: 48 39 71 18              - cmp [rcx+18],rsi
+re8.exe+2B61B20: 0F 85 1F 07 00 00        - jne re8.exe+2B62245
+re8.exe+2B61B26: 48 85 C0                 - test rax,rax
+re8.exe+2B61B29: 75 13                    - jne re8.exe+2B61B3E
+re8.exe+2B61B2B: 45 33 C0                 - xor r8d,r8d
+re8.exe+2B61B2E: 8D 50 38                 - lea edx,[rax+38]
+re8.exe+2B61B31: 48 8B CB                 - mov rcx,rbx
+re8.exe+2B61B34: E8 F7 6C 82 00           - call re8.exe+3388830
+re8.exe+2B61B39: E9 07 07 00 00           - jmp re8.exe+2B62245
+// ---------- INJECTING HERE ----------
+re8.exe+2B61B3E: F3 0F 10 80 80 01 00 00  - movss xmm0,[rax+00000180]
+// ---------- DONE INJECTING  ----------
+re8.exe+2B61B46: 44 0F 2F C0              - comiss xmm8,xmm0
+re8.exe+2B61B4A: 0F 29 74 24 70           - movaps [rsp+70],xmm6
+re8.exe+2B61B4F: 44 0F 29 4C 24 40        - movaps [rsp+40],xmm9
+re8.exe+2B61B55: 44 0F 29 5C 24 20        - movaps [rsp+20],xmm11
+re8.exe+2B61B5B: 0F 83 12 01 00 00        - jae re8.exe+2B61C73
+re8.exe+2B61B61: F2 0F 10 35 87 94 8A 03  - movsd xmm6,[re8.exe+640AFF0]
+re8.exe+2B61B69: 48 8B CB                 - mov rcx,rbx
+re8.exe+2B61B6C: 48 8B 57 10              - mov rdx,[rdi+10]
+re8.exe+2B61B70: 0F 5A C0                 - cvtps2pd xmm0,xmm0
+re8.exe+2B61B73: F2 0F 59 C6              - mulsd xmm0,xmm6
+re8.exe+2B61B77: 66 44 0F 5A D8           - cvtpd2ps xmm11,xmm0
+re8.exe+2B61B7C: 48 85 D2                 - test rdx,rdx
+re8.exe+2B61B7F: 0F 84 FA 00 00 00        - je re8.exe+2B61C7F
+re8.exe+2B61B85: E8 46 35 64 FD           - call re8.exe+1A50D0
+re8.exe+2B61B8A: 48 8B 4B 50              - mov rcx,[rbx+50]
+re8.exe+2B61B8E: 48 39 71 18              - cmp [rcx+18],rsi
+re8.exe+2B61B92: 0F 85 9C 06 00 00        - jne re8.exe+2B62234
+re8.exe+2B61B98: 48 85 C0                 - test rax,rax
+re8.exe+2B61B9B: 0F 84 1A 01 00 00        - je re8.exe+2B61CBB
+re8.exe+2B61BA1: F3 0F 10 80 84 01 00 00  - movss xmm0,[rax+00000184]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"Max out Lei"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-02
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+maxLei:
+  nop 2
+
+[DISABLE]
+maxLei:
+  db 7C 18
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+23FC668
+
+re8.exe+23FC61F: 40 88 7C 24 40        - mov [rsp+40],dil
+re8.exe+23FC624: E8 D7 51 FE 00        - call re8.exe+33E1800
+re8.exe+23FC629: 48 8B 46 50           - mov rax,[rsi+50]
+re8.exe+23FC62D: 48 8B 58 18           - mov rbx,[rax+18]
+re8.exe+23FC631: 48 85 DB              - test rbx,rbx
+re8.exe+23FC634: 74 09                 - je re8.exe+23FC63F
+re8.exe+23FC636: 48 89 78 18           - mov [rax+18],rdi
+re8.exe+23FC63A: E9 A5 00 00 00        - jmp re8.exe+23FC6E4
+re8.exe+23FC63F: 8B 55 48              - mov edx,[rbp+48]
+re8.exe+23FC642: 41 03 D6              - add edx,r14d
+re8.exe+23FC645: 89 55 48              - mov [rbp+48],edx
+re8.exe+23FC648: 48 8B 46 50           - mov rax,[rsi+50]
+re8.exe+23FC64C: 48 83 C0 18           - add rax,18
+re8.exe+23FC650: 48 8B 18              - mov rbx,[rax]
+re8.exe+23FC653: 48 85 DB              - test rbx,rbx
+re8.exe+23FC656: 74 08                 - je re8.exe+23FC660
+re8.exe+23FC658: 48 89 38              - mov [rax],rdi
+re8.exe+23FC65B: E9 84 00 00 00        - jmp re8.exe+23FC6E4
+re8.exe+23FC660: 8B 0D EA EB DA 07     - mov ecx,[re8.exe+A1AB250]
+re8.exe+23FC666: 3B D1                 - cmp edx,ecx
+// ---------- INJECTING HERE ----------
+re8.exe+23FC668: 7C 18                 - jl re8.exe+23FC682
+// ---------- DONE INJECTING  ----------
+re8.exe+23FC66A: 89 4D 48              - mov [rbp+48],ecx
+re8.exe+23FC66D: 48 8B 46 50           - mov rax,[rsi+50]
+re8.exe+23FC671: 48 83 C0 18           - add rax,18
+re8.exe+23FC675: 48 8B 18              - mov rbx,[rax]
+re8.exe+23FC678: 48 85 DB              - test rbx,rbx
+re8.exe+23FC67B: 74 05                 - je re8.exe+23FC682
+re8.exe+23FC67D: 48 89 38              - mov [rax],rdi
+re8.exe+23FC680: EB 62                 - jmp re8.exe+23FC6E4
+re8.exe+23FC682: 48 39 3D 6F 55 DB 07  - cmp [re8.exe+A1B1BF8],rdi
+re8.exe+23FC689: 74 10                 - je re8.exe+23FC69B
+re8.exe+23FC68B: 48 8B 15 56 22 DA 07  - mov rdx,[re8.exe+A19E8E8]
+re8.exe+23FC692: 48 85 DB              - test rbx,rbx
+re8.exe+23FC695: 48 0F 45 D7           - cmovne rdx,rdi
+re8.exe+23FC699: EB 03                 - jmp re8.exe+23FC69E
+re8.exe+23FC69B: 48 8B D7              - mov rdx,rdi
+re8.exe+23FC69E: 48 85 DB              - test rbx,rbx
+re8.exe+23FC6A1: 74 05                 - je re8.exe+23FC6A8
+re8.exe+23FC6A3: 48 89 38              - mov [rax],rdi
+re8.exe+23FC6A6: EB 3C                 - jmp re8.exe+23FC6E4
+re8.exe+23FC6A8: 48 8B CE              - mov rcx,rsi
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>181</ID>
+          <Description>"Ignore CP Cost"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-13
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+ignoreCPCost:
+  mov al,01
+  nop
+
+[DISABLE]
+ignoreCPCost:
+  db 0F 9D C0
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+2A2B4FD
+
+re8.exe+2A2B4B5: 75 10                 - jne re8.exe+2A2B4C7
+re8.exe+2A2B4B7: 8D 51 38              - lea edx,[rcx+38]
+re8.exe+2A2B4BA: 45 33 C0              - xor r8d,r8d
+re8.exe+2A2B4BD: 48 8B CB              - mov rcx,rbx
+re8.exe+2A2B4C0: E8 6B D3 95 00        - call re8.exe+3388830
+re8.exe+2A2B4C5: EB 03                 - jmp re8.exe+2A2B4CA
+re8.exe+2A2B4C7: 8B 79 18              - mov edi,[rcx+18]
+re8.exe+2A2B4CA: 48 8B 43 50           - mov rax,[rbx+50]
+re8.exe+2A2B4CE: 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re8.exe+2A2B4D3: 75 9A                 - jne re8.exe+2A2B46F
+re8.exe+2A2B4D5: 48 8B 86 A0 01 00 00  - mov rax,[rsi+000001A0]
+re8.exe+2A2B4DC: 48 85 C0              - test rax,rax
+re8.exe+2A2B4DF: 75 0F                 - jne re8.exe+2A2B4F0
+re8.exe+2A2B4E1: 45 33 C0              - xor r8d,r8d
+re8.exe+2A2B4E4: 48 8B CB              - mov rcx,rbx
+re8.exe+2A2B4E7: 41 8D 50 38           - lea edx,[r8+38]
+re8.exe+2A2B4EB: E9 7A FF FF FF        - jmp re8.exe+2A2B46A
+re8.exe+2A2B4F0: 3B 78 20              - cmp edi,[rax+20]
+re8.exe+2A2B4F3: 48 8B 7C 24 30        - mov rdi,[rsp+30]
+re8.exe+2A2B4F8: 48 8B 5C 24 38        - mov rbx,[rsp+38]
+// ---------- INJECTING HERE ----------
+re8.exe+2A2B4FD: 0F 9D C0              - setge al
+// ---------- DONE INJECTING  ----------
+re8.exe+2A2B500: 48 83 C4 20           - add rsp,20
+re8.exe+2A2B504: 5E                    - pop rsi
+re8.exe+2A2B505: C3                    - ret 
+re8.exe+2A2B506: CC                    - int 3 
+re8.exe+2A2B507: CC                    - int 3 
+re8.exe+2A2B508: CC                    - int 3 
+re8.exe+2A2B509: CC                    - int 3 
+re8.exe+2A2B50A: CC                    - int 3 
+re8.exe+2A2B50B: CC                    - int 3 
+re8.exe+2A2B50C: CC                    - int 3 
+re8.exe+2A2B50D: CC                    - int 3 
+re8.exe+2A2B50E: CC                    - int 3 
+re8.exe+2A2B50F: CC                    - int 3 
+re8.exe+2A2B510: 48 89 5C 24 08        - mov [rsp+08],rbx
+re8.exe+2A2B515: 57                    - push rdi
+re8.exe+2A2B516: 48 83 EC 20           - sub rsp,20
+re8.exe+2A2B51A: 48 8B D9              - mov rbx,rcx
+re8.exe+2A2B51D: 48 8B FA              - mov rdi,rdx
+re8.exe+2A2B520: 48 8B 8A B8 01 00 00  - mov rcx,[rdx+000001B8]
+re8.exe+2A2B527: 48 85 C9              - test rcx,rcx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>55</ID>
+          <Description>"No Craft Check"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+craftCheck:
+  db EB
+
+[DISABLE]
+craftCheck:
+  db 7D
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+109038B
+
+re8.exe+1090341: 48 8B 78 10              - mov rdi,[rax+10]
+re8.exe+1090345: 48 8B C6                 - mov rax,rsi
+re8.exe+1090348: 48 39 05 21 19 12 09     - cmp [re8.exe+A1B1C70],rax
+re8.exe+109034F: 48 0F 45 05 99 26 12 09  - cmovne rax,[re8.exe+A1B29F0]
+re8.exe+1090357: 48 85 C0                 - test rax,rax
+re8.exe+109035A: 74 5E                    - je re8.exe+10903BA
+re8.exe+109035C: 48 8B 50 60              - mov rdx,[rax+60]
+re8.exe+1090360: 48 85 FF                 - test rdi,rdi
+re8.exe+1090363: 74 55                    - je re8.exe+10903BA
+re8.exe+1090365: 48 8B CB                 - mov rcx,rbx
+re8.exe+1090368: 48 85 D2                 - test rdx,rdx
+re8.exe+109036B: 74 3C                    - je re8.exe+10903A9
+re8.exe+109036D: 44 8B 47 10              - mov r8d,[rdi+10]
+re8.exe+1090371: 41 B1 01                 - mov r9l,01
+re8.exe+1090374: 40 88 74 24 20           - mov [rsp+20],sil
+re8.exe+1090379: E8 E2 51 3A 01           - call re8.exe+2435560
+re8.exe+109037E: 48 8B 4B 50              - mov rcx,[rbx+50]
+re8.exe+1090382: 48 39 71 18              - cmp [rcx+18],rsi
+re8.exe+1090386: 75 17                    - jne re8.exe+109039F
+re8.exe+1090388: 3B 47 14                 - cmp eax,[rdi+14]
+// ---------- INJECTING HERE ----------
+re8.exe+109038B: 7D 86                    - jnl re8.exe+1090313
+// ---------- DONE INJECTING  ----------
+re8.exe+109038D: 40 88 B4 24 90 00 00 00  - mov [rsp+00000090],sil
+re8.exe+1090395: 48 8B D6                 - mov rdx,rsi
+re8.exe+1090398: BE 5F 00 00 00           - mov esi,0000005F
+re8.exe+109039D: EB 41                    - jmp re8.exe+10903E0
+re8.exe+109039F: 48 8B 51 18              - mov rdx,[rcx+18]
+re8.exe+10903A3: 48 89 71 18              - mov [rcx+18],rsi
+re8.exe+10903A7: EB 37                    - jmp re8.exe+10903E0
+re8.exe+10903A9: 45 33 C0                 - xor r8d,r8d
+re8.exe+10903AC: 41 8D 50 38              - lea edx,[r8+38]
+re8.exe+10903B0: E8 6B 67 2F 02           - call re8.exe+3386B20
+re8.exe+10903B5: 48 8B D0                 - mov rdx,rax
+re8.exe+10903B8: EB 26                    - jmp re8.exe+10903E0
+re8.exe+10903BA: 45 33 C0                 - xor r8d,r8d
+re8.exe+10903BD: 48 8B CB                 - mov rcx,rbx
+re8.exe+10903C0: 41 8D 50 38              - lea edx,[r8+38]
+re8.exe+10903C4: E8 57 67 2F 02           - call re8.exe+3386B20
+re8.exe+10903C9: 48 8B D0                 - mov rdx,rax
+re8.exe+10903CC: EB 12                    - jmp re8.exe+10903E0
+re8.exe+10903CE: 48 8B D6                 - mov rdx,rsi
+re8.exe+10903D1: BE 52 00 00 00           - mov esi,00000052
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>106</ID>
+          <Description>"No Recipe Check"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+alloc(newnoRecipeCost,100,noRecipeCost)
+label(codenoRecipeCost)
+label(returnnoRecipeCost)
+
+newnoRecipeCost:
+  xor eax,eax
+  mov al,A
+codenoRecipeCost:
+  mov [rsi+000001C8],eax
+  jmp returnnoRecipeCost
+
+noRecipeCost+03:
+  jmp newnoRecipeCost
+  nop
+returnnoRecipeCost:
+
+[DISABLE]
+noRecipeCost+03:
+  db 89 86 C8 01 00 00
+
+dealloc(newnoRecipeCost)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+19E026D
+
+re8.exe+19E0217: 48 8B CF                 - mov rcx,rdi
+re8.exe+19E021A: 48 85 D2                 - test rdx,rdx
+re8.exe+19E021D: 0F 84 90 0E 00 00        - je re8.exe+19E10B3
+re8.exe+19E0223: E8 E8 49 67 FE           - call re8.AK::WriteBytesCount::Reserve+2840
+re8.exe+19E0228: 48 8B 4F 50              - mov rcx,[rdi+50]
+re8.exe+19E022C: 4C 39 71 18              - cmp [rcx+18],r14
+re8.exe+19E0230: 0F 85 71 0F 00 00        - jne re8.exe+19E11A7
+re8.exe+19E0236: 48 85 C0                 - test rax,rax
+re8.exe+19E0239: 0F 84 4D 0F 00 00        - je re8.exe+19E118C
+re8.exe+19E023F: 44 8B 40 10              - mov r8d,[rax+10]
+re8.exe+19E0243: 48 8B CF                 - mov rcx,rdi
+re8.exe+19E0246: 48 85 DB                 - test rbx,rbx
+re8.exe+19E0249: 0F 84 64 0E 00 00        - je re8.exe+19E10B3
+re8.exe+19E024F: 41 B1 01                 - mov r9l,01
+re8.exe+19E0252: 44 88 74 24 20           - mov [rsp+20],r14l
+re8.exe+19E0257: 48 8B D3                 - mov rdx,rbx
+re8.exe+19E025A: E8 01 53 A5 00           - call re8.exe+2435560
+re8.exe+19E025F: 48 8B 4F 50              - mov rcx,[rdi+50]
+re8.exe+19E0263: 4C 39 71 18              - cmp [rcx+18],r14
+re8.exe+19E0267: 0F 85 3A 0F 00 00        - jne re8.exe+19E11A7
+// ---------- INJECTING HERE ----------
+re8.exe+19E026D: 89 86 C8 01 00 00        - mov [rsi+000001C8],eax
+// ---------- DONE INJECTING  ----------
+re8.exe+19E0273: 48 8B 47 50              - mov rax,[rdi+50]
+re8.exe+19E0277: 4C 39 70 18              - cmp [rax+18],r14
+re8.exe+19E027B: 0F 85 26 0F 00 00        - jne re8.exe+19E11A7
+re8.exe+19E0281: 49 8B 55 38              - mov rdx,[r13+38]
+re8.exe+19E0285: 48 8B CF                 - mov rcx,rdi
+re8.exe+19E0288: 48 85 D2                 - test rdx,rdx
+re8.exe+19E028B: 0F 84 22 0E 00 00        - je re8.exe+19E10B3
+re8.exe+19E0291: 44 8B 86 C0 01 00 00     - mov r8d,[rsi+000001C0]
+re8.exe+19E0298: E8 73 49 67 FE           - call re8.AK::WriteBytesCount::Reserve+2840
+re8.exe+19E029D: 48 8B 4F 50              - mov rcx,[rdi+50]
+re8.exe+19E02A1: 4C 39 71 18              - cmp [rcx+18],r14
+re8.exe+19E02A5: 0F 85 FC 0E 00 00        - jne re8.exe+19E11A7
+re8.exe+19E02AB: 48 85 C0                 - test rax,rax
+re8.exe+19E02AE: 0F 84 D8 0E 00 00        - je re8.exe+19E118C
+re8.exe+19E02B4: 4C 39 35 ED 1A 7D 08     - cmp [re8.exe+A1B1DA8],r14
+re8.exe+19E02BB: 49 8B D6                 - mov rdx,r14
+re8.exe+19E02BE: 8B 58 14                 - mov ebx,[rax+14]
+re8.exe+19E02C1: 49 8B 47 48              - mov rax,[r15+48]
+re8.exe+19E02C5: 48 0F 45 15 93 5F 7D 08  - cmovne rdx,[re8.exe+A1B6260]
+re8.exe+19E02CD: 48 85 C0                 - test rax,rax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>102</ID>
+          <Description>"Show Items Everywhere (Can Also Interact)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-07
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+itemShowDistance:
+  xorps xmm6,xmm6
+  nop
+
+[DISABLE]
+itemShowDistance:
+  db F3 0F 58 F1 45 84 ED
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+3055677
+
+re8.exe+305561B: F3 0F 11 44 24 60        - movss [rsp+60],xmm0
+re8.exe+3055621: 48 8D 4D E0              - lea rcx,[rbp-20]
+re8.exe+3055625: F3 0F 11 4C 24 68        - movss [rsp+68],xmm1
+re8.exe+305562B: F3 44 0F 11 7C 24 70     - movss [rsp+70],xmm15
+re8.exe+3055632: F3 0F 11 74 24 78        - movss [rsp+78],xmm6
+re8.exe+3055638: 89 74 24 74              - mov [rsp+74],esi
+re8.exe+305563C: 89 74 24 64              - mov [rsp+64],esi
+re8.exe+3055640: E8 8B 70 3E FE           - call re8.exe+143C6D0
+re8.exe+3055645: F3 0F 10 30              - movss xmm6,[rax]
+re8.exe+3055649: F3 0F 10 40 04           - movss xmm0,[rax+04]
+re8.exe+305564E: F3 0F 10 48 08           - movss xmm1,[rax+08]
+re8.exe+3055653: 48 8B 43 50              - mov rax,[rbx+50]
+re8.exe+3055657: 48 8B 48 18              - mov rcx,[rax+18]
+re8.exe+305565B: 48 85 C9                 - test rcx,rcx
+re8.exe+305565E: 0F 85 B7 FE FF FF        - jne re8.exe+305551B
+re8.exe+3055664: F3 0F 59 F6              - mulss xmm6,xmm6
+re8.exe+3055668: 45 32 F6                 - xor r14l,r14l
+re8.exe+305566B: F3 0F 59 C0              - mulss xmm0,xmm0
+re8.exe+305566F: F3 0F 59 C9              - mulss xmm1,xmm1
+re8.exe+3055673: F3 0F 58 F0              - addss xmm6,xmm0
+// ---------- INJECTING HERE ----------
+re8.exe+3055677: F3 0F 58 F1              - addss xmm6,xmm1
+// ---------- DONE INJECTING  ----------
+re8.exe+305567B: 45 84 ED                 - test r13l,r13l
+re8.exe+305567E: 0F 85 EA 00 00 00        - jne re8.exe+305576E
+re8.exe+3055684: 48 8B 87 98 00 00 00     - mov rax,[rdi+00000098]
+re8.exe+305568B: 48 85 C0                 - test rax,rax
+re8.exe+305568E: 0F 84 9F 03 00 00        - je re8.exe+3055A33
+re8.exe+3055694: 40 38 70 11              - cmp [rax+11],sil
+re8.exe+3055698: 0F 84 D0 00 00 00        - je re8.exe+305576E
+re8.exe+305569E: F3 0F 10 87 94 00 00 00  - movss xmm0,[rdi+00000094]
+re8.exe+30556A6: 8B C6                    - mov eax,esi
+re8.exe+30556A8: 0F 5A C0                 - cvtps2pd xmm0,xmm0
+re8.exe+30556AB: 0F 5A CE                 - cvtps2pd xmm1,xmm6
+re8.exe+30556AE: 66 0F 2F C8              - comisd xmm1,xmm0
+re8.exe+30556B2: 0F 96 C0                 - setbe al
+re8.exe+30556B5: 85 C0                    - test eax,eax
+re8.exe+30556B7: 0F 84 2B 03 00 00        - je re8.exe+30559E8
+re8.exe+30556BD: 48 8D 44 24 50           - lea rax,[rsp+50]
+re8.exe+30556C2: F3 44 0F 11 4C 24 40     - movss [rsp+40],xmm9
+re8.exe+30556C9: 48 89 44 24 28           - mov [rsp+28],rax
+re8.exe+30556CE: 4C 8D 4C 24 40           - lea r9,[rsp+40]
+re8.exe+30556D3: 48 8B 85 E8 00 00 00     - mov rax,[rbp+000000E8]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>120</ID>
+          <Description>"Get Mouseover Item"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-08
+	Author	: aSwedishMagyar
+    Credits	: Zachillios
+}
+[ENABLE]
+registersymbol(codeitemMouseover)
+registersymbol(baseItem)
+alloc(newitemMouseover,100,itemMouseover)
+label(codeitemMouseover)
+label(returnitemMouseover)
+label(baseItem)
+newitemMouseover:
+  mov [baseItem],r8
+codeitemMouseover:
+  readmem(itemMouseover,5)
+  jmp returnitemMouseover
+baseItem:
+  dq 0
+itemMouseover:
+  jmp newitemMouseover
+returnitemMouseover:
+
+[DISABLE]
+itemMouseover:
+  readmem(codeitemMouseover,5)
+
+unregistersymbol(codeitemMouseover)
+unregistersymbol(baseItem)
+dealloc(newitemMouseover)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+2628C29
+
+re8.exe+2628BFB: 48 8B D3           - mov rdx,rbx
+re8.exe+2628BFE: 48 8B CE           - mov rcx,rsi
+re8.exe+2628C01: E8 1A 00 00 00     - call re8.exe+2628C20
+re8.exe+2628C06: 48 8B 5C 24 30     - mov rbx,[rsp+30]
+re8.exe+2628C0B: 48 8B 74 24 38     - mov rsi,[rsp+38]
+re8.exe+2628C10: 48 83 C4 20        - add rsp,20
+re8.exe+2628C14: 5F                 - pop rdi
+re8.exe+2628C15: C3                 - ret 
+re8.exe+2628C16: CC                 - int 3 
+re8.exe+2628C17: CC                 - int 3 
+re8.exe+2628C18: CC                 - int 3 
+re8.exe+2628C19: CC                 - int 3 
+re8.exe+2628C1A: CC                 - int 3 
+re8.exe+2628C1B: CC                 - int 3 
+re8.exe+2628C1C: CC                 - int 3 
+re8.exe+2628C1D: CC                 - int 3 
+re8.exe+2628C1E: CC                 - int 3 
+re8.exe+2628C1F: CC                 - int 3 
+re8.exe+2628C20: 4D 85 C0           - test r8,r8
+re8.exe+2628C23: 0F 84 76 01 00 00  - je re8.exe+2628D9F
+// ---------- INJECTING HERE ----------
+re8.exe+2628C29: 48 89 5C 24 08     - mov [rsp+08],rbx
+// ---------- DONE INJECTING  ----------
+re8.exe+2628C2E: 48 89 74 24 10     - mov [rsp+10],rsi
+re8.exe+2628C33: 57                 - push rdi
+re8.exe+2628C34: 48 83 EC 20        - sub rsp,20
+re8.exe+2628C38: 49 8B F8           - mov rdi,r8
+re8.exe+2628C3B: 48 8B F2           - mov rsi,rdx
+re8.exe+2628C3E: 48 8B D9           - mov rbx,rcx
+re8.exe+2628C41: 48 8B 41 50        - mov rax,[rcx+50]
+re8.exe+2628C45: 49 8B 50 30        - mov rdx,[r8+30]
+re8.exe+2628C49: 48 83 78 18 00     - cmp qword ptr [rax+18],00
+re8.exe+2628C4E: 0F 85 3C 01 00 00  - jne re8.exe+2628D90
+re8.exe+2628C54: 48 85 D2           - test rdx,rdx
+re8.exe+2628C57: 75 1C              - jne re8.exe+2628C75
+re8.exe+2628C59: 45 33 C0           - xor r8d,r8d
+re8.exe+2628C5C: 41 8D 50 38        - lea edx,[r8+38]
+re8.exe+2628C60: E8 CB FB D5 00     - call re8.exe+3388830
+re8.exe+2628C65: 48 8B 5C 24 30     - mov rbx,[rsp+30]
+re8.exe+2628C6A: 48 8B 74 24 38     - mov rsi,[rsp+38]
+re8.exe+2628C6F: 48 83 C4 20        - add rsp,20
+re8.exe+2628C73: 5F                 - pop rdi
+re8.exe+2628C74: C3                 - ret 
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>121</ID>
+              <Description>"Item ID"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">553456B2:First Aid Med
+97EF67DC:Lockpick
+4654F1A0:Handgun Ammo
+673956B8:Shotgun Ammo
+E9A05039:Sniper Rifle Ammo
+8218A3CB:Magnum Ammo
+BE12452C:Rifle Ammo
+3E2472F8:Pipe Bomb
+BF8C9893:Mine
+</DropDownList>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseItem</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+                <Offset>58</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>122</ID>
+              <Description>"Quantity"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>baseItem</Address>
+              <Offsets>
+                <Offset>4C</Offset>
+                <Offset>58</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>119</ID>
+          <Description>"Force Flashlight On (Ctrl+PgUp)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-08
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+turnOnFlashlight:
+  mov al,01
+  nop
+
+[DISABLE]
+turnOnFlashlight:
+  db 0F 9F C0
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+128EE5E
+
+re8.exe+128EE24: 48 83 C4 30        - add rsp,30
+re8.exe+128EE28: 5F                 - pop rdi
+re8.exe+128EE29: C3                 - ret 
+re8.exe+128EE2A: CC                 - int 3 
+re8.exe+128EE2B: CC                 - int 3 
+re8.exe+128EE2C: CC                 - int 3 
+re8.exe+128EE2D: CC                 - int 3 
+re8.exe+128EE2E: CC                 - int 3 
+re8.exe+128EE2F: CC                 - int 3 
+re8.exe+128EE30: 48 89 5C 24 10     - mov [rsp+10],rbx
+re8.exe+128EE35: 57                 - push rdi
+re8.exe+128EE36: 48 83 EC 20        - sub rsp,20
+re8.exe+128EE3A: 48 8B 41 50        - mov rax,[rcx+50]
+re8.exe+128EE3E: 48 8B DA           - mov rbx,rdx
+re8.exe+128EE41: 48 8B F9           - mov rdi,rcx
+re8.exe+128EE44: 48 83 78 18 00     - cmp qword ptr [rax+18],00
+re8.exe+128EE49: 0F 85 D7 01 00 00  - jne re8.exe+128F026
+re8.exe+128EE4F: 83 7A 64 00        - cmp dword ptr [rdx+64],00
+re8.exe+128EE53: 41 B9 01 00 00 00  - mov r9d,00000001
+re8.exe+128EE59: 48 89 74 24 30     - mov [rsp+30],rsi
+// ---------- INJECTING HERE ----------
+re8.exe+128EE5E: 0F 9F C0           - setg al
+// ---------- DONE INJECTING  ----------
+re8.exe+128EE61: 80 7A 51 00        - cmp byte ptr [rdx+51],00
+re8.exe+128EE65: 44 0F B6 C0        - movzx r8d,al
+re8.exe+128EE69: 45 0F 45 C1        - cmovne r8d,r9d
+re8.exe+128EE6D: 80 7A 68 00        - cmp byte ptr [rdx+68],00
+re8.exe+128EE71: 41 0F B6 C0        - movzx eax,r8l
+re8.exe+128EE75: 41 0F 45 C1        - cmovne eax,r9d
+re8.exe+128EE79: 80 7B 69 00        - cmp byte ptr [rbx+69],00
+re8.exe+128EE7D: 0F B6 D0           - movzx edx,al
+re8.exe+128EE80: 41 0F 45 D1        - cmovne edx,r9d
+re8.exe+128EE84: 48 8B 43 70        - mov rax,[rbx+70]
+re8.exe+128EE88: 48 85 C0           - test rax,rax
+re8.exe+128EE8B: 74 09              - je re8.exe+128EE96
+re8.exe+128EE8D: 80 78 18 00        - cmp byte ptr [rax+18],00
+re8.exe+128EE91: 0F 95 C1           - setne cl
+re8.exe+128EE94: EB 02              - jmp re8.exe+128EE98
+re8.exe+128EE96: 32 C9              - xor cl,cl
+re8.exe+128EE98: 84 C9              - test cl,cl
+re8.exe+128EE9A: 0F B6 C2           - movzx eax,dl
+re8.exe+128EE9D: 41 0F 45 C1        - cmovne eax,r9d
+re8.exe+128EEA1: 48 8B 53 58        - mov rdx,[rbx+58]
+}
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>33</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>179</ID>
+          <Description>"Freeze Enemies"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-09
+	Author	: aSwedishMagyar
+    Credits : Mr Modification (found the function in the demo thread, object ID info is my own contribution)
+}
+[ENABLE]
+alloc(newanimationSpeed,100,animationSpeed)
+label(codeanimationSpeed)
+label(returnanimationSpeed)
+
+newanimationSpeed:
+  cmp [rcx+198],10	//0x10 is Player, 0x7 is NPCs (note you cannot speed the player movment speed up using this, just animations)
+  je  codeanimationSpeed
+  cmp [rcx+198],1	//0x1 and 0x0 are Objects like Drawers, Gears, Background Moving Props.. etc.
+  jle codeanimationSpeed
+  xorps xmm6,xmm6
+codeanimationSpeed:
+  mulss xmm6,[rcx+4C]
+  jmp returnanimationSpeed
+
+animationSpeed:
+  jmp newanimationSpeed
+returnanimationSpeed:
+
+[DISABLE]
+animationSpeed:
+  db F3 0F 59 71 4C
+
+dealloc(newanimationSpeed)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+385A086
+
+re8.exe+385A03E: 85 03                    - test [rbx],eax
+re8.exe+385A040: 40 57                    - push rdi
+re8.exe+385A042: 41 57                    - push r15
+re8.exe+385A044: 48 83 EC 48              - sub rsp,48
+re8.exe+385A048: 45 33 FF                 - xor r15d,r15d
+re8.exe+385A04B: 48 8B F9                 - mov rdi,rcx
+re8.exe+385A04E: 4C 39 B9 08 02 00 00     - cmp [rcx+00000208],r15
+re8.exe+385A055: 75 0C                    - jne re8.exe+385A063
+re8.exe+385A057: 41 8B C7                 - mov eax,r15d
+re8.exe+385A05A: 44 39 B9 E0 03 00 00     - cmp [rcx+000003E0],r15d
+re8.exe+385A061: 76 05                    - jna re8.exe+385A068
+re8.exe+385A063: B8 01 00 00 00           - mov eax,00000001
+re8.exe+385A068: 84 C0                    - test al,al
+re8.exe+385A06A: 0F 84 24 02 00 00        - je re8.exe+385A294
+re8.exe+385A070: 0F 29 74 24 30           - movaps [rsp+30],xmm6
+re8.exe+385A075: 44 38 79 69              - cmp [rcx+69],r15l
+re8.exe+385A079: 75 23                    - jne re8.exe+385A09E
+re8.exe+385A07B: 83 79 44 01              - cmp dword ptr [rcx+44],01
+re8.exe+385A07F: 74 1D                    - je re8.exe+385A09E
+re8.exe+385A081: F3 0F 10 71 50           - movss xmm6,[rcx+50]
+// ---------- INJECTING HERE ----------
+re8.exe+385A086: F3 0F 59 71 4C           - mulss xmm6,[rcx+4C]
+// ---------- DONE INJECTING  ----------
+re8.exe+385A08B: E8 40 1D B2 FF           - call re8.exe+337BDD0
+re8.exe+385A090: F3 0F 59 C6              - mulss xmm0,xmm6
+re8.exe+385A094: F3 0F 11 87 04 04 00 00  - movss [rdi+00000404],xmm0
+re8.exe+385A09C: EB 07                    - jmp re8.exe+385A0A5
+re8.exe+385A09E: 44 89 B9 04 04 00 00     - mov [rcx+00000404],r15d
+re8.exe+385A0A5: 48 89 5C 24 60           - mov [rsp+60],rbx
+re8.exe+385A0AA: 48 8B 9F 90 01 00 00     - mov rbx,[rdi+00000190]
+re8.exe+385A0B1: 48 89 6C 24 68           - mov [rsp+68],rbp
+re8.exe+385A0B6: 48 89 74 24 70           - mov [rsp+70],rsi
+re8.exe+385A0BB: 44 38 7F 6A              - cmp [rdi+6A],r15l
+re8.exe+385A0BF: 74 74                    - je re8.exe+385A135
+re8.exe+385A0C1: 8B 6F 44                 - mov ebp,[rdi+44]
+re8.exe+385A0C4: 48 85 DB                 - test rbx,rbx
+re8.exe+385A0C7: 74 0D                    - je re8.exe+385A0D6
+re8.exe+385A0C9: 48 8B 87 98 01 00 00     - mov rax,[rdi+00000198]
+re8.exe+385A0D0: 48 8D 34 C3              - lea rsi,[rbx+rax*8]
+re8.exe+385A0D4: EB 03                    - jmp re8.exe+385A0D9
+re8.exe+385A0D6: 49 8B F7                 - mov rsi,r15
+re8.exe+385A0D9: 48 3B DE                 - cmp rbx,rsi
+re8.exe+385A0DC: 0F 84 38 01 00 00        - je re8.exe+385A21A
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>59</ID>
+          <Description>"Teleport Scripts"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>56</ID>
+              <Description>"Save Location"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 
+	Date	: May 07, 2021
+	Author	: aSwedishMagyar
+}
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+saveTPLocation()
+return 'nop'
+[DISABLE]
+</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Activate</Action>
+                  <Keys>
+                    <Key>17</Key>
+                    <Key>105</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57</ID>
+              <Description>"Recall Location"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 
+	Date	: May 07, 2021
+	Author	: aSwedishMagyar
+}
+{$lua}
+if syntaxcheck then return end
+[ENABLE]
+recallTPLocation()
+return 'nop'
+[DISABLE]
+</AssemblerScript>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Activate</Action>
+                  <Keys>
+                    <Key>17</Key>
+                    <Key>104</Key>
+                  </Keys>
+                  <ID>0</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>176</ID>
+          <Description>"Mercenary Mode"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>174</ID>
+              <Description>"Modify Score Gain"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{
+	Game	: re8.exe
+	Version	: 0.0.0.0
+	Date	: 2021-05-13
+	Author	: aSwedishMagyar
+}
+[ENABLE]
+registersymbol(scoreMult)
+alloc(newscoreGain,100,scoreGain)
+label(codescoreGain)
+label(returnscoreGain)
+label(scoreMult)
+newscoreGain:
+  cvtsi2sd xmm15,ebp
+  mulsd xmm15,[scoreMult]
+  cvtsd2si ebp,xmm15
+  xorpd xmm0,xmm0
+codescoreGain:
+  add [rdi+18],ebp
+  mov rax,[rbx+50]
+  jmp returnscoreGain
+scoreMult:
+  dq (double)1
+scoreGain:
+  jmp newscoreGain
+  nop 2
+returnscoreGain:
+
+[DISABLE]
+scoreGain:
+  db 01 6F 18 48 8B 43 50
+
+unregistersymbol(scoreMult)
+dealloc(newscoreGain)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+10B1E2B
+
+re8.exe+10B1DDF: 4C 8B 76 18           - mov r14,[rsi+18]
+re8.exe+10B1DE3: 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re8.exe+10B1DE8: 75 2D                 - jne re8.exe+10B1E17
+re8.exe+10B1DEA: 4D 85 F6              - test r14,r14
+re8.exe+10B1DED: 74 28                 - je re8.exe+10B1E17
+re8.exe+10B1DEF: 49 8B 06              - mov rax,[r14]
+re8.exe+10B1DF2: 48 8B 15 87 CC 03 09  - mov rdx,[re8.exe+A0EEA80]
+re8.exe+10B1DF9: 48 8B 08              - mov rcx,[rax]
+re8.exe+10B1DFC: E8 2F C9 2B 02        - call re8.exe+336E730
+re8.exe+10B1E01: 84 C0                 - test al,al
+re8.exe+10B1E03: 74 12                 - je re8.exe+10B1E17
+re8.exe+10B1E05: 48 8B 43 50           - mov rax,[rbx+50]
+re8.exe+10B1E09: 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re8.exe+10B1E0E: 75 07                 - jne re8.exe+10B1E17
+re8.exe+10B1E10: 41 8B 46 10           - mov eax,[r14+10]
+re8.exe+10B1E14: 89 47 34              - mov [rdi+34],eax
+re8.exe+10B1E17: 48 8B 43 50           - mov rax,[rbx+50]
+re8.exe+10B1E1B: 4C 8B 74 24 38        - mov r14,[rsp+38]
+re8.exe+10B1E20: 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re8.exe+10B1E25: 0F 85 F2 00 00 00     - jne re8.exe+10B1F1D
+// ---------- INJECTING HERE ----------
+re8.exe+10B1E2B: 01 6F 18              - add [rdi+18],ebp
+// ---------- DONE INJECTING  ----------
+re8.exe+10B1E2E: 48 8B 43 50           - mov rax,[rbx+50]
+re8.exe+10B1E32: 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re8.exe+10B1E37: 75 67                 - jne re8.exe+10B1EA0
+re8.exe+10B1E39: 48 8B 4E 10           - mov rcx,[rsi+10]
+re8.exe+10B1E3D: 48 8B 15 B4 3C 10 09  - mov rdx,[re8.exe+A1B5AF8]
+re8.exe+10B1E44: 48 3B CA              - cmp rcx,rdx
+re8.exe+10B1E47: 74 19                 - je re8.exe+10B1E62
+re8.exe+10B1E49: 48 85 C9              - test rcx,rcx
+re8.exe+10B1E4C: 74 10                 - je re8.exe+10B1E5E
+re8.exe+10B1E4E: 48 85 D2              - test rdx,rdx
+re8.exe+10B1E51: 74 0B                 - je re8.exe+10B1E5E
+re8.exe+10B1E53: 8B 41 10              - mov eax,[rcx+10]
+re8.exe+10B1E56: 3B 42 10              - cmp eax,[rdx+10]
+re8.exe+10B1E59: 0F 94 C0              - sete al
+re8.exe+10B1E5C: EB 06                 - jmp re8.exe+10B1E64
+re8.exe+10B1E5E: 32 C0                 - xor al,al
+re8.exe+10B1E60: EB 02                 - jmp re8.exe+10B1E64
+re8.exe+10B1E62: B0 01                 - mov al,01
+re8.exe+10B1E64: 84 C0                 - test al,al
+re8.exe+10B1E66: 75 35                 - jne re8.exe+10B1E9D
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>175</ID>
+                  <Description>"Multiplier"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Double</VariableType>
+                  <Address>scoreMult</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>0</ID>
+              <Description>"Inf Mercenary Timer"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{
+	Game	: re8.exe
+	Version	:
+	Date	: May 13, 2021
+	Author	: aSwedishMagyar
+    Credits : Caliber (info in demo request thread ended up being the same for mercenaries timer)
+}
+[ENABLE]
+alloc(newinfTimer,100,infTimer)
+label(codeinfTimer)
+label(returninfTimer)
+
+newinfTimer:
+  mov [rdi+18],r8
+codeinfTimer:
+  sub r8,[rdi+18]
+  add rbx,r8
+  jmp returninfTimer
+
+infTimer:
+  jmp newinfTimer
+  nop 2
+returninfTimer:
+
+[DISABLE]
+infTimer:
+  db 4C 2B 47 18 49 03 D8
+
+dealloc(newinfTimer)
+
+{
+// ORIGINAL CODE - INJECTION POINT: re8.exe+243553A
+
+re8.exe+24354FD: CC              - int 3
+re8.exe+24354FE: CC              - int 3
+re8.exe+24354FF: CC              - int 3
+re8.exe+2435500: 48 89 5C 24 08  - mov [rsp+08],rbx
+re8.exe+2435505: 48 89 74 24 10  - mov [rsp+10],rsi
+re8.exe+243550A: 57              - push rdi
+re8.exe+243550B: 48 83 EC 20     - sub rsp,20
+re8.exe+243550F: 80 7A 20 00     - cmp byte ptr [rdx+20],00
+re8.exe+2435513: 48 8B FA        - mov rdi,rdx
+re8.exe+2435516: 48 8B 5A 10     - mov rbx,[rdx+10]
+re8.exe+243551A: 48 8B F1        - mov rsi,rcx
+re8.exe+243551D: 74 22           - je re8.exe+2435541
+re8.exe+243551F: E8 9C 04 FB 00  - call re8.exe+33E59C0
+re8.exe+2435524: 4C 8B C0        - mov r8,rax
+re8.exe+2435527: 48 8B 46 50     - mov rax,[rsi+50]
+re8.exe+243552B: 48 8B 48 18     - mov rcx,[rax+18]
+re8.exe+243552F: 33 C0           - xor eax,eax
+re8.exe+2435531: 48 85 C9        - test rcx,rcx
+re8.exe+2435534: 4C 0F 45 C0     - cmovne r8,rax
+re8.exe+2435538: 75 0A           - jne re8.exe+2435544
+// ---------- INJECTING HERE ----------
+re8.exe+243553A: 4C 2B 47 18     - sub r8,[rdi+18]
+// ---------- DONE INJECTING  ----------
+re8.exe+243553E: 49 03 D8        - add rbx,r8
+re8.exe+2435541: 48 8B C3        - mov rax,rbx
+re8.exe+2435544: 48 8B 5C 24 30  - mov rbx,[rsp+30]
+re8.exe+2435549: 48 8B 74 24 38  - mov rsi,[rsp+38]
+re8.exe+243554E: 48 83 C4 20     - add rsp,20
+re8.exe+2435552: 5F              - pop rdi
+re8.exe+2435553: C3              - ret
+re8.exe+2435554: CC              - int 3
+re8.exe+2435555: CC              - int 3
+re8.exe+2435556: CC              - int 3
+re8.exe+2435557: CC              - int 3
+re8.exe+2435558: CC              - int 3
+re8.exe+2435559: CC              - int 3
+re8.exe+243555A: CC              - int 3
+re8.exe+243555B: CC              - int 3
+re8.exe+243555C: CC              - int 3
+re8.exe+243555D: CC              - int 3
+re8.exe+243555E: CC              - int 3
+re8.exe+243555F: CC              - int 3
+re8.exe+2435560: 48 89 5C 24 18  - mov [rsp+18],rbx
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>ItemCHN</Name>
+      <Address>01010000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
