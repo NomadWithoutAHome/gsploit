@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="28">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Invulnerable"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(aobinvulnerable,DevilMayCry5.exe,83 BB B0 02 00 00 FF 0F 85 * * * * 80 BB * * 00 00 00 0F 85 * * * * 80 BB * * 00 00 00) // should be unique
+alloc(newmem,$1000,"DevilMayCry5.exe")
+label(code)
+label(return)
+label(skipcode)
+
+newmem:
+  push rax
+  push rcx
+  mov rax,[rbx+A8]
+  test rax,rax
+  je short code
+  mov rax,[rax+10]
+  test rax,rax
+  je short code
+  mov rcx,0061006C0050002F //'/Pla'
+  cmp [rax+20],rcx
+  jne short code
+  mov rcx,002F007200650079 //'yer/'
+  cmp [rax+28],rcx
+  jne short code
+  cmp rsp,0
+  jmp short skipcode
+
+code:
+  cmp dword ptr [rbx+000002B0],-01
+skipcode:
+  pop rcx
+  pop rax
+  jmp return
+
+aobinvulnerable:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(aobinvulnerable)
+
+[DISABLE]
+aobinvulnerable:
+  db 83 BB B0 02 00 00 FF
+dealloc(newmem)
+unregistersymbol(aobinvulnerable)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Health"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(health,DevilMayCry5.exe,F3 0F 11 4F 10 48 85)
+alloc(newmem,$1000,health)
+
+label(code)
+label(return)
+label(infhpf)
+label(ohkf)
+label(ohkchk)
+
+registersymbol(health)
+registersymbol(infhpf)
+registersymbol(ohkf)
+
+newmem:
+  cmp [infhpf],1
+  jne code
+  {cmp [rdi+160],0
+  jne ohkchk
+  cmp [rdi+E8],1
+  jne ohkchk
+  cmp [rdi+F8],1
+  jne ohkchk
+  cmp [rdi+108-110],0
+  jne ohkchk}
+  cmp byte ptr [rdi+134],'P'
+  jne ohkchk
+  cmp byte ptr [rdi+136],'l'
+  jne ohkchk
+  cmp byte ptr [rdi+138],'a'
+  jne ohkchk
+  cmp byte ptr [rdi+13A],'y'
+  jne ohkchk
+  fld [rdi+14]
+  fstp [rdi+10]
+  jmp return
+
+ohkchk:
+  cmp [ohkf],1
+  jne code
+  xorps xmm1,xmm1
+
+code:
+  movss [rdi+10],xmm1
+  jmp return
+
+infhpf:
+  dq 0
+
+ohkf:
+  dq 0
+
+health:
+  jmp newmem
+return:
+
+[DISABLE]
+
+health:
+  db F3 0F 11 4F 10
+
+unregistersymbol(health)
+unregistersymbol(infhpf)
+unregistersymbol(ohkf)
+dealloc(newmem)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"Inf Health"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+infhpf:
+  dq 1
+ 
+ 
+[DISABLE]
+infhpf:
+  dq 0
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"One Hit Kill"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+ohkf:
+  dq 1
+ 
+ 
+[DISABLE]
+ohkf:
+  dq 0
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9219</ID>
+      <Description>"Inf Devil Trigger"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-09
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(infdtv,DevilMayCry5.exe,F3 0F 10 8A 10 11 00 00 F3 0F 10 87)
+alloc(newmem,$1000,infdtv)
+
+label(code)
+label(return)
+
+registersymbol(infdtv)
+
+newmem:
+  fld [rdx+00001114]
+  fstp [rdx+00001110]
+
+code:
+  movss xmm1,[rdx+00001110]
+  jmp return
+
+infdtv:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+
+[DISABLE]
+
+infdtv:
+  db F3 0F 10 8A 10 11 00 00
+
+unregistersymbol(infdtv)
+dealloc(newmem)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9224</ID>
+      <Description>"Inf Double Jump"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-09
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(infdj,DevilMayCry5.exe,0F 92 D0 0F 28 74 24 20)
+alloc(newmem,$1000,infdj)
+
+label(code)
+label(return)
+
+registersymbol(infdj)
+
+aobscanmodule(infdjd1,DevilMayCry5.exe,8B 97 2C 11 00 00)
+alloc(newmem2,$1000,infdjd1)
+
+label(code2)
+label(return2)
+
+registersymbol(infdjd1)
+
+newmem:
+
+code:
+  mov al,1
+  movaps xmm6,[rsp+20]
+  jmp return
+
+newmem2:
+  mov [rdi+0000112C],0
+
+code2:
+  mov edx,[rdi+0000112C]
+  jmp return2
+
+infdj:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+
+infdjd1:
+  jmp newmem2
+  nop
+return2:
+
+[DISABLE]
+
+infdj:
+  db 0F 92 D0 0F 28 74 24 20
+
+unregistersymbol(infdj)
+dealloc(newmem)
+
+infdjd1:
+  db 8B 97 2C 11 00 00
+
+unregistersymbol(infdjd1)
+dealloc(newmem2)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>54</ID>
+      <Description>"Style Wont Decrease"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(esbu,DevilMayCry5.exe,F3 0F 11 87 B4 00 00 00 48 8B 43 50 48 8B 50)
+registersymbol(esbu)
+
+esbu:
+  db 90 90 90 90 90 90 90 90
+
+aobscanmodule(esbu2,DevilMayCry5.exe,89 BD B4 00 00 00 48 8B 43)
+registersymbol(esbu2)
+
+esbu2:
+  db 90 90 90 90 90 90
+
+[DISABLE]
+
+esbu:
+  db F3 0F 11 87 B4 00 00 00
+
+unregistersymbol(esbu)
+
+esbu2:
+  db 89 BD B4 00 00 00
+
+unregistersymbol(esbu2)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>55</ID>
+      <Description>"Style Multiplier"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(stylemult,DevilMayCry5.exe,C2 F3 0F 2A C8 0F 5A D0 0F 5A D9 F2 0F 58 DA 66 0F 5A CB)
+alloc(newmem,$1000,stylemult)
+
+label(code)
+label(return)
+label(stylemultv)
+
+registersymbol(stylemult)
+registersymbol(stylemultv)
+
+newmem:
+  mulsd xmm2,[stylemultv]
+
+code:
+  addsd xmm3,xmm2
+  cvtpd2ps xmm1,xmm3
+  jmp return
+
+stylemultv:
+  dq (double)2
+
+stylemult+0B:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+
+[DISABLE]
+
+stylemult+0B:
+  db F2 0F 58 DA 66 0F 5A CB
+
+unregistersymbol(stylemult)
+unregistersymbol(stylemultv)
+dealloc(newmem)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>56</ID>
+          <Description>"Multiplier"</Description>
+          <VariableType>Double</VariableType>
+          <Address>stylemultv</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>59</ID>
+      <Description>"Freeze Secret Mission Timer"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(ismt,DevilMayCry5.exe,F3 0F 11 4B 5C F3 0F 10 53 60)
+registersymbol(ismt)
+
+ismt:
+  db 90 90 90 90 90
+
+[DISABLE]
+
+ismt:
+  db F3 0F 11 4B 5C
+
+unregistersymbol(ismt)
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>16</ID>
+      <Description>"Orbs"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(orbs,DevilMayCry5.exe,4C 63 47 60 4B 8D 0C 07)
+alloc(newmem,$1000,orbs)
+
+label(code)
+label(return)
+
+registersymbol(orbs)
+registersymbol(orbsp)
+
+aobscanmodule(orbs2,DevilMayCry5.exe,8B 5B 60 EB 03)
+alloc(newmem2,$1000,orbs2)
+
+label(code2)
+label(return2)
+
+registersymbol(orbs2)
+
+newmem:
+  mov [orbsp],rdi
+
+code:
+  movsxd  r8,dword ptr [rdi+60]
+  lea rcx,[r15+r8]
+  jmp return
+
+orbsp:
+  dq 0
+
+newmem2:
+  mov [orbsp],rbx
+
+code2:
+  mov ebx,[rbx+60]
+  jmp orbs2+08
+  jmp return2
+
+orbs:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+
+orbs2:
+  jmp newmem2
+return2:
+
+[DISABLE]
+
+orbs:
+  db 4C 63 47 60 4B 8D 0C 07
+
+unregistersymbol(orbs)
+unregistersymbol(orbsp)
+dealloc(newmem)
+
+orbs2:
+  db 8B 5B 60 EB 03
+
+unregistersymbol(orbs2)
+dealloc(newmem2)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Red Orbs"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>orbsp</Address>
+          <Offsets>
+            <Offset>60</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"Yellow Orbs"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>orbsp</Address>
+          <Offsets>
+            <Offset>98</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>60</ID>
+          <Description>"Blue Fragments"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>orbsp</Address>
+          <Offsets>
+            <Offset>78</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>61</ID>
+          <Description>"Purple Fragments"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>orbsp</Address>
+          <Offsets>
+            <Offset>88</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9245</ID>
+      <Description>"Nero"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"Inf Blue Rose Ammo"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(infammo,DevilMayCry5.exe,89 87 20 03 00 00 E9)
+alloc(newmem,$1000,infammo)
+
+label(code)
+label(return)
+
+registersymbol(infammo)
+
+newmem:
+
+code:
+  mov eax,[rdi+324]
+  mov [rdi+320],eax
+  jmp return
+
+infammo:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+
+infammo:
+  db 89 87 20 03 00 00
+
+unregistersymbol(infammo)
+dealloc(newmem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"Inf Devilbreaker Uses"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(overture,DevilMayCry5.exe,8B 86 CC 17 00 00 85)
+alloc(newmem,$1000,overture)
+
+label(code)
+label(return)
+
+registersymbol(overture)
+
+newmem:
+  mov [rsi+000017CC],3
+
+code:
+  mov eax,[rsi+000017CC]
+  jmp return
+
+overture:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+
+overture:
+  db 8B 86 CC 17 00 00
+
+unregistersymbol(overture)
+dealloc(newmem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"Devil Breaker Override"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(dboverride,DevilMayCry5.exe,FF 41 8B 44 12 04 45 89 C8 41 89 04 12 49 83 C2 04)
+alloc(newmem,$1000,dboverride)
+
+label(code)
+label(return)
+label(setndb)
+
+registersymbol(dboverride)
+registersymbol(setndb)
+
+newmem:
+  cmp r10,20
+  jne code
+  mov eax,[setndb]
+
+code:
+  mov [r10+rdx],eax
+  add r10,04
+  jmp return
+
+setndb:
+  dq 0
+
+dboverride+09:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+
+[DISABLE]
+
+dboverride+09:
+  db 41 89 04 12 49 83 C2 04
+
+unregistersymbol(dboverride)
+unregistersymbol(setndb)
+dealloc(newmem)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>52</ID>
+              <Description>"Set Next Devil Breaker"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Overture
+1:Ragtime
+2:Helter Skelter
+3:Gerbera
+4:Punch Line
+5:Buster Arm
+6:Raw Hide
+7:Tomboy
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+12:Monkey Business
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>setndb</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>40</ID>
+          <Description>"Magazine Editor (View Pause Menu)"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(mageditor,DevilMayCry5.exe,45 8B 44 86 20 0F)
+alloc(newmem,$1000,mageditor)
+
+label(code)
+label(return)
+label(mageditorp)
+
+registersymbol(mageditor)
+registersymbol(mageditorp)
+
+newmem:
+  cmp rax,0
+  jne code
+  mov [mageditorp],r14
+
+code:
+  mov r8d,[r14+rax*4+20]
+  jmp return
+
+mageditorp:
+  dq 0
+
+mageditor:
+  jmp newmem
+return:
+
+[DISABLE]
+
+mageditor:
+  db 45 8B 44 86 20
+
+unregistersymbol(mageditor)
+unregistersymbol(mageditorp)
+dealloc(newmem)
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>41</ID>
+              <Description>"Slot 1"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>20</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>42</ID>
+              <Description>"Slot 2"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>24</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>44</ID>
+              <Description>"Slot 3"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>28</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>43</ID>
+              <Description>"Slot 4"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>2C</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>45</ID>
+              <Description>"Slot 5"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>30</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>46</ID>
+              <Description>"Slot 6"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>34</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>47</ID>
+              <Description>"Slot 7"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>38</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>48</ID>
+              <Description>"Slot 8"</Description>
+              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Overture
+3:Gerbera
+8:Mega Buster
+9:Gerbera GP01
+10:Pasta Breaker
+11:Sweet Surrender
+100:Empty
+</DropDownList>
+              <VariableType>4 Bytes</VariableType>
+              <Address>mageditorp</Address>
+              <Offsets>
+                <Offset>3C</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>80</ID>
+          <Description>"Instant Exceed Charge"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(instantex,DevilMayCry5.exe,F3 0F 11 4A 28 77)
+alloc(newmem,$1000,instantex)
+
+label(code)
+label(return)
+
+registersymbol(instantex)
+
+aobscanmodule(instantexceed,DevilMayCry5.exe,F3 0F 11 42 20 49)
+alloc(newmem2,$1000,instantexceed)
+
+label(code2)
+label(return2)
+
+registersymbol(instantexceed)
+
+newmem:
+  movss xmm1,[rdx+4C]
+
+code:
+  movss [rdx+28],xmm1
+  jmp return
+
+newmem2:
+
+code2:
+  fld [rdx+4C]
+  fstp [rdx+20]
+  jmp return2
+
+instantex:
+  jmp newmem
+return:
+
+instantexceed:
+  jmp newmem2
+return2:
+
+[DISABLE]
+
+instantex:
+  db F3 0F 11 4A 28
+
+unregistersymbol(instantex)
+dealloc(newmem)
+
+instantexceed:
+  db F3 0F 11 42 20
+
+unregistersymbol(instantexceed)
+dealloc(newmem2)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>81</ID>
+          <Description>"Maxed Exceed"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-08
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(maxex,DevilMayCry5.exe,8B 49 18 48 8B 43 50 48 39 70 18 0F 85 29)
+alloc(newmem,$1000,maxex)
+
+label(code)
+label(return)
+
+registersymbol(maxex)
+
+newmem:
+  mov [rcx+18],3
+
+code:
+  mov ecx,[rcx+18]
+  mov rax,[rbx+50]
+  jmp return
+
+maxex:
+  jmp newmem
+  nop
+  nop
+return:
+
+[DISABLE]
+
+maxex:
+  db 8B 49 18 48 8B 43 50
+
+unregistersymbol(maxex)
+dealloc(newmem)
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9247</ID>
+      <Description>"V"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9226</ID>
+          <Description>"Inf Summon Powerup Duration"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-10
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(infspud,DevilMayCry5.exe,F3 0F 11 87 6C 01 00 00 48 8B 43)
+registersymbol(infspud)
+
+infspud:
+  db 90 90 90 90 90 90 90 90
+
+[DISABLE]
+
+infspud:
+  db F3 0F 11 87 6C 01 00 00
+
+unregistersymbol(infspud)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9244</ID>
+          <Description>"Inf Summon Vitality"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-10
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(infsvv,DevilMayCry5.exe,34 F3 0F 10 48 14 F3 0F 10 40 10)
+alloc(newmem,$1000,infsvv)
+
+label(code)
+label(return)
+
+registersymbol(infsvv)
+
+newmem:
+  fld [rax+14]
+  fstp [rax+10]
+
+code:
+  movss xmm0,[rax+10]
+  jmp return
+
+infsvv+06:
+  jmp newmem
+return:
+
+[DISABLE]
+
+infsvv+06:
+  db F3 0F 10 40 10
+
+unregistersymbol(infsvv)
+dealloc(newmem)
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>9246</ID>
+      <Description>"Dante"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9231</ID>
+          <Description>"Inf Royal Guard"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-10
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(infrgd,DevilMayCry5.exe,F3 0F 10 5A 28 0F 57)
+alloc(newmem,$1000,infrgd)
+
+label(code)
+label(return)
+
+registersymbol(infrgd)
+
+newmem:
+  movss xmm3,[rdx+2C]
+  movss [rdx+28],xmm3
+
+code:
+  movss xmm3,[rdx+28]
+  jmp return
+
+infrgd:
+  jmp newmem
+return:
+
+[DISABLE]
+
+infrgd:
+  db F3 0F 10 5A 28
+
+unregistersymbol(infrgd)
+dealloc(newmem)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9235</ID>
+          <Description>"Inf Sin Devil Trigger Duration"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-10
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(infsdtd,DevilMayCry5.exe,F3 0F 11 A3 14 1A 00 00)
+registersymbol(infsdtd)
+
+infsdtd:
+  db 90 90 90 90 90 90 90 90
+
+[DISABLE]
+
+infsdtd:
+  db F3 0F 11 A3 14 1A 00 00
+
+unregistersymbol(infsdtd)
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9236</ID>
+          <Description>"Maxed Sin Devil Trigger"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : DevilMayCry5.exe
+  Version: 
+  Date   : 2019-03-10
+  Author : Jessie Kazama
+}
+
+[ENABLE]
+
+aobscanmodule(maxsdt,DevilMayCry5.exe,F3 0F 10 8F 14 1A 00 00 BA)
+alloc(newmem,$1000,maxsdt)
+
+label(code)
+label(return)
+
+registersymbol(maxsdt)
+
+newmem:
+  mov [rdi+00001A14],(float)10000
+
+code:
+  movss xmm1,[rdi+00001A14]
+  jmp return
+
+maxsdt:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+
+[DISABLE]
+
+maxsdt:
+  db F3 0F 10 8F 14 1A 00 00
+
+unregistersymbol(maxsdt)
+dealloc(newmem)
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
