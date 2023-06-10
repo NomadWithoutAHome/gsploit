@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheatTable CheatEngineTableVersion="19">
+<CheatTable CheatEngineTableVersion="42">
   <CheatEntries>
     <CheatEntry>
-      <ID>302</ID>
-      <Description>"Scripts"</Description>
+      <ID>137</ID>
+      <Description>"[Player]"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
-          <ID>9</ID>
-          <Description>"Infinite Health"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
+          <ID>399</ID>
+          <Description>"[Scripts]"</Description>
+          <Options moHideChildren="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>9</ID>
+              <Description>"Infinite Health"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
 aobscan(aob_H,29 81 70 08 00 00 EB 0A)
 label(aob1_H)
 label(aob2_H)
@@ -38,13 +42,12 @@ db 29 91 70 08 00 00 // sub [ecx+00000870],edx
 unregistersymbol(aob2_H)
 unregistersymbol(aob2_H)
 </AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>62</ID>
-          <Description>"Infinite Energy"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
+            </CheatEntry>
+            <CheatEntry>
+              <ID>62</ID>
+              <Description>"Infinite Energy"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
 aobscan(aob_BZ,D8 6A 04 D9 52 04 D8 D2 DF E0)
 registersymbol(aob_BZ)
 
@@ -60,13 +63,12 @@ db D9 52 04 // fst dword ptr [edx+04]
 
 unregistersymbol(aob_BZ)
 </AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>67</ID>
-          <Description>"Infinite Secondary Ammo"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
+            </CheatEntry>
+            <CheatEntry>
+              <ID>67</ID>
+              <Description>"Infinite Secondary Ammo"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
 alloc(newmem_I_RM,128)
 alloc(newmem_I_GR,128)
 label(exit_I_RM)
@@ -110,13 +112,12 @@ unregistersymbol(aob_I_GR)
 dealloc(newmem_I_RM)
 dealloc(newmem_I_GR)
 </AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>98</ID>
-          <Description>"Disable Enemy Detection"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
+            </CheatEntry>
+            <CheatEntry>
+              <ID>98</ID>
+              <Description>"Disable Enemy Detection"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
 aobscan(stealth,74 19 8B 0F E8 ?? ?? ?? ?? 8B 06 8B 48 08)
 registersymbol(stealth)
 
@@ -129,14 +130,13 @@ db 74 19 // je "METAL GEAR RISING REVENGEANCE.exe"+84A566
 
 unregistersymbol(stealth)
 </AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>395</ID>
-          <Description>"Play Speed"</Description>
-          <Options moHideChildren="1"/>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[enable]
+            </CheatEntry>
+            <CheatEntry>
+              <ID>395</ID>
+              <Description>"Play Speed"</Description>
+              <Options moHideChildren="1"/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[enable]
 aobscanmodule(play_speed_aob,METAL GEAR RISING REVENGEANCE.exe,8D 4E 28 D9 46 3C D9 5C 24 14 D9 44 24 14)
 registersymbol(play_speed_aob)
 alloc(cave,64,METAL GEAR RISING REVENGEANCE.exe)
@@ -173,22 +173,21 @@ dealloc(cave)
 dealloc(play_speed)
 
 </AssemblerScript>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>396</ID>
-              <Description>"Mult"</Description>
-              <VariableType>Float</VariableType>
-              <Address>play_speed</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>396</ID>
+                  <Description>"Mult"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>play_speed</Address>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>132</ID>
-          <Description>"Camera Mod"</Description>
-          <Options moHideChildren="1"/>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
+            <CheatEntry>
+              <ID>132</ID>
+              <Description>"Camera Mod"</Description>
+              <Options moHideChildren="1"/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
 alloc(newmem_CAMERA,512)
 label(exit_CAMERA)
 label(_CAMERA_Top)
@@ -237,27 +236,26 @@ unregistersymbol(_CAMERA_Top)
 unregistersymbol(_CAMERA_Back)
 unregistersymbol(aob_CAMERA)
 </AssemblerScript>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>134</ID>
-              <Description>"Y"</Description>
-              <VariableType>Float</VariableType>
-              <Address>_CAMERA_Back</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>134</ID>
+                  <Description>"Y"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>_CAMERA_Back</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>133</ID>
+                  <Description>"Z"</Description>
+                  <VariableType>Float</VariableType>
+                  <Address>_CAMERA_Top</Address>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
             <CheatEntry>
-              <ID>133</ID>
-              <Description>"Z"</Description>
-              <VariableType>Float</VariableType>
-              <Address>_CAMERA_Top</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>23</ID>
-          <Description>"One Hit Kills"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
+              <ID>23</ID>
+              <Description>"One Hit Kills"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
 alloc(newmem_1HK,128)
 label(exit_1HK)
 aobscan(aob_1HK,29 81 70 08 00 00 8B 81)
@@ -280,49 +278,23 @@ db 29 81 70 08 00 00 // sub [ecx+00000870],eax
 dealloc(newmem_1HK)
 unregistersymbol(aob_1HK)
 </AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
-        <CheatEntry>
-          <ID>179</ID>
-          <Description>"Disable Battle Result Write"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-"METAL GEAR RISING REVENGEANCE.exe"+81B43A:
-jmp "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
-nop
-
-[DISABLE]
-"METAL GEAR RISING REVENGEANCE.exe"+81B43A:
-je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
-</AssemblerScript>
-        </CheatEntry>
-      </CheatEntries>
-    </CheatEntry>
-    <CheatEntry>
-      <ID>137</ID>
-      <Description>"Player"</Description>
-      <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
-      <GroupHeader>1</GroupHeader>
-      <CheatEntries>
         <CheatEntry>
           <ID>292</ID>
-          <Description>"Global"</Description>
+          <Description>"[Global]"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>301</ID>
               <Description>"Position"</Description>
-              <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>299</ID>
                   <Description>"XYZ"</Description>
-                  <LastState Value="00 00 00 00 33 33 B3 3F 00 00 00 00" RealAddress="0261A690"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>12</ByteLength>
@@ -331,21 +303,18 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
                 <CheatEntry>
                   <ID>300</ID>
                   <Description>"X"</Description>
-                  <LastState Value="0" RealAddress="0261A690"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C16FC</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>297</ID>
                   <Description>"Y"</Description>
-                  <LastState Value="0" RealAddress="0261A698"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C1704</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>298</ID>
                   <Description>"Z"</Description>
-                  <LastState Value="1.399999976" RealAddress="0261A694"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C1700</Address>
                 </CheatEntry>
@@ -354,28 +323,23 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
             <CheatEntry>
               <ID>389</ID>
               <Description>"Camera"</Description>
-              <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
               <GroupHeader>1</GroupHeader>
               <CheatEntries>
                 <CheatEntry>
                   <ID>388</ID>
                   <Description>"Pitch"</Description>
-                  <LastState Value="0" RealAddress="0261A530"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C159C</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>387</ID>
                   <Description>"Yaw"</Description>
-                  <LastState Value="0" RealAddress="0261A534"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C15A0</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>391</ID>
                   <Description>"XYZ"</Description>
-                  <LastState Value="00 00 00 00 33 33 B3 3F 00 00" RealAddress="0261A680"/>
                   <ShowAsHex>1</ShowAsHex>
                   <VariableType>Array of byte</VariableType>
                   <ByteLength>10</ByteLength>
@@ -384,83 +348,26 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
                 <CheatEntry>
                   <ID>394</ID>
                   <Description>"X"</Description>
-                  <LastState Value="0" RealAddress="0261A680"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C16EC</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>393</ID>
                   <Description>"Y"</Description>
-                  <LastState Value="2" RealAddress="0261A688"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C16F4</Address>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>392</ID>
                   <Description>"Z"</Description>
-                  <LastState Value="1.399999976" RealAddress="0261A684"/>
                   <VariableType>Float</VariableType>
                   <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+C16F0</Address>
                 </CheatEntry>
               </CheatEntries>
             </CheatEntry>
             <CheatEntry>
-              <ID>303</ID>
-              <Description>"Debug"</Description>
-              <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
-              <GroupHeader>1</GroupHeader>
-              <CheatEntries>
-                <CheatEntry>
-                  <ID>287</ID>
-                  <Description>"Body"</Description>
-                  <LastState Value="0" RealAddress="02619FB4"/>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1020</Address>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>285</ID>
-                  <Description>"Main Model ID"</Description>
-                  <LastState Value="00000000" RealAddress="02619FF4"/>
-                  <ShowAsHex>1</ShowAsHex>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1060</Address>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>290</ID>
-                  <Description>"Main?"</Description>
-                  <LastState Value="0" RealAddress="02619FF8"/>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1064</Address>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>289</ID>
-                  <Description>"Main Store"</Description>
-                  <LastState Value="-1" RealAddress="02619FFC"/>
-                  <ShowAsSigned>1</ShowAsSigned>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1068</Address>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>288</ID>
-                  <Description>"Main"</Description>
-                  <LastState Value="0" RealAddress="0261A000"/>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C106C</Address>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>291</ID>
-                  <Description>"Main Index?"</Description>
-                  <LastState Value="0" RealAddress="0261A004"/>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1070</Address>
-                </CheatEntry>
-              </CheatEntries>
-            </CheatEntry>
-            <CheatEntry>
               <ID>140</ID>
               <Description>"BP"</Description>
-              <LastState Value="0" RealAddress="025A589C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+177589C</Address>
             </CheatEntry>
@@ -468,36 +375,31 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
         </CheatEntry>
         <CheatEntry>
           <ID>260</ID>
-          <Description>"Raiden"</Description>
+          <Description>"[Raiden]"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>236</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593A70"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+10</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>242</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593A74"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+14</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>243</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593A78"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+18</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>244</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593A7C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+1C</Address>
             </CheatEntry>
@@ -522,7 +424,6 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
 15:Jetstream Sam
 16:Blade Wolf
 </DropDownList>
-              <LastState Value="0" RealAddress="02593A80"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+20</Address>
             </CheatEntry>
@@ -534,7 +435,6 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
 2:Infinite Wig B
 3:Blade Mode Wig
 </DropDownList>
-              <LastState Value="0" RealAddress="02593A84"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+24</Address>
             </CheatEntry>
@@ -555,7 +455,6 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
 11:High Frequency Chainsaw
 12:High Frequency Blade (Invisible)
 </DropDownList>
-              <LastState Value="0" RealAddress="02593A88"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+28</Address>
             </CheatEntry>
@@ -567,7 +466,6 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
 3:Sai
 4:Pincer Blades
 </DropDownList>
-              <LastState Value="0" RealAddress="02593A8C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+2C</Address>
             </CheatEntry>
@@ -585,7 +483,6 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
 9:Drum Can
 10:Heat Knife
 </DropDownList>
-              <LastState Value="0" RealAddress="02593A90"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+30</Address>
             </CheatEntry>
@@ -596,21 +493,18 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
 1:Repair Nanopaste
 2:Electrolyte Pack
 </DropDownList>
-              <LastState Value="0" RealAddress="02593A94"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+34</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>240</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593A98"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+38</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>241</ID>
               <Description>"?"</Description>
-              <LastState Value="00000000" RealAddress="02593A9C"/>
               <ShowAsHex>1</ShowAsHex>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.exe+1763A60+3C</Address>
@@ -618,84 +512,72 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
             <CheatEntry>
               <ID>248</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593AA0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB0C</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>249</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593AA4"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB10</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>250</ID>
               <Description>"?"</Description>
-              <LastState Value="0" RealAddress="02593AA8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB14</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>251</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593AAC"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB18</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>252</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593AB0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB1C</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>253</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593AB4"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB20</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>254</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593AB8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB24</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>255</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593ABC"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB28</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>256</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593AC0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB2C</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>257</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593AC4"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB30</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>258</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593AC8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB34</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>259</ID>
               <Description>"?"</Description>
-              <LastState Value="4294967295" RealAddress="02593ACC"/>
               <VariableType>4 Bytes</VariableType>
               <Address>METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId+3AB38</Address>
             </CheatEntry>
@@ -703,36 +585,31 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
         </CheatEntry>
         <CheatEntry>
           <ID>283</ID>
-          <Description>"Jetstream Sam"</Description>
+          <Description>"[Jetstream Sam]"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>281</ID>
               <Description>"Sub"</Description>
-              <LastState Value="0" RealAddress="02593B90"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763B90</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>279</ID>
               <Description>"Main"</Description>
-              <LastState Value="10" RealAddress="02593B94"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763B94</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>280</ID>
               <Description>"Body"</Description>
-              <LastState Value="15" RealAddress="02593B98"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763B98</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>282</ID>
               <Description>"Recovery"</Description>
-              <LastState Value="-1" RealAddress="02593B9C"/>
               <ShowAsSigned>1</ShowAsSigned>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763B9c</Address>
@@ -741,36 +618,31 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
         </CheatEntry>
         <CheatEntry>
           <ID>277</ID>
-          <Description>"Blade Wolf"</Description>
+          <Description>"[Blade Wolf]"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>261</ID>
               <Description>"Recovery"</Description>
-              <LastState Value="0" RealAddress="02593BA0"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763BA0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>275</ID>
               <Description>"Sub"</Description>
-              <LastState Value="0" RealAddress="02593BA4"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763BA4</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>274</ID>
               <Description>"Main"</Description>
-              <LastState Value="11" RealAddress="02593BA8"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763BA8</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>276</ID>
               <Description>"Body"</Description>
-              <LastState Value="16" RealAddress="02593BAC"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.exe"+1763BAC</Address>
             </CheatEntry>
@@ -780,70 +652,222 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
     </CheatEntry>
     <CheatEntry>
       <ID>187</ID>
-      <Description>"Battle Result"</Description>
+      <Description>"[Battle Result]"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
+          <ID>400</ID>
+          <Description>"[Scripts]"</Description>
+          <Options moHideChildren="1"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>74</ID>
+              <Description>"Disable Battle Timer"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(newmem,256)
+aobscan(BTimer,D9 05 ?? ?? ?? ?? D8 44 24 08 D9 1D ?? ?? ?? ?? 8B 46 70)
+registersymbol(BTimer)
+label(value)
+
+alloc(originalbytes,32)
+registersymbol(originalbytes)
+originalbytes:
+readmem(BTimer,6)
+
+newmem:
+  fld dword ptr [value]
+  jmp BTimer+A
+value:
+  dd (float)0.10
+
+VRTimer:
+  jmp newmem
+  nop
+
+[DISABLE]
+VRTimer:
+readmem(originalbytes,6)
+
+
+unregistersymbol(BTimer)
+unregistersymbol(originalbytes)
+
+dealloc(newmem)
+dealloc(originalbytes)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>81</ID>
+              <Description>"Set Battle Stats"</Description>
+              <Options moHideChildren="1"/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+alloc(newmem_fightstats,512)
+label(exit_fightstats)
+aobscan(aob_fightstats,56 8B F1 83 BE C0 00 00 00 00 0F 84)
+registersymbol(aob_fightstats)
+label(iKills)
+label(iCombo)
+label(iZandatsu)
+label(exit_iKills)
+label(exit_iCombo)
+label(exit_iZandatsu)
+registersymbol(iKills)
+registersymbol(iCombo)
+registersymbol(iZandatsu)
+
+aob_fightstats+3:
+jmp newmem_fightstats
+nop
+nop
+exit_fightstats:
+
+newmem_fightstats:
+push eax
+cmp [iKills],00
+je exit_iKills
+mov eax,[iKills]
+mov [esi+10],eax
+exit_iKills:
+cmp [iZandatsu],00
+je exit_iZandatsu
+mov eax,[iZandatsu]
+mov [esi+6C],eax
+exit_iZandatsu:
+cmp [iCombo],00
+je exit_iCombo
+mov eax,[iCombo]
+mov [esi+88],eax
+exit_iCombo:
+pop eax
+cmp dword ptr [esi+000000C0],00
+jmp exit_fightstats
+
+iKills:
+dd (int)9999
+iCombo:
+dd (int)1
+iZandatsu:
+dd (int)1
+
+[DISABLE]
+aob_fightstats+3:
+cmp dword ptr [esi+000000C0],00
+
+dealloc(newmem_fightstats)
+unregistersymbol(aob_fightstats)
+unregistersymbol(iKills)
+unregistersymbol(iCombo)
+unregistersymbol(iZandatsu)
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>92</ID>
+                  <Description>"Total Kills"</Description>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>iKills</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>93</ID>
+                  <Description>"Combo (per millisecond)"</Description>
+                  <VariableType>Byte</VariableType>
+                  <Address>iCombo</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>94</ID>
+                  <Description>"Zandatsu (per millisecond)"</Description>
+                  <VariableType>Byte</VariableType>
+                  <Address>iZandatsu</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>110</ID>
+              <Description>"Always No Damage"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+aobscan(aob_NoDamageStat,B8 01 00 00 00 85 C9 74 05 A3)
+registersymbol(aob_NoDamageStat)
+
+aob_NoDamageStat:
+db B8 00
+
+[DISABLE]
+aob_NoDamageStat:
+db B8 01
+
+unregistersymbol(aob_NoDamageStat)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>179</ID>
+              <Description>"Disable Battle Result Write"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+"METAL GEAR RISING REVENGEANCE.exe"+81B43A:
+jmp "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
+nop
+
+[DISABLE]
+"METAL GEAR RISING REVENGEANCE.exe"+81B43A:
+je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
           <ID>177</ID>
           <Description>"InBattle"</Description>
-          <LastState Value="0" RealAddress="025A7DE0"/>
           <VariableType>4 Bytes</VariableType>
           <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4EE4C</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>234</ID>
           <Description>"Current"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>166</ID>
               <Description>"Time"</Description>
-              <LastState Value="0" RealAddress="025A6204"/>
               <VariableType>Float</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D270</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>165</ID>
               <Description>"BP"</Description>
-              <LastState Value="0" RealAddress="025A6208"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D274</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>167</ID>
               <Description>"Zandatsu"</Description>
-              <LastState Value="0" RealAddress="025A620C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D278</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>168</ID>
               <Description>"Longest Combo"</Description>
-              <LastState Value="0" RealAddress="025A6210"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D27C</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>169</ID>
               <Description>"Kills"</Description>
-              <LastState Value="0" RealAddress="025A6214"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D280</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>170</ID>
               <Description>"No Damage"</Description>
-              <LastState Value="0" RealAddress="025A6218"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D284</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>171</ID>
               <Description>"No Kills"</Description>
-              <LastState Value="0" RealAddress="025A621C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D288</Address>
             </CheatEntry>
@@ -852,55 +876,47 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
         <CheatEntry>
           <ID>235</ID>
           <Description>"Total"</Description>
-          <LastState Value="" RealAddress="00000000"/>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>222</ID>
               <Description>"Total Time"</Description>
-              <LastState Value="0" RealAddress="025A6140"/>
               <VariableType>Float</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D1AC</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>225</ID>
               <Description>"Total BP"</Description>
-              <LastState Value="0" RealAddress="025A614C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D1B8</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>227</ID>
               <Description>"Total Zandatsu"</Description>
-              <LastState Value="0" RealAddress="025A6154"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D1C0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>226</ID>
               <Description>"Longest Combo"</Description>
-              <LastState Value="0" RealAddress="025A6150"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D1BC</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>233</ID>
               <Description>"Total Kills"</Description>
-              <LastState Value="0" RealAddress="025A616C"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D1D8</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>223</ID>
               <Description>"No Damage"</Description>
-              <LastState Value="0" RealAddress="025A6144"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D1B0</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>224</ID>
               <Description>"No Kills"</Description>
-              <LastState Value="0" RealAddress="025A6148"/>
               <VariableType>4 Bytes</VariableType>
               <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+4D1B4</Address>
             </CheatEntry>
@@ -910,8 +926,7 @@ je "METAL GEAR RISING REVENGEANCE.exe"+81B4EC
     </CheatEntry>
     <CheatEntry>
       <ID>398</ID>
-      <Description>"Fuck the camera"</Description>
-      <LastState/>
+      <Description>"[Fuck the camera]"</Description>
       <VariableType>Auto Assembler Script</VariableType>
       <AssemblerScript>[enable]
 METAL GEAR RISING REVENGEANCE.exe+9A01F6:
@@ -921,52 +936,54 @@ METAL GEAR RISING REVENGEANCE.exe+9A01F6:
 db d9 01
 </AssemblerScript>
     </CheatEntry>
+    <CheatEntry>
+      <ID>303</ID>
+      <Description>"[Research]"</Description>
+      <Options moHideChildren="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>287</ID>
+          <Description>"Body"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1020</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>285</ID>
+          <Description>"Main Model ID"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1060</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>290</ID>
+          <Description>"Main?"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1064</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>289</ID>
+          <Description>"Main Store"</Description>
+          <ShowAsSigned>1</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1068</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>288</ID>
+          <Description>"Main"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C106C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>291</ID>
+          <Description>"Main Index?"</Description>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"METAL GEAR RISING REVENGEANCE.g_LEngineDefaultPoolId"+C1070</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols>
-    <SymbolEntry>
-      <Name>aob1_VRT</Name>
-      <Address>0174CA00</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob2</Name>
-      <Address>016B8D65</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob1_1HK</Name>
-      <Address>015C0484</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob1_BZ</Name>
-      <Address>016F44CB</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob1_I_RM</Name>
-      <Address>0147D8C3</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob1_I_GR</Name>
-      <Address>01481790</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob_ST1</Name>
-      <Address>015B950A</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob_ST2</Name>
-      <Address>015B96EA</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob_ST3</Name>
-      <Address>0165A6F5</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob_VRT2</Name>
-      <Address>00B2CA06</Address>
-    </SymbolEntry>
-    <SymbolEntry>
-      <Name>aob_NoDamageStat</Name>
-      <Address>0126CA41</Address>
-    </SymbolEntry>
     <SymbolEntry>
       <Name>nodmg</Name>
       <Address>0113B47E</Address>
@@ -1012,20 +1029,56 @@ db d9 01
       <Address>21420018</Address>
     </SymbolEntry>
     <SymbolEntry>
-      <Name>aob1_H</Name>
-      <Address>015B7859</Address>
+      <Name>aob1_VRT</Name>
+      <Address>0174CA00</Address>
     </SymbolEntry>
     <SymbolEntry>
-      <Name>aob_BZ</Name>
-      <Address> 015F30BB</Address>
+      <Name>aob2</Name>
+      <Address>016B8D65</Address>
     </SymbolEntry>
     <SymbolEntry>
-      <Name>aob_I_RM</Name>
-      <Address> 013799F3</Address>
+      <Name>aob1_1HK</Name>
+      <Address>015C0484</Address>
     </SymbolEntry>
     <SymbolEntry>
-      <Name>aob_I_GR</Name>
-      <Address> 0137D8D0</Address>
+      <Name>aob1_BZ</Name>
+      <Address>016F44CB</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob1_I_RM</Name>
+      <Address>0147D8C3</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob1_I_GR</Name>
+      <Address>01481790</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob_ST1</Name>
+      <Address>015B950A</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob_ST2</Name>
+      <Address>015B96EA</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob_ST3</Name>
+      <Address>0165A6F5</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob_VRT2</Name>
+      <Address>00B2CA06</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob_1HK</Name>
+      <Address>01720484</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>aob_NoDamageStat</Name>
+      <Address>0126CA41</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>stealth</Name>
+      <Address>0129A566</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
 </CheatTable>
