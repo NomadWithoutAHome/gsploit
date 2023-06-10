@@ -1,0 +1,5288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="29">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>609</ID>
+      <Description>"UnderRail AOB script; CharGen only"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobStatPtsChecker,83 BF ?? ?? 00 00 00 0F 9F C0 0F B6 C0)
+aobscan(aobSkillPtsChecker,83 BA ?? ?? 00 00 00 7E ?? 8B 86 ?? ?? 00 00)
+aobscan(aobFeatPtsChecker,83 B9 ?? ?? 00 00 00 7F ?? C7 86 ?? ?? 00 00 ?? ?? 00 00)
+
+alloc(newmemStatPtsChecker,4096,aobStatPtsChecker)
+
+label(aobStatPtsChecker_r)
+label(aobStatPtsChecker_i)
+registersymbol(aobStatPtsChecker_r)
+registersymbol(aobStatPtsChecker_i)
+
+label(lblStatPtsChecker)
+label(lblStatPtsCheckerSkip)
+label(lblStatPtsCheckerRet)
+
+label(pBase)
+label(iBaseStatOffset)
+registersymbol(pBase)
+registersymbol(iBaseStatOffset)
+
+label(aobSkillPtsChecker_r)
+label(aobSkillPtsChecker_i)
+registersymbol(aobSkillPtsChecker_r)
+registersymbol(aobSkillPtsChecker_i)
+
+label(lblSkillPtsChecker)
+label(lblSkillPtsCheckerSkip)
+label(lblSkillPtsCheckerRet)
+
+label(iBaseSkillOffset)
+registersymbol(iBaseSkillOffset)
+
+label(aobFeatPtsChecker_r)
+label(aobFeatPtsChecker_i)
+registersymbol(aobFeatPtsChecker_r)
+registersymbol(aobFeatPtsChecker_i)
+
+label(lblFeatPtsChecker)
+label(lblFeatPtsCheckerSkip)
+label(lblFeatPtsCheckerRet)
+
+label(iBaseFeatOffset)
+registersymbol(iBaseFeatOffset)
+
+newmemStatPtsChecker:
+
+lblStatPtsChecker:
+mov dword ptr [pBase],edi
+lblStatPtsCheckerSkip:
+readmem(aobStatPtsChecker,7)
+jmp lblStatPtsCheckerRet
+aobStatPtsChecker_i:
+readmem(aobStatPtsChecker,7)
+pBase:
+dd 0
+iBaseStatOffset:
+readmem(aobStatPtsChecker+2,4)
+
+lblSkillPtsChecker:
+mov dword ptr [pBase],edx
+lblSkillPtsCheckerSkip:
+readmem(aobSkillPtsChecker,7)
+jmp lblSkillPtsCheckerRet
+aobSkillPtsChecker_i:
+readmem(aobSkillPtsChecker,7)
+iBaseSkillOffset:
+readmem(aobSkillPtsChecker+2,4)
+
+lblFeatPtsChecker:
+mov dword ptr [pBase],ecx
+lblFeatPtsCheckerSkip:
+readmem(aobFeatPtsChecker,7)
+jmp lblFeatPtsCheckerRet
+aobFeatPtsChecker_i:
+readmem(aobFeatPtsChecker,7)
+iBaseFeatOffset:
+readmem(aobFeatPtsChecker+2,4)
+
+aobFeatPtsChecker:
+aobFeatPtsChecker_r:
+jmp lblFeatPtsChecker
+nop
+nop
+lblFeatPtsCheckerRet:
+
+aobSkillPtsChecker:
+aobSkillPtsChecker_r:
+jmp lblSkillPtsChecker
+nop
+nop
+lblSkillPtsCheckerRet:
+
+aobStatPtsChecker:
+aobStatPtsChecker_r:
+jmp lblStatPtsChecker
+nop
+nop
+lblStatPtsCheckerRet:
+
+[DISABLE]
+aobStatPtsChecker_r:
+readmem(aobStatPtsChecker_i,7)
+
+unregistersymbol(aobStatPtsChecker_r)
+unregistersymbol(aobStatPtsChecker_i)
+
+unregistersymbol(bEnableStatPtsChecker)
+
+aobSkillPtsChecker_r:
+readmem(aobSkillPtsChecker_i,7)
+
+unregistersymbol(aobSkillPtsChecker_r)
+unregistersymbol(aobSkillPtsChecker_i)
+
+unregistersymbol(iBaseSkillOffset)
+
+aobFeatPtsChecker_r:
+readmem(aobFeatPtsChecker_i,7)
+
+unregistersymbol(aobFeatPtsChecker_r)
+unregistersymbol(aobFeatPtsChecker_i)
+
+unregistersymbol(iBaseFeatOffset)
+
+dealloc(newmemStatPtsChecker)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>610</ID>
+          <Description>"iRemainingStatPoints"</Description>
+          <Color>FF0000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>[pBase]+[iBaseStatOffset]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>611</ID>
+          <Description>"iRemainingSkillPoints"</Description>
+          <Color>FF0000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>[pBase]+[iBaseSkillOffset]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>612</ID>
+          <Description>"iRemainingSkillPoints"</Description>
+          <Color>FF0000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>[pBase]+[iBaseFeatOffset]</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>783</ID>
+      <Description>"UnderRail AOB script; force merchant refresh"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobMerchantRefresh,8B B5 ?? ?? FF FF 83 C6 ?? F3 0F 7E 06 66 0F D6 07 8B 85 ?? ?? FF FF 8B 95 ?? ?? FF FF)
+
+alloc(newmemMerchantRefresh,4096,aobMerchantRefresh)
+
+label(aobMerchantRefresh_r)
+label(aobMerchantRefresh_i)
+registersymbol(aobMerchantRefresh_r)
+registersymbol(aobMerchantRefresh_i)
+
+label(lblMerchantRefresh)
+label(lblMerchantRefreshSkip)
+label(lblMerchantRefreshRet)
+
+label(bEnableMerchantRefresh)
+registersymbol(bEnableMerchantRefresh)
+
+newmemMerchantRefresh:
+bEnableMerchantRefresh:
+dd 1
+
+lblMerchantRefresh:
+readmem(aobMerchantRefresh,9)
+cmp dword ptr [bEnableMerchantRefresh],1
+jne short lblMerchantRefreshSkip
+mov dword ptr [esi+04],0
+lblMerchantRefreshSkip:
+jmp lblMerchantRefreshRet
+aobMerchantRefresh_i:
+readmem(aobMerchantRefresh,9)
+
+aobMerchantRefresh:
+aobMerchantRefresh_r:
+jmp lblMerchantRefresh
+nop
+nop
+nop
+nop
+lblMerchantRefreshRet:
+
+[DISABLE]
+aobMerchantRefresh_r:
+readmem(aobMerchantRefresh_i,9)
+
+unregistersymbol(aobMerchantRefresh_r)
+unregistersymbol(aobMerchantRefresh_i)
+
+unregistersymbol(bEnableMerchantRefresh)
+
+dealloc(newmemMerchantRefresh)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>784</ID>
+          <Description>"bEnableMerchantRefresh"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+          <Color>008000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>bEnableMerchantRefresh</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>626</ID>
+          <Description>"UnderRail AOB script; main"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobCheckCoordsBlock,83 B8 ?? ?? 00 00 00 74 ?? 8B 43 ?? 8B 40)
+aobscan(aobHealthOffsets,8B 80 ?? ?? 00 00 8B 48 ?? FF 15 ?? ?? ?? ?? D9)
+aobscan(aobPsiOffset,8B F1 8B 4E ?? FF 15 ?? ?? ?? ?? D9 EE DF F1 DD D8)
+alloc(newmemCheckCoordsBlock,4096,aobCheckCoordsBlock)
+
+label(aobCheckCoordsBlock_r)
+label(aobCheckCoordsBlock_i)
+registersymbol(aobCheckCoordsBlock_r)
+registersymbol(aobCheckCoordsBlock_i)
+
+label(lblCheckCoordsBlock)
+label(lblCheckCoordsBlockSkipGod)
+label(lblCheckCoordsBlockSkipPsi)
+label(lblCheckCoordsBlockSkip)
+label(lblCheckCoordsBlockRet)
+
+label(bEnableGodMode)
+label(bInfinitePsi)
+registersymbol(bEnableGodMode)
+registersymbol(bInfinitePsi)
+
+label(pPlayerBase)
+label(pPlayerCoords)
+registersymbol(pPlayerBase)
+registersymbol(pPlayerCoords)
+
+label(iPlayerDefensiveOffset)
+label(iPlayerHealthOffset)
+label(iPlayerPsiOffset)
+registersymbol(iPlayerDefensiveOffset)
+registersymbol(iPlayerHealthOffset)
+registersymbol(iPlayerPsiOffset)
+
+newmemCheckCoordsBlock:
+bEnableGodMode:
+dd 1
+bInfinitePsi:
+dd 1
+
+lblCheckCoordsBlock:
+mov dword ptr [pPlayerBase],eax
+mov ecx,[aobCheckCoordsBlock_i+2]
+mov ecx,[eax+ecx]
+mov dword ptr [pPlayerCoords],ecx
+test ecx,ecx
+jz lblCheckCoordsBlockSkip
+cmp dword ptr [bEnableGodMode],1
+jne short lblCheckCoordsBlockSkipGod
+{$try}
+mov ecx,[iPlayerDefensiveOffset]
+mov ecx,[eax+ecx]
+add ecx,[iPlayerHealthOffset]
+mov ecx,[ecx]
+cmp dword ptr [ecx+18],0
+jle short lblCheckCoordsBlockSkipGod
+mov edi,[ecx+10]
+mov dword ptr [ecx+18],edi
+{$except}
+lblCheckCoordsBlockSkipGod:
+cmp dword ptr [bInfinitePsi],1
+jne short lblCheckCoordsBlockSkipPsi
+{$try}
+mov ecx,[iPlayerDefensiveOffset]
+mov ecx,[eax+ecx+04]
+add ecx,[iPlayerPsiOffset]
+mov ecx,[ecx]
+cmp dword ptr [ecx+18],0
+jle short lblCheckCoordsBlockSkipPsi
+mov edi,[ecx+10]
+mov dword ptr [ecx+18],edi
+{$except}
+lblCheckCoordsBlockSkipPsi:
+lblCheckCoordsBlockSkip:
+xor edi,edi
+readmem(aobCheckCoordsBlock,7)
+jmp lblCheckCoordsBlockRet
+aobCheckCoordsBlock_i:
+readmem(aobCheckCoordsBlock,7)
+pPlayerBase:
+dd 0
+pPlayerCoords:
+dd 0
+iPlayerDefensiveOffset:
+readmem(aobHealthOffsets+2,4)
+iPlayerHealthOffset:
+readmem(aobHealthOffsets+8,1)
+db 00 00 00
+iPlayerPsiOffset:
+readmem(aobPsiOffset+4,1)
+db 00 00 00
+
+aobCheckCoordsBlock:
+aobCheckCoordsBlock_r:
+jmp lblCheckCoordsBlock
+nop
+nop
+lblCheckCoordsBlockRet:
+
+[DISABLE]
+aobCheckCoordsBlock_r:
+readmem(aobCheckCoordsBlock_i,7)
+
+unregistersymbol(aobCheckCoordsBlock_r)
+unregistersymbol(aobCheckCoordsBlock_i)
+
+unregistersymbol(bEnableGodMode)
+unregistersymbol(bInfinitePsi)
+
+unregistersymbol(pPlayerBase)
+unregistersymbol(pPlayerCoords)
+
+unregistersymbol(iPlayerDefensiveOffset)
+unregistersymbol(iPlayerHealthOffset)
+unregistersymbol(iPlayerPsiOffset)
+
+dealloc(newmemCheckCoordsBlock)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>627</ID>
+              <Description>"bEnableGodMode"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableGodMode</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>628</ID>
+              <Description>"bInfinitePsi"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bInfinitePsi</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>629</ID>
+              <Description>"sPlayerName"</Description>
+              <Color>0000FF</Color>
+              <VariableType>String</VariableType>
+              <Length>32</Length>
+              <Unicode>1</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>pPlayerBase</Address>
+              <Offsets>
+                <Offset>8</Offset>
+                <Offset>50</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>630</ID>
+                  <Description>"fPlayerCoords[x]"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayerCoords</Address>
+                  <Offsets>
+                    <Offset>8c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>631</ID>
+                  <Description>"fPlayerCoords[y]"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayerCoords</Address>
+                  <Offsets>
+                    <Offset>90</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>632</ID>
+                  <Description>"fPlayerCoords[z] (?)"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayerCoords</Address>
+                  <Offsets>
+                    <Offset>94</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>633</ID>
+                  <Description>"iXPLevel"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>d8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>634</ID>
+                  <Description>"iXP"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>148</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>635</ID>
+                  <Description>"dCarryWeight"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>44</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>636</ID>
+                  <Description>"iMaxCarryWeight"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>100</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>637</ID>
+                  <Description>"LevelingPts"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>0080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>638</ID>
+                      <Description>"iRemainingStatPoints"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>150</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>639</ID>
+                      <Description>"iRemainingSkillPoints"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>154</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>640</ID>
+                      <Description>"iRemainingFeatPoints"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>158</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>788</ID>
+                      <Description>"iRemainingSpecPoints"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>15C</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>641</ID>
+                  <Description>"Abilities"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>0080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>642</ID>
+                      <Description>"iStrengthBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>8</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>643</ID>
+                      <Description>"iStrengthEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>8</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>644</ID>
+                      <Description>"iDexterityBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>645</ID>
+                      <Description>"iDexterityEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>646</ID>
+                      <Description>"iAgilityBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>10</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>647</ID>
+                      <Description>"iAgilityEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>10</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>648</ID>
+                      <Description>"iConstitutionBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>14</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>649</ID>
+                      <Description>"iConstitutionEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>14</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>650</ID>
+                      <Description>"iPerceptionBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>18</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>651</ID>
+                      <Description>"iPerceptionEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>18</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>652</ID>
+                      <Description>"iWillBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>1C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>653</ID>
+                      <Description>"iWillEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>1C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>654</ID>
+                      <Description>"iIntelligenceBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>20</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>655</ID>
+                      <Description>"iIntelligenceEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>20</Offset>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>5c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>656</ID>
+                  <Description>"Skills"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>0080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>657</ID>
+                      <Description>"iGunsBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>8</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>658</ID>
+                      <Description>"iGunsEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>8</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>659</ID>
+                      <Description>"iThrowingBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>660</ID>
+                      <Description>"iThrowingEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>661</ID>
+                      <Description>"iCrossbowsBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>10</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>662</ID>
+                      <Description>"iCrossbowsEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>10</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>663</ID>
+                      <Description>"iMeleeBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>14</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>664</ID>
+                      <Description>"iMeleeEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>14</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>665</ID>
+                      <Description>"iDodgeBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>18</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>666</ID>
+                      <Description>"iDodgeEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>18</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>667</ID>
+                      <Description>"iEvasionBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>1C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>668</ID>
+                      <Description>"iEvasionEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>1C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>669</ID>
+                      <Description>"iStealthBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>20</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>670</ID>
+                      <Description>"iStealthEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>20</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>671</ID>
+                      <Description>"iHackingBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>24</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>672</ID>
+                      <Description>"iHackingEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>24</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>673</ID>
+                      <Description>"iLockpickingBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>28</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>674</ID>
+                      <Description>"iLockpickingEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>28</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>675</ID>
+                      <Description>"iPickpocketingBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>2C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>676</ID>
+                      <Description>"iPickpocketingEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>2C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>677</ID>
+                      <Description>"iTrapsBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>30</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>678</ID>
+                      <Description>"iTrapsEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>30</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>679</ID>
+                      <Description>"iMechanicsBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>34</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>680</ID>
+                      <Description>"iMechanicsEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>34</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>681</ID>
+                      <Description>"iElectronicsBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>38</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>682</ID>
+                      <Description>"iElectronicsEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>38</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>683</ID>
+                      <Description>"iChemistryBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>3C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>684</ID>
+                      <Description>"iChemistryEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>3C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>685</ID>
+                      <Description>"iBiologyBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>40</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>686</ID>
+                      <Description>"iBiologyEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>40</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>687</ID>
+                      <Description>"iTailoringBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>44</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>688</ID>
+                      <Description>"iTailoringEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>44</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>689</ID>
+                      <Description>"iThoughtControlBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>48</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>690</ID>
+                      <Description>"iThoughtControlEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>48</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>691</ID>
+                      <Description>"iPhychokinesisBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>4C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>692</ID>
+                      <Description>"iPhychokinesisEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>4C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>693</ID>
+                      <Description>"iMetathermicsBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>50</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>694</ID>
+                      <Description>"iMetathermicsEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>50</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>695</ID>
+                      <Description>"iUnknownBase"</Description>
+                      <Color>800080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>54</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>696</ID>
+                      <Description>"iUnknownEffective"</Description>
+                      <Color>800080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>54</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>697</ID>
+                      <Description>"iPersuasionBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>58</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>698</ID>
+                      <Description>"iPersuasionEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>58</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>699</ID>
+                      <Description>"iIntimidationBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>5C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>700</ID>
+                      <Description>"iIntimidationEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>5C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>701</ID>
+                      <Description>"iMerchantileBase"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>60</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>702</ID>
+                      <Description>"iMerchantileEffective"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>14</Offset>
+                        <Offset>60</Offset>
+                        <Offset>4</Offset>
+                        <Offset>8</Offset>
+                        <Offset>60</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>703</ID>
+                  <Description>"DefensiveAbilities"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>0080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>704</ID>
+                      <Description>"dWeaponCritChance"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>20</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>705</ID>
+                      <Description>"dHealingEff."</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>30</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>706</ID>
+                      <Description>"fMaxHealth"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>[iPlayerHealthOffset]</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>707</ID>
+                      <Description>"fHealth"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>18</Offset>
+                        <Offset>[iPlayerHealthOffset]</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>708</ID>
+                      <Description>"iDodge"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>98</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>709</ID>
+                      <Description>"iEvasion"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>9C</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>710</ID>
+                      <Description>"iFortitude"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>A0</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>711</ID>
+                      <Description>"iResolve"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>A4</Offset>
+                        <Offset>[iPlayerDefensiveOffset]</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>712</ID>
+                  <Description>"OffensiveAbilities"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>0080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>713</ID>
+                      <Description>"dCritBonus"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>714</ID>
+                      <Description>"dCritChance"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>715</ID>
+                      <Description>"dSpecialAttackBonus"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>68</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>716</ID>
+                      <Description>"pEquippedWeapon"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <Color>0000FF</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>70</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>717</ID>
+                      <Description>"fMaxPsi"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>10</Offset>
+                        <Offset>[iPlayerPsiOffset]</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>718</ID>
+                      <Description>"fPsi"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>18</Offset>
+                        <Offset>[iPlayerPsiOffset]</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>719</ID>
+                      <Description>"iMaxActionPoints"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>9c</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>720</ID>
+                      <Description>"iMaxMovementPoints"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>A0</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>721</ID>
+                      <Description>"iInitiative"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pPlayerBase</Address>
+                      <Offsets>
+                        <Offset>B8</Offset>
+                        <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>722</ID>
+              <Description>"Script: Max Carry Weight Mod"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobMaxCarryWeightCalc,89 82 ?? ?? 00 00 8B 8A ?? ?? 00 00 39 09)
+
+alloc(newmemMaxCarryWeightCalc,4096,aobMaxCarryWeightCalc)
+
+label(aobMaxCarryWeightCalc_r)
+label(aobMaxCarryWeightCalc_i)
+registersymbol(aobMaxCarryWeightCalc_r)
+registersymbol(aobMaxCarryWeightCalc_i)
+
+label(lblMaxCarryWeightCalc)
+label(lblMaxCarryWeightCalcSkip)
+label(lblMaxCarryWeightCalcRet)
+
+label(bEnableMaxCarryWeightMod)
+label(fMaxCarryWeightMod)
+registersymbol(bEnableMaxCarryWeightMod)
+registersymbol(fMaxCarryWeightMod)
+
+newmemMaxCarryWeightCalc:
+bEnableMaxCarryWeightMod:
+dd 1
+fMaxCarryWeightMod:
+dd (float)100.0
+
+lblMaxCarryWeightCalc:
+cmp dword ptr [bEnableMaxCarryWeightMod],1
+jne short lblMaxCarryWeightCalcSkip
+push eax
+fild dword ptr [esp]
+fmul dword ptr [fMaxCarryWeightMod]
+fistp dword ptr [esp]
+pop eax
+lblMaxCarryWeightCalcSkip:
+readmem(aobMaxCarryWeightCalc,6)
+jmp lblMaxCarryWeightCalcRet
+aobMaxCarryWeightCalc_i:
+readmem(aobMaxCarryWeightCalc,6)
+
+aobMaxCarryWeightCalc:
+aobMaxCarryWeightCalc_r:
+jmp lblMaxCarryWeightCalc
+nop
+lblMaxCarryWeightCalcRet:
+
+[DISABLE]
+aobMaxCarryWeightCalc_r:
+readmem(aobMaxCarryWeightCalc_i,6)
+
+unregistersymbol(aobMaxCarryWeightCalc_r)
+unregistersymbol(aobMaxCarryWeightCalc_i)
+
+unregistersymbol(bEnableMaxCarryWeightMod)
+
+dealloc(newmemMaxCarryWeightCalc)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>723</ID>
+                  <Description>"bEnableMaxCarryWeightMod"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+                  <Color>008000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>bEnableMaxCarryWeightMod</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>724</ID>
+                      <Description>"fMaxCarryWeightMod"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fMaxCarryWeightMod</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>725</ID>
+              <Description>"Script: XP Gain Mod"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobXPGainCalc,8B 45 ?? 01 86 ?? ?? 00 00 85 D2 75)
+
+alloc(newmemXPGainCalc,4096,aobXPGainCalc)
+
+label(aobXPGainCalc_r)
+label(aobXPGainCalc_i)
+registersymbol(aobXPGainCalc_r)
+registersymbol(aobXPGainCalc_i)
+
+label(lblXPGainCalc)
+label(lblXPGainCalcSkip)
+label(lblXPGainCalcRet)
+
+label(bEnableXPGainMod)
+label(fXPGainMod)
+registersymbol(bEnableXPGainMod)
+registersymbol(fXPGainMod)
+
+newmemXPGainCalc:
+bEnableXPGainMod:
+dd 1
+fXPGainMod:
+dd (float)2.0
+
+lblXPGainCalc:
+cmp dword ptr [bEnableXPGainMod],1
+jne short lblXPGainCalcSkip
+movsx eax,[aobXPGainCalc_i+02]
+fild dword ptr [ebp+eax]
+fmul dword ptr [fXPGainMod]
+fistp dword ptr [ebp+eax]
+lblXPGainCalcSkip:
+readmem(aobXPGainCalc,9)
+jmp lblXPGainCalcRet
+aobXPGainCalc_i:
+readmem(aobXPGainCalc,9)
+
+aobXPGainCalc:
+aobXPGainCalc_r:
+jmp lblXPGainCalc
+nop
+nop
+nop
+nop
+lblXPGainCalcRet:
+
+[DISABLE]
+aobXPGainCalc_r:
+readmem(aobXPGainCalc_i,9)
+
+unregistersymbol(aobXPGainCalc_r)
+unregistersymbol(aobXPGainCalc_i)
+
+unregistersymbol(bEnableXPGainMod)
+unregistersymbol(fXPGainMod)
+
+dealloc(newmemXPGainCalc)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>726</ID>
+                  <Description>"bEnableXPGainMod"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+                  <Color>008000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>bEnableXPGainMod</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>727</ID>
+                      <Description>"fXPGainMod"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fXPGainMod</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>728</ID>
+              <Description>"Script: Movement Points Mod"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobMovePtsCalc,DD 5D ?? DD 45 ?? DE E9 DD 56 ?? D9 EE)
+
+alloc(newmemMovePtsCalc,4096,aobMovePtsCalc)
+
+label(aobMovePtsCalc_r)
+label(aobMovePtsCalc_i)
+registersymbol(aobMovePtsCalc_r)
+registersymbol(aobMovePtsCalc_i)
+
+label(lblMovePtsCalc)
+label(lblMovePtsCalcSkip)
+label(lblMovePtsCalcRet)
+
+label(bEnableMovementCostMod)
+label(dMovementCostMod)
+registersymbol(bEnableMovementCostMod)
+registersymbol(dMovementCostMod)
+
+newmemMovePtsCalc:
+bEnableMovementCostMod:
+dd 1
+dMovementCostMod:
+dq (double)0.1
+
+lblMovePtsCalc:
+cmp dword ptr [bEnableMovementCostMod],1
+jne short lblMovePtsCalcSkip
+pushad
+push 12 // VK_MENU: ALT key
+call GetAsyncKeyState
+shr ax,#15
+cmp ax,1
+popad
+jne short lblMovePtsCalcSkip
+fmul qword ptr [dMovementCostMod]
+lblMovePtsCalcSkip:
+readmem(aobMovePtsCalc,6)
+jmp lblMovePtsCalcRet
+aobMovePtsCalc_i:
+readmem(aobMovePtsCalc,6)
+
+aobMovePtsCalc:
+aobMovePtsCalc_r:
+jmp lblMovePtsCalc
+nop
+lblMovePtsCalcRet:
+
+[DISABLE]
+aobMovePtsCalc_r:
+readmem(aobMovePtsCalc_i,6)
+
+unregistersymbol(aobMovePtsCalc_r)
+unregistersymbol(aobMovePtsCalc_i)
+
+unregistersymbol(bEnableMovementCostMod)
+unregistersymbol(dMovementCostMod)
+
+dealloc(newmemMovePtsCalc)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>729</ID>
+                  <Description>"bEnableMovementCostMod (hold ALT while moving!)"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+                  <Color>008000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>bEnableMovementCostMod</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>730</ID>
+                      <Description>"dMovementCostMod"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>dMovementCostMod</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>731</ID>
+              <Description>"Script: Action Points Mod"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobActionPtsCalc,DB 45 ?? D9 C0 DC 6E ?? DD 5E ?? 83)
+
+alloc(newmemActionPtsCalc,4096,aobActionPtsCalc)
+
+label(aobActionPtsCalc_r)
+label(aobActionPtsCalc_i)
+registersymbol(aobActionPtsCalc_r)
+registersymbol(aobActionPtsCalc_i)
+
+label(lblActionPtsCalc)
+label(lblActionPtsCalcSkip)
+label(lblActionPtsCalcRet)
+
+label(bEnableActionCostMod)
+label(dActionCostMod)
+registersymbol(bEnableActionCostMod)
+registersymbol(dActionCostMod)
+
+newmemActionPtsCalc:
+bEnableActionCostMod:
+dd 1
+dActionCostMod:
+dq (double)0.1
+
+lblActionPtsCalc:
+readmem(aobActionPtsCalc,3)
+cmp dword ptr [bEnableActionCostMod],1
+jne short lblActionPtsCalcSkip
+pushad
+push 12 // VK_MENU: ALT key
+call GetAsyncKeyState
+shr ax,#15
+cmp ax,1
+popad
+jne short lblActionPtsCalcSkip
+fmul qword ptr [dActionCostMod]
+lblActionPtsCalcSkip:
+readmem(aobActionPtsCalc+3,2)
+jmp lblActionPtsCalcRet
+aobActionPtsCalc_i:
+readmem(aobActionPtsCalc,5)
+
+aobActionPtsCalc:
+aobActionPtsCalc_r:
+jmp lblActionPtsCalc
+lblActionPtsCalcRet:
+
+[DISABLE]
+aobActionPtsCalc_r:
+readmem(aobActionPtsCalc_i,5)
+
+unregistersymbol(aobActionPtsCalc_r)
+unregistersymbol(aobActionPtsCalc_i)
+
+unregistersymbol(bEnableActionCostMod)
+unregistersymbol(dActionCostMod)
+
+dealloc(newmemActionPtsCalc)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>732</ID>
+                  <Description>"bEnableActionCostMod (hold ALT while taking action!)"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+                  <Color>008000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>bEnableActionCostMod</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>733</ID>
+                      <Description>"dActionCostMod"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>dActionCostMod</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>734</ID>
+              <Description>"Script: Item Editor"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobItemCountReader,FF 50 ?? 83 78 ?? 01 0F 8E ?? ?? ?? ?? 8D 4D)
+
+alloc(newmemItemCountReader,4096,aobItemCountReader)
+
+label(aobItemCountReader_r)
+label(aobItemCountReader_i)
+registersymbol(aobItemCountReader_r)
+registersymbol(aobItemCountReader_i)
+
+label(lblItemCountReader)
+label(lblItemCountReaderSkip)
+label(lblItemCountReaderRet)
+
+label(bEnableStackSizeIncrement)
+label(iStackSizeIncrement)
+registersymbol(bEnableStackSizeIncrement)
+registersymbol(iStackSizeIncrement)
+
+label(pLastClickedItem)
+registersymbol(pLastClickedItem)
+
+newmemItemCountReader:
+bEnableStackSizeIncrement:
+dd 0
+iStackSizeIncrement:
+dd (int)50
+
+lblItemCountReader:
+readmem(aobItemCountReader,3)
+push ebx
+push ecx
+movsx ecx,[aobItemCountReader_i+5]
+cmp [eax+ecx],1
+jle short lblItemCountReaderSkip
+pushad
+push 12 // VK_MENU: ALT key
+call GetAsyncKeyState
+shr ax,#15
+cmp ax,1
+popad
+jne short lblItemCountReaderSkip
+cmp dword ptr [bEnableStackSizeIncrement],1
+jne short lblItemCountReaderSkip
+mov ebx,[iStackSizeIncrement]
+add [eax+ecx],ebx
+lblItemCountReaderSkip:
+pop ecx
+pop ebx
+mov dword ptr [pLastClickedItem],eax
+readmem(aobItemCountReader+3,4)
+jmp lblItemCountReaderRet
+aobItemCountReader_i:
+readmem(aobItemCountReader,7)
+pLastClickedItem:
+dd 0
+
+aobItemCountReader:
+aobItemCountReader_r:
+jmp lblItemCountReader
+nop
+nop
+lblItemCountReaderRet:
+
+[DISABLE]
+//""+106C2839:
+//Alt: call dword ptr [eax+10]
+//Alt: cmp dword ptr [eax+20],01
+//db FF 50 10 83 78 20 01
+aobItemCountReader_r:
+readmem(aobItemCountReader_i,7)
+
+unregistersymbol(aobItemCountReader_r)
+unregistersymbol(aobItemCountReader_i)
+
+unregistersymbol(bEnableStackSizeIncrement)
+unregistersymbol(iStackSizeIncrement)
+
+unregistersymbol(pLastClickedItem)
+
+dealloc(newmemItemCountReader)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>735</ID>
+                  <Description>"bEnableStackSizeIncrement (hold ALT while clicking!)"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+                  <Color>008000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>bEnableStackSizeIncrement</Address>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>736</ID>
+                      <Description>"iStackSizeIncrement"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>iStackSizeIncrement</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>737</ID>
+                  <Description>"Last clicked Item"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>4080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>738</ID>
+                      <Description>"pLastClickedItem (Click on an item in the Inv. grid)"</Description>
+                      <ShowAsHex>1</ShowAsHex>
+                      <Color>0000FF</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>739</ID>
+                      <Description>"sName"</Description>
+                      <Color>0000FF</Color>
+                      <VariableType>String</VariableType>
+                      <Length>256</Length>
+                      <Unicode>1</Unicode>
+                      <CodePage>0</CodePage>
+                      <ZeroTerminate>1</ZeroTerminate>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>8</Offset>
+                        <Offset>10</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>740</ID>
+                      <Description>"iStackSize"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>741</ID>
+                      <Description>"iMaxStackSize"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>30</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>742</ID>
+                      <Description>"iRarity"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Grey
+1:White
+2:Green
+3:Blue
+4:Purple
+5:Orange
+</DropDownList>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>28</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>743</ID>
+                      <Description>"iUnknown (seems to impact value shown)"</Description>
+                      <Color>800080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>2c</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>744</ID>
+                      <Description>"dEnergyCurrent"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>4</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>745</ID>
+                      <Description>"iEnergyMax"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>24</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>746</ID>
+                      <Description>"dDurability"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>c</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>747</ID>
+                      <Description>"dWeight"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>748</ID>
+                      <Description>"iValue"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>4C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>749</ID>
+                      <Description>"ArmourOnly"</Description>
+                      <Options moHideChildren="1"/>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <Color>4080FF</Color>
+                      <GroupHeader>1</GroupHeader>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>750</ID>
+                          <Description>"dArmourPenalty"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Double</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>84</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>751</ID>
+                      <Description>"CraftableOnly"</Description>
+                      <Options moHideChildren="1"/>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <Color>4080FF</Color>
+                      <GroupHeader>1</GroupHeader>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>752</ID>
+                          <Description>"iQuality"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>40</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>753</ID>
+                      <Description>"WeaponsOnly"</Description>
+                      <Options moHideChildren="1"/>
+                      <LastState Value="" RealAddress="00000000"/>
+                      <Color>4080FF</Color>
+                      <GroupHeader>1</GroupHeader>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>754</ID>
+                          <Description>"iImpactSpeed"</Description>
+                          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Very Low (Melee attacks)
+1:Low (Slow projectiles)
+2:Medium (Pistol and SMG bullets, shrapnel)
+3:Fast (Explosives, extremely fast projectiles)
+4:Very Fast (Lasers, plasma, electrical attacks)
+</DropDownList>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>E4</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>755</ID>
+                          <Description>"iBaseAPCost"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>E0</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>756</ID>
+                          <Description>"bHasSpread"</Description>
+                          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>128</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>757</ID>
+                              <Description>"iSpreadAngle"</Description>
+                              <Color>FF0000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>pLastClickedItem</Address>
+                              <Offsets>
+                                <Offset>12c</Offset>
+                                <Offset>4</Offset>
+                                <Offset>14</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>758</ID>
+                          <Description>"fRange"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Float</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>EC</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>759</ID>
+                          <Description>"fOptimalRange"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Float</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>F0</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>760</ID>
+                          <Description>"dPrecision"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Double</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>9C</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>761</ID>
+                          <Description>"fCloseQuartersPrecision(Penalty!)"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Float</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>104</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>762</ID>
+                          <Description>"dMoveAndShootPresicion(Penalty!)"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Double</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>AC</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>763</ID>
+                          <Description>"dBurstPrecision"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Double</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>A4</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>764</ID>
+                          <Description>"iExtraBurstShots"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>100</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>765</ID>
+                          <Description>"dCritChance"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Double</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>84</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>766</ID>
+                          <Description>"dCritDmgBonus"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Double</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>8C</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>767</ID>
+                          <Description>"iMinStrength"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>E8</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>768</ID>
+                          <Description>"iMagazineCapacity"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>FC</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                          <CheatEntries>
+                            <CheatEntry>
+                              <ID>769</ID>
+                              <Description>"iMagazineLoaded"</Description>
+                              <Color>FF0000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>pLastClickedItem</Address>
+                              <Offsets>
+                                <Offset>c</Offset>
+                                <Offset>3c</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                            <CheatEntry>
+                              <ID>770</ID>
+                              <Description>"iTotalAmmoFired"</Description>
+                              <Color>FF0000</Color>
+                              <VariableType>4 Bytes</VariableType>
+                              <Address>pLastClickedItem</Address>
+                              <Offsets>
+                                <Offset>10</Offset>
+                                <Offset>3c</Offset>
+                              </Offsets>
+                            </CheatEntry>
+                          </CheatEntries>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>771</ID>
+                          <Description>"dReloadingCost"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>Double</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>B4</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>772</ID>
+              <Description>"Script: Infinite Durability"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobItemDurabilityUpdater,DD 40 ?? DC 65 ?? 83 EC ?? DD 1C 24)
+
+alloc(newmemItemDurabilityUpdater,4096,aobItemDurabilityUpdater)
+
+label(aobItemDurabilityUpdater_r)
+label(aobItemDurabilityUpdater_i)
+registersymbol(aobItemDurabilityUpdater_r)
+registersymbol(aobItemDurabilityUpdater_i)
+
+label(lblItemDurabilityUpdater)
+label(lblItemDurabilityUpdaterSkip)
+label(lblItemDurabilityUpdaterRet)
+
+label(bEnableInfiniteItemDurability)
+registersymbol(bEnableInfiniteItemDurability)
+
+newmemItemDurabilityUpdater:
+bEnableInfiniteItemDurability:
+dd 1
+
+lblItemDurabilityUpdater:
+readmem(aobItemDurabilityUpdater,3)
+cmp dword ptr [bEnableInfiniteItemDurability],1
+jne short lblItemDurabilityUpdaterSkip
+push ebx
+movsx ebx,[aobItemDurabilityUpdater_i+05]
+fadd qword ptr [ebp+ebx]
+pop ebx
+lblItemDurabilityUpdaterSkip:
+readmem(aobItemDurabilityUpdater+3,3)
+jmp lblItemDurabilityUpdaterRet
+aobItemDurabilityUpdater_i:
+readmem(aobItemDurabilityUpdater,6)
+
+aobItemDurabilityUpdater:
+aobItemDurabilityUpdater_r:
+jmp lblItemDurabilityUpdater
+nop
+lblItemDurabilityUpdaterRet:
+
+[DISABLE]
+aobItemDurabilityUpdater_r:
+readmem(aobItemDurabilityUpdater_i,6)
+
+unregistersymbol(aobItemDurabilityUpdater_r)
+unregistersymbol(aobItemDurabilityUpdater_i)
+
+unregistersymbol(bEnableInfiniteItemDurability)
+
+dealloc(newmemItemDurabilityUpdater)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>773</ID>
+                  <Description>"bEnableInfiniteItemDurability"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+                  <Color>008000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>bEnableInfiniteItemDurability</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>774</ID>
+              <Description>"Script: Instant Cooldown; Real time"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobRealtimeCooldownCalc,DD 40 ?? DC 65 ?? DD 50 ?? D9 EE DF F1 DD D8 7A)
+aobscan(aobPlayerCooldownBaseOffset,8B 40 ?? 89 45 ?? 8B 7E ?? 80)
+
+alloc(newmemRealtimeCooldownCalc,4096,aobRealtimeCooldownCalc)
+
+label(aobRealtimeCooldownCalc_r)
+label(aobRealtimeCooldownCalc_i)
+registersymbol(aobRealtimeCooldownCalc_r)
+registersymbol(aobRealtimeCooldownCalc_i)
+
+label(lblRealtimeCooldownCalc)
+label(lblRealtimeCooldownCalcSkip)
+label(lblRealtimeCooldownCalcRet)
+
+label(bEnableInstantSkillCooldown)
+registersymbol(bEnableInstantSkillCooldown)
+
+label(iPlayerCooldownBaseOffset)
+registersymbol(iPlayerCooldownBaseOffset)
+
+newmemRealtimeCooldownCalc:
+bEnableInstantSkillCooldown:
+dd 1
+
+lblRealtimeCooldownCalc:
+readmem(aobRealtimeCooldownCalc,6)
+mov ecx,[pPlayerBase]
+add ecx,[iPlayerCooldownBaseOffset]
+cmp dword ptr [ecx],ebx
+jne short lblRealtimeCooldownCalcSkip
+cmp dword ptr [bEnableInstantSkillCooldown],1
+jne short lblRealtimeCooldownCalcSkip
+fstp st(0)
+fldz
+lblRealtimeCooldownCalcSkip:
+jmp lblRealtimeCooldownCalcRet
+aobRealtimeCooldownCalc_i:
+readmem(aobRealtimeCooldownCalc,6)
+iPlayerCooldownBaseOffset:
+readmem(aobPlayerCooldownBaseOffset+2,1)
+db 00 00 00
+
+aobRealtimeCooldownCalc:
+aobRealtimeCooldownCalc_r:
+jmp lblRealtimeCooldownCalc
+nop
+lblRealtimeCooldownCalcRet:
+
+[DISABLE]
+aobRealtimeCooldownCalc_r:
+readmem(aobRealtimeCooldownCalc_i,6)
+
+unregistersymbol(aobRealtimeCooldownCalc_r)
+unregistersymbol(aobRealtimeCooldownCalc_i)
+
+unregistersymbol(bEnableInstantSkillCooldown)
+
+unregistersymbol(iPlayerCooldownBaseOffset)
+
+dealloc(newmemRealtimeCooldownCalc)
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>775</ID>
+                  <Description>"bEnableInstantSkillCooldown"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+                  <Color>008000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>bEnableInstantSkillCooldown</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>776</ID>
+                  <Description>"Script: Instant Cooldown; Turn-based (on end of turn)"</Description>
+                  <LastState/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobTurnBasedCooldownCalc,DD 51 ?? D9 EE DF F1 DD D8 7A)
+
+alloc(newmemTurnBasedCooldownCalc,4096,aobTurnBasedCooldownCalc)
+
+label(aobTurnBasedCooldownCalc_r)
+label(aobTurnBasedCooldownCalc_i)
+registersymbol(aobTurnBasedCooldownCalc_r)
+registersymbol(aobTurnBasedCooldownCalc_i)
+
+label(lblTurnBasedCooldownCalc)
+label(lblTurnBasedCooldownCalcSkip)
+label(lblTurnBasedCooldownCalcRet)
+
+newmemTurnBasedCooldownCalc:
+
+lblTurnBasedCooldownCalc:
+mov eax,[pPlayerBase]
+add eax,[iPlayerCooldownBaseOffset]
+cmp dword ptr [eax],ebx
+jne short lblTurnBasedCooldownCalcSkip
+cmp dword ptr [bEnableInstantSkillCooldown],1
+jne short lblTurnBasedCooldownCalcSkip
+fstp st(0)
+fldz
+lblTurnBasedCooldownCalcSkip:
+readmem(aobTurnBasedCooldownCalc,5)
+jmp lblTurnBasedCooldownCalcRet
+aobTurnBasedCooldownCalc_i:
+readmem(aobTurnBasedCooldownCalc,5)
+
+aobTurnBasedCooldownCalc:
+aobTurnBasedCooldownCalc_r:
+jmp lblTurnBasedCooldownCalc
+lblTurnBasedCooldownCalcRet:
+
+[DISABLE]
+aobTurnBasedCooldownCalc_r:
+readmem(aobTurnBasedCooldownCalc_i,5)
+
+unregistersymbol(aobTurnBasedCooldownCalc_r)
+unregistersymbol(aobTurnBasedCooldownCalc_i)
+
+dealloc(newmemTurnBasedCooldownCalc)
+
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>793</ID>
+      <Description>"UnderRail AOB script; main"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobCheckCoordsBlock,83 B8 ?? ?? 00 00 00 74 ?? 8B 43 ?? 8B 40)
+aobscan(aobHealthOffsets,8B 80 ?? ?? 00 00 8B 48 ?? FF 15 ?? ?? ?? ?? D9)
+aobscan(aobPsiOffset,8B F1 8B 4E ?? FF 15 ?? ?? ?? ?? D9 EE DF F1 DD D8)
+alloc(newmemCheckCoordsBlock,4096,aobCheckCoordsBlock)
+
+label(aobCheckCoordsBlock_r)
+label(aobCheckCoordsBlock_i)
+registersymbol(aobCheckCoordsBlock_r)
+registersymbol(aobCheckCoordsBlock_i)
+
+label(lblCheckCoordsBlock)
+label(lblCheckCoordsBlockSkipGod)
+label(lblCheckCoordsBlockSkipPsi)
+label(lblCheckCoordsBlockSkip)
+label(lblCheckCoordsBlockRet)
+
+label(bEnableGodMode)
+label(bInfinitePsi)
+registersymbol(bEnableGodMode)
+registersymbol(bInfinitePsi)
+
+label(pPlayerBase)
+label(pPlayerCoords)
+registersymbol(pPlayerBase)
+registersymbol(pPlayerCoords)
+
+label(iPlayerDefensiveOffset)
+label(iPlayerHealthOffset)
+label(iPlayerPsiOffset)
+registersymbol(iPlayerDefensiveOffset)
+registersymbol(iPlayerHealthOffset)
+registersymbol(iPlayerPsiOffset)
+
+newmemCheckCoordsBlock:
+bEnableGodMode:
+dd 1
+bInfinitePsi:
+dd 1
+
+lblCheckCoordsBlock:
+mov dword ptr [pPlayerBase],eax
+mov ecx,[aobCheckCoordsBlock_i+2]
+mov ecx,[eax+ecx]
+mov dword ptr [pPlayerCoords],ecx
+test ecx,ecx
+jz lblCheckCoordsBlockSkip
+cmp dword ptr [bEnableGodMode],1
+jne short lblCheckCoordsBlockSkipGod
+{$try}
+mov ecx,[iPlayerDefensiveOffset]
+mov ecx,[eax+ecx]
+add ecx,[iPlayerHealthOffset]
+mov ecx,[ecx]
+cmp dword ptr [ecx+18],0
+jle short lblCheckCoordsBlockSkipGod
+mov edi,[ecx+10]
+mov dword ptr [ecx+18],edi
+{$except}
+lblCheckCoordsBlockSkipGod:
+cmp dword ptr [bInfinitePsi],1
+jne short lblCheckCoordsBlockSkipPsi
+{$try}
+mov ecx,[iPlayerDefensiveOffset]
+mov ecx,[eax+ecx+04]
+add ecx,[iPlayerPsiOffset]
+mov ecx,[ecx]
+cmp dword ptr [ecx+18],0
+jle short lblCheckCoordsBlockSkipPsi
+mov edi,[ecx+10]
+mov dword ptr [ecx+18],edi
+{$except}
+lblCheckCoordsBlockSkipPsi:
+lblCheckCoordsBlockSkip:
+xor edi,edi
+readmem(aobCheckCoordsBlock,7)
+jmp lblCheckCoordsBlockRet
+aobCheckCoordsBlock_i:
+readmem(aobCheckCoordsBlock,7)
+pPlayerBase:
+dd 0
+pPlayerCoords:
+dd 0
+iPlayerDefensiveOffset:
+readmem(aobHealthOffsets+2,4)
+iPlayerHealthOffset:
+readmem(aobHealthOffsets+8,1)
+db 00 00 00
+iPlayerPsiOffset:
+readmem(aobPsiOffset+4,1)
+db 00 00 00
+
+aobCheckCoordsBlock:
+aobCheckCoordsBlock_r:
+jmp lblCheckCoordsBlock
+nop
+nop
+lblCheckCoordsBlockRet:
+
+[DISABLE]
+aobCheckCoordsBlock_r:
+readmem(aobCheckCoordsBlock_i,7)
+
+unregistersymbol(aobCheckCoordsBlock_r)
+unregistersymbol(aobCheckCoordsBlock_i)
+
+unregistersymbol(bEnableGodMode)
+unregistersymbol(bInfinitePsi)
+
+unregistersymbol(pPlayerBase)
+unregistersymbol(pPlayerCoords)
+
+unregistersymbol(iPlayerDefensiveOffset)
+unregistersymbol(iPlayerHealthOffset)
+unregistersymbol(iPlayerPsiOffset)
+
+dealloc(newmemCheckCoordsBlock)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>794</ID>
+          <Description>"bEnableGodMode"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+          <Color>008000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>bEnableGodMode</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>795</ID>
+          <Description>"bInfinitePsi"</Description>
+          <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+          <Color>008000</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>bInfinitePsi</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>947</ID>
+          <Description>"Player"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>796</ID>
+              <Description>"sPlayerName"</Description>
+              <Color>0000FF</Color>
+              <VariableType>String</VariableType>
+              <Length>32</Length>
+              <Unicode>1</Unicode>
+              <CodePage>0</CodePage>
+              <ZeroTerminate>1</ZeroTerminate>
+              <Address>pPlayerBase</Address>
+              <Offsets>
+                <Offset>8</Offset>
+                <Offset>50</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>797</ID>
+              <Description>"fPlayerCoords[x]"</Description>
+              <Color>FF0000</Color>
+              <VariableType>Float</VariableType>
+              <Address>pPlayerCoords</Address>
+              <Offsets>
+                <Offset>8c</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>798</ID>
+              <Description>"fPlayerCoords[y]"</Description>
+              <Color>FF0000</Color>
+              <VariableType>Float</VariableType>
+              <Address>pPlayerCoords</Address>
+              <Offsets>
+                <Offset>90</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>799</ID>
+              <Description>"fPlayerCoords[z] (?)"</Description>
+              <Color>FF0000</Color>
+              <VariableType>Float</VariableType>
+              <Address>pPlayerCoords</Address>
+              <Offsets>
+                <Offset>94</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>800</ID>
+              <Description>"iXPLevel"</Description>
+              <Color>FF0000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pPlayerBase</Address>
+              <Offsets>
+                <Offset>d8</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>801</ID>
+              <Description>"iXP"</Description>
+              <Color>FF0000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pPlayerBase</Address>
+              <Offsets>
+                <Offset>148</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>802</ID>
+              <Description>"dCarryWeight"</Description>
+              <Color>FF0000</Color>
+              <VariableType>Double</VariableType>
+              <Address>pPlayerBase</Address>
+              <Offsets>
+                <Offset>44</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>803</ID>
+              <Description>"iMaxCarryWeight"</Description>
+              <Color>FF0000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pPlayerBase</Address>
+              <Offsets>
+                <Offset>100</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>804</ID>
+              <Description>"LevelingPts"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0080FF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>805</ID>
+                  <Description>"iRemainingStatPoints"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>150</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>806</ID>
+                  <Description>"iRemainingSkillPoints"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>154</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>807</ID>
+                  <Description>"iRemainingFeatPoints"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>158</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>808</ID>
+                  <Description>"iRemainingSpecPoints"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>15C</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>809</ID>
+              <Description>"Abilities"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0080FF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>810</ID>
+                  <Description>"iStrengthBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>8</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>811</ID>
+                  <Description>"iStrengthEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>8</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>812</ID>
+                  <Description>"iDexterityBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>813</ID>
+                  <Description>"iDexterityEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>814</ID>
+                  <Description>"iAgilityBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>10</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>815</ID>
+                  <Description>"iAgilityEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>10</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>816</ID>
+                  <Description>"iConstitutionBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>14</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>817</ID>
+                  <Description>"iConstitutionEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>14</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>818</ID>
+                  <Description>"iPerceptionBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>18</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>819</ID>
+                  <Description>"iPerceptionEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>18</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>820</ID>
+                  <Description>"iWillBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>1C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>821</ID>
+                  <Description>"iWillEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>1C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>822</ID>
+                  <Description>"iIntelligenceBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>20</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>823</ID>
+                  <Description>"iIntelligenceEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>20</Offset>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>5c</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>824</ID>
+              <Description>"Skills"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0080FF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>825</ID>
+                  <Description>"iGunsBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>8</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>826</ID>
+                  <Description>"iGunsEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>8</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>827</ID>
+                  <Description>"iThrowingBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>828</ID>
+                  <Description>"iThrowingEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>829</ID>
+                  <Description>"iCrossbowsBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>10</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>830</ID>
+                  <Description>"iCrossbowsEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>10</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>831</ID>
+                  <Description>"iMeleeBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>14</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>832</ID>
+                  <Description>"iMeleeEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>14</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>833</ID>
+                  <Description>"iDodgeBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>18</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>834</ID>
+                  <Description>"iDodgeEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>18</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>835</ID>
+                  <Description>"iEvasionBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>1C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>836</ID>
+                  <Description>"iEvasionEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>1C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>837</ID>
+                  <Description>"iStealthBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>20</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>838</ID>
+                  <Description>"iStealthEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>20</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>839</ID>
+                  <Description>"iHackingBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>24</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>840</ID>
+                  <Description>"iHackingEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>24</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>841</ID>
+                  <Description>"iLockpickingBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>28</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>842</ID>
+                  <Description>"iLockpickingEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>28</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>843</ID>
+                  <Description>"iPickpocketingBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>2C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>844</ID>
+                  <Description>"iPickpocketingEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>2C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>845</ID>
+                  <Description>"iTrapsBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>30</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>846</ID>
+                  <Description>"iTrapsEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>30</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>847</ID>
+                  <Description>"iMechanicsBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>34</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>848</ID>
+                  <Description>"iMechanicsEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>34</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>849</ID>
+                  <Description>"iElectronicsBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>38</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>850</ID>
+                  <Description>"iElectronicsEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>38</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>851</ID>
+                  <Description>"iChemistryBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>3C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>852</ID>
+                  <Description>"iChemistryEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>3C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>853</ID>
+                  <Description>"iBiologyBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>40</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>854</ID>
+                  <Description>"iBiologyEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>40</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>855</ID>
+                  <Description>"iTailoringBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>44</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>856</ID>
+                  <Description>"iTailoringEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>44</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>857</ID>
+                  <Description>"iThoughtControlBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>48</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>858</ID>
+                  <Description>"iThoughtControlEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>48</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>859</ID>
+                  <Description>"iPhychokinesisBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>4C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>860</ID>
+                  <Description>"iPhychokinesisEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>4C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>861</ID>
+                  <Description>"iMetathermicsBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>50</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>862</ID>
+                  <Description>"iMetathermicsEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>50</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>863</ID>
+                  <Description>"iUnknownBase"</Description>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>54</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>864</ID>
+                  <Description>"iUnknownEffective"</Description>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>54</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>865</ID>
+                  <Description>"iPersuasionBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>58</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>866</ID>
+                  <Description>"iPersuasionEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>58</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>867</ID>
+                  <Description>"iIntimidationBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>5C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>868</ID>
+                  <Description>"iIntimidationEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>5C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>869</ID>
+                  <Description>"iMerchantileBase"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>60</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>870</ID>
+                  <Description>"iMerchantileEffective"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>14</Offset>
+                    <Offset>60</Offset>
+                    <Offset>4</Offset>
+                    <Offset>8</Offset>
+                    <Offset>60</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>871</ID>
+              <Description>"DefensiveAbilities"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0080FF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>872</ID>
+                  <Description>"dWeaponCritChance"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>20</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>873</ID>
+                  <Description>"dHealingEff."</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>30</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>874</ID>
+                  <Description>"fMaxHealth"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>[iPlayerHealthOffset]</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>875</ID>
+                  <Description>"fHealth"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>18</Offset>
+                    <Offset>[iPlayerHealthOffset]</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>876</ID>
+                  <Description>"iDodge"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>98</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>877</ID>
+                  <Description>"iEvasion"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>9C</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>878</ID>
+                  <Description>"iFortitude"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>A0</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>879</ID>
+                  <Description>"iResolve"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>A4</Offset>
+                    <Offset>[iPlayerDefensiveOffset]</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>880</ID>
+              <Description>"OffensiveAbilities"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>0080FF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>881</ID>
+                  <Description>"dCritBonus"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>8</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>882</ID>
+                  <Description>"dCritChance"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>883</ID>
+                  <Description>"dSpecialAttackBonus"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>68</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>884</ID>
+                  <Description>"pEquippedWeapon"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>0000FF</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>70</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>885</ID>
+                  <Description>"fMaxPsi"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>[iPlayerPsiOffset]</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>886</ID>
+                  <Description>"fPsi"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>18</Offset>
+                    <Offset>[iPlayerPsiOffset]</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>887</ID>
+                  <Description>"iMaxActionPoints"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>9c</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>888</ID>
+                  <Description>"iMaxMovementPoints"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>A0</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>889</ID>
+                  <Description>"iInitiative"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pPlayerBase</Address>
+                  <Offsets>
+                    <Offset>B8</Offset>
+                    <Offset>[iPlayerDefensiveOffset]+4</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>890</ID>
+          <Description>"Script: Max Carry Weight Mod"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobMaxCarryWeightCalc,89 82 ?? ?? 00 00 8B 8A ?? ?? 00 00 39 09)
+
+alloc(newmemMaxCarryWeightCalc,4096,aobMaxCarryWeightCalc)
+
+label(aobMaxCarryWeightCalc_r)
+label(aobMaxCarryWeightCalc_i)
+registersymbol(aobMaxCarryWeightCalc_r)
+registersymbol(aobMaxCarryWeightCalc_i)
+
+label(lblMaxCarryWeightCalc)
+label(lblMaxCarryWeightCalcSkip)
+label(lblMaxCarryWeightCalcRet)
+
+label(bEnableMaxCarryWeightMod)
+label(fMaxCarryWeightMod)
+registersymbol(bEnableMaxCarryWeightMod)
+registersymbol(fMaxCarryWeightMod)
+
+newmemMaxCarryWeightCalc:
+bEnableMaxCarryWeightMod:
+dd 1
+fMaxCarryWeightMod:
+dd (float)100.0
+
+lblMaxCarryWeightCalc:
+cmp dword ptr [bEnableMaxCarryWeightMod],1
+jne short lblMaxCarryWeightCalcSkip
+push eax
+fild dword ptr [esp]
+fmul dword ptr [fMaxCarryWeightMod]
+fistp dword ptr [esp]
+pop eax
+lblMaxCarryWeightCalcSkip:
+readmem(aobMaxCarryWeightCalc,6)
+jmp lblMaxCarryWeightCalcRet
+aobMaxCarryWeightCalc_i:
+readmem(aobMaxCarryWeightCalc,6)
+
+aobMaxCarryWeightCalc:
+aobMaxCarryWeightCalc_r:
+jmp lblMaxCarryWeightCalc
+nop
+lblMaxCarryWeightCalcRet:
+
+[DISABLE]
+aobMaxCarryWeightCalc_r:
+readmem(aobMaxCarryWeightCalc_i,6)
+
+unregistersymbol(aobMaxCarryWeightCalc_r)
+unregistersymbol(aobMaxCarryWeightCalc_i)
+
+unregistersymbol(bEnableMaxCarryWeightMod)
+
+dealloc(newmemMaxCarryWeightCalc)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>891</ID>
+              <Description>"bEnableMaxCarryWeightMod"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMaxCarryWeightMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>892</ID>
+                  <Description>"fMaxCarryWeightMod"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fMaxCarryWeightMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>945</ID>
+          <Description>"Script: JetSki Weight Calc"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobJetSkiWeightCalc,DD 42 ?? DC 40 ?? DD 58 ?? 8B 45 ?? DD)
+
+alloc(newmemJetSkiWeightCalc,4096,aobJetSkiWeightCalc)
+
+label(aobJetSkiWeightCalc_r)
+label(aobJetSkiWeightCalc_i)
+registersymbol(aobJetSkiWeightCalc_r)
+registersymbol(aobJetSkiWeightCalc_i)
+
+label(lblJetSkiWeightCalc)
+label(lblJetSkiWeightCalcSkip)
+label(lblJetSkiWeightCalcRet)
+
+label(bEnableJetSkiIgnoresPlayerWeight)
+registersymbol(bEnableJetSkiIgnoresPlayerWeight)
+
+newmemJetSkiWeightCalc:
+bEnableJetSkiIgnoresPlayerWeight:
+dd 1
+
+lblJetSkiWeightCalc:
+readmem(aobJetSkiWeightCalc,3)
+cmp dword ptr [bEnableJetSkiIgnoresPlayerWeight],1
+jne short lblJetSkiWeightCalcSkip
+fstp st(0)
+fldz
+lblJetSkiWeightCalcSkip:
+readmem(aobJetSkiWeightCalc+3,3)
+jmp lblJetSkiWeightCalcRet
+aobJetSkiWeightCalc_i:
+readmem(aobJetSkiWeightCalc,6)
+
+aobJetSkiWeightCalc:
+aobJetSkiWeightCalc_r:
+jmp lblJetSkiWeightCalc
+nop
+lblJetSkiWeightCalcRet:
+
+[DISABLE]
+aobJetSkiWeightCalc_r:
+readmem(aobJetSkiWeightCalc_i,6)
+
+unregistersymbol(aobJetSkiWeightCalc_r)
+unregistersymbol(aobJetSkiWeightCalc_i)
+
+unregistersymbol(bEnableJetSkiIgnoresPlayerWeight)
+
+dealloc(newmemJetSkiWeightCalc)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>946</ID>
+              <Description>"bEnableJetSkiIgnoresPlayerWeight"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableJetSkiIgnoresPlayerWeight</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>893</ID>
+          <Description>"Script: XP Gain Mod"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobXPGainCalc,8B 45 ?? 01 86 ?? ?? 00 00 85 D2 75)
+
+alloc(newmemXPGainCalc,4096,aobXPGainCalc)
+
+label(aobXPGainCalc_r)
+label(aobXPGainCalc_i)
+registersymbol(aobXPGainCalc_r)
+registersymbol(aobXPGainCalc_i)
+
+label(lblXPGainCalc)
+label(lblXPGainCalcSkip)
+label(lblXPGainCalcRet)
+
+label(bEnableXPGainMod)
+label(fXPGainMod)
+registersymbol(bEnableXPGainMod)
+registersymbol(fXPGainMod)
+
+newmemXPGainCalc:
+bEnableXPGainMod:
+dd 1
+fXPGainMod:
+dd (float)2.0
+
+lblXPGainCalc:
+cmp dword ptr [bEnableXPGainMod],1
+jne short lblXPGainCalcSkip
+movsx eax,[aobXPGainCalc_i+02]
+fild dword ptr [ebp+eax]
+fmul dword ptr [fXPGainMod]
+fistp dword ptr [ebp+eax]
+lblXPGainCalcSkip:
+readmem(aobXPGainCalc,9)
+jmp lblXPGainCalcRet
+aobXPGainCalc_i:
+readmem(aobXPGainCalc,9)
+
+aobXPGainCalc:
+aobXPGainCalc_r:
+jmp lblXPGainCalc
+nop
+nop
+nop
+nop
+lblXPGainCalcRet:
+
+[DISABLE]
+aobXPGainCalc_r:
+readmem(aobXPGainCalc_i,9)
+
+unregistersymbol(aobXPGainCalc_r)
+unregistersymbol(aobXPGainCalc_i)
+
+unregistersymbol(bEnableXPGainMod)
+unregistersymbol(fXPGainMod)
+
+dealloc(newmemXPGainCalc)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>894</ID>
+              <Description>"bEnableXPGainMod"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableXPGainMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>895</ID>
+                  <Description>"fXPGainMod"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fXPGainMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>896</ID>
+          <Description>"Script: Movement Points Mod"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobMovePtsCalc,DD 5D ?? DD 45 ?? DE E9 DD 56 ?? D9 EE)
+
+alloc(newmemMovePtsCalc,4096,aobMovePtsCalc)
+
+label(aobMovePtsCalc_r)
+label(aobMovePtsCalc_i)
+registersymbol(aobMovePtsCalc_r)
+registersymbol(aobMovePtsCalc_i)
+
+label(lblMovePtsCalc)
+label(lblMovePtsCalcSkip)
+label(lblMovePtsCalcRet)
+
+label(bEnableMovementCostMod)
+label(dMovementCostMod)
+registersymbol(bEnableMovementCostMod)
+registersymbol(dMovementCostMod)
+
+newmemMovePtsCalc:
+bEnableMovementCostMod:
+dd 1
+dMovementCostMod:
+dq (double)0.1
+
+lblMovePtsCalc:
+cmp dword ptr [bEnableMovementCostMod],1
+jne short lblMovePtsCalcSkip
+pushad
+push 09 // VK_MENU: TAB key
+call GetAsyncKeyState
+shr ax,#15
+cmp ax,1
+popad
+jne short lblMovePtsCalcSkip
+fmul qword ptr [dMovementCostMod]
+lblMovePtsCalcSkip:
+readmem(aobMovePtsCalc,6)
+jmp lblMovePtsCalcRet
+aobMovePtsCalc_i:
+readmem(aobMovePtsCalc,6)
+
+aobMovePtsCalc:
+aobMovePtsCalc_r:
+jmp lblMovePtsCalc
+nop
+lblMovePtsCalcRet:
+
+[DISABLE]
+aobMovePtsCalc_r:
+readmem(aobMovePtsCalc_i,6)
+
+unregistersymbol(aobMovePtsCalc_r)
+unregistersymbol(aobMovePtsCalc_i)
+
+unregistersymbol(bEnableMovementCostMod)
+unregistersymbol(dMovementCostMod)
+
+dealloc(newmemMovePtsCalc)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>897</ID>
+              <Description>"bEnableMovementCostMod (hold ALT while moving!)"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableMovementCostMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>898</ID>
+                  <Description>"dMovementCostMod"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>dMovementCostMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>899</ID>
+          <Description>"Script: Action Points Mod"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobActionPtsCalc,DB 45 ?? D9 C0 DC 6E ?? DD 5E ?? 83)
+
+alloc(newmemActionPtsCalc,4096,aobActionPtsCalc)
+
+label(aobActionPtsCalc_r)
+label(aobActionPtsCalc_i)
+registersymbol(aobActionPtsCalc_r)
+registersymbol(aobActionPtsCalc_i)
+
+label(lblActionPtsCalc)
+label(lblActionPtsCalcSkip)
+label(lblActionPtsCalcRet)
+
+label(bEnableActionCostMod)
+label(dActionCostMod)
+registersymbol(bEnableActionCostMod)
+registersymbol(dActionCostMod)
+
+newmemActionPtsCalc:
+bEnableActionCostMod:
+dd 1
+dActionCostMod:
+dq (double)0.1
+
+lblActionPtsCalc:
+readmem(aobActionPtsCalc,3)
+cmp dword ptr [bEnableActionCostMod],1
+jne short lblActionPtsCalcSkip
+pushad
+push 09 // VK_MENU: TAB key
+call GetAsyncKeyState
+shr ax,#15
+cmp ax,1
+popad
+jne short lblActionPtsCalcSkip
+fmul qword ptr [dActionCostMod]
+lblActionPtsCalcSkip:
+readmem(aobActionPtsCalc+3,2)
+jmp lblActionPtsCalcRet
+aobActionPtsCalc_i:
+readmem(aobActionPtsCalc,5)
+
+aobActionPtsCalc:
+aobActionPtsCalc_r:
+jmp lblActionPtsCalc
+lblActionPtsCalcRet:
+
+[DISABLE]
+aobActionPtsCalc_r:
+readmem(aobActionPtsCalc_i,5)
+
+unregistersymbol(aobActionPtsCalc_r)
+unregistersymbol(aobActionPtsCalc_i)
+
+unregistersymbol(bEnableActionCostMod)
+unregistersymbol(dActionCostMod)
+
+dealloc(newmemActionPtsCalc)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>900</ID>
+              <Description>"bEnableActionCostMod (hold ALT while taking action!)"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableActionCostMod</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>901</ID>
+                  <Description>"dActionCostMod"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>dActionCostMod</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>902</ID>
+          <Description>"Script: Item Editor"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobItemCountReader,FF 50 ?? 83 78 ?? 01 0F 8E ?? ?? ?? ?? 8D 4D)
+
+alloc(newmemItemCountReader,4096,aobItemCountReader)
+
+label(aobItemCountReader_r)
+label(aobItemCountReader_i)
+registersymbol(aobItemCountReader_r)
+registersymbol(aobItemCountReader_i)
+
+label(lblItemCountReader)
+label(lblItemCountReaderSkip)
+label(lblItemCountReaderRet)
+
+label(bEnableStackSizeIncrement)
+label(iStackSizeIncrement)
+registersymbol(bEnableStackSizeIncrement)
+registersymbol(iStackSizeIncrement)
+
+label(pLastClickedItem)
+registersymbol(pLastClickedItem)
+
+newmemItemCountReader:
+bEnableStackSizeIncrement:
+dd 0
+iStackSizeIncrement:
+dd (int)50
+
+lblItemCountReader:
+readmem(aobItemCountReader,3)
+push ebx
+push ecx
+movsx ecx,[aobItemCountReader_i+5]
+cmp [eax+ecx],1
+jle short lblItemCountReaderSkip
+pushad
+push 12 // VK_MENU: ALT key
+call GetAsyncKeyState
+shr ax,#15
+cmp ax,1
+popad
+jne short lblItemCountReaderSkip
+cmp dword ptr [bEnableStackSizeIncrement],1
+jne short lblItemCountReaderSkip
+mov ebx,[iStackSizeIncrement]
+add [eax+ecx],ebx
+lblItemCountReaderSkip:
+pop ecx
+pop ebx
+mov dword ptr [pLastClickedItem],eax
+readmem(aobItemCountReader+3,4)
+jmp lblItemCountReaderRet
+aobItemCountReader_i:
+readmem(aobItemCountReader,7)
+pLastClickedItem:
+dd 0
+
+aobItemCountReader:
+aobItemCountReader_r:
+jmp lblItemCountReader
+nop
+nop
+lblItemCountReaderRet:
+
+[DISABLE]
+//""+106C2839:
+//Alt: call dword ptr [eax+10]
+//Alt: cmp dword ptr [eax+20],01
+//db FF 50 10 83 78 20 01
+aobItemCountReader_r:
+readmem(aobItemCountReader_i,7)
+
+unregistersymbol(aobItemCountReader_r)
+unregistersymbol(aobItemCountReader_i)
+
+unregistersymbol(bEnableStackSizeIncrement)
+unregistersymbol(iStackSizeIncrement)
+
+unregistersymbol(pLastClickedItem)
+
+dealloc(newmemItemCountReader)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>903</ID>
+              <Description>"bEnableStackSizeIncrement (hold ALT while clicking!)"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableStackSizeIncrement</Address>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>904</ID>
+                  <Description>"iStackSizeIncrement"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>iStackSizeIncrement</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>905</ID>
+              <Description>"Last clicked Item"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>4080FF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>906</ID>
+                  <Description>"pLastClickedItem (Click on an item in the Inv. grid)"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>0000FF</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pLastClickedItem</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>907</ID>
+                  <Description>"sName"</Description>
+                  <Color>0000FF</Color>
+                  <VariableType>String</VariableType>
+                  <Length>256</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>8</Offset>
+                    <Offset>10</Offset>
+                    <Offset>4</Offset>
+                    <Offset>14</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>908</ID>
+                  <Description>"iStackSize"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>24</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>909</ID>
+                  <Description>"iMaxStackSize"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>30</Offset>
+                    <Offset>4</Offset>
+                    <Offset>14</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>910</ID>
+                  <Description>"iRarity"</Description>
+                  <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Grey
+1:White
+2:Green
+3:Blue
+4:Purple
+5:Orange
+</DropDownList>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>28</Offset>
+                    <Offset>4</Offset>
+                    <Offset>14</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>911</ID>
+                  <Description>"iUnknown (seems to impact value shown)"</Description>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>2c</Offset>
+                    <Offset>4</Offset>
+                    <Offset>14</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>912</ID>
+                  <Description>"dEnergyCurrent"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>913</ID>
+                  <Description>"iEnergyMax"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>24</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>914</ID>
+                  <Description>"dDurability"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>915</ID>
+                  <Description>"dWeight"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>4</Offset>
+                    <Offset>4</Offset>
+                    <Offset>14</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>916</ID>
+                  <Description>"iValue"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>pLastClickedItem</Address>
+                  <Offsets>
+                    <Offset>4C</Offset>
+                    <Offset>4</Offset>
+                    <Offset>14</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>917</ID>
+                  <Description>"ArmourOnly"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>4080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>918</ID>
+                      <Description>"dArmourPenalty"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>84</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>919</ID>
+                  <Description>"CraftableOnly"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>4080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>920</ID>
+                      <Description>"iQuality"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>40</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>921</ID>
+                  <Description>"WeaponsOnly"</Description>
+                  <Options moHideChildren="1"/>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>4080FF</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>922</ID>
+                      <Description>"iImpactSpeed"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Very Low (Melee attacks)
+1:Low (Slow projectiles)
+2:Medium (Pistol and SMG bullets, shrapnel)
+3:Fast (Explosives, extremely fast projectiles)
+4:Very Fast (Lasers, plasma, electrical attacks)
+</DropDownList>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>E4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>923</ID>
+                      <Description>"iBaseAPCost"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>E0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>924</ID>
+                      <Description>"bHasSpread"</Description>
+                      <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>128</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>925</ID>
+                          <Description>"iSpreadAngle"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>12c</Offset>
+                            <Offset>4</Offset>
+                            <Offset>14</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>926</ID>
+                      <Description>"fRange"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>EC</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>927</ID>
+                      <Description>"fOptimalRange"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>F0</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>928</ID>
+                      <Description>"dPrecision"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>9C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>929</ID>
+                      <Description>"fCloseQuartersPrecision(Penalty!)"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>104</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>930</ID>
+                      <Description>"dMoveAndShootPresicion(Penalty!)"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>AC</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>931</ID>
+                      <Description>"dBurstPrecision"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>A4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>932</ID>
+                      <Description>"iExtraBurstShots"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>100</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>933</ID>
+                      <Description>"dCritChance"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>84</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>934</ID>
+                      <Description>"dCritDmgBonus"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>8C</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>935</ID>
+                      <Description>"iMinStrength"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>E8</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>936</ID>
+                      <Description>"iMagazineCapacity"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>FC</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                      <CheatEntries>
+                        <CheatEntry>
+                          <ID>937</ID>
+                          <Description>"iMagazineLoaded"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>c</Offset>
+                            <Offset>3c</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                        <CheatEntry>
+                          <ID>938</ID>
+                          <Description>"iTotalAmmoFired"</Description>
+                          <Color>FF0000</Color>
+                          <VariableType>4 Bytes</VariableType>
+                          <Address>pLastClickedItem</Address>
+                          <Offsets>
+                            <Offset>10</Offset>
+                            <Offset>3c</Offset>
+                          </Offsets>
+                        </CheatEntry>
+                      </CheatEntries>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>939</ID>
+                      <Description>"dReloadingCost"</Description>
+                      <Color>FF0000</Color>
+                      <VariableType>Double</VariableType>
+                      <Address>pLastClickedItem</Address>
+                      <Offsets>
+                        <Offset>B4</Offset>
+                        <Offset>4</Offset>
+                        <Offset>14</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>940</ID>
+          <Description>"Script: Infinite Durability"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobItemDurabilityUpdater,DD 40 ?? DC 65 ?? 83 EC ?? DD 1C 24)
+
+alloc(newmemItemDurabilityUpdater,4096,aobItemDurabilityUpdater)
+
+label(aobItemDurabilityUpdater_r)
+label(aobItemDurabilityUpdater_i)
+registersymbol(aobItemDurabilityUpdater_r)
+registersymbol(aobItemDurabilityUpdater_i)
+
+label(lblItemDurabilityUpdater)
+label(lblItemDurabilityUpdaterSkip)
+label(lblItemDurabilityUpdaterRet)
+
+label(bEnableInfiniteItemDurability)
+registersymbol(bEnableInfiniteItemDurability)
+
+newmemItemDurabilityUpdater:
+bEnableInfiniteItemDurability:
+dd 1
+
+lblItemDurabilityUpdater:
+readmem(aobItemDurabilityUpdater,3)
+cmp dword ptr [bEnableInfiniteItemDurability],1
+jne short lblItemDurabilityUpdaterSkip
+push ebx
+movsx ebx,[aobItemDurabilityUpdater_i+05]
+fadd qword ptr [ebp+ebx]
+pop ebx
+lblItemDurabilityUpdaterSkip:
+readmem(aobItemDurabilityUpdater+3,3)
+jmp lblItemDurabilityUpdaterRet
+aobItemDurabilityUpdater_i:
+readmem(aobItemDurabilityUpdater,6)
+
+aobItemDurabilityUpdater:
+aobItemDurabilityUpdater_r:
+jmp lblItemDurabilityUpdater
+nop
+lblItemDurabilityUpdaterRet:
+
+[DISABLE]
+aobItemDurabilityUpdater_r:
+readmem(aobItemDurabilityUpdater_i,6)
+
+unregistersymbol(aobItemDurabilityUpdater_r)
+unregistersymbol(aobItemDurabilityUpdater_i)
+
+unregistersymbol(bEnableInfiniteItemDurability)
+
+dealloc(newmemItemDurabilityUpdater)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>941</ID>
+              <Description>"bEnableInfiniteItemDurability"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableInfiniteItemDurability</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>942</ID>
+          <Description>"Script: Instant Cooldown; Real time"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobRealtimeCooldownCalc,DD 40 ?? DC 65 ?? DD 50 ?? D9 EE DF F1 DD D8 7A)
+aobscan(aobPlayerCooldownBaseOffset,8B 40 ?? 89 45 ?? 8B 7E ?? 80)
+
+alloc(newmemRealtimeCooldownCalc,4096,aobRealtimeCooldownCalc)
+
+label(aobRealtimeCooldownCalc_r)
+label(aobRealtimeCooldownCalc_i)
+registersymbol(aobRealtimeCooldownCalc_r)
+registersymbol(aobRealtimeCooldownCalc_i)
+
+label(lblRealtimeCooldownCalc)
+label(lblRealtimeCooldownCalcSkip)
+label(lblRealtimeCooldownCalcRet)
+
+label(bEnableInstantSkillCooldown)
+registersymbol(bEnableInstantSkillCooldown)
+
+label(iPlayerCooldownBaseOffset)
+registersymbol(iPlayerCooldownBaseOffset)
+
+newmemRealtimeCooldownCalc:
+bEnableInstantSkillCooldown:
+dd 1
+
+lblRealtimeCooldownCalc:
+readmem(aobRealtimeCooldownCalc,6)
+mov ecx,[pPlayerBase]
+add ecx,[iPlayerCooldownBaseOffset]
+cmp dword ptr [ecx],ebx
+jne short lblRealtimeCooldownCalcSkip
+cmp dword ptr [bEnableInstantSkillCooldown],1
+jne short lblRealtimeCooldownCalcSkip
+fstp st(0)
+fldz
+lblRealtimeCooldownCalcSkip:
+jmp lblRealtimeCooldownCalcRet
+aobRealtimeCooldownCalc_i:
+readmem(aobRealtimeCooldownCalc,6)
+iPlayerCooldownBaseOffset:
+readmem(aobPlayerCooldownBaseOffset+2,1)
+db 00 00 00
+
+aobRealtimeCooldownCalc:
+aobRealtimeCooldownCalc_r:
+jmp lblRealtimeCooldownCalc
+nop
+lblRealtimeCooldownCalcRet:
+
+[DISABLE]
+aobRealtimeCooldownCalc_r:
+readmem(aobRealtimeCooldownCalc_i,6)
+
+unregistersymbol(aobRealtimeCooldownCalc_r)
+unregistersymbol(aobRealtimeCooldownCalc_i)
+
+unregistersymbol(bEnableInstantSkillCooldown)
+
+unregistersymbol(iPlayerCooldownBaseOffset)
+
+dealloc(newmemRealtimeCooldownCalc)
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>943</ID>
+              <Description>"bEnableInstantSkillCooldown"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>bEnableInstantSkillCooldown</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>944</ID>
+              <Description>"Script: Instant Cooldown; Turn-based (on end of turn)"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>// Game   : underrail.exe
+// Version:
+// Date   :
+// Author : Cs
+[ENABLE]
+aobscan(aobTurnBasedCooldownCalc,DD 51 ?? D9 EE DF F1 DD D8 7A)
+
+alloc(newmemTurnBasedCooldownCalc,4096,aobTurnBasedCooldownCalc)
+
+label(aobTurnBasedCooldownCalc_r)
+label(aobTurnBasedCooldownCalc_i)
+registersymbol(aobTurnBasedCooldownCalc_r)
+registersymbol(aobTurnBasedCooldownCalc_i)
+
+label(lblTurnBasedCooldownCalc)
+label(lblTurnBasedCooldownCalcSkip)
+label(lblTurnBasedCooldownCalcRet)
+
+newmemTurnBasedCooldownCalc:
+
+lblTurnBasedCooldownCalc:
+mov eax,[pPlayerBase]
+add eax,[iPlayerCooldownBaseOffset]
+cmp dword ptr [eax],ebx
+jne short lblTurnBasedCooldownCalcSkip
+cmp dword ptr [bEnableInstantSkillCooldown],1
+jne short lblTurnBasedCooldownCalcSkip
+fstp st(0)
+fldz
+lblTurnBasedCooldownCalcSkip:
+readmem(aobTurnBasedCooldownCalc,5)
+jmp lblTurnBasedCooldownCalcRet
+aobTurnBasedCooldownCalc_i:
+readmem(aobTurnBasedCooldownCalc,5)
+
+aobTurnBasedCooldownCalc:
+aobTurnBasedCooldownCalc_r:
+jmp lblTurnBasedCooldownCalc
+lblTurnBasedCooldownCalcRet:
+
+[DISABLE]
+aobTurnBasedCooldownCalc_r:
+readmem(aobTurnBasedCooldownCalc_i,5)
+
+unregistersymbol(aobTurnBasedCooldownCalc_r)
+unregistersymbol(aobTurnBasedCooldownCalc_i)
+
+dealloc(newmemTurnBasedCooldownCalc)
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
