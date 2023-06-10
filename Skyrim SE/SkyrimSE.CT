@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="28">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"PerkPoints"</Description>
+      <LastState Value="41" RealAddress="17FAEE4F931"/>
+      <VariableType>Byte</VariableType>
+      <Address>SkyrimSE.exe+2F26EF8</Address>
+      <Offsets>
+        <Offset>b01</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
