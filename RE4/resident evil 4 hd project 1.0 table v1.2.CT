@@ -1,0 +1,2525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="38">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>17559</ID>
+      <Description>"Add Item to Inventory"</Description>
+      <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+aobscanmodule(ItemAdder,$process,55 8B EC 83 EC 38 A1 ?? ?? ?? ?? 33 C5 89 45 FC 53 56 8B 75 08 57 8D 45 C8 50 56 C6 45 EB 00) // should be unique
+registersymbol(ItemAdder)
+
+alloc(Amount,0x100,$process)
+registersymbol(Amount)
+
+alloc(ID,0x100,$process)
+registersymbol(ID)
+
+
+ID:
+db 18  //shotgun ammo
+/*
+hex
+4 handgun ammo
+7 sniper ammo
+e flash grenade
+1c yellow herb
+
+
+*/
+
+Amount:
+db #100
+
+
+[DISABLE]
+dealloc(ID,0x100,$process)
+unregistersymbol(ID)
+
+dealloc(Amount,0x100,$process)
+unregistersymbol(Amount)
+unregistersymbol(ItemAdder)
+//code from here till the end of the code will be used to disable the cheat
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17568</ID>
+          <Description>"Execute the Function"</Description>
+          <LastState/>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+alloc( Thread_for_ItemCall, 0x1000, $process )
+registersymbol( Thread_for_ItemCall )
+CreateThread( Thread_for_ItemCall )
+
+Thread_for_ItemCall:
+
+{$lua}
+func_caller = getAddressList().getMemoryRecordByID(17568)
+
+
+
+local timer = createTimer()
+timer.Interval = 350 -- 1000 milliseconds per second
+timer.OnTimer = function(theTimerCallingThisFunction)
+  func_caller.Active=false
+  timer.destroy() -- destroy the timer so it doesn't keep running
+end
+
+{$asm}
+
+push ebp
+  mov ebp,esp
+
+  sub esp,220
+  and esp,-10 //  aligning the stack with the next lowest 16-byte boundary
+
+//mov qword ptr [rsp+30],FFFFFFFFFFFFFFFE
+
+
+
+mov ecx,[ID]
+mov eax,[Amount]
+mov edx,3
+
+push edx
+push eax
+push ecx
+
+//call 141B74930
+call ItemAdder
+
+
+  mov esp,ebp
+
+  pop ebp
+
+
+ret
+
+
+[DISABLE]
+
+dealloc( Thread_for_ItemCall )
+unregistersymbol( Thread_for_ItemCall )
+
+
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>192</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>17569</ID>
+              <Description>"ID"</Description>
+              <DropDownList DescriptionOnly="1">0:magnum ammo
+4:handgun ammo
+7:sniper ammo
+24:shotgun ammo
+26:hand cannon ammo
+32:TMP ammo
+70:mine dart ammo
+17:bowgun bolt
+114:arrow (ammo)
+106:chicago typewriter ammo
+52:infinite chicago typewriter
+65:P.R.L. 412
+23:Rocket Launcher (special)
+109:Infinite Rocket Launcher
+1:hand drenade
+2:incendiary drenade
+14:flash grenade
+3:matilda (handgun)
+33:Punisher (handgun)
+35:handgun
+37:red9 (handgun)
+39:blacktail (handgun)
+64:punisher (handgun)
+16:bowgun
+41:broken butterfly (revolver)
+42:killer7 (magnum pistol)
+44:shotgun
+71:shotgun (with grip)
+45:striker (shotgun)
+149:riot gun (shotgun)
+46:rifle
+47:Rifle (semi-auo)
+48:TMP
+83:chicago typewriter
+62:custom TMP
+53:Rocket Launcher
+54:mine thrower
+55:hand cannon
+56:combat knife
+82:krauser's bow
+63:silencer (handgun)
+170:scope (mine thrower)
+197:inrared scope
+66:stock (red9)
+67:stock (TMP)
+68:scope (rifle)
+69:scope (semi-auo rifle)
+5:first aid spray
+6:green herb
+28:yellow herb
+25:red herb
+18:green herb x2
+19:green herb x3
+20:herb G+R
+21:herb G+R+Y
+22:herb G+Y
+168:herb R+Y
+8:egg
+9:brown egg
+10:gold egg
+151:black bass (L)
+87:spinel (treasure)
+88:pearl pendant (treasure)
+94:beerstein (treasure)
+96:red catseye (treasure)
+12:plaga sample
+34:punisher with silencer (** weird!?)
+</DropDownList>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>2 Bytes</VariableType>
+              <Address>ID</Address>
+              <Hotkeys>
+                <Hotkey>
+                  <Action>Increase Value</Action>
+                  <Keys>
+                    <Key>106</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>0</ID>
+                </Hotkey>
+                <Hotkey>
+                  <Action>Decrease Value</Action>
+                  <Keys>
+                    <Key>111</Key>
+                  </Keys>
+                  <Value>1</Value>
+                  <ID>1</ID>
+                </Hotkey>
+              </Hotkeys>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>17570</ID>
+              <Description>"Amount"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Byte</VariableType>
+              <Address>Amount</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>17588</ID>
+              <Description>"invalid_ID_resolve   (if you want to test more IDs)"</Description>
+              <LastState/>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-16
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(nullptr_check,bio4.exe,8B 47 14 C6 40 21 02) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+label(Caption)
+label(Text)
+
+newmem:
+mov eax,[edi+14]
+
+
+cmp eax,0
+jne code
+
+push 0 //uType  (0=mb_ok)
+push Caption //lpCaption
+push Text //lpText
+push 0  //hWnd
+call MessageBoxA
+
+jmp 0068C60E
+
+code:
+
+  mov byte ptr [eax+21],02
+  jmp return
+
+
+Caption:
+db 'Error',0
+
+Text:
+db 'Invalid ID ',0
+
+nullptr_check:
+  jmp newmem
+  nop 2
+return:
+registersymbol(nullptr_check)
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+nullptr_check:
+  db 8B 47 14 C6 40 21 02
+
+unregistersymbol(nullptr_check)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+28C650
+
+bio4.exe+28C62E: 51                    - push ecx
+bio4.exe+28C62F: B9 D4 0F C7 00        - mov ecx,bio4.exe+870FD4
+bio4.exe+28C634: E8 31 BC D7 FF        - call bio4.exe+826A
+bio4.exe+28C639: 66 8B 55 0C           - mov dx,[ebp+0C]
+bio4.exe+28C63D: 80 4D F0 01           - or byte ptr [ebp-10],01
+bio4.exe+28C641: 8D 45 EC              - lea eax,[ebp-14]
+bio4.exe+28C644: 50                    - push eax
+bio4.exe+28C645: 8B CF                 - mov ecx,edi
+bio4.exe+28C647: 66 89 55 EE           - mov [ebp-12],dx
+bio4.exe+28C64B: E8 89 66 D7 FF        - call bio4.exe+2CD9
+// ---------- INJECTING HERE ----------
+bio4.exe+28C650: 8B 47 14              - mov eax,[edi+14]
+// ---------- DONE INJECTING  ----------
+bio4.exe+28C653: C6 40 21 02           - mov byte ptr [eax+21],02
+bio4.exe+28C657: 8B 77 14              - mov esi,[edi+14]
+bio4.exe+28C65A: 8B 07                 - mov eax,[edi]
+bio4.exe+28C65C: 89 77 10              - mov [edi+10],esi
+bio4.exe+28C65F: 0F BE 58 05           - movsx ebx,byte ptr [eax+05]
+bio4.exe+28C663: 0F BE 48 04           - movsx ecx,byte ptr [eax+04]
+bio4.exe+28C667: 89 4D D8              - mov [ebp-28],ecx
+bio4.exe+28C66A: 89 5D D4              - mov [ebp-2C],ebx
+bio4.exe+28C66D: C7 45 E4 00 00 00 00  - mov [ebp-1C],00000000
+bio4.exe+28C674: 85 DB                 - test ebx,ebx
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17573</ID>
+      <Description>"super-upgrade weapon by equipping it"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-16
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(WPN_upg_full,bio4.exe,8A 46 06 8B 0D ?? ?? ?? ?? 24 0F 88 81 C3 4F 00 00 8A 56 06 A1 ?? ?? ?? ?? C0 EA 04 80 E2 0F 88 90 C4 4F 00 00 8A 4E 07 8B 15 ?? ?? ?? ?? 80 E1 0F 88 8A CA 4F 00 00 66 8B 46 06) // should be unique
+alloc(newmem,$1000)
+alloc(WPN_upg_full_orig,$100)
+registersymbol(WPN_upg_full_orig)
+registersymbol(upg_Flags)
+
+WPN_upg_full_orig:
+readmem(WPN_upg_full,10)
+
+label(code)
+label(return)
+
+newmem:
+//mov byte ptr [esi+06],FF
+//mov byte ptr [esi+07],FF
+mov [upg_Flags],esi // base-7
+mov word ptr [esi+06],56aF // each 0xf is max value of an upgrade
+                           //high values may cause bugs specialy "reload speed"
+                           //in case of bugs,lower the value
+
+                           //order :
+                           // capacity - reload speed - firing speed - fire power
+code:
+  mov al,[esi+06]
+  mov ecx,[bio4.exe+806F3C]
+  jmp return
+
+upg_Flags:
+dw 00
+
+WPN_upg_full:
+  jmp newmem
+  nop 4
+return:
+registersymbol(WPN_upg_full)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+WPN_upg_full:
+  readmem(WPN_upg_full_orig,10)
+
+unregistersymbol(WPN_upg_full)
+unregistersymbol(upg_Flags)
+dealloc(newmem)
+dealloc(WPN_upg_full_orig,$100)
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+30814E
+
+bio4.exe+30812F: B8 F8 FF 00 00     - mov eax,0000FFF8
+bio4.exe+308134: 66 21 46 08        - and [esi+08],ax
+bio4.exe+308138: 0F B7 16           - movzx edx,word ptr [esi]
+bio4.exe+30813B: 8D 4D F8           - lea ecx,[ebp-08]
+bio4.exe+30813E: 51                 - push ecx
+bio4.exe+30813F: 52                 - push edx
+bio4.exe+308140: E8 CF 33 D0 FF     - call bio4.exe+B514
+bio4.exe+308145: 83 C4 08           - add esp,08
+bio4.exe+308148: 80 7D FA 01        - cmp byte ptr [ebp-06],01
+bio4.exe+30814C: 75 4D              - jne bio4.exe+30819B
+// ---------- INJECTING HERE ----------
+bio4.exe+30814E: 8A 46 06           - mov al,[esi+06]
+// ---------- DONE INJECTING  ----------
+bio4.exe+308151: 8B 0D 3C 6F C0 00  - mov ecx,[bio4.exe+806F3C]
+bio4.exe+308157: 24 0F              - and al,0F
+bio4.exe+308159: 88 81 C3 4F 00 00  - mov [ecx+00004FC3],al
+bio4.exe+30815F: 8A 56 06           - mov dl,[esi+06]
+bio4.exe+308162: A1 3C 6F C0 00     - mov eax,[bio4.exe+806F3C]
+bio4.exe+308167: C0 EA 04           - shr dl,04
+bio4.exe+30816A: 80 E2 0F           - and dl,0F
+bio4.exe+30816D: 88 90 C4 4F 00 00  - mov [eax+00004FC4],dl
+bio4.exe+308173: 8A 4E 07           - mov cl,[esi+07]
+bio4.exe+308176: 8B 15 3C 6F C0 00  - mov edx,[bio4.exe+806F3C]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17594</ID>
+          <Description>"Upgrade Flags"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>2 Bytes</VariableType>
+          <Address>[upg_Flags]+6</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>17595</ID>
+              <Description>"order: capacity - reload speed - firing speed - fire power"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <GroupHeader>1</GroupHeader>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>17682</ID>
+              <Description>"*** Note"</Description>
+              <LastState/>
+              <Color>FF0000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+local sMessage = [[This can be buggy for some weapons so you should test values for every gun. for example setting firing speed too high, will bug the bolt-action sniper rifle.]]
+
+    showMessage(sMessage)
+
+{$asm}
+test al,al
+[DISABLE]
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17590</ID>
+      <Description>"NoReload"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-16
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(NoReload,bio4.exe,66 89 57 08 5E) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //mov [edi+08],dx
+  pop esi
+  jmp return
+
+NoReload:
+  jmp newmem
+return:
+registersymbol(NoReload)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+NoReload:
+  db 66 89 57 08 5E
+
+unregistersymbol(NoReload)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+3091E3
+
+bio4.exe+3091C4: 5D                    - pop ebp
+bio4.exe+3091C5: C2 04 00              - ret 0004
+bio4.exe+3091C8: 0F B7 4F 08           - movzx ecx,word ptr [edi+08]
+bio4.exe+3091CC: 8B C1                 - mov eax,ecx
+bio4.exe+3091CE: 66 C1 E8 03           - shr ax,03
+bio4.exe+3091D2: 66 85 C0              - test ax,ax
+bio4.exe+3091D5: 74 1B                 - je bio4.exe+3091F2
+bio4.exe+3091D7: 8D 14 C5 F8 FF FF FF  - lea edx,[eax*8-00000008]
+bio4.exe+3091DE: 83 E1 07              - and ecx,07
+bio4.exe+3091E1: 0B D1                 - or edx,ecx
+// ---------- INJECTING HERE ----------
+bio4.exe+3091E3: 66 89 57 08           - mov [edi+08],dx
+// ---------- DONE INJECTING  ----------
+bio4.exe+3091E7: 5E                    - pop esi
+bio4.exe+3091E8: 5F                    - pop edi
+bio4.exe+3091E9: B0 01                 - mov al,01
+bio4.exe+3091EB: 5B                    - pop ebx
+bio4.exe+3091EC: 8B E5                 - mov esp,ebp
+bio4.exe+3091EE: 5D                    - pop ebp
+bio4.exe+3091EF: C2 04 00              - ret 0004
+bio4.exe+3091F2: 5E                    - pop esi
+bio4.exe+3091F3: 5F                    - pop edi
+bio4.exe+3091F4: 32 C0                 - xor al,al
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17591</ID>
+      <Description>"Inf Grenade &amp; RPG"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-16
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(InfGrenade,bio4.exe,4A 66 89 50 02) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //dec edx
+  mov [eax+02],dx
+  jmp return
+
+InfGrenade:
+  jmp newmem
+return:
+registersymbol(InfGrenade)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+InfGrenade:
+  db 4A 66 89 50 02
+
+unregistersymbol(InfGrenade)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+3088C9
+
+bio4.exe+3088B1: 8B EC           - mov ebp,esp
+bio4.exe+3088B3: 8B 45 08        - mov eax,[ebp+08]
+bio4.exe+3088B6: 85 C0           - test eax,eax
+bio4.exe+3088B8: 75 06           - jne bio4.exe+3088C0
+bio4.exe+3088BA: 32 C0           - xor al,al
+bio4.exe+3088BC: 5D              - pop ebp
+bio4.exe+3088BD: C2 04 00        - ret 0004
+bio4.exe+3088C0: 0F B7 50 02     - movzx edx,word ptr [eax+02]
+bio4.exe+3088C4: 66 85 D2        - test dx,dx
+bio4.exe+3088C7: 74 05           - je bio4.exe+3088CE
+// ---------- INJECTING HERE ----------
+bio4.exe+3088C9: 4A              - dec edx
+// ---------- DONE INJECTING  ----------
+bio4.exe+3088CA: 66 89 50 02     - mov [eax+02],dx
+bio4.exe+3088CE: 66 83 78 02 00  - cmp word ptr [eax+02],00
+bio4.exe+3088D3: 75 06           - jne bio4.exe+3088DB
+bio4.exe+3088D5: 50              - push eax
+bio4.exe+3088D6: E8 9B 4C D0 FF  - call bio4.exe+D576
+bio4.exe+3088DB: B0 01           - mov al,01
+bio4.exe+3088DD: 5D              - pop ebp
+bio4.exe+3088DE: C2 04 00        - ret 0004
+bio4.exe+3088E1: CC              - int 3 
+bio4.exe+3088E2: CC              - int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17593</ID>
+      <Description>"Inf Ammo Stack"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-16
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(ammoStack,bio4.exe,66 29 47 02 5E) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  //sub [edi+02],ax
+  pop esi
+  jmp return
+
+ammoStack:
+  jmp newmem
+return:
+registersymbol(ammoStack)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+ammoStack:
+  db 66 29 47 02 5E
+
+unregistersymbol(ammoStack)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+306401
+
+bio4.exe+3063E5: 8B D6              - mov edx,esi
+bio4.exe+3063E7: 3B D0              - cmp edx,eax
+bio4.exe+3063E9: 7F 02              - jg bio4.exe+3063ED
+bio4.exe+3063EB: 8B C2              - mov eax,edx
+bio4.exe+3063ED: 8B D1              - mov edx,ecx
+bio4.exe+3063EF: 81 E2 F8 FF 00 00  - and edx,0000FFF8
+bio4.exe+3063F5: 8D 14 C2           - lea edx,[edx+eax*8]
+bio4.exe+3063F8: 83 E1 07           - and ecx,07
+bio4.exe+3063FB: 33 D1              - xor edx,ecx
+bio4.exe+3063FD: 66 89 53 08        - mov [ebx+08],dx
+// ---------- INJECTING HERE ----------
+bio4.exe+306401: 66 29 47 02        - sub [edi+02],ax
+// ---------- DONE INJECTING  ----------
+bio4.exe+306405: 5E                 - pop esi
+bio4.exe+306406: B0 01              - mov al,01
+bio4.exe+306408: 5B                 - pop ebx
+bio4.exe+306409: 5D                 - pop ebp
+bio4.exe+30640A: C3                 - ret 
+bio4.exe+30640B: CC                 - int 3 
+bio4.exe+30640C: CC                 - int 3 
+bio4.exe+30640D: CC                 - int 3 
+bio4.exe+30640E: CC                 - int 3 
+bio4.exe+30640F: CC                 - int 3 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17675</ID>
+      <Description>"Unlock all weapons/upgrades"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-19
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+aobscanmodule(upg_subCall1,bio4.exe,A1 3C 6F 62 01 0F B7 80 AC 4F 00 00 50 B9 60 75 68 01 E8 ?? ?? ?? ?? 81 48) // should be unique
+
+ 
+aobscanmodule(upg_add_caller,bio4.exe,8B 0D ?? ?? ?? ?? F7 41 54 ?? ?? ?? ?? 74 05 E9 ?? ?? ?? ?? B8 ?? ?? ?? ?? C7 05 ?? ?? ?? ?? ?? ?? ?? ?? C7 05 ?? ?? ?? ?? ?? ?? ?? ?? A3 ?? ?? ?? ?? A3 ?? ?? ?? ?? C7 05 ?? ?? ?? ?? ?? ?? ?? ?? 0F B7 81 ?? ?? ?? ??  8D 88 ?? ?? ?? ?? 83 F9 10 0F87 ?? ?? ?? ??  0F B6 89 ?? ?? ?? ??  FF 24 8D ?? ?? ?? ?? 6A 00 50 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 84 C0 0F 85 ?? ?? ?? ??) // should be unique
+alloc(argList,$1000)
+alloc(upg_add_caller_orig,$100)
+registersymbol(upg_add_caller_orig)
+
+
+registersymbol(upg_add_caller)
+registersymbol(argList)
+registersymbol(upg_subCall1)
+
+argList:
+dw 501,506,508,50D,513,51B,51C,50E,512,518,102,104,10D,10F,10e,112,202,204,20B,20F,211,214,220,225,227,229,22A,301,305,30A,312,315,331,31A,31D,329,FFFF
+
+upg_add_caller_orig:
+readmem(upg_add_caller,16)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+upg_add_caller:
+  readmem(upg_add_caller_orig,10)
+
+unregistersymbol(upg_add_caller)
+unregistersymbol(argList)
+unregistersymbol(upg_subCall1)
+unregistersymbol(upg_add_caller_orig)
+dealloc(argList)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+314F50
+
+bio4.exe+314F46: CC                             - int 3 
+bio4.exe+314F47: CC                             - int 3 
+bio4.exe+314F48: CC                             - int 3 
+bio4.exe+314F49: CC                             - int 3 
+bio4.exe+314F4A: CC                             - int 3 
+bio4.exe+314F4B: CC                             - int 3 
+bio4.exe+314F4C: CC                             - int 3 
+bio4.exe+314F4D: CC                             - int 3 
+bio4.exe+314F4E: CC                             - int 3 
+bio4.exe+314F4F: CC                             - int 3 
+// ---------- INJECTING HERE ----------
+bio4.exe+314F50: 8B 0D 3C 6F B0 00              - mov ecx,[bio4.exe+806F3C]
+// ---------- DONE INJECTING  ----------
+bio4.exe+314F56: F7 41 54 00 10 00 00           - test [ecx+54],00001000
+bio4.exe+314F5D: 74 05                          - je bio4.exe+314F64
+bio4.exe+314F5F: E9 1C FE FF FF                 - jmp bio4.exe+314D80
+bio4.exe+314F64: B8 90 6E B1 00                 - mov eax,bio4.exe+816E90
+bio4.exe+314F69: C7 05 D0 14 B7 00 A0 64 B1 00  - mov [bio4.exe+8714D0],bio4.exe+8164A0
+bio4.exe+314F73: C7 05 D4 14 B7 00 C8 11 B7 00  - mov [bio4.exe+8714D4],bio4.exe+8711C8
+bio4.exe+314F7D: A3 D8 14 B7 00                 - mov [bio4.exe+8714D8],eax
+bio4.exe+314F82: A3 DC 14 B7 00                 - mov [bio4.exe+8714DC],eax
+bio4.exe+314F87: C7 05 E0 14 B7 00 B8 64 B1 00  - mov [bio4.exe+8714E0],bio4.exe+8164B8
+bio4.exe+314F91: 0F B7 81 AC 4F 00 00           - movzx eax,word ptr [ecx+00004FAC]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17673</ID>
+          <Description>"Execute"</Description>
+          <LastState/>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+alloc( upg_add, 0x1000, $process )
+registersymbol( upg_add )
+CreateThread( upg_add )
+
+registersymbol(index)
+label(myloop)
+upg_add:
+
+{$lua}
+
+func_caller = getAddressList().getMemoryRecordByID(17673)
+
+
+
+local timer = createTimer()
+timer.Interval = 1000 -- 1000 milliseconds per second
+timer.OnTimer = function(theTimerCallingThisFunction)
+  func_caller.Active=false
+  timer.destroy() -- destroy the timer so it doesn't keep running
+end
+
+{$asm}
+//int 3
+
+push ebp
+  mov ebp,esp
+
+  sub esp,920
+  and esp,-10 //  aligning the stack with the next lowest 16-byte boundary
+
+//mov qword ptr [rsp+30],FFFFFFFFFFFFFFFE
+
+myloop:
+mov ecx,[bio4.exe+806F3C]
+movzx eax,word ptr [ecx+00004FAC]
+mov word ptr [ecx+00004FAC],101
+
+
+mov eax,[bio4.exe+806F3C]
+or [eax+54],00000800
+
+
+mov edx,[bio4.exe+806F3C]
+mov word ptr [edx+00004F9E],1
+
+mov eax,[bio4.exe+806F40]
+mov [eax+04],20000000 //check it
+
+
+xor edx,edx
+movzx edx,word ptr [index]
+cmp word ptr [argList+edx*2],FFFF
+je @f
+movzx ebx,word ptr [argList+edx*2]
+mov [ecx+00004FAC],bx
+
+//call 141B74930
+call upg_add_caller
+
+inc [index]
+jmp myloop
+
+@@:
+mov edx,[bio4.exe+806F3C]
+mov word ptr [edx+00004F9E],1 // for handcanon
+
+call upg_add_caller
+
+mov edx,[bio4.exe+806F3C] //reset the bool
+mov word ptr [edx+00004F9E],0
+
+
+
+mov eax,[bio4.exe+806F3C]
+or [eax+000052CC],00040000
+push 01
+mov eax,00000258
+push bio4.exe+816B90
+push bio4.exe+8711C8
+mov [bio4.exe+86CFF4],ax
+call bio4.exe+609B
+mov eax,[bio4.exe+806F3C]
+add esp,0C
+and [eax+00005024],FFFBFFFF
+
+push 00
+push bio4.exe+816B70
+push bio4.exe+8711C8
+call bio4.exe+609B
+add esp,0C
+
+push 00
+push bio4.exe+816758
+push bio4.exe+8711C8
+call bio4.exe+20F4
+push 00
+push bio4.exe+816B60
+push bio4.exe+8711C8
+call bio4.exe+609B
+add esp,18
+
+push 00
+push bio4.exe+816758
+push bio4.exe+8711C8
+call bio4.exe+20F4
+push 00
+push bio4.exe+816B60
+push bio4.exe+8711C8
+call bio4.exe+609B
+add esp,18
+
+/*
+//call upg_subCall1  //instead of this call, below code is executed:
+push 00
+push bio4.exe+8167E0
+push bio4.exe+8711C8
+call bio4.exe+20F4
+push 00
+push bio4.exe+816BA0
+push bio4.exe+8711C8
+call bio4.exe+609B
+push 09
+push 05
+call bio4.exe+397C
+*/
+
+  mov esp,ebp
+
+  pop ebp
+
+
+ret
+
+index:
+dw 00
+
+[DISABLE]
+
+dealloc( upg_add )
+unregistersymbol( upg_add )
+unregistersymbol(index)
+
+
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Toggle Activation</Action>
+              <Keys>
+                <Key>192</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>17677</ID>
+              <Description>"Debug"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>C0C0C0</Color>
+              <GroupHeader>1</GroupHeader>
+              <Address/>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>17669</ID>
+                  <Description>"cur arg (cur room?!)"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>C0C0C0</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>[00B06F3C]+4FAC</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>17676</ID>
+                  <Description>"index"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>C0C0C0</Color>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>index</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>17674</ID>
+                  <Description>"dont touch EVER"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>D3D3D3</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>00615518</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>17672</ID>
+                  <Description>"array of current upgrades"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>C0C0C0</Color>
+                  <VariableType>Array of byte</VariableType>
+                  <ByteLength>48</ByteLength>
+                  <Address>bio4.exe+8713C8</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>17470</ID>
+              <Description>"*** Note"</Description>
+              <LastState/>
+              <Color>FF0000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+{$lua}
+local sMessage = [[Execute during gameplay (not in any menu). After using this cheat, you MUST change room unless you want to ruin your savegame. "changing room" means opening a door that causes loading screen; usually with green "open" text.]]
+
+    showMessage(sMessage)
+
+{$asm}
+test al,al
+[DISABLE]
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17612</ID>
+      <Description>"Add EVERY Item to BUY menu"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-17
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(unlock_all_shop,bio4.exe,74 13 0F B7 41 08 83 C1 08 BA) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+cmp di,FFFF
+je code
+jmp bio4.exe+313DD8
+
+code:
+
+  movzx eax,word ptr [ecx+08]
+  jmp return
+
+unlock_all_shop:
+  jmp newmem
+  nop
+return:
+registersymbol(unlock_all_shop)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+unlock_all_shop:
+  db 74 13 0F B7 41 08
+
+unregistersymbol(unlock_all_shop)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+313DC3
+
+bio4.exe+313DA5: 84 C0                    - test al,al
+bio4.exe+313DA7: 74 3B                    - je bio4.exe+313DE4
+bio4.exe+313DA9: 8B 4D F4                 - mov ecx,[ebp-0C]
+bio4.exe+313DAC: 0F B7 41 10              - movzx eax,word ptr [ecx+10]
+bio4.exe+313DB0: 83 C1 10                 - add ecx,10
+bio4.exe+313DB3: BA FF FF 00 00           - mov edx,0000FFFF
+bio4.exe+313DB8: 66 3B D0                 - cmp dx,ax
+bio4.exe+313DBB: 74 27                    - je bio4.exe+313DE4
+bio4.exe+313DBD: 8D 49 00                 - lea ecx,[ecx+00]
+bio4.exe+313DC0: 66 3B F8                 - cmp di,ax
+// ---------- INJECTING HERE ----------
+bio4.exe+313DC3: 74 13                    - je bio4.exe+313DD8
+// ---------- DONE INJECTING  ----------
+bio4.exe+313DC5: 0F B7 41 08              - movzx eax,word ptr [ecx+08]
+bio4.exe+313DC9: 83 C1 08                 - add ecx,08
+bio4.exe+313DCC: BA FF FF 00 00           - mov edx,0000FFFF
+bio4.exe+313DD1: 66 3B D0                 - cmp dx,ax
+bio4.exe+313DD4: 75 EA                    - jne bio4.exe+313DC0
+bio4.exe+313DD6: EB 0C                    - jmp bio4.exe+313DE4
+bio4.exe+313DD8: 8B 45 F4                 - mov eax,[ebp-0C]
+bio4.exe+313DDB: 66 89 B4 58 16 05 00 00  - mov [eax+ebx*2+00000516],si
+bio4.exe+313DE3: 43                       - inc ebx
+bio4.exe+313DE4: 83 45 FC 06              - add dword ptr [ebp-04],06
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17613</ID>
+          <Description>"make all items buyable (+multiple buy)"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-17
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+ 
+aobscanmodule(buy_multi_unlock,bio4.exe,74 1A 66 8B 55 08 66 3B C2) // should be unique
+
+buy_multi_unlock:
+db eb
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+buy_multi_unlock:
+  db 74 1A 66 8B 55 08
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+3146C2
+
+bio4.exe+3146AD: CC              - int 3 
+bio4.exe+3146AE: CC              - int 3 
+bio4.exe+3146AF: CC              - int 3 
+bio4.exe+3146B0: 55              - push ebp
+bio4.exe+3146B1: 8B EC           - mov ebp,esp
+bio4.exe+3146B3: 8B 49 04        - mov ecx,[ecx+04]
+bio4.exe+3146B6: 0F B7 01        - movzx eax,word ptr [ecx]
+bio4.exe+3146B9: BA FF FF 00 00  - mov edx,0000FFFF
+bio4.exe+3146BE: 56              - push esi
+bio4.exe+3146BF: 66 3B D0        - cmp dx,ax
+// ---------- INJECTING HERE ----------
+bio4.exe+3146C2: 74 1A           - je bio4.exe+3146DE
+// ---------- DONE INJECTING  ----------
+bio4.exe+3146C4: 66 8B 55 08     - mov dx,[ebp+08]
+bio4.exe+3146C8: 66 3B C2        - cmp ax,dx
+bio4.exe+3146CB: 74 18           - je bio4.exe+3146E5
+bio4.exe+3146CD: 0F B7 41 06     - movzx eax,word ptr [ecx+06]
+bio4.exe+3146D1: 83 C1 06        - add ecx,06
+bio4.exe+3146D4: BE FF FF 00 00  - mov esi,0000FFFF
+bio4.exe+3146D9: 66 3B F0        - cmp si,ax
+bio4.exe+3146DC: 75 EA           - jne bio4.exe+3146C8
+bio4.exe+3146DE: 33 C0           - xor eax,eax
+bio4.exe+3146E0: 5E              - pop esi
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17660</ID>
+      <Description>"Coordinates"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <Address/>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17626</ID>
+          <Description>"x"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>bio4.exe+8706EC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17628</ID>
+          <Description>"y"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>bio4.exe+8706cC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17627</ID>
+          <Description>"z"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>bio4.exe+8706bC</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17641</ID>
+      <Description>"Get player base"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-18
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(baseplySize_colis,bio4.exe,8B 11 8B 42 10 FF D0 68) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+registersymbol(baseplySize_colis_ptr)
+registersymbol(movSpdMul)
+
+newmem:
+mov [baseplySize_colis_ptr],ecx
+
+fld dword ptr [ecx+14]
+fmul dword ptr [movSpdMul]
+fstp dword ptr [ecx+14]
+
+fld dword ptr [ecx+34]
+fmul dword ptr [movSpdMul]
+fstp dword ptr [ecx+34]
+
+code:
+  mov edx,[ecx]
+  mov eax,[edx+10]
+  jmp return
+
+baseplySize_colis_ptr:
+dd 00
+
+movSpdMul:
+dd (float)1.0
+
+baseplySize_colis:
+  jmp newmem
+return:
+registersymbol(baseplySize_colis)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+baseplySize_colis:
+  db 8B 11 8B 42 10
+
+unregistersymbol(baseplySize_colis)
+unregistersymbol(baseplySize_colis_ptr)
+unregistersymbol(movSpdMul)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+23E748
+
+bio4.exe+23E724: 85 96 70 01 00 00  - test [esi+00000170],edx
+bio4.exe+23E72A: 75 23              - jne bio4.exe+23E74F
+bio4.exe+23E72C: 8B 0D 54 70 E8 00  - mov ecx,[bio4.exe+857054]
+bio4.exe+23E732: 8B 41 04           - mov eax,[ecx+04]
+bio4.exe+23E735: A8 20              - test al,20
+bio4.exe+23E737: 74 16              - je bio4.exe+23E74F
+bio4.exe+23E739: 85 96 20 50 00 00  - test [esi+00005020],edx
+bio4.exe+23E73F: 74 07              - je bio4.exe+23E748
+bio4.exe+23E741: A9 00 08 00 00     - test eax,00000800
+bio4.exe+23E746: 74 07              - je bio4.exe+23E74F
+// ---------- INJECTING HERE ----------
+bio4.exe+23E748: 8B 11              - mov edx,[ecx]
+// ---------- DONE INJECTING  ----------
+bio4.exe+23E74A: 8B 42 10           - mov eax,[edx+10]
+bio4.exe+23E74D: FF D0              - call eax
+bio4.exe+23E74F: 68 48 CC D4 00     - push bio4.exe+71CC48
+bio4.exe+23E754: 6A 05              - push 05
+bio4.exe+23E756: E8 26 57 DC FF     - call bio4.exe+3E81
+bio4.exe+23E75B: 8B 0D 3C 6F E3 00  - mov ecx,[bio4.exe+806F3C]
+bio4.exe+23E761: 83 C4 08           - add esp,08
+bio4.exe+23E764: 85 B9 28 50 00 00  - test [ecx+00005028],edi
+bio4.exe+23E76A: 74 12              - je bio4.exe+23E77E
+bio4.exe+23E76C: 8B 81 0C 53 00 00  - mov eax,[ecx+0000530C]
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17646</ID>
+          <Description>"[baseplySize_colis_ptr]"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <Color>C0C0C0</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>[baseplySize_colis_ptr]</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17643</ID>
+          <Description>"leon width"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>[baseplySize_colis_ptr]+ac</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17642</ID>
+          <Description>"leon height"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>[baseplySize_colis_ptr]+b0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17644</ID>
+          <Description>"leon girth"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>[baseplySize_colis_ptr]+b4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17645</ID>
+          <Description>"collision boundry (walk throw obstacles set to 0)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>[baseplySize_colis_ptr]+2c0</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>48</Key>
+              </Keys>
+              <Value>0</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>48</Key>
+              </Keys>
+              <Value>400</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17649</ID>
+          <Description>"moveback when aiming"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>[baseplySize_colis_ptr]+2c8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17648</ID>
+          <Description>"leon animation speed (affects movement too)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>[baseplySize_colis_ptr]+298</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>188</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>188</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17652</ID>
+          <Description>"movment speed mult"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>movSpdMul</Address>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>16</Key>
+                <Key>191</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Set Value</Action>
+              <Keys>
+                <Key>17</Key>
+                <Key>191</Key>
+              </Keys>
+              <Value>1</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>17651</ID>
+              <Description>"x-delta"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>[baseplySize_colis_ptr]+14</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>17650</ID>
+              <Description>"y-delta"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Float</VariableType>
+              <Address>[baseplySize_colis_ptr]+34</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17653</ID>
+      <Description>"FOV"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-18
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(cameraZoom,bio4.exe,00 8D BB 30 01 00 00) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+fld dword ptr [zoomAmount]
+
+fstp dword ptr [ebx+0000011C]
+
+code:
+  lea edi,[ebx+00000130]
+  jmp return
+
+zoomAmount:
+dd (float)50.0
+
+cameraZoom+01:
+  jmp newmem
+  nop
+return:
+registersymbol(cameraZoom)
+registersymbol(zoomAmount)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+cameraZoom+01:
+  db 8D BB 30 01 00 00
+
+unregistersymbol(cameraZoom)
+unregistersymbol(zoomAmount)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+2F2F2E
+
+bio4.exe+2F2F0B: D9 83 1C 01 00 00     - fld dword ptr [ebx+0000011C]
+bio4.exe+2F2F11: DE CA                 - fmulp st(2),st(0)
+bio4.exe+2F2F13: D9 C9                 - fxch st(1)
+bio4.exe+2F2F15: D9 5D BC              - fstp dword ptr [ebp-44]
+bio4.exe+2F2F18: D9 45 BC              - fld dword ptr [ebp-44]
+bio4.exe+2F2F1B: D9 93 1C 01 00 00     - fst dword ptr [ebx+0000011C]
+bio4.exe+2F2F21: D9 47 1C              - fld dword ptr [edi+1C]
+bio4.exe+2F2F24: DE CA                 - fmulp st(2),st(0)
+bio4.exe+2F2F26: DE C1                 - faddp 
+bio4.exe+2F2F28: D9 9B 1C 01 00 00     - fstp dword ptr [ebx+0000011C]
+// ---------- INJECTING HERE ----------
+bio4.exe+2F2F2E: 8D BB 30 01 00 00     - lea edi,[ebx+00000130]
+// ---------- DONE INJECTING  ----------
+bio4.exe+2F2F34: B9 08 00 00 00        - mov ecx,00000008
+bio4.exe+2F2F39: 8D B3 00 01 00 00     - lea esi,[ebx+00000100]
+bio4.exe+2F2F3F: C6 83 2C 01 00 00 00  - mov byte ptr [ebx+0000012C],00
+bio4.exe+2F2F46: F3 A5                 - repe movsd 
+bio4.exe+2F2F48: 80 3D 04 03 EA 00 0A  - cmp byte ptr [bio4.exe+870304],0A
+bio4.exe+2F2F4F: 75 2A                 - jne bio4.exe+2F2F7B
+bio4.exe+2F2F51: 8D 45 CC              - lea eax,[ebp-34]
+bio4.exe+2F2F54: 50                    - push eax
+bio4.exe+2F2F55: 68 C0 06 EA 00        - push bio4.exe+8706C0
+bio4.exe+2F2F5A: E8 00 9A D1 FF        - call bio4.exe+C95F
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17654</ID>
+          <Description>"amount"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>zoomAmount</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Cash"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>bio4.exe+85F708</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17576</ID>
+      <Description>"hp"</Description>
+      <VariableType>2 Bytes</VariableType>
+      <Address>bio4.exe+85F714</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17618</ID>
+      <Description>"max hp"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>bio4.exe+85F716</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17661</ID>
+      <Description>"Avoid damages"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <Address/>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17657</ID>
+          <Description>"Avoid Explosion"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-18
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+ 
+aobscanmodule(avoid_explo,bio4.exe,0F 85 6A FF FF FF 8B 15) // should be unique
+
+avoid_explo:
+ db E9 6B FF FF FF 90
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+avoid_explo:
+  db 0F 85 6A FF FF FF
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+1BBF91
+
+bio4.exe+1BBF77: C3                    - ret 
+bio4.exe+1BBF78: 68 00 00 40 00        - push XINPUT1_3.Ordinal93
+bio4.exe+1BBF7D: 6A 00                 - push 00
+bio4.exe+1BBF7F: 6A 00                 - push 00
+bio4.exe+1BBF81: 6A 00                 - push 00
+bio4.exe+1BBF83: 52                    - push edx
+bio4.exe+1BBF84: 51                    - push ecx
+bio4.exe+1BBF85: B9 A0 9A E2 00        - mov ecx,bio4.exe+7F9AA0
+bio4.exe+1BBF8A: E8 A6 C5 E4 FF        - call bio4.exe+8535
+bio4.exe+1BBF8F: 85 C0                 - test eax,eax
+// ---------- INJECTING HERE ----------
+bio4.exe+1BBF91: 0F 85 6A FF FF FF     - jne bio4.exe+1BBF01
+// ---------- DONE INJECTING  ----------
+bio4.exe+1BBF97: 8B 15 3C 6F E3 00     - mov edx,[bio4.exe+806F3C]
+bio4.exe+1BBF9D: B9 F4 01 00 00        - mov ecx,000001F4
+bio4.exe+1BBFA2: 66 39 8A B4 4F 00 00  - cmp [edx+00004FB4],cx
+bio4.exe+1BBFA9: 7E 05                 - jle bio4.exe+1BBFB0
+bio4.exe+1BBFAB: B8 01 00 00 00        - mov eax,00000001
+bio4.exe+1BBFB0: 50                    - push eax
+bio4.exe+1BBFB1: A1 54 70 E8 00        - mov eax,[bio4.exe+857054]
+bio4.exe+1BBFB6: 6A 00                 - push 00
+bio4.exe+1BBFB8: 68 B0 04 00 00        - push 000004B0
+bio4.exe+1BBFBD: 50                    - push eax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17658</ID>
+          <Description>"Avoid Melee dmg"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-18
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(avoid_melee_dmg,bio4.exe,74 4B 33 C0 F6 46 0A 04) // should be unique
+
+avoid_melee_dmg:
+db eb
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+avoid_melee_dmg:
+  db 74 4B 33 C0 F6 46 0A 04
+
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+1BDE40
+
+bio4.exe+1BDE2B: 8B 75 08        - mov esi,[ebp+08]
+bio4.exe+1BDE2E: 57              - push edi
+bio4.exe+1BDE2F: 50              - push eax
+bio4.exe+1BDE30: 51              - push ecx
+bio4.exe+1BDE31: 56              - push esi
+bio4.exe+1BDE32: 33 FF           - xor edi,edi
+bio4.exe+1BDE34: E8 31 59 E4 FF  - call bio4.exe+376A
+bio4.exe+1BDE39: 8B D8           - mov ebx,eax
+bio4.exe+1BDE3B: 83 C4 0C        - add esp,0C
+bio4.exe+1BDE3E: 85 DB           - test ebx,ebx
+// ---------- INJECTING HERE ----------
+bio4.exe+1BDE40: 74 4B           - je bio4.exe+1BDE8D
+// ---------- DONE INJECTING  ----------
+bio4.exe+1BDE42: 33 C0           - xor eax,eax
+bio4.exe+1BDE44: F6 46 0A 04     - test byte ptr [esi+0A],04
+bio4.exe+1BDE48: 74 05           - je bio4.exe+1BDE4F
+bio4.exe+1BDE4A: B8 01 00 00 00  - mov eax,00000001
+bio4.exe+1BDE4F: 0F B7 56 08     - movzx edx,word ptr [esi+08]
+bio4.exe+1BDE53: 50              - push eax
+bio4.exe+1BDE54: A1 54 70 E8 00  - mov eax,[bio4.exe+857054]
+bio4.exe+1BDE59: 6A 00           - push 00
+bio4.exe+1BDE5B: 52              - push edx
+bio4.exe+1BDE5C: 50              - push eax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17659</ID>
+          <Description>"Avoid being grabbed"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-18
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(avoid_grab,bio4.exe,75 09 80 B8 2D 03 00 00 00 74 10 33 C0 8B 4D FC 33 CD E8 74) // should be unique
+avoid_grab:
+db eb
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+avoid_grab:
+  db 75 09 80 B8 2D 03 00 00 00
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+2B80F
+
+bio4.exe+2B7EE: CC                    - int 3 
+bio4.exe+2B7EF: CC                    - int 3 
+bio4.exe+2B7F0: 55                    - push ebp
+bio4.exe+2B7F1: 8B EC                 - mov ebp,esp
+bio4.exe+2B7F3: 81 EC 8C 00 00 00     - sub esp,0000008C
+bio4.exe+2B7F9: A1 10 5E E6 00        - mov eax,[bio4.exe+835E10]
+bio4.exe+2B7FE: 33 C5                 - xor eax,ebp
+bio4.exe+2B800: 89 45 FC              - mov [ebp-04],eax
+bio4.exe+2B803: A1 54 70 E8 00        - mov eax,[bio4.exe+857054]
+bio4.exe+2B808: 80 B8 2C 03 00 00 00  - cmp byte ptr [eax+0000032C],00
+// ---------- INJECTING HERE ----------
+bio4.exe+2B80F: 75 09                 - jne bio4.exe+2B81A
+// ---------- DONE INJECTING  ----------
+bio4.exe+2B811: 80 B8 2D 03 00 00 00  - cmp byte ptr [eax+0000032D],00
+bio4.exe+2B818: 74 10                 - je bio4.exe+2B82A
+bio4.exe+2B81A: 33 C0                 - xor eax,eax
+bio4.exe+2B81C: 8B 4D FC              - mov ecx,[ebp-04]
+bio4.exe+2B81F: 33 CD                 - xor ecx,ebp
+bio4.exe+2B821: E8 74 15 64 00        - call bio4.exe+66CD9A
+bio4.exe+2B826: 8B E5                 - mov esp,ebp
+bio4.exe+2B828: 5D                    - pop ebp
+bio4.exe+2B829: C3                    - ret 
+bio4.exe+2B82A: A1 3C 6F E3 00        - mov eax,[bio4.exe+806F3C]
+}
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17681</ID>
+      <Description>"semi-god mode"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-20
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(semi_God,bio4.exe,56 8B F1 80 BE ?? ?? ?? ?? 00 0F 85 ?? ?? ?? ?? 80 BE ?? ?? ?? ?? 00 0F 85 ?? ?? ?? ?? A1 ?? ?? ?? ?? 66 83 B8 ?? ?? ?? ?? 00 7E 73 6A 00 6A 00 E8 ?? ?? ?? ?? 83 C0 70 50 B9 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 83 F8 07 77 56 FF 24 85) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  push esi
+  mov esi,ecx
+  cmp byte ptr [esi+0000032C],00
+  jmp return
+
+semi_God:
+  jmp newmem
+  nop 5
+return:
+registersymbol(semi_God)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+semi_God:
+  db 56 8B F1 80 BE 2C 03 00 00 00
+
+unregistersymbol(semi_God)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+27EEF0
+
+bio4.exe+27EEE6: CC                       - int 3 
+bio4.exe+27EEE7: CC                       - int 3 
+bio4.exe+27EEE8: CC                       - int 3 
+bio4.exe+27EEE9: CC                       - int 3 
+bio4.exe+27EEEA: CC                       - int 3 
+bio4.exe+27EEEB: CC                       - int 3 
+bio4.exe+27EEEC: CC                       - int 3 
+bio4.exe+27EEED: CC                       - int 3 
+bio4.exe+27EEEE: CC                       - int 3 
+bio4.exe+27EEEF: CC                       - int 3 
+// ---------- INJECTING HERE ----------
+bio4.exe+27EEF0: 56                       - push esi
+// ---------- DONE INJECTING  ----------
+bio4.exe+27EEF1: 8B F1                    - mov esi,ecx
+bio4.exe+27EEF3: 80 BE 2C 03 00 00 00     - cmp byte ptr [esi+0000032C],00
+bio4.exe+27EEFA: 0F 85 8F 00 00 00        - jne bio4.exe+27EF8F
+bio4.exe+27EF00: 80 BE 2D 03 00 00 00     - cmp byte ptr [esi+0000032D],00
+bio4.exe+27EF07: 0F 85 82 00 00 00        - jne bio4.exe+27EF8F
+bio4.exe+27EF0D: A1 3C 6F 16 01           - mov eax,[bio4.exe+806F3C]
+bio4.exe+27EF12: 66 83 B8 B4 4F 00 00 00  - cmp word ptr [eax+00004FB4],00
+bio4.exe+27EF1A: 7E 73                    - jle bio4.exe+27EF8F
+bio4.exe+27EF1C: 6A 00                    - push 00
+bio4.exe+27EF1E: 6A 00                    - push 00
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17683</ID>
+      <Description>"Set hit ratio to 100% upon shooting"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-21
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(hitRatioMax,bio4.exe,8B 4D FC 5F 5E 8B C3 33 CD 5B E8 E7) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+newmem:
+mov eax,[bio4.exe+806F3C] //just for avoiding nullptr
+
+mov ecx,[eax+0000846C]
+mov [eax+00008474],ecx
+
+mov ecx,[eax+00008470]
+mov [eax+00008478],ecx
+
+code:
+  mov ecx,[ebp-04]
+  pop edi
+  pop esi
+  jmp return
+
+hitRatioMax:
+  jmp newmem
+return:
+registersymbol(hitRatioMax)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+hitRatioMax:
+  db 8B 4D FC 5F 5E
+
+unregistersymbol(hitRatioMax)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+2870A4
+
+bio4.exe+287074: 85 DB              - test ebx,ebx
+bio4.exe+287076: 74 16              - je bio4.exe+28708E
+bio4.exe+287078: A1 3C 6F 62 01     - mov eax,[bio4.exe+806F3C]
+bio4.exe+28707D: 01 88 6C 84 00 00  - add [eax+0000846C],ecx
+bio4.exe+287083: A1 3C 6F 62 01     - mov eax,[bio4.exe+806F3C]
+bio4.exe+287088: 01 88 70 84 00 00  - add [eax+00008470],ecx
+bio4.exe+28708E: A1 3C 6F 62 01     - mov eax,[bio4.exe+806F3C]
+bio4.exe+287093: 01 88 74 84 00 00  - add [eax+00008474],ecx
+bio4.exe+287099: A1 3C 6F 62 01     - mov eax,[bio4.exe+806F3C]
+bio4.exe+28709E: 01 88 78 84 00 00  - add [eax+00008478],ecx
+// ---------- INJECTING HERE ----------
+bio4.exe+2870A4: 8B 4D FC           - mov ecx,[ebp-04]
+// ---------- DONE INJECTING  ----------
+bio4.exe+2870A7: 5F                 - pop edi
+bio4.exe+2870A8: 5E                 - pop esi
+bio4.exe+2870A9: 8B C3              - mov eax,ebx
+bio4.exe+2870AB: 33 CD              - xor ecx,ebp
+bio4.exe+2870AD: 5B                 - pop ebx
+bio4.exe+2870AE: E8 E7 5C 3E 00     - call bio4.exe+66CD9A
+bio4.exe+2870B3: 8B E5              - mov esp,ebp
+bio4.exe+2870B5: 5D                 - pop ebp
+bio4.exe+2870B6: C3                 - ret 
+bio4.exe+2870B7: 90                 - nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17684</ID>
+      <Description>"Current level death count"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>bio4.exe+806F3C</Address>
+      <Offsets>
+        <Offset>8460</Offset>
+      </Offsets>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Set Value</Action>
+          <Keys>
+            <Key>106</Key>
+          </Keys>
+          <Value>0</Value>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17685</ID>
+      <Description>"Total death count"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>bio4.exe+806F3C</Address>
+      <Offsets>
+        <Offset>8462</Offset>
+      </Offsets>
+      <Hotkeys>
+        <Hotkey>
+          <Action>Set Value</Action>
+          <Keys>
+            <Key>106</Key>
+          </Keys>
+          <Value>0</Value>
+          <ID>0</ID>
+        </Hotkey>
+      </Hotkeys>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17601</ID>
+      <Description>"Cursor fix while debugging"</Description>
+      <LastState/>
+      <Color>C0C0C0</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+alloc(newmem,2048)
+label(returnhere)
+label(originalcode)
+label(exit)
+
+newmem: //this is allocated memory, you have read,write,execute access
+//place your code here
+
+originalcode:
+jmp bio4.exe+5649EE
+mov eax,[eax+60]
+
+exit:
+jmp returnhere
+
+"bio4.exe"+5649CE:
+jmp newmem
+returnhere:
+
+
+ 
+ 
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+dealloc(newmem)
+"bio4.exe"+5649CE:
+je bio4.exe+5649EE
+mov eax,[eax+60]
+//Alt: db 74 1E 8B 40 60
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>17655</ID>
+      <Description>"causing crash or useless"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <Color>C0C0C0</Color>
+      <GroupHeader>1</GroupHeader>
+      <Address/>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>17602</ID>
+          <Description>"Function call (broken/ buy emulate)"</Description>
+          <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+aobscanmodule(ItemAdder2,$process,55 8B EC 83 EC 10 53 8B 5D 08 0F) // should be unique
+registersymbol(ItemAdder2)
+
+alloc(flag2,0x100,$process)
+registersymbol(flag2)
+
+alloc(ID2,0x100,$process)
+registersymbol(ID2)
+
+
+ID2:
+db 7d  //case M
+/*
+hex
+a9 TREASURE map 1
+
+7 sniper ammo
+e flash grenade
+1c yellow herb
+
+
+*/
+
+flag2:
+dw 1
+
+
+[DISABLE]
+dealloc(ID2,0x100,$process)
+unregistersymbol(ID2)
+
+dealloc(flag2,0x100,$process)
+unregistersymbol(flag2)
+unregistersymbol(ItemAdder2)
+//code from here till the end of the code will be used to disable the cheat
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>17603</ID>
+              <Description>"Execute the Function"</Description>
+              <LastState/>
+              <Color>0000FF</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+
+alloc( Thread_for_ItemCall, 0x1000, $process )
+registersymbol( Thread_for_ItemCall )
+CreateThread( Thread_for_ItemCall )
+
+
+
+/*
+registersymbol(ID2)
+registersymbol(flag2)
+*/
+
+Thread_for_ItemCall:
+
+{$lua}
+--[[
+func_caller = getAddressList().getMemoryRecordByID(17603)
+
+
+
+local timer = createTimer()
+timer.Interval = 350 -- 1000 milliseconds per second
+timer.OnTimer = function(theTimerCallingThisFunction)
+  func_caller.Active=false
+  timer.destroy() -- destroy the timer so it doesn't keep running
+end
+--]]
+
+{$asm}
+
+int 3   //********************************BP
+
+push ebp
+  mov ebp,esp
+
+  sub esp,220
+  and esp,-10 //  aligning the stack with the next lowest 16-byte boundary
+
+// emulating 009C0840 vcall
+
+mov eax,[bio4.exe+806F3C]
+add eax,00004FA8
+
+/*
+mov ecx,[ID]
+mov eax,[Amount]
+xor edx,edx
+*/
+
+movzx ecx,[flag2]
+movzx edx,[ID2] //word ptr
+
+push eax
+push ecx //usually 1
+push edx // ID
+xor ebx,ebx
+
+mov edi,00EAACD8 //??!!
+mov ecx,[edi+314]
+
+call bio4.exe+CB67
+
+movzx eax,[flag2] //word ptr
+movzx ecx,[ID2] //word ptr
+
+push eax //usually 1
+push ecx // ID
+mov ecx,bio4.exe+870FD4
+call bio4.exe+3F8F
+
+
+
+  mov esp,ebp
+
+  pop ebp
+
+
+ret
+
+/*
+ID2:
+dw 7d
+
+flag2:
+dw 1
+*/
+[DISABLE]
+
+dealloc( Thread_for_ItemCall )
+unregistersymbol( Thread_for_ItemCall )
+/*
+unregistersymbol(ID2)
+unregistersymbol(flag2)
+*/
+
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>17604</ID>
+                  <Description>"ID"</Description>
+                  <DropDownList DescriptionOnly="1">0:magnum ammo
+4:handgun ammo
+7:sniper ammo
+24:shotgun ammo
+26:hand cannon ammo
+32:TMP ammo
+70:mine dart ammo
+17:bowgun bolt
+114:arrow (ammo)
+106:chicago typewriter ammo
+52:infinite chicago typewriter
+65:P.R.L. 412
+23:Rocket Launcher (special)
+109:Infinite Rocket Launcher
+1:hand drenade
+2:incendiary drenade
+14:flash grenade
+3:matilda (handgun)
+33:Punisher (handgun)
+35:handgun
+37:red9 (handgun)
+39:blacktail (handgun)
+64:punisher (handgun)
+16:bowgun
+41:broken butterfly (revolver)
+42:killer7 (magnum pistol)
+44:shotgun
+71:shotgun (with grip)
+45:striker (shotgun)
+149:riot gun (shotgun)
+46:rifle
+47:Rifle (semi-auo)
+48:TMP
+83:chicago typewriter
+62:custom TMP
+53:Rocket Launcher
+54:mine thrower
+55:hand cannon
+56:combat knife
+82:krauser's bow
+63:silencer (handgun)
+170:scope (mine thrower)
+197:inrared scope
+66:stock (red9)
+67:stock (TMP)
+68:scope (rifle)
+69:scope (semi-auo rifle)
+5:first aid spray
+6:green herb
+28:yellow herb
+25:red herb
+18:green herb x2
+19:green herb x3
+20:herb G+R
+21:herb G+R+Y
+22:herb G+Y
+168:herb R+Y
+8:egg
+9:brown egg
+10:gold egg
+151:black bass (L)
+87:spinel (treasure)
+88:pearl pendant (treasure)
+94:beerstein (treasure)
+96:red catseye (treasure)
+12:plaga sample
+34:punisher with silencer (** weird!?)
+</DropDownList>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>2 Bytes</VariableType>
+                  <Address>ID2</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>17605</ID>
+                  <Description>"flag"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>Byte</VariableType>
+                  <Address>flag2</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>17606</ID>
+                  <Description>"invalid_ID_resolve"</Description>
+                  <LastState/>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : bio4.exe
+  Version: 
+  Date   : 2022-02-16
+  Author : Shetal
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(nullptr_check,bio4.exe,8B 47 14 C6 40 21 02) // should be unique
+alloc(newmem,$1000)
+
+label(code)
+label(return)
+
+label(Caption)
+label(Text)
+
+newmem:
+mov eax,[edi+14]
+
+
+cmp eax,0
+jne code
+
+push 0 //uType  (0=mb_ok)
+push Caption //lpCaption
+push Text //lpText
+push 0  //hWnd
+call MessageBoxA
+
+jmp 0068C60E
+
+code:
+
+  mov byte ptr [eax+21],02
+  jmp return
+
+
+Caption:
+db 'Error',0
+
+Text:
+db 'Invalid ID ',0
+
+nullptr_check:
+  jmp newmem
+  nop 2
+return:
+registersymbol(nullptr_check)
+
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+nullptr_check:
+  db 8B 47 14 C6 40 21 02
+
+unregistersymbol(nullptr_check)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: bio4.exe+28C650
+
+bio4.exe+28C62E: 51                    - push ecx
+bio4.exe+28C62F: B9 D4 0F C7 00        - mov ecx,bio4.exe+870FD4
+bio4.exe+28C634: E8 31 BC D7 FF        - call bio4.exe+826A
+bio4.exe+28C639: 66 8B 55 0C           - mov dx,[ebp+0C]
+bio4.exe+28C63D: 80 4D F0 01           - or byte ptr [ebp-10],01
+bio4.exe+28C641: 8D 45 EC              - lea eax,[ebp-14]
+bio4.exe+28C644: 50                    - push eax
+bio4.exe+28C645: 8B CF                 - mov ecx,edi
+bio4.exe+28C647: 66 89 55 EE           - mov [ebp-12],dx
+bio4.exe+28C64B: E8 89 66 D7 FF        - call bio4.exe+2CD9
+// ---------- INJECTING HERE ----------
+bio4.exe+28C650: 8B 47 14              - mov eax,[edi+14]
+// ---------- DONE INJECTING  ----------
+bio4.exe+28C653: C6 40 21 02           - mov byte ptr [eax+21],02
+bio4.exe+28C657: 8B 77 14              - mov esi,[edi+14]
+bio4.exe+28C65A: 8B 07                 - mov eax,[edi]
+bio4.exe+28C65C: 89 77 10              - mov [edi+10],esi
+bio4.exe+28C65F: 0F BE 58 05           - movsx ebx,byte ptr [eax+05]
+bio4.exe+28C663: 0F BE 48 04           - movsx ecx,byte ptr [eax+04]
+bio4.exe+28C667: 89 4D D8              - mov [ebp-28],ecx
+bio4.exe+28C66A: 89 5D D4              - mov [ebp-2C],ebx
+bio4.exe+28C66D: C7 45 E4 00 00 00 00  - mov [ebp-1C],00000000
+bio4.exe+28C674: 85 DB                 - test ebx,ebx
+}
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17587</ID>
+          <Description>"god?"</Description>
+          <LastState/>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+alloc( Thread_for_God, 0x1000, $process )
+registersymbol( Thread_for_God )
+CreateThread( Thread_for_God )
+
+
+
+Thread_for_God:
+
+{$lua}
+func_caller = getAddressList().getMemoryRecordByID(17568)
+
+
+
+local timer = createTimer()
+timer.Interval = 350 -- 1000 milliseconds per second
+timer.OnTimer = function(theTimerCallingThisFunction)
+  func_caller.Active=false
+  timer.destroy() -- destroy the timer so it doesn't keep running
+end
+
+{$asm}
+
+push ebp
+  mov ebp,esp
+
+  sub esp,220
+  and esp,-10 //  aligning the stack with the next lowest 16-byte boundary
+
+
+mov ecx,[bio4.exe+806F3C]
+mov byte ptr [ecx+00004FAD],05
+mov edx,[bio4.exe+806F3C]
+mov byte ptr [edx+00004FAC],00
+mov ecx,[bio4.exe+806F3C]
+push 00
+mov eax,00000500
+push 5A
+mov [ecx+28],ax
+push 00
+///mov byte ptr [esi],07
+//call bio4.exe+E930
+mov edx,[bio4.exe+806F3C]
+mov byte ptr [edx+00004FC8],02
+mov eax,[bio4.exe+806F3C]
+mov byte ptr [eax+00004FCB],02
+mov ecx,[bio4.exe+806F3C]
+add esp,0C
+mov byte ptr [ecx+00004FC9],03
+mov edx,[bio4.exe+806F3C]
+push 00
+mov byte ptr [edx+00004F9A],14
+
+  mov esp,ebp
+  pop ebp
+
+ret
+
+
+[DISABLE]
+
+dealloc( Thread_for_God )
+unregistersymbol( Thread_for_God )
+
+
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17592</ID>
+          <Description>"debug menu"</Description>
+          <LastState/>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+
+alloc( Thread_for_God, 0x1000, $process )
+registersymbol( Thread_for_God )
+CreateThread( Thread_for_God )
+
+
+
+Thread_for_God:
+
+{$lua}
+func_caller = getAddressList().getMemoryRecordByID(17568)
+
+
+
+local timer = createTimer()
+timer.Interval = 350 -- 1000 milliseconds per second
+timer.OnTimer = function(theTimerCallingThisFunction)
+  func_caller.Active=false
+  timer.destroy() -- destroy the timer so it doesn't keep running
+end
+
+{$asm}
+
+push ebp
+  mov ebp,esp
+
+  sub esp,220
+  and esp,-10 //  aligning the stack with the next lowest 16-byte boundary
+
+push C51D24
+call 005A7E70
+
+  mov esp,ebp
+  pop ebp
+
+ret
+
+
+[DISABLE]
+
+dealloc( Thread_for_God )
+unregistersymbol( Thread_for_God )
+
+
+
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17617</ID>
+          <Description>"avoid grab flag+1 ?!?!?"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>[00E87054]+32d</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17616</ID>
+          <Description>"avoid grab flag?"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>[00E87054]+32c</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17579</ID>
+          <Description>"x   to 1"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>00C5A760+4fc8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17580</ID>
+          <Description>"xxx  must set to 2"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Byte</VariableType>
+          <Address>00C5A760+4fcb</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17611</ID>
+          <Description>"buy menu + IDs"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00EAACD8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17629</ID>
+          <Description>"camera zoom"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>00EA029C</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <DisassemblerComments>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+1B5AF0</Address>
+      <Comment>dmg func
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+1B5B2D</Address>
+      <Comment>jmp enemy
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+1B5CDE</Address>
+      <Comment>jmp enemy
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+1B5E1E</Address>
+      <Comment>switch - for enemy dosnt jmp
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+1BDE20</Address>
+      <Comment>when leon is about to get hit
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+1BDE40</Address>
+      <Comment>avoid dmg?
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+1BDEA6</Address>
+      <Comment>avoid dmg?
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+23E63C</Address>
+      <Comment>call to fadd dword ptr [eax+0C]  add to cord  //0086E641   
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+2E896F</Address>
+      <Comment>call to fapp (get speed base)
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+2EAF2B</Address>
+      <Comment>speed base 2
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+2EB54E</Address>
+      <Comment>speed base 3
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+2EE25F</Address>
+      <Comment>speed base 4
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+313DA7</Address>
+      <Comment>unlock ammo
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+313DD4</Address>
+      <Comment>loops
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+313DDB</Address>
+      <Comment>after loop
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+31409A</Address>
+      <Comment>maybe  isWpn
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+3148F3</Address>
+      <Comment>************** set  dx
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+31499A</Address>
+      <Comment>**********************
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+364FB8</Address>
+      <Comment>on knife
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+364FD3</Address>
+      <Comment>jumping till below cond jmp= no move
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+3651A7</Address>
+      <Comment>freeze camera
+</Comment>
+    </DisassemblerComment>
+    <DisassemblerComment>
+      <Address>"bio4.exe"+399D54</Address>
+      <Comment>??? excep
+</Comment>
+    </DisassemblerComment>
+  </DisassemblerComments>
+</CheatTable>

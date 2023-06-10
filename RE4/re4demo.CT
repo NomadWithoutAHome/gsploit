@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>13</ID>
+      <Description>"pPlayer"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+desc:   Get pPlayer
+author: DRKDST
+game:   re4demo.exe
+}
+
+[enable]
+aobScanModule(pPlayerAob,re4demo.exe,48 ?? ?? 18 48 ?? ?? 74 ?? 40 ?? ?? ?? ?? ?? ?? 75 ?? 48 ?? ?? 74 ?? 40 ?? ?? ?? ?? ?? ?? 75 ?? 48 ?? ?? 75 ?? 45 ?? ?? 48 ?? ?? 41 ?? ?? ?? 48 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 5F 5B)
+registerSymbol(pPlayerAob)
+
+alloc(pPlayerMem,1024,re4demo.exe)
+label(pPlayerMemOriginal)
+label(pPlayerMemEntry)
+label(pPlayerMemReturn)
+registerSymbol(pPlayerMemOriginal)
+
+alloc(pPlayer,8,re4demo.exe)
+registerSymbol(pPlayer)
+
+
+pPlayerMem:
+pPlayerMemOriginal:
+    readMem(pPlayerAob,7)
+    jmp pPlayerMemReturn
+
+pPlayerMemEntry:
+    mov [pPlayer],rdi
+    jmp pPlayerMemOriginal
+
+pPlayerAob:
+    jmp pPlayerMemEntry
+    nop 2
+pPlayerMemReturn:
+
+[disable]
+pPlayerAob:
+    readMem(pPlayerMemOriginal,7)
+
+unregisterSymbol(pPlayerAob)
+unregisterSymbol(pPlayerMemOriginal)
+unregisterSymbol(pPlayer)
+deAlloc(pPlayerMem)
+deAlloc(pPlayer)
+
+{
+re4demo.exe+16DF6B2 - 48 8B 0D F731630C     - mov rcx,[re4demo.exe+DD128B0]
+re4demo.exe+16DF6B9 - 48 85 C9              - test rcx,rcx
+re4demo.exe+16DF6BC - 75 15                 - jne re4demo.exe+16DF6D3
+re4demo.exe+16DF6BE - 8D 51 38              - lea edx,[rcx+38]
+re4demo.exe+16DF6C1 - 45 33 C0              - xor r8d,r8d
+re4demo.exe+16DF6C4 - 48 8B CB              - mov rcx,rbx
+re4demo.exe+16DF6C7 - E8 D4B0EC02           - call re4demo.exe+45AA7A0
+re4demo.exe+16DF6CC - 32 C9                 - xor cl,cl
+re4demo.exe+16DF6CE - E9 9F000000           - jmp re4demo.exe+16DF772
+re4demo.exe+16DF6D3 - 48 8B 49 10           - mov rcx,[rcx+10]
+re4demo.exe+16DF6D7 - 48 85 C9              - test rcx,rcx
+re4demo.exe+16DF6DA - 74 0A                 - je re4demo.exe+16DF6E6
+re4demo.exe+16DF6DC - 48 39 69 10           - cmp [rcx+10],rbp
+re4demo.exe+16DF6E0 - 74 04                 - je re4demo.exe+16DF6E6
+re4demo.exe+16DF6E2 - 32 C0                 - xor al,al
+re4demo.exe+16DF6E4 - EB 02                 - jmp re4demo.exe+16DF6E8
+re4demo.exe+16DF6E6 - B0 01                 - mov al,01
+re4demo.exe+16DF6E8 - 0FB6 C0               - movzx eax,al
+re4demo.exe+16DF6EB - 85 C0                 - test eax,eax
+re4demo.exe+16DF6ED - 75 13                 - jne re4demo.exe+16DF702
+re4demo.exe+16DF6EF - 48 85 C9              - test rcx,rcx
+re4demo.exe+16DF6F2 - 75 1E                 - jne re4demo.exe+16DF712
+re4demo.exe+16DF6F4 - 45 33 C0              - xor r8d,r8d
+re4demo.exe+16DF6F7 - 8D 50 38              - lea edx,[rax+38]
+re4demo.exe+16DF6FA - 48 8B CB              - mov rcx,rbx
+re4demo.exe+16DF6FD - E8 9EB0EC02           - call re4demo.exe+45AA7A0
+re4demo.exe+16DF702 - 32 C9                 - xor cl,cl
+re4demo.exe+16DF704 - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+16DF708 - 48 39 68 18           - cmp [rax+18],rbp
+re4demo.exe+16DF70C - 74 5F                 - je re4demo.exe+16DF76D
+re4demo.exe+16DF70E - 32 C9                 - xor cl,cl
+re4demo.exe+16DF710 - EB 60                 - jmp re4demo.exe+16DF772
+re4demo.exe+16DF712 - 48 8B 51 58           - mov rdx,[rcx+58]
+re4demo.exe+16DF716 - 48 85 D2              - test rdx,rdx
+re4demo.exe+16DF719 - 74 0A                 - je re4demo.exe+16DF725
+re4demo.exe+16DF71B - 48 39 6A 10           - cmp [rdx+10],rbp
+re4demo.exe+16DF71F - 74 04                 - je re4demo.exe+16DF725
+re4demo.exe+16DF721 - 32 C0                 - xor al,al
+re4demo.exe+16DF723 - EB 02                 - jmp re4demo.exe+16DF727
+re4demo.exe+16DF725 - B0 01                 - mov al,01
+re4demo.exe+16DF727 - 0FB6 C0               - movzx eax,al
+re4demo.exe+16DF72A - 85 C0                 - test eax,eax
+re4demo.exe+16DF72C - 75 13                 - jne re4demo.exe+16DF741
+re4demo.exe+16DF72E - 48 8B CB              - mov rcx,rbx
+re4demo.exe+16DF731 - 48 85 D2              - test rdx,rdx
+re4demo.exe+16DF734 - 75 1E                 - jne re4demo.exe+16DF754
+re4demo.exe+16DF736 - 45 33 C0              - xor r8d,r8d
+re4demo.exe+16DF739 - 8D 50 38              - lea edx,[rax+38]
+re4demo.exe+16DF73C - E8 5FB0EC02           - call re4demo.exe+45AA7A0
+re4demo.exe+16DF741 - 32 C9                 - xor cl,cl
+re4demo.exe+16DF743 - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+16DF747 - 48 39 68 18           - cmp [rax+18],rbp
+re4demo.exe+16DF74B - 75 B5                 - jne re4demo.exe+16DF702
+re4demo.exe+16DF74D - 84 C9                 - test cl,cl
+re4demo.exe+16DF74F - 0F95 C1               - setne cl
+re4demo.exe+16DF752 - EB B0                 - jmp re4demo.exe+16DF704
+re4demo.exe+16DF754 - E8 67546301           - call re4demo.exe+2D14BC0
+re4demo.exe+16DF759 - 0FB6 C8               - movzx ecx,al
+re4demo.exe+16DF75C - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+16DF760 - 48 39 68 18           - cmp [rax+18],rbp
+re4demo.exe+16DF764 - 75 DB                 - jne re4demo.exe+16DF741
+re4demo.exe+16DF766 - 85 C9                 - test ecx,ecx
+re4demo.exe+16DF768 - 0F95 C1               - setne cl
+re4demo.exe+16DF76B - EB D6                 - jmp re4demo.exe+16DF743
+re4demo.exe+16DF76D - 84 C9                 - test cl,cl
+re4demo.exe+16DF76F - 0F95 C1               - setne cl
+re4demo.exe+16DF772 - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+16DF776 - 48 39 68 18           - cmp [rax+18],rbp
+re4demo.exe+16DF77A - 0F85 5A020000         - jne re4demo.exe+16DF9DA
+re4demo.exe+16DF780 - 84 C9                 - test cl,cl
+re4demo.exe+16DF782 - 0F84 6B020000         - je re4demo.exe+16DF9F3
+re4demo.exe+16DF788 - 40 88 6F 4C           - mov [rdi+4C],bpl
+re4demo.exe+16DF78C - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+16DF790 - 48 39 68 18           - cmp [rax+18],rbp
+re4demo.exe+16DF794 - 0F85 40020000         - jne re4demo.exe+16DF9DA
+re4demo.exe+16DF79A - 40 38 6F 20           - cmp [rdi+20],bpl
+re4demo.exe+16DF79E - 0F85 36020000         - jne re4demo.exe+16DF9DA
+&gt;&gt;&gt;
+re4demo.exe+16DF7A4 - 48 8B 47 18           - mov rax,[rdi+18]
+re4demo.exe+16DF7A8 - 48 85 C0              - test rax,rax
+&gt;&gt;&gt;
+re4demo.exe+16DF7AB - 74 1C                 - je re4demo.exe+16DF7C9
+re4demo.exe+16DF7AD - 40 38 A8 F3030000     - cmp [rax+000003F3],bpl
+re4demo.exe+16DF7B4 - 75 3D                 - jne re4demo.exe+16DF7F3
+re4demo.exe+16DF7B6 - 48 85 C0              - test rax,rax
+re4demo.exe+16DF7B9 - 74 0E                 - je re4demo.exe+16DF7C9
+re4demo.exe+16DF7BB - 40 38 A8 F4030000     - cmp [rax+000003F4],bpl
+re4demo.exe+16DF7C2 - 75 2F                 - jne re4demo.exe+16DF7F3
+re4demo.exe+16DF7C4 - 48 85 C0              - test rax,rax
+re4demo.exe+16DF7C7 - 75 1D                 - jne re4demo.exe+16DF7E6
+re4demo.exe+16DF7C9 - 45 33 C0              - xor r8d,r8d
+re4demo.exe+16DF7CC - 48 8B CB              - mov rcx,rbx
+re4demo.exe+16DF7CF - 41 8D 50 38           - lea edx,[r8+38]
+re4demo.exe+16DF7D3 - 48 8B AC 24 98000000  - mov rbp,[rsp+00000098]
+re4demo.exe+16DF7DB - 48 83 C4 68           - add rsp,68
+re4demo.exe+16DF7DF - 5F                    - pop rdi
+re4demo.exe+16DF7E0 - 5B                    - pop rbx
+re4demo.exe+16DF7E1 - E9 BAAFEC02           - jmp re4demo.exe+45AA7A0
+re4demo.exe+16DF7E6 - 40 38 A8 F5030000     - cmp [rax+000003F5],bpl
+re4demo.exe+16DF7ED - 0F84 E7010000         - je re4demo.exe+16DF9DA
+re4demo.exe+16DF7F3 - 0F29 74 24 50         - movaps [rsp+50],xmm6
+re4demo.exe+16DF7F8 - 0F29 7C 24 40         - movaps [rsp+40],xmm7
+re4demo.exe+16DF7FD - 44 0F29 44 24 30      - movaps [rsp+30],xmm8
+re4demo.exe+16DF803 - F3 44 0F10 05 1400EA06  - movss xmm8,[re4demo.exe+857F820]
+re4demo.exe+16DF80C - 48 85 C0              - test rax,rax
+re4demo.exe+16DF80F - 0F85 9F000000         - jne re4demo.exe+16DF8B4
+re4demo.exe+16DF815 - BA 38000000           - mov edx,00000038
+re4demo.exe+16DF81A - 45 33 C0              - xor r8d,r8d
+re4demo.exe+16DF81D - 48 8B CB              - mov rcx,rbx
+re4demo.exe+16DF820 - E8 7BAFEC02           - call re4demo.exe+45AA7A0
+re4demo.exe+16DF825 - 0F57 FF               - xorps xmm7,xmm7
+re4demo.exe+16DF828 - 0F57 F6               - xorps xmm6,xmm6
+re4demo.exe+16DF82B - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+16DF82F - 48 39 68 18           - cmp [rax+18],rbp
+re4demo.exe+16DF833 - 0F85 91010000         - jne re4demo.exe+16DF9CA
+re4demo.exe+16DF839 - 48 8B 05 585B620C     - mov rax,[re4demo.exe+DD05398]
+
+}
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"health"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>pPlayer</Address>
+          <Offsets>
+            <Offset>14</Offset>
+            <Offset>148</Offset>
+            <Offset>18</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"maxHealth"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>pPlayer</Address>
+          <Offsets>
+            <Offset>10</Offset>
+            <Offset>148</Offset>
+            <Offset>18</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"Health Mods"</Description>
+          <Options moHideChildren="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+title:  Intercepts and manipulates the health update code for all entities
+author: DRKDST
+game:   re4demo.exe@1.0.0
+}
+
+[enable]
+aobScanModule(healthWriteAob,re4demo.exe,8B ?? 41 ?? ?? 14 49 ?? ?? ?? 48 ?? ?? ?? 48 ?? ?? 75 ?? 41 ?? ?? ?? 74 ?? 85 ?? 7F ?? 41 ?? ?? ?? 01 00 00 00)
+registerSymbol(healthWriteAob)
+
+alloc(healthWriteMem,1024,re4demo.exe)
+label(healthWriteMemOriginal)
+label(healthWriteMemEntry)
+label(healthWriteMemReturn)
+label(healthWriteMemCheckPlayerUndead)
+label(healthWriteMemCheckEnemyUndead)
+registerSymbol(healthWriteMemOriginal)
+
+alloc(bPlayerUndead,1,re4demo.exe)
+registerSymbol(bPlayerUndead)
+
+alloc(bEnemyUndead,1,re4demo.exe)
+registerSymbol(bEnemyUndead)
+
+bEnemyUndead:
+db 00
+
+bEnemyUndead:
+db 00
+
+healthWriteMem:
+healthWriteMemOriginal:
+    readMem(healthWriteAob,6)
+    jmp healthWriteMemExit
+
+healthWriteMemEntry:
+    push rbx
+    mov rbx,[pPlayer]
+    test rbx,rbx
+    je healthWriteMemOriginal
+    mov rbx,[rbx+18]
+    test rbx,rbx
+    je healthWriteMemOriginal
+    mov rbx,[rbx+148]
+    test rbx,rbx
+    je healthWriteMemOriginal
+    cmp [bPlayerUndead],1
+    je healthWriteMemCheckPlayerUndead
+    cmp [bEnemyUndead],1
+    je healthWriteMemCheckEnemyUndead
+    jmp healthWriteMemOriginal
+
+healthWriteMemExit:
+    pop rbx
+    jmp healthWriteMemReturn
+
+healthWriteMemCheckPlayerUndead:
+    cmp r9,rbx
+    jne healthWriteMemOriginal
+    mov edx,[r9+10]
+    mov [rax],edx
+    jmp healthWriteMemOriginal
+
+healthWriteMemCheckEnemyUndead:
+    cmp r9,rbx
+    je healthWriteMemOriginal
+    mov edx,[r9+10]
+    mov [rax],edx
+    jmp healthWriteMemOriginal
+
+healthWriteAob:
+    jmp healthWriteMemEntry
+    nop
+healthWriteMemReturn:
+
+[disable]
+healthWriteAob:
+    readMem(healthWriteMemOriginal,6)
+
+unregisterSymbol(healthWriteAob)
+unregisterSymbol(healthWriteMemOriginal)
+unregisterSymbol(bPlayerUndead)
+unregisterSymbol(bEnemyUndead)
+deAlloc(healthWriteMem)
+deAlloc(bPlayerUndead)
+deAlloc(bEnemyUndead)
+
+{
+re4demo.exe+1AAB4B5 - 75 75                 - jne re4demo.exe+1AAB52C
+re4demo.exe+1AAB4B7 - 41 8B 49 14           - mov ecx,[r9+14]
+re4demo.exe+1AAB4BB - 41 8B C0              - mov eax,r8d
+re4demo.exe+1AAB4BE - 99                    - cdq
+re4demo.exe+1AAB4BF - C7 44 24 10 00000000  - mov [rsp+10],00000000
+re4demo.exe+1AAB4C7 - 33 C2                 - xor eax,edx
+re4demo.exe+1AAB4C9 - 2B C2                 - sub eax,edx
+re4demo.exe+1AAB4CB - 48 8D 54 24 10        - lea rdx,[rsp+10]
+re4demo.exe+1AAB4D0 - 2B C8                 - sub ecx,eax
+re4demo.exe+1AAB4D2 - 48 8D 44 24 08        - lea rax,[rsp+08]
+re4demo.exe+1AAB4D7 - 85 C9                 - test ecx,ecx
+re4demo.exe+1AAB4D9 - 89 4C 24 08           - mov [rsp+08],ecx
+re4demo.exe+1AAB4DD - 48 0F4E C2            - cmovle rax,rdx
+&gt;&gt;&gt;
+re4demo.exe+1AAB4E1 - 8B 10                 - mov edx,[rax]
+re4demo.exe+1AAB4E3 - 41 89 51 14           - mov [r9+14],edx
+&gt;&gt;&gt;
+re4demo.exe+1AAB4E7 - 49 8B 42 50           - mov rax,[r10+50]
+re4demo.exe+1AAB4EB - 48 8B 48 18           - mov rcx,[rax+18]
+re4demo.exe+1AAB4EF - 48 85 C9              - test rcx,rcx
+re4demo.exe+1AAB4F2 - 75 38                 - jne re4demo.exe+1AAB52C
+re4demo.exe+1AAB4F4 - 41 38 49 1A           - cmp [r9+1A],cl
+re4demo.exe+1AAB4F8 - 74 19                 - je re4demo.exe+1AAB513
+re4demo.exe+1AAB4FA - 85 D2                 - test edx,edx
+re4demo.exe+1AAB4FC - 7F 15                 - jg re4demo.exe+1AAB513
+re4demo.exe+1AAB4FE - 41 C7 41 14 01000000  - mov [r9+14],00000001
+re4demo.exe+1AAB506 - 49 8B 42 50           - mov rax,[r10+50]
+re4demo.exe+1AAB50A - 48 8B 48 18           - mov rcx,[rax+18]
+re4demo.exe+1AAB50E - 48 85 C9              - test rcx,rcx
+re4demo.exe+1AAB511 - 75 19                 - jne re4demo.exe+1AAB52C
+re4demo.exe+1AAB513 - 48 85 C9              - test rcx,rcx
+re4demo.exe+1AAB516 - 75 14                 - jne re4demo.exe+1AAB52C
+re4demo.exe+1AAB518 - 41 38 49 1B           - cmp [r9+1B],cl
+re4demo.exe+1AAB51C - 74 0E                 - je re4demo.exe+1AAB52C
+re4demo.exe+1AAB51E - 41 39 49 14           - cmp [r9+14],ecx
+re4demo.exe+1AAB522 - 7F 08                 - jg re4demo.exe+1AAB52C
+re4demo.exe+1AAB524 - 41 8B 41 10           - mov eax,[r9+10]
+re4demo.exe+1AAB528 - 41 89 41 14           - mov [r9+14],eax
+re4demo.exe+1AAB52C - C3                    - ret
+}
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>37</ID>
+              <Description>"Player Undead"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:disabled
+1:enabled
+</DropDownList>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Byte</VariableType>
+              <Address>bPlayerUndead</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>36</ID>
+              <Description>"Enemy Undead"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:disabled
+1:enabled
+</DropDownList>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Byte</VariableType>
+              <Address>bEnemyUndead</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"pMover"</Description>
+      <Options moHideChildren="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+desc:   get pMover
+author: DRKDST
+game:   re4demo.exe@1.0.0
+}
+
+[enable]
+aobScanModule(pMoverAob,re4demo.exe,F3 0F 10 ?? 30 4C ?? ?? ?? 20 F3 0F 10 ?? 34 4C ?? ?? ?? 30 F3 0F 10 ?? 38 48 ?? ?? ?? 40 48 ?? ?? F3 0F 11 ?? ?? ?? ?? ?? F3 0F 11 ?? ?? ?? ?? ?? F3 0F 11 ?? ?? ?? ?? ?? F3 0F 11 ?? ?? ?? F3 0F 11 ?? ?? ?? F3 0F 11 ?? ?? ?? F3 44 0F 11 ?? ?? ?? F3 44 0F 11 ?? ?? ?? F3 44 0F 11 ?? ?? ?? E8)
+registerSymbol(pMoverAob)
+
+alloc(pMoverMem,1024,re4demo.exe)
+label(pMoverMemOriginal)
+label(pMoverMemEntry)
+label(pMoverMemReturn)
+registerSymbol(pMoverMemOriginal)
+
+alloc(pMover,8,re4demo.exe)
+registerSymbol(pMover)
+
+pMoverMem:
+pMoverMemOriginal:
+    readMem(pMoverAob,5)
+    jmp pMoverMemReturn
+
+pMoverMemEntry:
+    mov [pMover],rsi
+    jmp pMoverMemOriginal
+
+pMoverAob:
+    jmp pMoverMemEntry
+pMoverMemReturn:
+
+[disable]
+pMoverAob:
+    readMem(pMoverMemOriginal,5)
+
+unregisterSymbol(pMoverAob)
+unregisterSymbol(pMoverMemOriginal)
+unregisterSymbol(pMover)
+deAlloc(pMoverMem)
+deAlloc(pMover)
+
+{
+re4demo.exe+388FDF6 - F3 44 0F10 87 F0010000  - movss xmm8,[rdi+000001F0]
+re4demo.exe+388FDFF - F3 44 0F10 8F F4010000  - movss xmm9,[rdi+000001F4]
+re4demo.exe+388FE08 - F3 44 0F10 97 F8010000  - movss xmm10,[rdi+000001F8]
+re4demo.exe+388FE11 - 48 85 C9              - test rcx,rcx
+re4demo.exe+388FE14 - 75 10                 - jne re4demo.exe+388FE26
+re4demo.exe+388FE16 - 8D 51 46              - lea edx,[rcx+46]
+re4demo.exe+388FE19 - 45 33 C0              - xor r8d,r8d
+re4demo.exe+388FE1C - 48 8B CB              - mov rcx,rbx
+re4demo.exe+388FE1F - E8 7CA9D100           - call re4demo.exe+45AA7A0
+re4demo.exe+388FE24 - 8B CE                 - mov ecx,esi
+re4demo.exe+388FE26 - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+388FE2A - 48 39 70 18           - cmp [rax+18],rsi
+re4demo.exe+388FE2E - 0F85 A6010000         - jne re4demo.exe+388FFDA
+re4demo.exe+388FE34 - 48 85 C9              - test rcx,rcx
+re4demo.exe+388FE37 - 74 30                 - je re4demo.exe+388FE69
+re4demo.exe+388FE39 - 48 8B 41 20           - mov rax,[rcx+20]
+re4demo.exe+388FE3D - 48 85 C0              - test rax,rax
+re4demo.exe+388FE40 - 75 10                 - jne re4demo.exe+388FE52
+re4demo.exe+388FE42 - 45 33 C0              - xor r8d,r8d
+re4demo.exe+388FE45 - 8D 50 46              - lea edx,[rax+46]
+re4demo.exe+388FE48 - 48 8B CB              - mov rcx,rbx
+re4demo.exe+388FE4B - E8 50A9D100           - call re4demo.exe+45AA7A0
+re4demo.exe+388FE50 - EB 03                 - jmp re4demo.exe+388FE55
+re4demo.exe+388FE52 - 48 8B F0              - mov rsi,rax
+re4demo.exe+388FE55 - 48 8B 43 50           - mov rax,[rbx+50]
+re4demo.exe+388FE59 - 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re4demo.exe+388FE5E - 0F85 76010000         - jne re4demo.exe+388FFDA
+re4demo.exe+388FE64 - 48 85 F6              - test rsi,rsi
+re4demo.exe+388FE67 - 75 14                 - jne re4demo.exe+388FE7D
+re4demo.exe+388FE69 - 45 33 C0              - xor r8d,r8d
+re4demo.exe+388FE6C - 48 8B CB              - mov rcx,rbx
+re4demo.exe+388FE6F - 41 8D 50 38           - lea edx,[r8+38]
+re4demo.exe+388FE73 - E8 28A9D100           - call re4demo.exe+45AA7A0
+re4demo.exe+388FE78 - E9 5D010000           - jmp re4demo.exe+388FFDA
+&gt;&gt;&gt;
+re4demo.exe+388FE7D - F3 0F10 46 30         - movss xmm0,[rsi+30]
+&gt;&gt;&gt;
+re4demo.exe+388FE82 - 4C 8D 4C 24 20        - lea r9,[rsp+20]
+re4demo.exe+388FE87 - F3 0F10 4E 34         - movss xmm1,[rsi+34]
+re4demo.exe+388FE8C - 4C 8D 44 24 30        - lea r8,[rsp+30]
+re4demo.exe+388FE91 - F3 0F10 56 38         - movss xmm2,[rsi+38]
+re4demo.exe+388FE96 - 48 8D 4C 24 40        - lea rcx,[rsp+40]
+re4demo.exe+388FE9B - 48 8B D3              - mov rdx,rbx
+re4demo.exe+388FE9E - F3 0F11 87 F0010000   - movss [rdi+000001F0],xmm0
+re4demo.exe+388FEA6 - F3 0F11 8F F4010000   - movss [rdi+000001F4],xmm1
+re4demo.exe+388FEAE - F3 0F11 97 F8010000   - movss [rdi+000001F8],xmm2
+re4demo.exe+388FEB6 - F3 0F11 44 24 30      - movss [rsp+30],xmm0
+re4demo.exe+388FEBC - F3 0F11 4C 24 34      - movss [rsp+34],xmm1
+re4demo.exe+388FEC2 - F3 0F11 54 24 38      - movss [rsp+38],xmm2
+re4demo.exe+388FEC8 - F3 44 0F11 44 24 20   - movss [rsp+20],xmm8
+re4demo.exe+388FECF - F3 44 0F11 4C 24 24   - movss [rsp+24],xmm9
+re4demo.exe+388FED6 - F3 44 0F11 54 24 28   - movss [rsp+28],xmm10
+re4demo.exe+388FEDD - E8 8E5BE6FD           - call re4demo.exe+16F5A70
+}
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>26</ID>
+          <Description>"XYZ"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Array of byte</VariableType>
+          <ByteLength>12</ByteLength>
+          <Address>pMover</Address>
+          <Offsets>
+            <Offset>30</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"X"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>pMover</Address>
+          <Offsets>
+            <Offset>30</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>68</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>65</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>27</ID>
+          <Description>"Y"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>pMover</Address>
+          <Offsets>
+            <Offset>38</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>87</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>83</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>28</ID>
+          <Description>"Z"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Float</VariableType>
+          <Address>pMover</Address>
+          <Offsets>
+            <Offset>34</Offset>
+          </Offsets>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Increase Value</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>69</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Decrease Value</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>81</Key>
+              </Keys>
+              <Value>2</Value>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"Position Mods"</Description>
+          <Options moHideChildren="1"/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{
+title:  Intercepts and manipulates the position update code for all entities
+author: DRKDST
+game:   re4demo.exe@1.0.0
+}
+
+[enable]
+aobScanModule(posWriteAob,re4demo.exe,8B ?? 89 ?? 30 8B ?? ?? 89 ?? 34 8B ?? ?? 89 ?? 38 80 ?? ?? ?? ?? ?? 00 C6 ?? ?? ?? ?? ?? 01 75 ?? 48 ?? ?? ?? 48 ?? ?? 74 ?? F6 ?? 01 74)
+registerSymbol(posWriteAob)
+
+alloc(posWriteMem,1024,re4demo.exe)
+label(posWriteMemOriginal)
+label(posWriteMemEntry)
+label(posWriteMemExit)
+label(posWriteMemReturn)
+label(posWriteMemUpdateXY)
+label(posWriteMemUpdateZ)
+label(posWriteMemCheckLockPlayerZ)
+registerSymbol(posWriteMemOriginal)
+
+alloc(bLockPlayerZ,1,re4demo.exe)
+registerSymbol(bLockPlayerZ)
+
+bLockPlayerZ:
+db 00
+
+posWriteMem:
+posWriteMemOriginal:
+    readMem(posWriteAob,17)
+
+posWriteMemEntry:
+    push rbx
+    mov rbx,[pMover]
+    test rbx,rbx
+    je posWriteMemUpdateZ
+    cmp [bLockPlayerZ],1
+    je posWriteMemCheckLockPlayerZ
+    jmp posWriteMemUpdateZ
+
+posWriteMemExit:
+    pop rbx
+    jmp posWriteMemReturn
+
+posWriteMemUpdateXY:
+    mov eax,[rdx]
+    mov [rcx+30],eax
+    mov eax,[rdx+08]
+    mov [rcx+38],eax
+    jmp posWriteMemExit
+
+posWriteMemUpdateZ:
+    mov eax,[rdx+04]
+    mov [rcx+34],eax
+    jmp posWriteMemUpdateXY
+
+posWriteMemCheckLockPlayerZ:
+    cmp rcx,rbx
+    je posWriteMemUpdateXY
+    jmp posWriteMemUpdateZ
+
+posWriteAob:
+    jmp posWriteMemEntry
+    nop 3
+    nop 3
+    nop 3
+    nop 3
+posWriteMemReturn:
+
+[disable]
+posWriteAob:
+    readMem(posWriteMemOriginal,17)
+
+unregisterSymbol(posWriteAob)
+unregisterSymbol(posWriteMemOriginal)
+unregisterSymbol(bLockPlayerZ)
+deAlloc(posWriteMem)
+deAlloc(bLockPlayerZ)
+
+{
+re4demo.exe+45CE838 - 80 BB 01010000 00     - cmp byte ptr [rbx+00000101],00
+re4demo.exe+45CE83F - C6 83 00010000 01     - mov byte ptr [rbx+00000100],01
+re4demo.exe+45CE846 - 75 5B                 - jne re4demo.exe+45CE8A3
+re4demo.exe+45CE848 - 48 8B 4B 60           - mov rcx,[rbx+60]
+re4demo.exe+45CE84C - EB 25                 - jmp re4demo.exe+45CE873
+&gt;&gt;&gt;
+re4demo.exe+45CE84E - 8B 02                 - mov eax,[rdx]
+re4demo.exe+45CE850 - 89 41 30              - mov [rcx+30],eax
+re4demo.exe+45CE853 - 8B 42 04              - mov eax,[rdx+04]
+re4demo.exe+45CE856 - 89 41 34              - mov [rcx+34],eax
+re4demo.exe+45CE859 - 8B 42 08              - mov eax,[rdx+08]
+re4demo.exe+45CE85C - 89 41 38              - mov [rcx+38],eax
+&gt;&gt;&gt;
+re4demo.exe+45CE85F - 80 B9 01010000 00     - cmp byte ptr [rcx+00000101],00
+re4demo.exe+45CE866 - C6 81 00010000 01     - mov byte ptr [rcx+00000100],01
+re4demo.exe+45CE86D - 75 34                 - jne re4demo.exe+45CE8A3
+re4demo.exe+45CE86F - 48 8B 49 60           - mov rcx,[rcx+60]
+re4demo.exe+45CE873 - 48 85 C9              - test rcx,rcx
+re4demo.exe+45CE876 - 74 2B                 - je re4demo.exe+45CE8A3
+re4demo.exe+45CE878 - F6 C1 01              - test cl,01
+re4demo.exe+45CE87B - 74 11                 - je re4demo.exe+45CE88E
+re4demo.exe+45CE87D - 45 33 C0              - xor r8d,r8d
+re4demo.exe+45CE880 - 48 8B D3              - mov rdx,rbx
+re4demo.exe+45CE883 - 48 83 E1 FE           - and rcx,-02
+re4demo.exe+45CE887 - E8 74550300           - call re4demo.exe+4603E00
+re4demo.exe+45CE88C - EB 15                 - jmp re4demo.exe+45CE8A3
+re4demo.exe+45CE88E - C6 83 01010000 01     - mov byte ptr [rbx+00000101],01
+re4demo.exe+45CE895 - 80 B9 01010000 00     - cmp byte ptr [rcx+00000101],00
+re4demo.exe+45CE89C - 75 05                 - jne re4demo.exe+45CE8A3
+re4demo.exe+45CE89E - E8 DDBBFFFF           - call re4demo.exe+45CA480
+re4demo.exe+45CE8A3 - 48 8B 8C 24 E0000000  - mov rcx,[rsp+000000E0]
+re4demo.exe+45CE8AB - 48 33 CC              - xor rcx,rsp
+re4demo.exe+45CE8AE - E8 2DD5E103           - call re4demo.exe+83EBDE0
+re4demo.exe+45CE8B3 - 48 8B 9C 24 10010000  - mov rbx,[rsp+00000110]
+re4demo.exe+45CE8BB - 48 81 C4 F0000000     - add rsp,000000F0
+re4demo.exe+45CE8C2 - 5F                    - pop rdi
+re4demo.exe+45CE8C3 - C3                    - ret
+}
+
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"Lock Player Z"</Description>
+              <DropDownList DescriptionOnly="1" DisplayValueAsItem="1">0:disabled
+1:enabled
+</DropDownList>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>Byte</VariableType>
+              <Address>bLockPlayerZ</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"ptas."</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>re4demo.exe+DD4DFF8</Address>
+      <Offsets>
+        <Offset>10</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Infinite Ammo"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+title:  Always max ammo in magazine
+author: DRKDST
+game:   re4demo.exe@1.0.0
+}
+
+[enable]
+aobScanModule(maxAmmoAob,re4demo.exe,7E 18 48 ?? ?? 48 ?? ?? E8 ?? ?? ?? ?? 8B ?? 48 ?? ?? ?? 48 ?? ?? ?? 00 75 ?? 33)
+registerSymbol(maxAmmoAob)
+
+alloc(maxAmmoMemOriginal,2,re4demo.exe)
+registerSymbol(maxAmmoMemOriginal)
+
+maxAmmoMemOriginal:
+    readMem(maxAmmoAob,2)
+
+maxAmmoAob:
+    nop 2
+
+[disable]
+maxAmmoAob:
+    readMem(maxAmmoMemOriginal,2)
+
+unregisterSymbol(maxAmmoAob)
+unregisterSymbol(maxAmmoMemOriginal)
+deAlloc(maxAmmoMemOriginal)
+
+{
+re4demo.exe+4335660 - 48 89 5C 24 08        - mov [rsp+08],rbx
+re4demo.exe+4335665 - 48 89 74 24 10        - mov [rsp+10],rsi
+re4demo.exe+433566A - 57                    - push rdi
+re4demo.exe+433566B - 48 83 EC 20           - sub rsp,20
+re4demo.exe+433566F - 48 8B 41 50           - mov rax,[rcx+50]
+re4demo.exe+4335673 - 41 8B D8              - mov ebx,r8d
+re4demo.exe+4335676 - 48 8B FA              - mov rdi,rdx
+re4demo.exe+4335679 - 48 8B F1              - mov rsi,rcx
+re4demo.exe+433567C - 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re4demo.exe+4335681 - 75 3D                 - jne re4demo.exe+43356C0
+re4demo.exe+4335683 - 48 83 7A 38 00        - cmp qword ptr [rdx+38],00
+re4demo.exe+4335688 - 74 2C                 - je re4demo.exe+43356B6
+re4demo.exe+433568A - E8 F1A6F3FF           - call re4demo.exe+426FD80
+re4demo.exe+433568F - 48 8B 56 50           - mov rdx,[rsi+50]
+re4demo.exe+4335693 - 48 83 7A 18 00        - cmp qword ptr [rdx+18],00
+re4demo.exe+4335698 - 75 26                 - jne re4demo.exe+43356C0
+re4demo.exe+433569A - 3B D8                 - cmp ebx,eax
+&gt;&gt;&gt;
+re4demo.exe+433569C - 7E 18                 - jle re4demo.exe+43356B6
+&gt;&gt;&gt;
+re4demo.exe+433569E - 48 8B D7              - mov rdx,rdi
+re4demo.exe+43356A1 - 48 8B CE              - mov rcx,rsi
+re4demo.exe+43356A4 - E8 D7A6F3FF           - call re4demo.exe+426FD80
+re4demo.exe+43356A9 - 8B D8                 - mov ebx,eax
+re4demo.exe+43356AB - 48 8B 46 50           - mov rax,[rsi+50]
+re4demo.exe+43356AF - 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re4demo.exe+43356B4 - 75 0A                 - jne re4demo.exe+43356C0
+re4demo.exe+43356B6 - 33 C0                 - xor eax,eax
+re4demo.exe+43356B8 - 85 DB                 - test ebx,ebx
+re4demo.exe+43356BA - 0F48 D8               - cmovs ebx,eax
+re4demo.exe+43356BD - 89 5F 44              - mov [rdi+44],ebx
+re4demo.exe+43356C0 - 48 8B 5C 24 30        - mov rbx,[rsp+30]
+re4demo.exe+43356C5 - 48 8B 74 24 38        - mov rsi,[rsp+38]
+re4demo.exe+43356CA - 48 83 C4 20           - add rsp,20
+re4demo.exe+43356CE - 5F                    - pop rdi
+re4demo.exe+43356CF - C3                    - ret
+
+}
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>45</ID>
+      <Description>"Infinite Durability"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{
+title:  Prevents item durability loss
+author: DRKDST
+game:   re4demo.exe@1.0.0
+}
+
+[enable]
+aobScanModule(itemDurabilityAob,re4demo.exe,48 ?? ?? E8 ?? ?? ?? ?? 8B ?? 48 ?? ?? 50 48 ?? ?? 18 00 75 ?? 89 ?? 30 48 ?? ?? ?? 30 48 ?? ?? ?? 38 48 ?? ?? ?? ?? C3)
+registerSymbol(itemDurabilityAob)
+
+alloc(itemDurabilityMemOriginal,3,re4demo.exe)
+registerSymbol(itemDurabilityMemOriginal)
+
+itemDurabilityMemOriginal:
+    readMem(itemDurabilityAob+15,3)
+
+itemDurabilityAob+15:
+    nop 3
+
+[disable]
+itemDurabilityAob+15:
+    readMem(itemDurabilityMemOriginal,3)
+
+unregisterSymbol(itemDurabilityAob)
+unregisterSymbol(itemDurabilityMemOriginal)
+deAlloc(itemDurabilityMemOriginal)
+
+{
+re4demo.exe+3C7A840 - 48 89 5C 24 08        - mov [rsp+08],rbx
+re4demo.exe+3C7A845 - 48 89 74 24 10        - mov [rsp+10],rsi
+re4demo.exe+3C7A84A - 57                    - push rdi
+re4demo.exe+3C7A84B - 48 83 EC 20           - sub rsp,20
+re4demo.exe+3C7A84F - 33 C0                 - xor eax,eax
+re4demo.exe+3C7A851 - 41 8B D8              - mov ebx,r8d
+re4demo.exe+3C7A854 - 45 85 C0              - test r8d,r8d
+re4demo.exe+3C7A857 - 48 8B FA              - mov rdi,rdx
+re4demo.exe+3C7A85A - 48 8B F1              - mov rsi,rcx
+re4demo.exe+3C7A85D - 0F48 D8               - cmovs ebx,eax
+re4demo.exe+3C7A860 - E8 7BFCFAFF           - call re4demo.exe+3C2A4E0
+re4demo.exe+3C7A865 - 4C 8B 46 50           - mov r8,[rsi+50]
+re4demo.exe+3C7A869 - 49 83 78 18 00        - cmp qword ptr [r8+18],00
+re4demo.exe+3C7A86E - 75 1F                 - jne re4demo.exe+3C7A88F
+re4demo.exe+3C7A870 - 3B D8                 - cmp ebx,eax
+re4demo.exe+3C7A872 - 7E 18                 - jle re4demo.exe+3C7A88C
+re4demo.exe+3C7A874 - 48 8B D7              - mov rdx,rdi
+re4demo.exe+3C7A877 - 48 8B CE              - mov rcx,rsi
+re4demo.exe+3C7A87A - E8 61FCFAFF           - call re4demo.exe+3C2A4E0
+re4demo.exe+3C7A87F - 8B D8                 - mov ebx,eax
+re4demo.exe+3C7A881 - 48 8B 46 50           - mov rax,[rsi+50]
+re4demo.exe+3C7A885 - 48 83 78 18 00        - cmp qword ptr [rax+18],00
+re4demo.exe+3C7A88A - 75 03                 - jne re4demo.exe+3C7A88F
+&gt;&gt;&gt;
+re4demo.exe+3C7A88C - 89 5F 30              - mov [rdi+30],ebx
+&gt;&gt;&gt;
+re4demo.exe+3C7A88F - 48 8B 5C 24 30        - mov rbx,[rsp+30]
+re4demo.exe+3C7A894 - 48 8B 74 24 38        - mov rsi,[rsp+38]
+re4demo.exe+3C7A899 - 48 83 C4 20           - add rsp,20
+re4demo.exe+3C7A89D - 5F                    - pop rdi
+re4demo.exe+3C7A89E - C3                    - ret
+}
+
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
